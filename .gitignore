@@ -1,0 +1,9 @@
+node_modules
+build
+coverage
+.vscode
+.env*
+firebase*
+*pem
+.firebase*
+.eslintcache

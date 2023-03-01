@@ -1,0 +1,53 @@
+name: Studio Deploy Development
+on:
+  push:
+    branches:
+      - development
+jobs:
+  build:
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 18
+      - name: Caching
+        id: react-cache-build
+        uses: actions/cache@v2
+        with:
+          path: |
+            public
+            .cache
+            node_modules
+          key: ${{ runner.os }}-react-studio-${{ github.run_id }}
+          restore-keys: |
+            ${{ runner.os }}-react-studio-
+      - name: Install dependencies
+        run: npm i
+      - name: Build
+        env: 
+          SKIP_PREFLIGHT_CHECK: true
+          REACT_APP_MORALIS_API_KEY: ${{ secrets.MORALIS_API_KEY_DEV }}
+          REACT_APP_INFURA_KEY: ${{ secrets.INFURA_API_KEY }}
+          REACT_APP_MAGIC_API_KEY: ${{ secrets.MAGIC }}
+          REACT_APP_HOST_ENV: dev
+          REACT_APP_WEBSTUDIO_API_URL: "https://api.dev.webstudio.so"
+          REACT_APP_DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          CI: false
+        run: npm run build:release
+      - name: Set AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Deploy to S3
+        env:
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          PROJECT_NAME: app
+        run: aws s3 sync build s3://dev.webstudio.so/$PROJECT_NAME/ --region $AWS_REGION
+      - name: Invalidate Cloudfront Cache
+        env:
+          CF_DIST: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID_DEV }}
+        run: aws cloudfront create-invalidation --distribution-id $CF_DIST --paths '/*'
