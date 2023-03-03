@@ -147,7 +147,7 @@ const Editor = ({ projectId, onClickHome, principal }) => {
       });
     });
 
-    editorUI.on('storage:end', (e) => {
+    editorUI.on('storage:store', () => {
       dispatch({
           type: SNACKBAR_OPEN,
           open: true,

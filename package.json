@@ -1,6 +1,6 @@
 {
     "name": "webstudio-app",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "private": false,
     "dependencies": {
         "@auth0/auth0-spa-js": "^1.14.0",
@@ -46,7 +46,7 @@
         "remark-gfm": "^1.0.0",
         "stylis-plugin-rtl": "^2.0.2",
         "uuid": "^8.3.2",
-        "wsm-form": "^0.0.21",
+        "wsm-form": "^0.0.22",
         "wsm-toast": "^1.0.4",
         "wsm-wallet-connect": "^0.0.23",
         "yup": "^0.32.9"
