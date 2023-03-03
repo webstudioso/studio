@@ -60,9 +60,11 @@ const EditorView = () => {
 	};
 
 	const loadPrincipal = async () => {
-		const idToken = await m.user.getIdToken();
+		// 6 hour session in editor
+		const idToken = await m.user.getIdToken({ lifespan: 21600 });
 		setPrincipal(idToken);
 	};
+
 	const onClickHome = () => {
 		navigate("/profile/projects", { replace: true });
 	};

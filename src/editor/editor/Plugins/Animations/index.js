@@ -43,7 +43,6 @@ const Plugin = (editor) => {
             ]
          },
          init() {
-          console.log('init')
             this.on('change:animation', this.onAnimationChange);
             this.onAnimationChange();
             this.on("change:duration", this.onDurationChange);
@@ -52,30 +51,16 @@ const Plugin = (editor) => {
             this.onDelayChange();
          },
          onAnimationChange() {
-            console.log('onAnimationChange')
-            // const animation = this.get('animation')
-            // this.addAttributes({ 'data-anim-type': animation   });
-            // console.log(this);
-            // console.log(animation);
-            // this.addClass(animation);
-            // this.classList.add(animation);
-            // console.log(animation);
             this.removeStyle("animation");
             this.addStyle({ "animation": `${this.get('animation')} ${this.get('duration')}s ease ${this.get('delay')}}s`  });
          },
          onDurationChange() {
-          // console.log('onDurationChange')
-          //   const duration = this.get("duration");
-          //   this.addStyle({ "animation-duration": `${duration}s`  });
-          this.removeStyle("animation");
-          this.addStyle({ "animation": `${this.get('animation')} ${this.get('duration')}s ease ${this.get('delay')}}s`  });
+            this.removeStyle("animation");
+            this.addStyle({ "animation": `${this.get('animation')} ${this.get('duration')}s ease ${this.get('delay')}}s`  });
          },
          onDelayChange() {
-          // console.log('onDelayChange')
-          //   const delay = this.get("delay");
-          //   this.addStyle({ "animation-delay": `${delay}s`  });
-          this.removeStyle("animation");
-          this.addStyle({ "animation": `${this.get('animation')} ${this.get('duration')}s ease ${this.get('delay')}s`  });
+            this.removeStyle("animation");
+            this.addStyle({ "animation": `${this.get('animation')} ${this.get('duration')}s ease ${this.get('delay')}s`  });
          }
       }
   });
