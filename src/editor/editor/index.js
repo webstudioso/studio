@@ -6,7 +6,7 @@ import PluginNFT from "../primitives/nft-card";
 import PluginActionButton from "../primitives/action-button";
 import PluginTailwind from "grapesjs-tailwind";
 import PageManager from "./Plugins/PageManager";
-import Animations from "./Plugins/Animations";
+// import Animations from "./Plugins/Animations";
 import { AssetManager as assetManager } from "./Plugins/AssetManager";
 import PluginEditorPanelButtons from "./Panel/Buttons";
 import { useDispatch } from "react-redux";
@@ -15,7 +15,8 @@ import { LOADER, SNACKBAR_OPEN } from "store/actions";
 // Primitives
 import WSMToast from "wsm-toast";
 import WSMForm from "wsm-form";
-import WSMWallerConnect from "wsm-wallet-connect";
+import WSMWalletConnect from "wsm-wallet-connect";
+import WSMAnimations from "wsm-animations";
 
 import axios from 'axios';
 
@@ -89,17 +90,15 @@ const Editor = ({ projectId, onClickHome, principal }) => {
       },
       plugins: [
         PluginEditorPanelButtons,
-        // PrimitiveWalletConnect,
-        WSMWallerConnect,
+        WSMWalletConnect,
         PluginTokenGate,
         PluginNFT,
         PluginActionButton,
         PluginTailwind,
         PageManager,
-        Animations,
-        // PluginForms,
         WSMForm,
-        WSMToast
+        WSMToast,
+        WSMAnimations
       ],
       pluginsOpts: {},
       canvas: {
