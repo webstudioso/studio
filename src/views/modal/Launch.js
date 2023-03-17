@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
+import { WSMFontStyles } from 'wsm-fonts';
 import { 
     Box, 
     Grid, 
@@ -123,6 +124,15 @@ const Launch = ({ handleClose, editor, principal, projectId }) => {
                 <link rel="apple-touch-icon" href="${metadata.icon}" type="image/png">
             `)
 
+            const customFonts = WSMFontStyles.map((font) => {
+                return `
+                    <link
+                        rel="stylesheet"
+                        href="${font}"
+                    />
+                `
+            })
+
             const allPages = [];
             pageManager.getAll().forEach(async (page) => {
     
@@ -149,6 +159,7 @@ const Launch = ({ handleClose, editor, principal, projectId }) => {
                         rel="stylesheet"
                         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
                     />
+                    ${customFonts.join('')}
                     <script src="https://cdn.tailwindcss.com"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
                     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
