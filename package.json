@@ -48,7 +48,7 @@
         "uuid": "^8.3.2",
         "wsm-animations": "^0.0.2",
         "wsm-fonts": "^0.0.5",
-        "wsm-form": "^0.0.22",
+        "wsm-form": "^0.0.26",
         "wsm-toast": "^1.0.4",
         "wsm-wallet-connect": "^0.0.23",
         "yup": "^0.32.9"
