@@ -11,7 +11,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 
 const ModalManager = ({ open, handleClose, editor, event, principal, projectId }) => {
-
       const getTitle = () => {
         let title;
         switch (event) {

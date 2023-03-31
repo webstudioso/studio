@@ -5,9 +5,8 @@ import PluginTokenGate from "../primitives/token-gated-container";
 import PluginNFT from "../primitives/nft-card";
 import PluginActionButton from "../primitives/action-button";
 import PluginTailwind from "grapesjs-tailwind";
+import PluginScriptEditor from "grapesjs-script-editor";
 import PageManager from "./Plugins/PageManager";
-// import Animations from "./Plugins/Animations";
-import { AssetManager as assetManager } from "./Plugins/AssetManager";
 import PluginEditorPanelButtons from "./Panel/Buttons";
 import { useDispatch } from "react-redux";
 import { LOADER, SNACKBAR_OPEN } from "store/actions";
@@ -18,6 +17,8 @@ import WSMForm from "wsm-form";
 import WSMWalletConnect from "wsm-wallet-connect";
 import WSMAnimations from "wsm-animations";
 import WSMFonts, { WSMFontStyles } from "wsm-fonts";
+// Plugins
+import { AssetManager as assetManager } from "wsm-asset-manager";
 
 import axios from 'axios';
 
@@ -91,6 +92,7 @@ const Editor = ({ projectId, onClickHome, principal }) => {
       },
       plugins: [
         PluginEditorPanelButtons,
+        PluginScriptEditor,
         WSMWalletConnect,
         PluginTokenGate,
         PluginNFT,
@@ -159,7 +161,7 @@ const Editor = ({ projectId, onClickHome, principal }) => {
           alertSeverity: "success"
       });
     });
-    
+
     window.editor = editorUI;
   };
 

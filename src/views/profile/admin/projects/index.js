@@ -125,7 +125,6 @@ const Projects = () => {
 	const listApps = () => {
 		const list = [createNew];
 		const myProjects = [...projects,...collabProjects];
-		console.log(myProjects);
 		myProjects.forEach((app) => {
 			list.push(
 				<Grid item xs={12} sm={6} md={4} key={app.id}>
