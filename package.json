@@ -50,7 +50,7 @@
         "wsm-animations": "^0.0.2",
         "wsm-asset-manager": "^0.0.2",
         "wsm-fonts": "^0.0.5",
-        "wsm-form": "^0.0.29",
+        "wsm-form": "^0.0.32",
         "wsm-toast": "^1.0.4",
         "wsm-wallet-connect": "^0.0.23",
         "yup": "^0.32.9"
