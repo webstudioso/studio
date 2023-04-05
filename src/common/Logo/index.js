@@ -4,7 +4,7 @@ import logo from "assets/images/logo.png";
 const Logo = () => {
 	return (
 		<Grid container direction="row">
-			<img src={logo} alt="logo"></img>
+			<img src={logo} alt="logo" style={{"height": "44px", width: "auto"}}></img>
 		</Grid>
 	);
 };

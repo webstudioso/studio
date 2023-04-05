@@ -6,6 +6,7 @@ import * as Product from 'views/templates/content/Product';
 import * as Sweepfloor from 'views/templates/content/Sweepfloor';
 import * as SweepfloorModern from 'views/templates/content/SweepfloorModern';
 import * as Tailblocks from 'views/templates/content/Tailblocks';
+import * as IFrame from 'views/templates/content/IFrame';
 
 const templates = [
     Starter,
@@ -15,7 +16,8 @@ const templates = [
     Product,
     Sweepfloor,
     SweepfloorModern,
-    Tailblocks
+    Tailblocks,
+    IFrame
 ]
 
 export default templates;

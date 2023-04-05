@@ -12,13 +12,18 @@ import { useDispatch } from "react-redux";
 import { LOADER, SNACKBAR_OPEN } from "store/actions";
 
 // Primitives
+import WSMBasic from "wsm-basic";
 import WSMToast from "wsm-toast";
 import WSMForm from "wsm-form";
 import WSMWalletConnect from "wsm-wallet-connect";
 import WSMAnimations from "wsm-animations";
 import WSMFonts, { WSMFontStyles } from "wsm-fonts";
+
 // Plugins
 import { AssetManager as assetManager } from "wsm-asset-manager";
+
+// Default Template
+import { template as TutorialLandingPage } from "../../views/templates/content/Tutorial"
 
 import axios from 'axios';
 
@@ -91,6 +96,7 @@ const Editor = ({ projectId, onClickHome, principal }) => {
         }
       },
       plugins: [
+        WSMBasic,
         PluginEditorPanelButtons,
         PluginScriptEditor,
         WSMWalletConnect,
@@ -161,6 +167,16 @@ const Editor = ({ projectId, onClickHome, principal }) => {
           alertSeverity: "success"
       });
     });
+
+    // Used to load default template "Tutorial" only if no other template is loaded after API Call
+    editorUI.on('storage:end:load', (data) => {
+        if (!data?.pages) {
+            console.log('No data loaded from API, launching starter template')
+            editorUI.loadProjectData(TutorialLandingPage)
+        } else {
+            console.log('Template loaded from API')
+        }
+    })
 
     window.editor = editorUI;
   };
