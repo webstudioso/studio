@@ -244,6 +244,29 @@ const Projects = () => {
 		</div>
 	);
 
+	const userCard = (
+		<Grid item xs={12}>
+			{ metadata.email &&
+				(<Paper
+					sx={{
+						borderRadius: 2,
+						p: 3,
+						background: 'linear-gradient(90deg, rgba(42,62,177,1) 0%, rgba(69,90,211,1) 100%);',
+						position: "relative",
+						color: 'white',
+						border: '1px solid #455ad3'
+					}}
+				>
+					<Grid container>
+						<Grid item xs={12}>
+							{welcome}
+						</Grid>
+					</Grid>
+				</Paper>)
+			}
+		</Grid>
+	);
+
 	return (
 		<Container
 			className="main-view-container"
@@ -260,26 +283,7 @@ const Projects = () => {
 				justifyContent="left"
 				alignItems="left"
 			>
-				<Grid item xs={12}>
-					{ metadata.email &&
-						(<Paper
-							sx={{
-								borderRadius: 2,
-								p: 3,
-								background: 'linear-gradient(90deg, rgba(42,62,177,1) 0%, rgba(69,90,211,1) 100%);',
-								position: "relative",
-								color: 'white',
-								border: '1px solid #455ad3'
-							}}
-						>
-							<Grid container>
-								<Grid item xs={12}>
-									{welcome}
-								</Grid>
-							</Grid>
-						</Paper>)
-					}
-				</Grid>
+				{userCard}
 				{metadata.issuer && listApps()}
 			</Grid>
 		</Container>
