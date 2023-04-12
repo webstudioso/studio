@@ -158,6 +158,16 @@ const MenuCard = () => {
 					>
 						💁 Book a Call
 					</Button>
+					<Button
+						textAlign="left"
+						color="primary"
+						sx={{ mt: 2 }}
+						id="visit-dapp-btn"
+						target="_blank"
+						href="https://github.com/orgs/webstudioso/repositories"
+					>
+						📦 Source Code
+					</Button>
 				</Box>
 
 				{/* <TwitterShareButton
