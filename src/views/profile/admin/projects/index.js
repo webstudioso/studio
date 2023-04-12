@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Typography, Grid, Box, Paper, Container, TextField } from "@mui/material";
+import { Typography, Grid, Box, Paper, Container, TextField, Button } from "@mui/material";
 import ProjectCard from "ui-component/ProjectCard";
 import { useTheme } from "@mui/material/styles";
 import AddIcon from "@mui/icons-material/Add";
@@ -244,6 +244,53 @@ const Projects = () => {
 		</div>
 	);
 
+	const userCard = (
+		<Grid item xs={12} md={7}>
+			{ metadata.email &&
+				(<Paper
+					sx={{
+						borderRadius: 2,
+						p: 3,
+						background: '#2a3eb1',
+						position: "relative",
+						color: 'white',
+						border: '1px solid #2a3eb1'
+					}}
+				>
+					<Grid container>
+						<Grid item xs={12}>
+							{welcome}
+						</Grid>
+					</Grid>
+				</Paper>)
+			}
+		</Grid>
+	);
+
+	const githubIssue = "https://github.com/webstudioso/studio/issues/new";
+
+	const askCard = (
+		<Grid item xs={12} md={5}>
+			<Paper
+				sx={{
+					borderRadius: 2,
+					p: 4,
+					background: '#9412fb',
+					position: "relative",
+					color: 'white',
+					border: '1px solid #9412fb'
+				}}
+			>
+				<Button href={githubIssue} target="__blank">
+					<Typography variant="h4" color="white">Report an issue 🐞</Typography>
+				</Button>
+				<Button href={githubIssue} target="__blank">
+					<Typography variant="h4" color="white">Improvement or new feature ideas? 💡</Typography>
+				</Button>
+			</Paper>
+		</Grid>
+	);
+
 	return (
 		<Container
 			className="main-view-container"
@@ -260,26 +307,8 @@ const Projects = () => {
 				justifyContent="left"
 				alignItems="left"
 			>
-				<Grid item xs={12}>
-					{ metadata.email &&
-						(<Paper
-							sx={{
-								borderRadius: 2,
-								p: 3,
-								background: 'linear-gradient(90deg, rgba(42,62,177,1) 0%, rgba(69,90,211,1) 100%);',
-								position: "relative",
-								color: 'white',
-								border: '1px solid #455ad3'
-							}}
-						>
-							<Grid container>
-								<Grid item xs={12}>
-									{welcome}
-								</Grid>
-							</Grid>
-						</Paper>)
-					}
-				</Grid>
+				{userCard}
+				{askCard}
 				{metadata.issuer && listApps()}
 			</Grid>
 		</Container>

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+// import { useContext } from "react";
 import PropTypes from "prop-types";
 
 // material-ui
@@ -17,9 +17,9 @@ import {
 
 // assets
 // import { useMoralis } from "react-moralis";
-import { TwitterIcon, TwitterShareButton } from "react-share";
-import { getUrl } from "utils/url";
-import { ProgressContext } from "contexts/ProgressContext";
+// import { TwitterIcon, TwitterShareButton } from "react-share";
+// import { getUrl } from "utils/url";
+// import { ProgressContext } from "contexts/ProgressContext";
 
 // styles
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -41,7 +41,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 const CardStyle = styled(Card)(({ theme }) => ({
 	background:
 		theme.palette.mode === "dark"
-			? theme.palette.dark.main
+			? theme.palette.dark.light
 			: theme.palette.primary.light,
 	marginBottom: "22px",
 	overflow: "hidden",
@@ -54,7 +54,7 @@ const CardStyle = styled(Card)(({ theme }) => ({
 		background:
 			theme.palette.mode === "dark"
 				? theme.palette.dark.dark
-				: theme.palette.primary[200],
+				: theme.palette.secondary.light,
 		borderRadius: "50%",
 		top: "-105px",
 		right: "-96px"
@@ -112,29 +112,65 @@ LinearProgressWithLabel.propTypes = {
 // ==============================|| SIDEBAR MENU Card ||============================== //
 
 const MenuCard = () => {
-	const { progress } = useContext(ProgressContext);
+	// const { progress } = useContext(ProgressContext);
 	// const { user } = useMoralis();
 
 	return (
 		<CardStyle>
 			<CardContent sx={{ p: 2 }}>
-				<LinearProgressWithLabel value={progress} />
-				<Tooltip title="You can share your public profile with other builders and as a portfolio of your web3 work">
-					<Box>
-						<Button
-							fullWidth
-							variant="contained"
-							color="secondary"
-							sx={{ mt: 2 }}
-							id="visit-dapp-btn"
-							target="_blank"
-						>
-							View my Public Profile
-						</Button>
-					</Box>
-				</Tooltip>
+				{/* <LinearProgressWithLabel value={progress} /> */}
+				<Box>
+					<Typography variant="h4">Learn & Build</Typography>
+					<Button
+						color="primary"
+						sx={{ mt: 2 }}
+						id="visit-dapp-btn"
+						target="_blank"
+						href="https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08"
+					>
+						🗺️ Notion Guides
+					</Button>
+					<Button
+						color="primary"
+						sx={{ mt: 2 }}
+						id="visit-dapp-btn"
+						target="_blank"
+						href="https://discord.gg/CYYX8yUVgc"
+					>
+						💬 Chat on Discord
+					</Button>
+					<Button
+						color="primary"
+						sx={{ mt: 2 }}
+						id="visit-dapp-btn"
+						target="_blank"
+						href="https://twitter.com/webstudioso"
+					>
+						🐦 Follow us on Twitter
+					</Button>
+					<Button
+						textAlign="left"
+						color="primary"
+						sx={{ mt: 2 }}
+						id="visit-dapp-btn"
+						target="_blank"
+						href="https://calendly.com/webstudioso"
+					>
+						💁 Book a Call
+					</Button>
+					<Button
+						textAlign="left"
+						color="primary"
+						sx={{ mt: 2 }}
+						id="visit-dapp-btn"
+						target="_blank"
+						href="https://github.com/orgs/webstudioso/repositories"
+					>
+						📦 Source Code
+					</Button>
+				</Box>
 
-				<TwitterShareButton
+				{/* <TwitterShareButton
 					title={
 						"Check out my new Web3 builder profile at @Webstudioso 🤩. Create yours now, it is free!"
 					}
@@ -156,7 +192,7 @@ const MenuCard = () => {
 							</Box>
 						</Grid>
 					</Grid>
-				</TwitterShareButton>
+				</TwitterShareButton> */}
 			</CardContent>
 		</CardStyle>
 	);
