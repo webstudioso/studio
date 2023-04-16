@@ -1,11 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link as RouterLink } from "react-router-dom";
 import { Editor } from "editor";
 import Modal from "views/modal";
 import { Magic } from 'magic-sdk';
 import { useDispatch } from "react-redux";
 import { LOADER, SNACKBAR_OPEN } from "store/actions";
+import SidePanel from 'layout/SidePanel';
+import { Grid, Box, AppBar, Toolbar, Typography, IconButton, Stack, Button } from "@mui/material";
+import { IconChecks, IconSettings, IconPlus } from '@tabler/icons';
+import Logo from 'common/Logo';
+import AnimateButton from 'ui-component/extended/AnimateButton';
+
 const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY);
 
 const EditorView = () => {
@@ -15,6 +21,7 @@ const EditorView = () => {
 	const [editor, setEditor] = useState();
 	const [principal, setPrincipal] = useState();
 	const [eventName, setEventName] = useState();
+	const [open, setOpen] = useState(false);
 
 	const handleEvent =  (event) =>  {
 		setEventName(event.type);
@@ -89,7 +96,45 @@ const EditorView = () => {
 
 	return (
 		<>
-			{principal && (<Editor projectId={projectId} onClickHome={onClickHome} principal={principal} />)}
+			<Grid container direction="column">
+				<Grid item>
+					<Box sx={{ flexGrow: 1 }}>
+						<AppBar position="static" sx={{background:'white'}}>
+							<Toolbar variant="dense" disableGutters={true}>
+								<Typography
+									component="div"
+									sx={{ flexGrow: 1, textAlign: "left" }}
+								>
+									<Button
+										color="inherit"
+										component={RouterLink}
+										to="/"
+									>
+										<Logo />
+									</Button>
+								</Typography>
+							</Toolbar>
+						</AppBar>
+					</Box>
+				</Grid>
+				<Grid item>
+					<Grid container direction="row" sx={{ height: 'calc(100vh - 50px)' }} id="sideMenu">
+						<Grid item sx={{background:'white', width: '60px', boxShadow: '10px 0px 10px -10px rgba(0,0,0,0.25);'}}>
+							<Grid container sx={{ px: '5px', py: '35px' }}>
+								<Grid item xs={12}>
+									<IconButton color="primary" variant="contained" size="large" onClick={() => setOpen(!open)}>
+										<IconPlus />
+									</IconButton>
+								</Grid>
+							</Grid>
+						</Grid>
+						<Grid item xs sx={{ py: '15px', px: '30px' }}>
+							{principal && (<Editor projectId={projectId} onClickHome={onClickHome} principal={principal} />)}
+						</Grid>
+					</Grid>
+				</Grid>
+			</Grid>
+			<SidePanel open={open} />
 			<Modal  open={!!editor} 
 					handleClose={handleClose} 
 					editor={editor} 

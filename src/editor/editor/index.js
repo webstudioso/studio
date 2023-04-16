@@ -95,6 +95,7 @@ const Editor = ({ projectId, onClickHome, principal }) => {
           }
         }
       },
+      panels: { defaults: [] },
       plugins: [
         WSMBasic,
         PluginEditorPanelButtons,
@@ -126,24 +127,24 @@ const Editor = ({ projectId, onClickHome, principal }) => {
       },
     });
 
-    const panels = editorUI.Panels;
-    panels.addButton("options", [
-      {
-        id: "home",
-        command: onClickHome,
-        label: `
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#c6c7c8" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <polyline points="5 12 3 12 12 3 21 12 19 12" />
-                        <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-                        <rect x="10" y="12" width="4" height="4" />
-                    </svg>
-                `,
-        attributes: {
-          title: "Home Profile",
-        },
-      },
-    ]);
+    // const panels = editorUI.Panels;
+    // panels.addButton("options", [
+    //   {
+    //     id: "home",
+    //     command: onClickHome,
+    //     label: `
+    //                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#c6c7c8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    //                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+    //                     <polyline points="5 12 3 12 12 3 21 12 19 12" />
+    //                     <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+    //                     <rect x="10" y="12" width="4" height="4" />
+    //                 </svg>
+    //             `,
+    //     attributes: {
+    //       title: "Home Profile",
+    //     },
+    //   },
+    // ]);
 
     // Storage events
     editorUI.on('storage:error', (e) => {
@@ -178,6 +179,18 @@ const Editor = ({ projectId, onClickHome, principal }) => {
         }
     })
 
+
+    // const cats = '.gjs-block-categories';
+    // const catManager = document.querySelector(cats);
+    // console.log(catManager)
+    // catManager.addEventListener('mouseEnter', () => {
+    //   console.log("hover in")
+    // })
+
+    // catManager.addEventListener('mouseExit', () => {
+    //   console.log("hover out")
+    // })
+
     window.editor = editorUI;
   };
 
@@ -185,7 +198,7 @@ const Editor = ({ projectId, onClickHome, principal }) => {
     loadProject();
   }, []);
 
-  return <div id="gjs" />;
+  return (<div id="gjs" />);
 };
 
 export default Editor;

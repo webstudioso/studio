@@ -16,6 +16,7 @@ import {
 // project imports
 import { drawerWidth } from "store/constant";
 import Sidebar from "layout/ProfileLayout/Sidebar";
+// import SidePanel from "layout/SidePanel";
 import { SET_MENU } from "store/actions";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Logo from "common/Logo";

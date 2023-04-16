@@ -1,16 +1,82 @@
 // Palette variables
-$primaryColor: #27293D;
-$secondaryColor: #fffc;
+$primaryColor: #fff;
+$secondaryColor: #9795fb;
 $tertiaryColor: #ec5896;
-$quaternaryColor: #7572F9;
+$quaternaryColor: #605ed8;
 
 body {
   margin: 0px;
+  overflow:hidden;
+  background: white;
 }
-
 
 @import 'material-icons/iconfont/material-icons.scss';
 @import 'grapesjs/src/styles/scss/main.scss';
+
+.gjs-pn-views { 
+    border-bottom: none;
+    width: auto !important;
+}
+
+.gjs-pn-options {
+    left: 10%;
+}
+
+.address-bar__dots span.dot-1 {
+    background-color: #f26c6f;
+}
+.address-bar__dots span {
+    border-radius: 50%;
+    display: inline-block;
+    height: 12px;
+    margin: 0px 8px 0 0;
+    width: 12px;
+}
+.address-bar__dots span.dot-2 {
+    background-color: #ffc554;
+}
+.address-bar__dots span.dot-3 {
+    background-color: #5dce91;
+    margin-right: 30px;
+}
+.project-link-button {
+    // border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 25px;
+    /* height: 20px; */
+    background: #f5f5f5;
+    // text-decoration: underline;
+    padding: 0px 10px !important;
+    /* height: 10px; */
+    min-height: 24px !important;
+    // margin: 5px 15%;
+    font-size: 14px;
+    color: #666;
+    line-height:24px !important;
+    margin-right: 30px !important;
+}
+
+.gjs-one-bg {
+    background: transparent;
+}
+
+.gjs-pn-commands {
+    box-shadow:none;
+    border-bottom: 1px solid rgba(84, 84, 84, 0.15);
+    width:100%;
+}
+
+.gjs-cv-canvas {
+    width: 100% !important;
+}
+
+.gjs-editor {
+    box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.15);
+}
+
+.gjs-pn-views-container {
+    z-index:0 !important;
+    display: none;
+}
 
 // Devices
 .device-tablet {
@@ -47,17 +113,14 @@ body {
 }
 
 // Panels
-.gjs-pn-views-container {
-  padding-top: 40px;
-}
-
 .gjs-layer-caret {
   padding: 8px 2px;
 }
 
 .gjs-pn-views-container {
-  width: 15%;
-  z-index: 1;
+    padding-top: 40px;
+    width: 15%;
+    z-index: 1;
 }
 
 // Modal

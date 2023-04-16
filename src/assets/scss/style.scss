@@ -10,6 +10,10 @@
 
 $primary-font:  'Montserrat';
 
+.MuiDrawer-modal {
+    inset: unset !important;
+}
+
 * {
     font-family: $primary-font;
   }
@@ -38,7 +42,8 @@ $primary-font:  'Montserrat';
 
 html, body {
     max-width: 100% !important;
-    overflow-x: hidden !important;
+    overflow: hidden !important;
+    overscroll-behavior-y: none !important;
 }
 
 // ==============================|| LIGHT BOX ||============================== //

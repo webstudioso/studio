@@ -1,4 +1,5 @@
 
+import { getUrl } from 'utils/url';
 const cmdPublish = "publish";
 const cmdDeviceDesktop = "set-device-desktop";
 const cmdDeviceTablet = "set-device-tablet";
@@ -24,6 +25,12 @@ const publishButton = {
   `,
 };
 
+const getProjectUrl = () => {
+  const project = window?.webstudio?.project;
+  const domain = project.custom ? `https://${project.custom}` : getUrl(project.subdomain)
+  return domain;
+}
+
 const Plugin = (editor, config) => {
   const pn = editor.Panels;
   const eConfig = editor.getConfig();
@@ -44,124 +51,142 @@ const Plugin = (editor, config) => {
     {
       id: "options",
       buttons: [
-        {
-          id: hlp,
-          context: hlp,
-          command: (e) => window.open('https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08','_newtab'),
-          attributes: { title: "Help" },
-          label: `
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-help" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <circle cx="12" cy="12" r="9" />
-              <line x1="12" y1="17" x2="12" y2="17.01" />
-              <path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" />
-            </svg>
-          `,
-        },
-        {
-          id: prv,
-          context: prv,
-          command: (e) => e.runCommand(prv),
-          attributes: { title: "Preview" },
-          // className: 'fa fa-eye',
-          label: `
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <circle cx="12" cy="12" r="2"></circle>
-                <path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"></path>
-            </svg>
-        `,
-        },
-        {
-          id: 'manage-users',
-          context: 'manage-users',
-          command(editor) { 
-            console.log("Toggle modal");
-            console.log(editor.getProjectData());
-            document.dispatchEvent(new CustomEvent('toggleUsers', {
-              detail: editor
-            }));  
-          },
-          attributes: { title: "Manager Users" },
-          // className: 'fa fa-eye',
-          label: `
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <circle cx="9" cy="7" r="4" />
-              <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-              <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
-            </svg>
-          `,
-        },
+        // {
+        //   id: hlp,
+        //   context: hlp,
+        //   command: (e) => window.open('https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08','_newtab'),
+        //   attributes: { title: "Help" },
+        //   label: `
+        //     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-help" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        //       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        //       <circle cx="12" cy="12" r="9" />
+        //       <line x1="12" y1="17" x2="12" y2="17.01" />
+        //       <path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" />
+        //     </svg>
+        //   `,
+        // },
+        // {
+        //   id: prv,
+        //   context: prv,
+        //   command: (e) => e.runCommand(prv),
+        //   attributes: { title: "Preview" },
+        //   // className: 'fa fa-eye',
+        //   label: `
+        //     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        //         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        //         <circle cx="12" cy="12" r="2"></circle>
+        //         <path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"></path>
+        //     </svg>
+        // `,
+        // },
+        // {
+        //   id: 'manage-users',
+        //   context: 'manage-users',
+        //   command(editor) { 
+        //     console.log("Toggle modal");
+        //     console.log(editor.getProjectData());
+        //     document.dispatchEvent(new CustomEvent('toggleUsers', {
+        //       detail: editor
+        //     }));  
+        //   },
+        //   attributes: { title: "Manager Users" },
+        //   // className: 'fa fa-eye',
+        //   label: `
+        //     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        //       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        //       <circle cx="9" cy="7" r="4" />
+        //       <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+        //       <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        //       <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
+        //     </svg>
+        //   `,
+        // },
+
+        // clearCanvasButton,
+        // publishButton,
+        // {
+        //   id: 'alert-button',
+        //   attributes: { title: "Change template" },
+        //   label: `
+        //   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        //     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        //     <rect x="8" y="8" width="12" height="12" rx="2" />
+        //     <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+        //   </svg>
+        //   `,
+        //   command(editor) { 
+        //     console.log("Toggle modal");
+        //     console.log(editor.getProjectData());
+        //     document.dispatchEvent(new CustomEvent('toggleTemplates', {
+        //       detail: editor
+        //     }));  
+        //   }
+        // }
+      ],
+    },
+    {
+      id: "views",
+      buttons: [
+        // {
+        //   id: osm,
+        //   command: osm,
+        //   // active: true,
+        //   // className: 'fa fa-paint-brush',
+        //   label: `
+        //     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        //         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        //         <path d="M12 21a9 9 0 1 1 0 -18a9 8 0 0 1 9 8a4.5 4 0 0 1 -4.5 4h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25"></path>
+        //         <circle cx="7.5" cy="10.5" r=".5" fill="currentColor"></circle>
+        //         <circle cx="12" cy="7.5" r=".5" fill="currentColor"></circle>
+        //         <circle cx="16.5" cy="10.5" r=".5" fill="currentColor"></circle>
+        //     </svg>
+        // `,
+        // },
+        // {
+        //   id: otm,
+        //   command: otm,
+        //   // className: 'fa fa-cog',
+        //   label: `
+        //     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        //         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        //         <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
+        //         <circle cx="12" cy="12" r="3"></circle>
+        //     </svg>
+        // `,
+        // },
         {
           id: "undo",
           // className: 'fa fa-undo',
           command: (e) => e.runCommand("core:undo"),
           attributes: { title: "Undo" },
           label: `
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M15 4.55a8 8 0 0 0 -6 14.9m0 -4.45v5h-5"></path>
-                <line x1="18.37" y1="7.16" x2="18.37" y2="7.17"></line>
-                <line x1="13" y1="19.94" x2="13" y2="19.95"></line>
-                <line x1="16.84" y1="18.37" x2="16.84" y2="18.38"></line>
-                <line x1="19.37" y1="15.1" x2="19.37" y2="15.11"></line>
-                <line x1="19.94" y1="11" x2="19.94" y2="11.01"></line>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#6366f1" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M15 4.55a8 8 0 0 0 -6 14.9m0 -4.45v5h-5" />
+              <line x1="18.37" y1="7.16" x2="18.37" y2="7.17" />
+              <line x1="13" y1="19.94" x2="13" y2="19.95" />
+              <line x1="16.84" y1="18.37" x2="16.84" y2="18.38" />
+              <line x1="19.37" y1="15.1" x2="19.37" y2="15.11" />
+              <line x1="19.94" y1="11" x2="19.94" y2="11.01" />
             </svg>
         `,
         },
-        // clearCanvasButton,
-        publishButton,
         {
-          id: 'alert-button',
-          attributes: { title: "Change template" },
+          id: "redo",
+          // className: 'fa fa-undo',
+          command: (e) => e.runCommand("core:redo"),
+          attributes: { title: "Redo" },
           label: `
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <rect x="8" y="8" width="12" height="12" rx="2" />
-            <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
-          </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate-clockwise-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#6366f1" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M9 4.55a8 8 0 0 1 6 14.9m0 -4.45v5h5" />
+              <line x1="5.63" y1="7.16" x2="5.63" y2="7.17" />
+              <line x1="4.06" y1="11" x2="4.06" y2="11.01" />
+              <line x1="4.63" y1="15.1" x2="4.63" y2="15.11" />
+              <line x1="7.16" y1="18.37" x2="7.16" y2="18.38" />
+              <line x1="11" y1="19.94" x2="11" y2="19.95" />
+            </svg>
           `,
-          command(editor) { 
-            console.log("Toggle modal");
-            console.log(editor.getProjectData());
-            document.dispatchEvent(new CustomEvent('toggleTemplates', {
-              detail: editor
-            }));  
-          }
-        }
-      ],
-    },
-    {
-      id: "views",
-      buttons: [
-        {
-          id: osm,
-          command: osm,
-          // active: true,
-          // className: 'fa fa-paint-brush',
-          label: `
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M12 21a9 9 0 1 1 0 -18a9 8 0 0 1 9 8a4.5 4 0 0 1 -4.5 4h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25"></path>
-                <circle cx="7.5" cy="10.5" r=".5" fill="currentColor"></circle>
-                <circle cx="12" cy="7.5" r=".5" fill="currentColor"></circle>
-                <circle cx="16.5" cy="10.5" r=".5" fill="currentColor"></circle>
-            </svg>
-        `,
-        },
-        {
-          id: otm,
-          command: otm,
-          // className: 'fa fa-cog',
-          label: `
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-            </svg>
-        `,
         },
         {
           id: obl,
@@ -169,7 +194,7 @@ const Plugin = (editor, config) => {
           active: true,
           // className: 'fa fa-th-large',
           label: `
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-package" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-package" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"></polyline>
                 <line x1="12" y1="12" x2="20" y2="7.5"></line>
@@ -178,31 +203,31 @@ const Plugin = (editor, config) => {
                 <line x1="16" y1="5.25" x2="8" y2="9.75"></line>
             </svg>
         `,
-        },
-        {
-          id: ola,
-          command: ola,
-          label: `<svg style="display: block; max-width:22px viewBox="0 0 24 24">
-              <path fill="currentColor" d="M12,16L19.36,10.27L21,9L12,2L3,9L4.63,10.27M12,18.54L4.62,12.81L3,14.07L12,21.07L21,14.07L19.37,12.8L12,18.54Z" />
-          </svg>`
-        },
-        {
-          id: 'open-pages',
-          attributes: {
-              title: 'Pages'
-          },
-          label: `
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-              <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-              <line x1="12" y1="11" x2="12" y2="17" />
-              <line x1="9" y1="14" x2="15" y2="14" />
-            </svg>
-          `,
-          command: 'open-pages',
-          togglable: false
         }
+        // {
+        //   id: ola,
+        //   command: ola,
+        //   label: `<svg style="display: block; max-width:22px viewBox="0 0 24 24">
+        //       <path fill="currentColor" d="M12,16L19.36,10.27L21,9L12,2L3,9L4.63,10.27M12,18.54L4.62,12.81L3,14.07L12,21.07L21,14.07L19.37,12.8L12,18.54Z" />
+        //   </svg>`
+        // },
+        // {
+        //   id: 'open-pages',
+        //   attributes: {
+        //       title: 'Pages'
+        //   },
+        //   label: `
+        //     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        //       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        //       <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+        //       <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+        //       <line x1="12" y1="11" x2="12" y2="17" />
+        //       <line x1="9" y1="14" x2="15" y2="14" />
+        //     </svg>
+        //   `,
+        //   command: 'open-pages',
+        //   togglable: false
+        // }
       ],
     },
   ]);
@@ -210,6 +235,25 @@ const Plugin = (editor, config) => {
   // Add devices buttons
   const panelDevices = pn.addPanel({ id: "devices-c" });
   panelDevices.get("buttons").add([
+    {
+      id: 'browserMinimizeControlsMock',
+      //   className: 'fa fa-desktop',
+      label: `
+        <div class="address-bar__dots mr-auto">
+          <span class="dot-1"></span>
+          <span class="dot-2"></span>
+          <span class="dot-3"></span>
+        </div>
+      `,
+    },
+    {
+      id: 'alert-button',
+      className: 'project-link-button',
+      label: `🌐 ${getProjectUrl()}`,
+      command(editor) {
+        window.open(getProjectUrl(), "_blank");
+      }
+    },
     {
       id: cmdDeviceDesktop,
       command: cmdDeviceDesktop,
