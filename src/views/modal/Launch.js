@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { TwitterIcon, TwitterShareButton } from "react-share";
 import { Magic } from 'magic-sdk';
+import { getProjectById } from 'api/project';
 const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY);
 
 const DEFAULT_METADATA = {
@@ -59,17 +60,18 @@ const Launch = ({ handleClose, editor, principal, projectId }) => {
         
         try {
             dispatch({ type: LOADER, show: true });
-            const currentProject = await axios.get(`${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${projectId}`,
-                {
-                    headers: {
-                    "AuthorizeToken": `Bearer ${principal}`,
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                    }
-                }
-            );
-            setProject(currentProject?.data);
-            const mData = currentProject?.data?.metadata;
+            // const currentProject = await axios.get(`${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${projectId}`,
+            //     {
+            //         headers: {
+            //         "AuthorizeToken": `Bearer ${principal}`,
+            //         "Content-Type": "application/json",
+            //         "Accept": "application/json"
+            //         }
+            //     }
+            // );
+            const currentProject = getProjectById({ projectId, principal });
+            setProject(currentProject);
+            const mData = currentProject?.metadata;
             if (mData) {
                 setMetadata(mData);
             }

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // material-ui
@@ -23,7 +23,7 @@ import {
     Tooltip,
     Typography
 } from '@mui/material';
-import { IconChecks, IconSettings } from '@tabler/icons';
+import { IconChecks, IconSettings, IconPlus } from '@tabler/icons';
 
 // third-party
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -72,16 +72,95 @@ PresetColor.propTypes = {
 
 // ==============================|| LIVE CUSTOMIZATION ||============================== //
 
-const SidePanel = () => {
+const SidePanel = ({ open=false }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const customization = useSelector((state) => state.customization);
+    const [editor, setEditor] = useState();
+    const [blockManager, setBlockManager] = useState();
+    const [blocks, setBlocks] = useState();
+    const ref = useRef(null);
+    const [categories, setCategories] = useState([]);
+    const [filter, setFilter] = useState();
+
+    // console.log("SidepNale")
+    // console.log(window.editor);
+    // console.log(editor);
+
+    useEffect(() => {
+        // Load data from window.editor
+        if (!window.editor) return;
+        setEditor(window.editor)
+
+        // Render all blocks (inside the global collection)
+        // blockManager.render();
+        console.log(window.editor);
+        
+
+
+    }, [window.editor])
 
     // drawer on/off
-    const [open, setOpen] = useState(false);
+    // const [open, setOpen] = useState(false);
     const handleToggle = () => {
-        setOpen(!open);
+        console.log("toggling")
+        // setOpen(!open);
+        setTimeout(()=>{
+            
+
+
+
+            //cats
+
+            const cats = window?.editor?.Blocks?.getCategories().models.map((cat) => cat.attributes);
+            console.log(cats);
+            setCategories(cats)
+        },500)
+        
     };
+
+    useEffect(() => {
+            handleToggle()
+    }, [open])
+
+    useEffect(() => {
+        if (!filter) return;
+        const blockManager = window.editor.Blocks;
+        // Render new set of blocks
+        const blocks = blockManager.getAll();
+        console.log(blocks);
+        console.log(filter);
+        const filtered = blocks.filter(block => {
+            const cat = block.get('category')
+            console.log(cat.id)
+            return cat.id == filter
+        })
+
+        // blockManager.render(filtered);
+        // Or a new set from an array
+        // blockManager.render([
+        // {label: 'Label text', content: '<div>Content</div>'}
+        // ]);
+
+        // Back to blocks from the global collection
+        // blockManager.render();
+
+        // You can also render your blocks outside of the main block container
+        const newBlocksEl = blockManager.render(filtered, {ignoreCategories:true});
+        console.log(newBlocksEl);
+        const blockco = document.getElementById('myBlocks');
+        // console.log(blockco);
+        ref.current.appendChild(newBlocksEl);
+        console.log(ref);
+        setBlocks(blockco)
+        console.log(ref)
+    }, [filter])
+
+    useEffect(() => {
+        // 👇️ call method in useEffect hook
+        const el = document.getElementById('myBlocks');
+        console.log(el);
+      }, []);
 
     // state - layout type
     const [navType, setNavType] = useState(customization.navType);
@@ -177,207 +256,77 @@ const SidePanel = () => {
         }
     ];
 
+    const catList = categories?.map((cat) => 
+        <Grid id={cat.id} item sx={{ p: '3px 2px 3px 15px', cursor: 'pointer' }} onMouseEnter={(e) => {
+            const catId = e.target.id;
+            setFilter(catId);
+        }}>
+            {cat.label}
+        </Grid> 
+    )
+
     return (
         <>
             {/* toggle button */}
-            <Tooltip title="Live Customize">
+            {/* <Tooltip title="Add new Blocks to the canvas">
                 <Fab
                     component="div"
                     onClick={handleToggle}
                     size="medium"
-                    variant="circular"
-                    color="secondary"
+                    // variant="circular"
+                    color="primary"
                     sx={{
                         borderRadius: 0,
-                        borderTopLeftRadius: '50%',
-                        borderBottomLeftRadius: '50%',
-                        borderTopRightRadius: '50%',
-                        borderBottomRightRadius: '4px',
-                        top: '25%',
+                        // borderTopLeftRadius: '50%',
+                        // borderBottomLeftRadius: '50%',
+                        // borderTopRightRadius: '25px',
+                        // borderBottomRightRadius: '25px',
+                        top: '30%',
                         position: 'fixed',
-                        right: 10,
+                        left: 0,
                         zIndex: theme.zIndex.speedDial,
                         boxShadow: theme.customShadows.secondary
                     }}
                 >
-                    <AnimateButton type="rotate">
-                        <IconButton color="inherit" size="large" disableRipple>
-                            <IconSettings />
+                    <IconButton color="inherit" size="large">
+                            <IconPlus />
                         </IconButton>
-                    </AnimateButton>
+  
                 </Fab>
-            </Tooltip>
+            </Tooltip> */}
 
             <Drawer
-                anchor="right"
+                anchor="left"
                 onClose={handleToggle}
                 open={open}
+                hideBackdrop={true}
+                elevation={0}
                 PaperProps={{
                     sx: {
-                        width: 600
+                        width: 450,
+                        ml: '60px',
+                        mt: '55px',
+                        py: '15px',
+                        boxShadow: '15px 15px 15px 0px rgba(0,0,0,0.15)'
                     }
                 }}
             >
-                <PerfectScrollbar component="div">
-                    <Grid container spacing={gridSpacing} sx={{ p: 3 }}>
-                        <Grid item xs={12}>
-                            {/* layout type */}
-                            <SubCard title="Layout">
-                                <FormControl component="fieldset">
-                                    <FormLabel component="legend">Mode</FormLabel>
-                                    <RadioGroup
-                                        row
-                                        aria-label="layout"
-                                        value={navType}
-                                        onChange={(e) => setNavType(e.target.value)}
-                                        name="row-radio-buttons-group"
-                                    >
-                                        <FormControlLabel
-                                            value="light"
-                                            control={<Radio />}
-                                            label="Light"
-                                            sx={{
-                                                '& .MuiSvgIcon-root': { fontSize: 28 },
-                                                '& .MuiFormControlLabel-label': { color: theme.palette.grey[900] }
-                                            }}
-                                        />
-                                        <FormControlLabel
-                                            value="dark"
-                                            control={<Radio />}
-                                            label="Dark"
-                                            sx={{
-                                                '& .MuiSvgIcon-root': { fontSize: 28 },
-                                                '& .MuiFormControlLabel-label': { color: theme.palette.grey[900] }
-                                            }}
-                                        />
-                                    </RadioGroup>
-                                </FormControl>
-                                <FormControl component="fieldset" sx={{ mt: 2 }}>
-                                    <FormLabel component="legend">Direction</FormLabel>
-                                    <FormControlLabel
-                                        control={
-                                            <Switch
-                                                checked={rtlLayout}
-                                                onChange={handleRtlLayout}
-                                                inputProps={{ 'aria-label': 'controlled-direction' }}
-                                            />
-                                        }
-                                        label="RTL"
-                                    />
-                                </FormControl>
-                            </SubCard>
-                        </Grid>
-                        <Grid item xs={12}>
-                            {/* Theme Preset Color */}
-                            <SubCard title="Preset Color">
-                                <Grid item container spacing={2} alignItems="center">
-                                    {colorOptions.map((color, index) => (
-                                        <PresetColor key={index} color={color} presetColor={presetColor} setPresetColor={setPresetColor} />
-                                    ))}
-                                </Grid>
-                            </SubCard>
-                        </Grid>
-                        <Grid item xs={12}>
-                            {/* font family */}
-                            <SubCard title="Font Family">
-                                <FormControl>
-                                    <RadioGroup
-                                        aria-label="font-family"
-                                        value={fontFamily}
-                                        onChange={(e) => setFontFamily(e.target.value)}
-                                        name="row-radio-buttons-group"
-                                    >
-                                        <FormControlLabel
-                                            value="Roboto"
-                                            control={<Radio />}
-                                            label="Roboto"
-                                            sx={{
-                                                '& .MuiSvgIcon-root': { fontSize: 28 },
-                                                '& .MuiFormControlLabel-label': { color: theme.palette.grey[900] }
-                                            }}
-                                        />
-                                        <FormControlLabel
-                                            value="Poppins"
-                                            control={<Radio />}
-                                            label="Poppins"
-                                            sx={{
-                                                '& .MuiSvgIcon-root': { fontSize: 28 },
-                                                '& .MuiFormControlLabel-label': { color: theme.palette.grey[900] }
-                                            }}
-                                        />
-                                        <FormControlLabel
-                                            value="Inter"
-                                            control={<Radio />}
-                                            label="Inter"
-                                            sx={{
-                                                '& .MuiSvgIcon-root': { fontSize: 28 },
-                                                '& .MuiFormControlLabel-label': { color: theme.palette.grey[900] }
-                                            }}
-                                        />
-                                    </RadioGroup>
-                                </FormControl>
-                            </SubCard>
-                        </Grid>
-                        <Grid item xs={12}>
-                            {/* border radius */}
-                            <SubCard title="Border Radius">
-                                <Grid item xs={12} container spacing={2} alignItems="center" sx={{ mt: 2.5 }}>
-                                    <Grid item>
-                                        <Typography variant="h6" color="secondary">
-                                            4px
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs>
-                                        <Slider
-                                            size="small"
-                                            value={borderRadius}
-                                            onChange={handleBorderRadius}
-                                            getAriaValueText={valueText}
-                                            valueLabelDisplay="on"
-                                            aria-labelledby="discrete-slider-small-steps"
-                                            marks
-                                            step={2}
-                                            min={4}
-                                            max={24}
-                                            color="secondary"
-                                            sx={{
-                                                '& .MuiSlider-valueLabel': {
-                                                    color: theme.palette.mode === 'dark' ? 'secondary.dark' : 'secondary.light'
-                                                }
-                                            }}
-                                        />
-                                    </Grid>
-                                    <Grid item>
-                                        <Typography variant="h6" color="secondary">
-                                            24px
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                            </SubCard>
-                        </Grid>
-                        <Grid item xs={12}>
-                            {/* filled with outline textfield */}
-                            <SubCard title="Input Outlined With Filled">
-                                <Grid item xs={12} container spacing={2} alignItems="center">
-                                    <Grid item>
-                                        <Stack spacing={2}>
-                                            <Switch
-                                                checked={outlinedFilled}
-                                                onChange={handleOutlinedFilled}
-                                                inputProps={{ 'aria-label': 'controlled' }}
-                                            />
-                                            <TextField
-                                                fullWidth
-                                                id="outlined-basic"
-                                                label={outlinedFilled ? 'With Background' : 'Without Background'}
-                                            />
-                                        </Stack>
-                                    </Grid>
-                                </Grid>
-                            </SubCard>
-                        </Grid>
+                <Grid container>
+                    
+                <Grid item xs={4}>
+                        {catList}
                     </Grid>
-                </PerfectScrollbar>
+                    <Grid item xs={8}>
+
+                        <PerfectScrollbar component="div">
+                            <Grid container spacing={gridSpacing} sx={{ p: 3 }} id="myBlocks" ref={ref}>
+                            
+                            </Grid>
+                        </PerfectScrollbar>
+                    </Grid>
+
+                </Grid>
+
             </Drawer>
         </>
     );

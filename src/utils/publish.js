@@ -1,0 +1,92 @@
+import { WSMFontStyles } from "wsm-fonts"
+
+export const getUserConfiguredMetadataTags = ({ project }) => {
+    const metadata = project?.metadata
+    if (!metadata) return;
+
+    const tags = Object.keys(metadata).map((key) => {
+        const value = metadata[key];
+        return `
+            <meta name="${key}" content="${value}"></meta>
+            <meta property="${key}" content="${value}"></meta>
+        `
+    })
+    tags.push(`
+        <title>${metadata.description}</title>
+        <link rel="icon" sizes="192x192" href="">
+        <link rel="shortcut icon" href="${metadata.icon}" type="image/png">
+        <link rel="apple-touch-icon" href="${metadata.icon}" type="image/png">
+    `)
+    return tags
+}
+
+export const getCustomFontsMetadatTags = () => WSMFontStyles.map((font) => `<link rel="stylesheet" href="${font}" />`)
+
+export const getPages = ({ tags=[], fonts=[] }) => {
+
+    const pages = []
+    const editor = window?.editor
+    const pageManager = editor?.Pages
+    const currentPageId = pageManager.getSelected().id
+    pageManager.getAll().forEach(async (page) => {
+
+      pageManager.select(page.id);
+      const pageName = page.attributes?.type === 'main' ? 'index' : page.attributes?.name;
+      const body = page.getMainComponent().toHTML();
+
+      const functionalBody = body.replace(
+        '</body>', 
+        `<script>
+            ${editor.getJs()}
+          </script>
+        </body>`
+      ).replace('<video', '<video autoplay');
+
+      const content = `
+        <!doctype html>
+        <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            ${tags.join('')}
+            <link
+                rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+            />
+            ${fonts.join('')}
+            <script src="https://cdn.tailwindcss.com"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/webstudio-sdk@0.0.6/dist/main.min.js"></script>
+            <style>
+                html {
+                    scroll-behavior: smooth;
+                }
+                ${editor.getCss()}
+            </style>
+          </head>
+          ${functionalBody}
+        </html>`;
+
+        pages.push({
+          path: `${pageName}.html`,
+          content:btoa(unescape(encodeURIComponent(content)))
+        });
+    });
+
+    // Return to original selected page
+    pageManager.select(currentPageId);
+    return pages
+}
+
+export const getCidFromDeployment = ({ upload }) => {
+    const indexPage = upload?.find((item) => item.path.includes('/index.html'))
+    const cid = indexPage.path.split('/')[4]
+    return cid
+}
+
+export const getWebstudioUrl = ({ projectId }) => {
+    return process.env.REACT_APP_HOST_ENV === 'dev' ?
+    `${projectId}.dev.webstudio.so` :
+    `${projectId}.webstudio.so`
+}
