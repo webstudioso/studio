@@ -128,7 +128,7 @@ const EditorView = () => {
 						<Grid item sx={{background:'white', width: '60px', boxShadow: '10px 0px 10px -10px rgba(0,0,0,0.25);'}}>
 							<Grid container sx={{ px: '5px', py: '35px' }}>
 								<Grid item xs={12}>
-									<IconButton color="primary" variant="contained" size="large" onClick={() => setOpen(!open)}>
+									<IconButton color="primary" size="large" onClick={() => setOpen(!open)}>
 										<IconPlus />
 									</IconButton>
 								</Grid>
@@ -140,7 +140,7 @@ const EditorView = () => {
 					</Grid>
 				</Grid>
 			</Grid>
-			<SidePanel open={open} />
+			<SidePanel open={open} onLeave={() => setOpen(!open)} />
 			<Modal  open={!!editor} 
 					handleClose={handleClose} 
 					editor={editor} 

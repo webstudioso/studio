@@ -2,12 +2,15 @@ import PropTypes from 'prop-types';
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import draganddrop from "assets/images/draganddrop.jpg";
+
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import {
     Avatar,
     ButtonBase,
     Drawer,
+    Box,
     Fab,
     FormControl,
     FormControlLabel,
@@ -72,7 +75,7 @@ PresetColor.propTypes = {
 
 // ==============================|| LIVE CUSTOMIZATION ||============================== //
 
-const SidePanel = ({ open=false }) => {
+const SidePanel = ({ open=false, onLeave }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const customization = useSelector((state) => state.customization);
@@ -125,7 +128,8 @@ const SidePanel = ({ open=false }) => {
 
     useEffect(() => {
         if (!filter) return;
-        const blockManager = window.editor.Blocks;
+        const editor = window.editor;
+        const blockManager = editor.Blocks;
         // Render new set of blocks
         const blocks = blockManager.getAll();
         console.log(blocks);
@@ -154,6 +158,10 @@ const SidePanel = ({ open=false }) => {
         console.log(ref);
         setBlocks(blockco)
         console.log(ref)
+
+
+        // When dragging of a block starts, hide side panel
+        editor.on('block:drag', () => dismiss())
     }, [filter])
 
     useEffect(() => {
@@ -257,13 +265,30 @@ const SidePanel = ({ open=false }) => {
     ];
 
     const catList = categories?.map((cat) => 
-        <Grid id={cat.id} item sx={{ p: '3px 2px 3px 15px', cursor: 'pointer' }} onMouseEnter={(e) => {
-            const catId = e.target.id;
-            setFilter(catId);
-        }}>
-            {cat.label}
+        <Grid   id={cat.id} 
+                item 
+                sx={{ 
+                    p: '5px 10px', 
+                    m: '0px 10px',
+                    cursor: 'pointer',
+                    borderRadius: '50px',
+                    background: filter === cat.id ? '#E8E8FF' : 'transparent'
+                }} 
+                onMouseEnter={(e) => {
+                    const catId = e.target.id;
+                    setFilter(catId);
+                }}
+        >
+            <Typography fontWeight="normal" color={
+                filter === cat.id ? '#3F41A4' : 'black'
+            } fontSize={12}>{cat.label}</Typography>
         </Grid> 
     )
+
+    const dismiss = () => {
+        setFilter()
+        onLeave()
+    }
 
     return (
         <>
@@ -306,27 +331,59 @@ const SidePanel = ({ open=false }) => {
                         width: 450,
                         ml: '60px',
                         mt: '55px',
-                        py: '15px',
-                        boxShadow: '15px 15px 15px 0px rgba(0,0,0,0.15)'
+                        boxShadow: '15px 15px 15px 0px rgba(0,0,0,0.15)',
+                        border: '1px solid #dfe5eb'
                     }
                 }}
             >
-                <Grid container>
-                    
-                <Grid item xs={4}>
-                        {catList}
+                <Grid container direction="column" onMouseLeave={dismiss}>
+                    <Grid item>
+                        <Stack
+                            direction="row"
+                            justifyContent="left"
+                            alignItems="left"
+                            spacing={1}
+                            fullWidth
+                            sx={{
+                                borderTop: '5px solid #6366F1',
+                            }}
+                        >
+                            <Box sx={{ minWidth: 120, m: '15px' }}>
+                                <Typography variant="h4" color="black" fontWeight="bolder">Add Elements</Typography>
+                            </Box>
+                            {/* <Box sx={{ m: '10px', p: '5px' }}>
+                                <Typography color="#666">Select a component 👇  and drag it to the canvas 👉</Typography>
+                            </Box> */}
+                        </Stack>
                     </Grid>
-                    <Grid item xs={8}>
-
-                        <PerfectScrollbar component="div">
-                            <Grid container spacing={gridSpacing} sx={{ p: 3 }} id="myBlocks" ref={ref}>
-                            
+                    <Grid item>
+                        <Grid container>
+                            <Grid item xs={4} sx={{ 
+                                height: 'calc(100vh - 110px)', 
+                                overflow: 'scroll', 
+                                background: '#f7f8f8', 
+                                border: '1px solid #dfe5eb',
+                                borderLeft: '0px',
+                                paddingTop: '10px'
+                            }}>
+                                {catList}
                             </Grid>
-                        </PerfectScrollbar>
+                            <Grid item xs={8} sx={{ 
+                                height: 'calc(100vh - 110px)', 
+                                overflow: 'scroll',
+                                borderTop: '1px solid #dfe5eb',
+                            }}>
+                                <Grid container spacing={gridSpacing} sx={{ p: 3 }} id="myBlocks" ref={ref}>
+                                    {!filter && (
+                                    <Box sx={{ mx: '10px', p: '5px' }} textAlign="center" justifyContent="center">
+                                        <img src={draganddrop} width="100%" height="auto" />
+                                        <Typography fontSize={16} color="black">Select a component 👈 and drag it to the canvas 👉</Typography>
+                                    </Box>)}
+                                </Grid>
+                            </Grid>
+                        </Grid>
                     </Grid>
-
                 </Grid>
-
             </Drawer>
         </>
     );
