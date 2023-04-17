@@ -275,8 +275,7 @@ const SidePanel = ({ open=false, onLeave }) => {
                     background: filter === cat.id ? '#E8E8FF' : 'transparent'
                 }} 
                 onMouseEnter={(e) => {
-                    const catId = e.target.id;
-                    setFilter(catId);
+                    setFilter(cat.id);
                 }}
         >
             <Typography fontWeight="normal" color={
@@ -330,9 +329,10 @@ const SidePanel = ({ open=false, onLeave }) => {
                     sx: {
                         width: 450,
                         ml: '60px',
-                        mt: '55px',
+                        mt: '56px',
                         boxShadow: '15px 15px 15px 0px rgba(0,0,0,0.15)',
-                        border: '1px solid #dfe5eb'
+                        border: '1px solid #dfe5eb',
+                        zIndex: 10
                     }
                 }}
             >

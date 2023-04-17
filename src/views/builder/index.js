@@ -6,12 +6,13 @@ import Modal from "views/modal";
 import { Magic } from 'magic-sdk';
 import { useDispatch } from "react-redux";
 import { LOADER, SNACKBAR_OPEN } from "store/actions";
-import SidePanel from 'layout/SidePanel';
+import SidePanel from 'views/builder/SidePanel';
 import { Grid, Box, AppBar, Toolbar, Typography, IconButton, Stack, Button } from "@mui/material";
 import { IconChecks, IconSettings, IconPlus } from '@tabler/icons';
 import Logo from 'common/Logo';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import PublishButton from './publishButton';
+import DraggableDialog from './draggableDialog';
 
 const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY);
 
@@ -23,6 +24,7 @@ const EditorView = () => {
 	const [principal, setPrincipal] = useState();
 	const [eventName, setEventName] = useState();
 	const [open, setOpen] = useState(false);
+	const [openDialog, setOpenDialog] = useState(false);
 
 	const handleEvent =  (event) =>  {
 		setEventName(event.type);
@@ -65,6 +67,8 @@ const EditorView = () => {
 		document.addEventListener('assetUploadStart', handleAssetUploadStart);
 		document.addEventListener('assetUploadEnd', handleAssetUploadEnd);
 		document.addEventListener('assetUploadError', handleAssetUploadError);
+
+		document.addEventListener('toggleSettingsModal', () => setOpenDialog(true));
 	};
 
 	const loadPrincipal = async () => {
@@ -87,7 +91,9 @@ const EditorView = () => {
 			document.removeEventListener('assetUploadStart', () => {});
 			document.removeEventListener('assetUploadEnd', () => {});
 			document.removeEventListener('assetUploadError', () => {});
+			document.removeEventListener('toggleSettingsModal', () => {});
 		}
+		
 	},[]);
 
 	const handleClose = () => {
@@ -125,7 +131,12 @@ const EditorView = () => {
 				</Grid>
 				<Grid item>
 					<Grid container direction="row" sx={{ height: 'calc(100vh - 50px)' }} id="sideMenu">
-						<Grid item sx={{background:'white', width: '60px', boxShadow: '10px 0px 10px -10px rgba(0,0,0,0.25);'}}>
+						<Grid item sx={{
+							background:'white', 
+							width: '60px', 
+							boxShadow: open ? '0px' : '5px 0px 5px -5px rgba(0,0,0,0.25);', 
+							zIndex: 1201
+						}}>
 							<Grid container sx={{ px: '5px', py: '35px' }}>
 								<Grid item xs={12}>
 									<IconButton color="primary" size="large" onClick={() => setOpen(!open)}>
@@ -134,7 +145,7 @@ const EditorView = () => {
 								</Grid>
 							</Grid>
 						</Grid>
-						<Grid item xs sx={{ py: '15px', px: '30px' }}>
+						<Grid item xs sx={{ py: '15px', px: '30px'}}>
 							{editorCanvas}
 						</Grid>
 					</Grid>
@@ -148,6 +159,7 @@ const EditorView = () => {
 					principal={principal}
 					projectId={projectId}
 			/>
+			<DraggableDialog open={openDialog} handleClose={() => setOpenDialog(false)}></DraggableDialog>
 		</>
 	);
 };

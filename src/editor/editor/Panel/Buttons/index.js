@@ -335,6 +335,17 @@ const Plugin = (editor, config) => {
     run: (ed) => ed.setDevice("Mobile portrait"),
     stop: () => {},
   });
+
+
+
+  cmdm.add('tlb-settings', (ed) => {
+  
+    console.log("Toggle settings modal");
+    document.dispatchEvent(new CustomEvent('toggleSettingsModal', {
+      detail: ed
+    }));  
+  
+  })
 };
 
 export default Plugin;
