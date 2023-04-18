@@ -275,7 +275,7 @@ const EditorView = () => {
 					</Grid>
 				</Grid>
 			</Grid>
-			<SidePanel open={open} onLeave={() => setOpen()} />
+			<SidePanel open={open} principal={principal} projectId={projectId} onLeave={() => setOpen()} />
 			<Modal  open={!!editor} 
 					handleClose={handleClose} 
 					editor={editor} 

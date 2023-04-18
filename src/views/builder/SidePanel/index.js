@@ -46,6 +46,7 @@ import constants from 'constant'
 import Blocks from './Blocks';
 import Pages from './Pages';
 import Templates from './Templates';
+import Settings from './Settings';
 const { SIDEPANEL, SECTION } = constants
 const { TITLE } = SIDEPANEL
 
@@ -83,7 +84,7 @@ PresetColor.propTypes = {
 
 // ==============================|| LIVE CUSTOMIZATION ||============================== //
 
-const SidePanel = ({ open, onLeave }) => {
+const SidePanel = ({ open, onLeave, principal, projectId }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const customization = useSelector((state) => state.customization);
@@ -372,6 +373,7 @@ const SidePanel = ({ open, onLeave }) => {
                         {open === SECTION.BLOCKS && (<Blocks onLeave={onLeave} />)}
                         {open === SECTION.PAGES && (<Pages onLeave={onLeave} />)}
                         {open === SECTION.TEMPLATE && (<Templates onLeave={onLeave} />)}
+                        {open === SECTION.SETTINGS && (<Settings onLeave={onLeave} principal={principal} projectId={projectId} />)}
                     </Grid>
                 </Grid>
             </Drawer>

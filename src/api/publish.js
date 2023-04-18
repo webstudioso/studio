@@ -27,3 +27,17 @@ export const publishRouting = async ({ id, cid, principal }) => {
     )
     return routing?.data
 }
+
+export const publishMetadata = async({ id, principal, metadata }) => {
+    const meta = await axios.post(`${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${id}/metadata`,
+      metadata,
+      {
+          headers: {
+              "AuthorizeToken": `Bearer ${principal}`,
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+          }
+      }
+    )
+    return meta?.data
+}
