@@ -40,6 +40,11 @@ import { gridSpacing } from 'store/constant';
 // color import
 import colors from 'assets/scss/_themes-vars.module.scss';
 import themeStyle from 'assets/scss/_theme.module.scss';
+import InfoButton from '../InfoButton';
+
+import constants from 'constant'
+const { SIDEPANEL } = constants
+const { TITLE } = SIDEPANEL
 
 // concat 'px'
 function valueText(value) {
@@ -75,7 +80,7 @@ PresetColor.propTypes = {
 
 // ==============================|| LIVE CUSTOMIZATION ||============================== //
 
-const SidePanel = ({ open=false, onLeave }) => {
+const SidePanel = ({ open, onLeave }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const customization = useSelector((state) => state.customization);
@@ -349,7 +354,10 @@ const SidePanel = ({ open=false, onLeave }) => {
                             }}
                         >
                             <Box sx={{ minWidth: 120, m: '15px' }}>
-                                <Typography variant="h4" color="black" fontWeight="bolder">Add Elements</Typography>
+                                <Typography variant="h4" color="black" fontWeight="bolder">
+                                    {TITLE[open]}
+                                    <InfoButton section={open} />
+                                </Typography>
                             </Box>
                             {/* <Box sx={{ m: '10px', p: '5px' }}>
                                 <Typography color="#666">Select a component 👇  and drag it to the canvas 👉</Typography>

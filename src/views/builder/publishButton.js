@@ -1,36 +1,15 @@
 import { Fragment } from "react"
-import { Button, Typography, CircularProgress } from "@mui/material"
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
-import { styled } from '@mui/material/styles';
+import { Button, Typography, CircularProgress, IconButton } from "@mui/material"
 import { getProjectById } from "api/project"
 import { uploadPagesToIPFS, publishRouting } from "api/publish"
 import { useDispatch, useSelector } from "react-redux"
 import { showLoader } from "utils/loader"
 import { getCidFromDeployment, getCustomFontsMetadatTags, getPages, getUserConfiguredMetadataTags, getWebstudioUrl } from "utils/publish"
 import { showSuccess, showError } from "utils/snackbar"
+import { IconInfoCircle } from '@tabler/icons';
 import { getProjectUrl } from "utils/project";
-
-const HtmlTooltip = styled(({ className, ...props }) => (
-    <Tooltip {...props} classes={{ popper: className }} arrow />
-  ))(({ theme }) => ({
-    [`& .${tooltipClasses.tooltipArrow}`]: {
-        backgroundColor: '#fff'
-      },
-      [`& .${tooltipClasses.arrow}`]: {
-        "&:before": {
-          border: `1px solid #dadde9`
-        },
-        color: '#fff'
-      },
-    [`& .${tooltipClasses.tooltip}`]: {
-      backgroundColor: '#fff',
-      color: '#333',
-      maxWidth: 220,
-      fontSize: theme.typography.pxToRem(14),
-      border: '1px solid #dadde9',
-      padding: '15px'
-    },
-  }));
+import HtmlTooltip from "./HtmlTooltip"
+import InfoButton from "./InfoButton"
 
 const PublishButton = ({ principal, projectId }) => {
     const isLoading = useSelector((state) => state.loader.show);
@@ -67,7 +46,9 @@ const PublishButton = ({ principal, projectId }) => {
 
     const publishTooltip = (
         <Fragment>
-            <Typography fontWeight="bold" color="inherit">Publish</Typography>
+            <Typography fontWeight="bold" color="inherit">Publish
+                <InfoButton section='PUBLISH' />
+            </Typography>
             <Typography variant="body" sx={{ mt: '15px' }}>
                 Click Publish to go live with your latest changes.
             </Typography>

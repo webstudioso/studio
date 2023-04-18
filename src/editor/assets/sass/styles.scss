@@ -27,6 +27,31 @@ body {
     border-bottom: 1px solid #dfe5eb;
 }
 
+.gjs-editor-cont .sp-container button, .gjs-editor-cont .sp-container button:hover, .gjs-editor-cont .sp-container button:active {
+    background: #6366F1;
+    border-color: #6366F1;
+}
+
+.gjs-radio-item {
+    border-left: 1px solid #D7D6FF;
+}
+
+.gjs-radio-item:hover {
+    background-color: #6366F1;
+    color: white;
+    opacity: 0.8;
+}
+
+.gjs-radio-item input:checked + .gjs-radio-item-label {
+    background-color: #6366F1;
+    color: white;
+}
+
+.gjs-color-main, .gjs-sm-stack #gjs-sm-add, .gjs-off-prv {
+    color: #6366F1;
+    fill: #6366F1;
+}
+
 .gjs-field .gjs-d-s-arrow {
     border-top: 4px solid #7572f9;
 }
@@ -104,7 +129,7 @@ body {
 }
 
 .gjs-one-bg {
-    background: transparent;
+    background: white;
 }
 
 .gjs-pn-commands {
@@ -138,6 +163,15 @@ body {
   line-height: 21px;
   padding: 6px 10px;
   margin-right: 0px;
+  color: $secondaryColor;
+}
+
+.gjs-sm-field select {
+    color: #333;
+}
+
+.gjs-pn-active {
+    color: $quaternaryColor;
 }
 
 .gjs-pn-btn svg {
