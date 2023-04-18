@@ -21,6 +21,7 @@ import axios from "axios";
 import { TwitterIcon, TwitterShareButton } from "react-share";
 import { Magic } from 'magic-sdk';
 import { getProjectById } from 'api/project';
+import { queryParams } from 'utils/url';
 const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY);
 
 const DEFAULT_METADATA = {
@@ -232,11 +233,6 @@ const Launch = ({ handleClose, editor, principal, projectId }) => {
         } finally {
             dispatch({ type: LOADER, show: false });
         }
-    };
-
-    const queryParams = () => {
-        const t = Math.floor(Math.random() * 100000);
-        return `?t=${t}`;
     };
 
     const getUrl = () => {

@@ -10,6 +10,7 @@ import { IconInfoCircle } from '@tabler/icons';
 import { getProjectUrl } from "utils/project";
 import HtmlTooltip from "./HtmlTooltip"
 import InfoButton from "./InfoButton"
+import { queryParams } from "utils/url"
 
 const PublishButton = ({ principal, projectId }) => {
     const isLoading = useSelector((state) => state.loader.show);
@@ -53,7 +54,7 @@ const PublishButton = ({ principal, projectId }) => {
                 Click Publish to go live with your latest changes. Your website will be hosted in the<br/>
                 <a style={{ color: '#6366F1'}} href="https://docs.ipfs.tech/concepts/faq/#what-is-ipfs" target="__blank">Interplanetary File System</a>
             </Typography>
-            <Button href={getProjectUrl()} target="__blank">View site</Button>
+            <Button href={`${getProjectUrl()}${queryParams()}`} target="__blank">View site</Button>
         </Fragment>
     )
 

@@ -5470,11 +5470,11 @@ const template = {
 };
 
 const metadata = {
-  image: 'https://i.ibb.co/zbkgR06/Screenshot-2023-01-26-at-12-54-16.png',
-  name: 'Sweep Floor DAO',
-  description: 'Single page landing page template',
-  tags: ['Landing Page'],
-  premium: false
+    image: 'https://bafybeiahhoupy6f2imckqem2h4k2drvbdttxnci3fyxhdtrg6aehzdtdam.ipfs.w3s.link/SFD.png',
+    preview: 'https://bafybeigzokrxf4aicrwn26uwudjjfjnkuee7dxiymvps5wlekaarqjh4lq.ipfs.w3s.link/SFDPreview.png',
+    description: 'Single page landing page template',
+    tags: ['Landing Page'],
+    premium: false
 };
 
 export { template, metadata };

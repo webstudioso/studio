@@ -2100,7 +2100,8 @@ const template = {
 }
 
 const metadata = {
-  image: 'https://i.ibb.co/NK7MZP1/Screenshot-2023-01-17-at-11-38-24.png',
+  image: 'https://bafybeiary7nvn3odjs57n6w3swo2tntlynyrrrlmgemlmtplj256dv2dkm.ipfs.w3s.link/Frame.png',
+  preview: 'https://bafybeifhvnp7fnopdywrthtehnfd5fuoyceqbdsmg3x57yde3gm4aov2be.ipfs.w3s.link/FramePreview.png',
   name: 'Tailblocks',
   description: 'Landing page skeleton based on tailwind css',
   tags: ['Landing Page'],

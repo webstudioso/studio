@@ -2570,7 +2570,8 @@ const template = {
 };
 
 const metadata = {
-  image: 'https://i.ibb.co/6rqT82s/Screenshot-2023-01-26-at-14-41-25.png',
+  image: 'https://bafybeifcra42n2udxh4quvzoflfv6tljifrilrs5z2xkxnbbc7efxwylje.ipfs.w3s.link/Untitled.jpg',
+  preview: 'https://bafybeiciz6zkw23scy6w2atkevf35zp42aavxgxcq5jmup6pujzoho3qhy.ipfs.w3s.link/ProductPreview.png',
   name: 'Product Landing Page',
   description: 'Basic product landing page template',
   tags: ['Landing Page'],

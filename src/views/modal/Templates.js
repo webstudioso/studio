@@ -26,7 +26,7 @@ const Templates = ({ handleClose, editor }) => {
     }
 
     return availableTemplates.map((template, index) => (
-        <Grid item xs={6} key={index}>
+        <Grid item xs={3} key={index}>
         <Item elevation={6}>
             <Grid container>
                 <Grid item xs={12}>

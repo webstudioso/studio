@@ -1,4 +1,5 @@
 import { getProjectUrl } from "utils/project";
+import { queryParams } from "utils/url";
 
 const cmdPublish = "publish";
 const cmdDeviceDesktop = "set-device-desktop";
@@ -247,7 +248,7 @@ const Plugin = (editor, config) => {
       className: 'project-link-button',
       label: `🌐 ${getProjectUrl()}`,
       command(editor) {
-        window.open(getProjectUrl(), "_blank");
+        window.open(`${getProjectUrl()}${queryParams()}`, "_blank");
       }
     },
     {

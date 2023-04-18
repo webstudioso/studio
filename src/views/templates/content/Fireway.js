@@ -8463,7 +8463,8 @@ const template = {
 };
 
 const metadata = {
-  image: 'https://i.ibb.co/w42rR1n/Screenshot-2023-01-06-at-15-50-38.png',
+  image: 'https://bafybeigglenhh3n3d3cxf6ld5eazrjb5wmp5copszeuiiizcydckfp3uhi.ipfs.w3s.link/Fireway.png',
+  preview: 'https://bafybeifogg7e7swux6kkowuh6fvszilcpcoofkn7cndn75sdn6xicsd5uy.ipfs.w3s.link/FirewayPreview.png',
   name: 'Fireway',
   description: 'Showcase your hackathon idea with simple concepts',
   tags: ['Landing Page'],

@@ -2182,7 +2182,8 @@ const template = {
 };
 
 const metadata = {
-  image: 'https://i.ibb.co/4sjvZpx/Screenshot-2023-01-17-at-16-07-29.png',
+  image: 'https://bafybeiekbvoyyczzrurd7zshb6b52lfzau25uv27jwcyespra7gcbaovqq.ipfs.w3s.link/Voids.png',
+  preview: 'https://bafybeiekbvoyyczzrurd7zshb6b52lfzau25uv27jwcyespra7gcbaovqq.ipfs.w3s.link/Voids.png',
   name: 'Voids',
   description: 'Landing page template without any functional component',
   tags: ['Landing Page'],

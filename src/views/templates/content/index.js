@@ -9,15 +9,16 @@ import * as Tailblocks from 'views/templates/content/Tailblocks';
 import * as IFrame from 'views/templates/content/IFrame';
 
 const templates = [
-    Starter,
+
     Fireway,
     Crypto,
-    Voids,
+    // Voids,
     Product,
     Sweepfloor,
     SweepfloorModern,
     Tailblocks,
-    IFrame
+    // IFrame,
+    Starter,
 ]
 
 export default templates;

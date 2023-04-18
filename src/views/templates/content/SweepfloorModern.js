@@ -5623,7 +5623,8 @@ const template = {
 };
 
 const metadata = {
-  image: 'https://i.ibb.co/pWQ73s6/Screenshot-2023-01-27-at-17-00-29.png',
+  image: 'https://bafybeidzwyayemuzpc63ck2nxjmzwkva7odmwq3nx5b46sog67h2gpd2uu.ipfs.w3s.link/SFDAO.png',
+  preview: 'https://bafybeiha7n6ep7xflyw2ojjutxtol5yrjvdegvot4p6qfkntbjxc2osy34.ipfs.w3s.link/SFDAOPreview.png',
   name: 'Sweep Floor DAO Modern',
   description: 'Single page landing page template',
   tags: ['Landing Page'],

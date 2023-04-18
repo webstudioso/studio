@@ -40,7 +40,7 @@ const Templates = ({ onLeave }) => {
                     background: `url(${template.metadata.image})`,
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'center'
+                    backgroundPosition: 'top'
                 }}
                 className={index === selected ? "blurred" : ""}
                 >
@@ -109,7 +109,7 @@ const Templates = ({ onLeave }) => {
 
     return (
         <Grid container spacing={2} sx={{ 
-            height: 'calc(100vh - 110px)', 
+            height: 'calc(100vh - 120px)', 
             overflow: 'scroll', 
             background: '#f7f8f8', 
             border: '1px solid #dfe5eb',

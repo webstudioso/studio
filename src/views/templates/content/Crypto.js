@@ -14749,7 +14749,8 @@ const template = {
 };
 
 const metadata = {
-  image: 'https://i.ibb.co/S7wdYqR/Screenshot-2023-01-06-at-16-30-26.png',
+  image: 'https://bafybeidm3nic5iqic2c57qqpfgzrfrv7igvlomtovqs2xxdsr6uldjnhum.ipfs.w3s.link/CryptoLand.png',
+  preview: 'https://bafybeias2erfelnl3pl75hjlrguevh3nwokwoar34ku2lnvdlx2ckzd6oi.ipfs.w3s.link/CryptoLandPreview.png',
   name: 'Crypto',
   description: 'Showcase your crypto project',
   tags: ['Landing Page'],

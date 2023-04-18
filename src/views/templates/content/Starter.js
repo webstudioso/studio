@@ -3577,11 +3577,12 @@ const template = {
 };
 
 const metadata = {
-  image: 'https://i.ibb.co/nkChZm6/Screenshot-2022-12-22-at-21-30-58.png',
-  name: 'Starter',
-  description: 'Landing page template without any functional component',
-  tags: ['Landing Page'],
-  premium: false
+    image: 'https://bafybeid5v3l3ldvhrcifbiwiwddosm2g3sdowcaqlctzezvyig4wgkz4bq.ipfs.w3s.link/Screenshot%202023-04-18%20at%2022.22.43.png',
+    preview: 'https://bafybeigeue2hlug4olxszai7gylvfgrvjlvarten5j373riu6bdn6qigvi.ipfs.w3s.link/demotest.dev.webstudio.so__t%3D73724.png',
+    name: 'Starter',
+    description: 'Landing page template without any functional component',
+    tags: ['Landing Page'],
+    premium: false
 };
 
 export { template, metadata };
