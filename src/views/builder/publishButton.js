@@ -50,7 +50,8 @@ const PublishButton = ({ principal, projectId }) => {
                 <InfoButton section='PUBLISH' />
             </Typography>
             <Typography variant="body" sx={{ mt: '15px' }}>
-                Click Publish to go live with your latest changes.
+                Click Publish to go live with your latest changes. Your website will be hosted in the<br/>
+                <a style={{ color: '#6366F1'}} href="https://docs.ipfs.tech/concepts/faq/#what-is-ipfs" target="__blank">Interplanetary File System</a>
             </Typography>
             <Button href={getProjectUrl()} target="__blank">View site</Button>
         </Fragment>

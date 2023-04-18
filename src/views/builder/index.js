@@ -239,13 +239,13 @@ const EditorView = () => {
 										</IconButton>
 									</HtmlTooltip>
 								</Grid>
-								<Grid item xs={12}>
+								{/* <Grid item xs={12}>
 									<HtmlTooltip title={styleTooltip} placement="right-start">
 										<IconButton color="primary" size="large" onClick={() => setOpen(open !== SECTION.STYLE ? SECTION.STYLE : null)}>
 											<IconPalette />
 										</IconButton>
 									</HtmlTooltip>
-								</Grid>
+								</Grid> */}
 								<Grid item xs={12}>
 									<HtmlTooltip title={appTooltip} placement="right-start">
 										<IconButton color="primary" size="large" onClick={() => setOpen(open !== SECTION.SETTINGS ? SECTION.SETTINGS : null)}>
@@ -260,13 +260,13 @@ const EditorView = () => {
 										</IconButton>
 									</HtmlTooltip>
 								</Grid>
-								<Grid item xs={12}>
+								{/* <Grid item xs={12}>
 									<HtmlTooltip title={shoppingTooltip} placement="right-start">
 										<IconButton color="primary" size="large" onClick={() => setOpen(SECTION.MARKETPLACE)}>
 											<IconShoppingCart />
 										</IconButton>
 									</HtmlTooltip>
-								</Grid>
+								</Grid> */}
 							</Grid>
 						</Grid>
 						<Grid item xs sx={{ py: '15px', px: '30px'}}>

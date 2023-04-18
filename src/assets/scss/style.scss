@@ -16,6 +16,56 @@ $primary-font:  'Montserrat';
     }
 }
 
+
+.blurred {
+    -webkit-filter: blur(2px);
+    filter: blur(2px);
+}
+.overlay {
+    -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 0.5s; /* Firefox < 16 */
+     -ms-animation: fadein 0.5s; /* Internet Explorer */
+      -o-animation: fadein 0.5s; /* Opera < 12.1 */
+         animation: fadein 0.5s;
+}
+// img,
+// .overlay {
+//   transition: .3s all;
+//   border-radius: 3px;
+// }
+
+// .template {
+//   float: left;
+//   max-width: 31%;
+//   position: relative;
+//   margin: .5%;
+//   img {
+//     width: 100%;
+//     margin-bottom: -4px;
+//   }
+//   .overlay {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     bottom: 0;
+//     width: 100%;
+//     background: $bg;
+//     color: #fff;
+//     opacity: 0;
+//   }
+//   &:hover {
+//     .overlay {
+//       opacity: 1;
+//     }
+//     img {
+//       -webkit-filter: blur(2px);
+//       filter: blur(2px);
+//     }
+//   }
+// }
+
+
+
 .MuiDrawer-modal {
     inset: unset !important;
 }

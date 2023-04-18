@@ -8,7 +8,7 @@ const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     textAlign: 'left',
     color: theme.palette.text.secondary,
-    height: 380,
+    height: 250,
     borderRadius: '4px'
 }));
 
@@ -26,20 +26,27 @@ const Templates = ({ handleClose, editor }) => {
     }
 
     return availableTemplates.map((template, index) => (
-        <Grid item xs={12} sm={4} key={index}>
-        <Item elevation={10}>
+        <Grid item xs={6} key={index}>
+        <Item elevation={6}>
             <Grid container>
                 <Grid item xs={12}>
-                    <Box sx={{
+                    {/* <Box sx={{
                         width: '100%',
-                        height: '250px',
+                        height: '150px',
                         background: `url(${template.metadata.image})`,
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center'
                     }}>
+                    </Box> */}
+                    <Box sx={{
+                        width: '100%',
+                        height: '150px',
+                        background: `rgba(255,255,255,0.7)`,
+                        position: 'absolute'
+                    }}>
                     </Box>
-                    <Box sx={{ p: 2 }}>
+                    {/* <Box sx={{ p: 2 }}>
                         <Typography variant="h3" fontSize={16} sx={{ mb: 1 }}>{template.metadata.name}</Typography>
                         <span>
                             {template.metadata.description}
@@ -55,7 +62,7 @@ const Templates = ({ handleClose, editor }) => {
                                 <Button variant="outlined" onClick={() => handleTemplateSelect(template)}>Select</Button>
                             </Grid>
                         </Grid>
-                    </Box>
+                    </Box> */}
                 </Grid>
             </Grid>
         </Item>

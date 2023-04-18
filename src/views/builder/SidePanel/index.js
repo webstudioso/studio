@@ -43,7 +43,10 @@ import themeStyle from 'assets/scss/_theme.module.scss';
 import InfoButton from '../InfoButton';
 
 import constants from 'constant'
-const { SIDEPANEL } = constants
+import Blocks from './Blocks';
+import Pages from './Pages';
+import Templates from './Templates';
+const { SIDEPANEL, SECTION } = constants
 const { TITLE } = SIDEPANEL
 
 // concat 'px'
@@ -330,9 +333,10 @@ const SidePanel = ({ open, onLeave }) => {
                 open={open}
                 hideBackdrop={true}
                 elevation={0}
+                onMouseLeave={dismiss}
                 PaperProps={{
                     sx: {
-                        width: 450,
+                        width: open === SECTION.TEMPLATE ? 650 : 450,
                         ml: '60px',
                         mt: '56px',
                         boxShadow: '15px 15px 15px 0px rgba(0,0,0,0.15)',
@@ -341,7 +345,7 @@ const SidePanel = ({ open, onLeave }) => {
                     }
                 }}
             >
-                <Grid container direction="column" onMouseLeave={dismiss}>
+                <Grid container direction="column" >
                     <Grid item>
                         <Stack
                             direction="row"
@@ -365,31 +369,9 @@ const SidePanel = ({ open, onLeave }) => {
                         </Stack>
                     </Grid>
                     <Grid item>
-                        <Grid container>
-                            <Grid item xs={4} sx={{ 
-                                height: 'calc(100vh - 110px)', 
-                                overflow: 'scroll', 
-                                background: '#f7f8f8', 
-                                border: '1px solid #dfe5eb',
-                                borderLeft: '0px',
-                                paddingTop: '10px'
-                            }}>
-                                {catList}
-                            </Grid>
-                            <Grid item xs={8} sx={{ 
-                                height: 'calc(100vh - 110px)', 
-                                overflow: 'scroll',
-                                borderTop: '1px solid #dfe5eb',
-                            }}>
-                                <Grid container spacing={gridSpacing} sx={{ p: 3 }} id="myBlocks" ref={ref}>
-                                    {!filter && (
-                                    <Box sx={{ mx: '10px', p: '5px' }} textAlign="center" justifyContent="center">
-                                        <img src={draganddrop} width="100%" height="auto" />
-                                        <Typography fontSize={16} color="black">Select a component 👈 and drag it to the canvas 👉</Typography>
-                                    </Box>)}
-                                </Grid>
-                            </Grid>
-                        </Grid>
+                        {open === SECTION.BLOCKS && (<Blocks onLeave={onLeave} />)}
+                        {open === SECTION.PAGES && (<Pages onLeave={onLeave} />)}
+                        {open === SECTION.TEMPLATE && (<Templates onLeave={onLeave} />)}
                     </Grid>
                 </Grid>
             </Drawer>

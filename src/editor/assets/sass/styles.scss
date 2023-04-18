@@ -123,9 +123,10 @@ body {
     min-height: 24px !important;
     // margin: 5px 15%;
     font-size: 14px;
-    color: #555;
+    color: #333 !important;
     line-height:24px !important;
     margin-right: 30px !important;
+    border: 1px solid #eee !important;
 }
 
 .gjs-one-bg {
