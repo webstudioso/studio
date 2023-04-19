@@ -32,7 +32,8 @@ const constants = {
 		STYLE: 'STYLE',
 		SETTINGS: 'SETTINGS',
 		TEMPLATE: 'TEMPLATE',
-		MARKETPLACE: 'MARKETPLACE'
+		MARKETPLACE: 'MARKETPLACE',
+		MEDIA: 'MEDIA'
 	},
 	SIDEPANEL: {
 		TITLE: {
@@ -41,7 +42,8 @@ const constants = {
 			STYLE: 'Edit Style',
 			SETTINGS: 'Configure Settings',
 			TEMPLATE: 'Change Template',
-			MARKETPLACE: 'Open Marketplace'
+			MARKETPLACE: 'Open Marketplace',
+			MEDIA: 'Media'
 		}
 	},
 	INFO_URL: {
@@ -51,7 +53,8 @@ const constants = {
 		SETTINGS: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
 		TEMPLATE: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
 		MARKETPLACE: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
-		PUBLISH: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08'
+		PUBLISH: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
+		MEDIA: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08'
 	},
 	IMAGE_PLACEHOLDER:
 		"https://media.istockphoto.com/vectors/image-preview-icon-picture-placeholder-for-website-or-uiux-design-vector-id1222357475?k=20&m=1222357475&s=170667a&w=0&h=YGycIDbBRAWkZaSvdyUFvotdGfnKhkutJhMOZtIoUKY="

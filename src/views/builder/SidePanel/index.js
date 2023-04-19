@@ -47,6 +47,7 @@ import Blocks from './Blocks';
 import Pages from './Pages';
 import Templates from './Templates';
 import Settings from './Settings';
+import Media from "./Media";
 const { SIDEPANEL, SECTION } = constants
 const { TITLE } = SIDEPANEL
 
@@ -293,9 +294,24 @@ const SidePanel = ({ open, onLeave, principal, projectId }) => {
         </Grid> 
     )
 
+    const isLoading = useSelector((state) => state.loader.show);
     const dismiss = () => {
-        setFilter()
-        onLeave()
+
+        (async() => {
+            console.log("waiting for variable");
+            while(isLoading) // define the condition as you like
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            console.log("variable is defined");
+
+            window?.editor?.AssetManager?.close();
+            console.log("close?")
+            console.log(window.editor.AssetManager);
+            setFilter()
+            onLeave()
+            
+        })();
+
+
     }
 
     return (
@@ -374,6 +390,7 @@ const SidePanel = ({ open, onLeave, principal, projectId }) => {
                         {open === SECTION.PAGES && (<Pages onLeave={onLeave} />)}
                         {open === SECTION.TEMPLATE && (<Templates onLeave={onLeave} />)}
                         {open === SECTION.SETTINGS && (<Settings onLeave={onLeave} principal={principal} projectId={projectId} />)}
+                        {open === SECTION.MEDIA && (<Media onLeave={onLeave} />)}
                     </Grid>
                 </Grid>
             </Drawer>

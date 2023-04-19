@@ -9,7 +9,7 @@ import { LOADER, SNACKBAR_OPEN } from "store/actions";
 import SidePanel from 'views/builder/SidePanel';
 
 import { Grid, Box, AppBar, Toolbar, Typography, IconButton, Stack, Button } from "@mui/material";
-import { IconChecks, IconSettings, IconPlus, IconFiles, IconPalette, IconInfoCircle, IconTemplate, IconShoppingCart } from '@tabler/icons';
+import { IconChecks, IconSettings, IconPlus, IconFiles, IconPalette, IconInfoCircle, IconTemplate, IconShoppingCart, IconPhoto } from '@tabler/icons';
 import Logo from 'common/Logo';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import PublishButton from './publishButton';
@@ -78,6 +78,7 @@ const EditorView = () => {
 		document.addEventListener('assetUploadError', handleAssetUploadError);
 
 		document.addEventListener('toggleSettingsModal', () => setOpenDialog(true));
+		document.addEventListener('toggleAssetsModal', () => setOpen(SECTION.MEDIA));
 	};
 
 	const loadPrincipal = async () => {
@@ -101,6 +102,7 @@ const EditorView = () => {
 			document.removeEventListener('assetUploadEnd', () => {});
 			document.removeEventListener('assetUploadError', () => {});
 			document.removeEventListener('toggleSettingsModal', () => {});
+			document.removeEventListener('toggleAssetsModal', () => {});
 		}
 		
 	},[]);
@@ -173,6 +175,19 @@ const EditorView = () => {
 			
             <Typography variant="body" sx={{ mt: '15px' }}>
                 Replace the current page template. This will discard all changes to the current page
+            </Typography>
+        </Fragment>
+    )
+
+	const mediaTooltip = (
+        <Fragment>
+            <Typography fontWeight="bold" color="inherit">
+				Media
+				<InfoButton section={SECTION.TEMPLATE} />
+			</Typography>
+			
+            <Typography variant="body" sx={{ mt: '15px' }}>
+				Upload images and multimedia to your cloud storage to quickly use them in the editor.
             </Typography>
         </Fragment>
     )
@@ -257,6 +272,13 @@ const EditorView = () => {
 									<HtmlTooltip title={templateTooltip} placement="right-start">
 										<IconButton color="primary" size="large" onClick={() => setOpen(open !== SECTION.TEMPLATE ? SECTION.TEMPLATE : null)}>
 											<IconTemplate />
+										</IconButton>
+									</HtmlTooltip>
+								</Grid>
+								<Grid item xs={12}>
+									<HtmlTooltip title={mediaTooltip} placement="right-start">
+										<IconButton color="primary" size="large" onClick={() => setOpen(open !== SECTION.MEDIA ? SECTION.MEDIA : null)}>
+											<IconPhoto />
 										</IconButton>
 									</HtmlTooltip>
 								</Grid>

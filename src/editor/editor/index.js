@@ -71,7 +71,29 @@ const Editor = ({ projectId, onClickHome, principal }) => {
       fromElement: true,
       selectorManager: { escapeName },
       pageManager: true, // This should be set to true
-      assetManager,
+      assetManager: {
+        custom: {
+          open(props) {
+            console.log("ONOPEN-----")
+            console.log(props)
+            document.dispatchEvent(new CustomEvent('toggleAssetsModal'));  
+            // `props` are the same used in `asset:custom` event
+            // ...
+            // Init and open your external Asset Manager
+            // ...
+            // IMPORTANT:
+            // When the external library is closed you have to comunicate
+            // this state back to the editor, otherwise GrapesJS will think
+            // the Asset Manager is still open.
+            // example: myAssetManager.on('close', () => props.close())
+          },
+          close(props) {
+            console.log("ONCLOSE-----")
+            console.log(props)
+            // Close the external Asset Manager
+          },
+        }
+      },
       storageManager:  {
         type: 'remote',
         autosave: true, // Store data automatically

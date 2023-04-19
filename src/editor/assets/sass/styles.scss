@@ -13,6 +13,16 @@ body {
 @import 'material-icons/iconfont/material-icons.scss';
 @import 'grapesjs/src/styles/scss/main.scss';
 
+.gjs-clm-tag-status svg, .gjs-clm-tag-close svg {
+    vertical-align: unset;
+}
+
+.gjs-clm-tag {
+    background: $quaternaryColor;
+    color:white;
+    height:24px;
+}
+
 .gjs-two-color {
     color: black;
 }
