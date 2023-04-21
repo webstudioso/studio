@@ -47,6 +47,7 @@
         "redux-persist": "^6.0.0",
         "remark-gfm": "^1.0.0",
         "stylis-plugin-rtl": "^2.0.2",
+        "three-dots": "^0.3.2",
         "uuid": "^8.3.2",
         "wsm-animations": "^0.0.2",
         "wsm-asset-manager": "^0.0.2",

@@ -14,6 +14,8 @@ import {
 import { gridSpacing } from 'store/constant';
 import Templates from 'views/modal/Templates';
 import { IconTrash } from '@tabler/icons';
+import { getProjectUrl } from 'utils/project';
+import { truncate } from 'utils/format';
 
 const Pages = ({ onLeave }) => {
     const ref = useRef(null);
@@ -127,7 +129,7 @@ const Pages = ({ onLeave }) => {
     // )
 
     const getName = (page) => {
-        return page.attributes.type === 'main' ? 'Home' : page.attributes.name
+        return page.attributes.type === 'main' ? 'index' : page.attributes.name
     }
 
     const pageList = pages?.map((page) => 
@@ -152,7 +154,7 @@ const Pages = ({ onLeave }) => {
         >
             <Typography fontWeight="normal" color={
                 selectedPage?.id === page.id ? '#3F41A4' : 'black'
-            } fontSize={12}>{getName(page)}</Typography>
+            } fontSize={12}>{truncate(getName(page), 18)}</Typography>
         </Grid> 
     )
 
@@ -161,12 +163,18 @@ const Pages = ({ onLeave }) => {
     const saveAndReload =  async() => {
         const data = window.editor.getProjectData();
         await window.editor.Storage.store(data);
+        // await window.editor.store();
         loadPages()
     }
 
     const isHome = () => {
         return selectedPage?.attributes?.type === 'main'
     }
+
+    // const ALPHA_NUMERIC_DASH_REGEX = /^[a-z0-9]+$/;
+
+    const getPageNme = () => isHome() ? '' : `/${name}`
+    const getPagePath = () => `${getProjectUrl()}${getPageNme()}`
 
     return (
         <Grid container>
@@ -227,20 +235,26 @@ const Pages = ({ onLeave }) => {
                                     fullWidth
                                     size="small"
                                     variant="standard" 
-                                    label="Name"
+                                    label="Path"
                                     disabled={isHome()}
                                     InputLabelProps={{ shrink: true }}
                                     value={name}
-                                    placeholder='Page identifier e.g pricing' 
-                                    onChange={(e) => setName(e.target.value)} 
+                                    placeholder='Page path alpha numeric lower case e.g pricing' 
+                                    onChange={(e) => {
+                                        const name = e.target.value.replaceAll(' ', '').toLowerCase();
+                                        setName(name)
+                                    }} 
                         />
+                        <Box className="project-link-button" sx={{ fontSize: '11px !important', my: 1, width: '100%', color:'black' }}>
+                             🌐 {truncate(getPagePath(), 37)}
+                        </Box>
                         <Button 
                             size="small"
                             fullWidth
                             variant="outlined"
                             elevation={0}
                             disabled={isHome() || !name}
-                            sx={{ mt: 1 }}
+                            // sx={{ mt: 1 }}
                             onClick={() => {
                                     const editor = window.editor;
                                     const pageManager = editor.Pages;

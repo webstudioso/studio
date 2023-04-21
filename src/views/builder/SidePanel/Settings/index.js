@@ -153,6 +153,7 @@ const Settings = ({ onLeave, principal, projectId }) => {
                 const currMeta = {...metadata};
                 currMeta['icon'] = uploadedFilePath;
                 await save(currMeta);
+                // window.editor.store();
                 setMetadata(currMeta);
                 // await publishMetadata({ id: projectId, principal, data  })
 
@@ -246,6 +247,7 @@ const Settings = ({ onLeave, principal, projectId }) => {
                                     type="file"
                                     accept="image/*"
                                     hidden
+                                    onClick={() => document.dispatchEvent(new CustomEvent('addCloseDelay'))}
                                     onChange={handleFaviconChange}
                                 />
                             </Button>

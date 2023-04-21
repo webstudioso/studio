@@ -1,3 +1,5 @@
+@use 'three-dots';
+
 // color variants
 @import 'themes-vars.module.scss';
 @import 'loader.module.scss';
@@ -118,13 +120,73 @@ html, body {
     margin-right: 8px;
 }
 
-.signin-container {
-    height: 100vh;
-    background: url('../images/signin-background.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+// .signin-container {
+//     height: 100vh;
+//     background: url('../images/signin-background.png');
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     background-position: center;
+
+    
+// }
+
+
+
+
+
+
+.signin-logo {
+    height: 120px;
+    width: auto;
+    margin: 0 auto;
 }
+
+.signin-text {
+    font-weight: lighter;
+    color: white;
+    font-size: 24px;
+}
+
+.signin-loading-container {
+    display: inline-flex;
+    margin-left: 20px;
+}
+
+.fade-in-image { animation: fadeIn 2s; }
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.signin-container {
+    background: linear-gradient(320deg, #9114fd, #bb10e2);
+    background-size: 400% 400%;
+    height: 100vh;
+    padding-top: 35vh;
+    -webkit-animation: AnimationName 8s ease infinite;
+    -moz-animation: AnimationName 8s ease infinite;
+    animation: AnimationName 8s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:19% 0%}
+    50%{background-position:82% 100%}
+    100%{background-position:19% 0%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:19% 0%}
+    50%{background-position:82% 100%}
+    100%{background-position:19% 0%}
+}
+@keyframes AnimationName {
+    0%{background-position:19% 0%}
+    50%{background-position:82% 100%}
+    100%{background-position:19% 0%}
+}
+
+
+
 
 .glass-container {
     background: rgba( 255, 255, 255, 0.25 );

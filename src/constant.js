@@ -8,6 +8,9 @@ const constants = {
 		MAGIC_LINK: "magicLink",
 		METAMASK: "metamask"
 	},
+	PATH: {
+		ADMIN: '/profile/projects'
+	},
 	ERROR: {
 		HANDLE_REGISTERED: "Handle already registered to an account",
 		EMAIL_REGISTERED: "Email already registered to an account",
@@ -33,7 +36,8 @@ const constants = {
 		SETTINGS: 'SETTINGS',
 		TEMPLATE: 'TEMPLATE',
 		MARKETPLACE: 'MARKETPLACE',
-		MEDIA: 'MEDIA'
+		MEDIA: 'MEDIA',
+		DASHBOARD: 'DASHBOARD'
 	},
 	SIDEPANEL: {
 		TITLE: {
@@ -54,7 +58,8 @@ const constants = {
 		TEMPLATE: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
 		MARKETPLACE: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
 		PUBLISH: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
-		MEDIA: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08'
+		MEDIA: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
+		DASHBOARD: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08'
 	},
 	IMAGE_PLACEHOLDER:
 		"https://media.istockphoto.com/vectors/image-preview-icon-picture-placeholder-for-website-or-uiux-design-vector-id1222357475?k=20&m=1222357475&s=170667a&w=0&h=YGycIDbBRAWkZaSvdyUFvotdGfnKhkutJhMOZtIoUKY="

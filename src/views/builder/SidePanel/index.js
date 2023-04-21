@@ -176,8 +176,12 @@ const SidePanel = ({ open, onLeave, principal, projectId }) => {
 
     useEffect(() => {
         // 👇️ call method in useEffect hook
-        const el = document.getElementById('myBlocks');
-        console.log(el);
+        // const el = document.getElementById('myBlocks');
+        // console.log(el);
+        document.addEventListener('addCloseDelay', () => setDelay(true));
+        return () => {
+			document.removeEventListener('addCloseDelay', () => {});
+        }
       }, []);
 
     // state - layout type
@@ -295,23 +299,28 @@ const SidePanel = ({ open, onLeave, principal, projectId }) => {
     )
 
     const isLoading = useSelector((state) => state.loader.show);
-    const dismiss = () => {
 
-        (async() => {
-            console.log("waiting for variable");
-            while(isLoading) // define the condition as you like
-                await new Promise(resolve => setTimeout(resolve, 1000));
-            console.log("variable is defined");
+    const onClose = () => {
+        window?.editor?.AssetManager?.close();
+        console.log("close?")
+        setFilter()
+        onLeave()
+    }
 
-            window?.editor?.AssetManager?.close();
-            console.log("close?")
-            console.log(window.editor.AssetManager);
-            setFilter()
-            onLeave()
-            
-        })();
+    const [delay, setDelay] = useState(false)
 
-
+    const dismiss = () => {            
+        // Do we have an action delaying closure?
+        console.log(delay)
+        if (delay) {
+            setTimeout(() => {
+                
+                setDelay(false)
+                // onClose()
+            }, 2000)
+        } else {
+            onClose()
+        }
     }
 
     return (

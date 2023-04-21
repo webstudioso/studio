@@ -73,6 +73,9 @@ const Media = ({ onLeave }) => {
 
 
     const handleMediaUpload = async (e) => {
+
+        document.dispatchEvent(new CustomEvent('addCloseDelay'));
+
         dispatch({ type: LOADER, show: true });
         const file = e.target.files[0];
 
@@ -134,13 +137,14 @@ const Media = ({ onLeave }) => {
             }}
             ref={ref}
         >
-                        <Box sx={{ position:'absolute', right:20, top: 18}}>>
+                        <Box sx={{ position:'absolute', right:20, top: 18}}>
                             <Button color="primary" variant="outlined" component="label">
                             Upload New Media
                                 <input
                                     type="file"
                                     accept="image/*"
                                     hidden
+                                    onClick={() => document.dispatchEvent(new CustomEvent('addCloseDelay')) }
                                     onChange={handleMediaUpload}
                                 />
                             </Button>

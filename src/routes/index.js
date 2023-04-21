@@ -8,7 +8,7 @@ import ProfileGuard from "utils/route-guard/ProfileGuard";
 
 const NewProject = Loadable(lazy(() => import("views/new")));
 const ProfileAdmin = Loadable(lazy(() => import("views/profile/admin")));
-const Signin = Loadable(lazy(() => import("views/signin")));
+const Signin = Loadable(lazy(() => import("views/login")));
 const ProjectsPage = Loadable(
 	lazy(() => import("views/profile/admin/projects"))
 );

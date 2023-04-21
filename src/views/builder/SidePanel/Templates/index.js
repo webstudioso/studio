@@ -12,7 +12,7 @@ const Item = styled(Paper)(({ theme }) => ({
     borderRadius: '4px'
 }));
 
-const Templates = ({ onLeave }) => {
+const Templates = ({ onLeave, fullScreen=false }) => {
 
     // const handleTemplateSelect = (template) => {
     //     if (template.html) {
@@ -28,7 +28,7 @@ const Templates = ({ onLeave }) => {
     const [selected, setSelected] = useState();
 
     const templateList = availableTemplates.map((template, index) => (
-        <Grid item xs={6} key={index} sx={{ mb: 3, cursor: 'pointer' }}
+        <Grid item xs={fullScreen ? 6:12} md={fullScreen ? 4:6} lg={fullScreen ? 3:6} key={index} sx={{ mb: 3, cursor: 'pointer' }}
             onMouseEnter={() => {
                 setSelected(index)
             }}
@@ -59,8 +59,53 @@ const Templates = ({ onLeave }) => {
                 >
                     <Button elevation={0} 
                             onClick={() => {
-                                window.editor.loadProjectData(template.template);
-                                onLeave()
+                                const currentData = window.editor.getProjectData();
+                                const currentPage = window.editor.Pages.getSelected();
+                                const currId = currentPage.id;
+                                // console.log(currentData)
+
+                                // console.log(currentPage)
+                                const index = currentData.pages.findIndex((page) => page.id === currentPage.id)
+
+                                // console.log(index)
+                                // console.log(template.template.pages[0])
+
+                                // const assets = template.template.assets;
+                                // const pages = template.template.pages;
+                                // const styles = template.template.styles;
+                                currentData.pages[index].frames = template.template.pages[0].frames
+
+                                // console.log(currentData.pages)
+                                // Get current assets, not from templates
+                                const assets = currentData.assets
+                                const pages = currentData.pages
+                                const styles = template.template.styles//{...template.template.styles, ...currentData.styles}
+                                console.log(styles)
+                                // console.log(styles)
+                                // console.log(currentData.styles)
+                                // console.log(pages)
+                                // console.log("????---???")
+                                // console.log(template.template.assets)
+                                // console.log(assets)
+
+                                // currentData.pages[index] = template.template.pages[0]
+                                window.editor.loadProjectData({
+                                    assets,
+                                    pages,
+                                    styles
+                                });
+
+                                window.editor.Pages.select(currId);
+                                
+
+                                if (fullScreen)
+                                    onLeave()
+                                // window.editor.loadProjectData(template.template);
+                                // onLeave()
+                                // console.log("clicking??")
+                                // 
+                                // console.log(page)
+                                // window.editor.getComponents().add(template.template)
                             }}
                             variant="contained"
                             sx={{
@@ -109,13 +154,15 @@ const Templates = ({ onLeave }) => {
 
     return (
         <Grid container spacing={2} sx={{ 
-            height: 'calc(100vh - 120px)', 
+            height: fullScreen ? 'calc(100vh - 70px)' : 'calc(100vh - 120px)', 
             overflow: 'scroll', 
             background: '#f7f8f8', 
             border: '1px solid #dfe5eb',
+            // margin: 2,
             borderLeft: '0px',
             marginTop: '0px',
-            p: 1
+            p: 2,
+            pt: 0
         }}>
             {templateList}
         </Grid>

@@ -4,8 +4,8 @@ import { useParams, useNavigate, Link as RouterLink } from "react-router-dom";
 import { Editor } from "editor";
 import Modal from "views/modal";
 import { Magic } from 'magic-sdk';
-import { useDispatch } from "react-redux";
-import { LOADER, SNACKBAR_OPEN } from "store/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { LOADER, SNACKBAR_OPEN, UPDATE_APP } from "store/actions";
 import SidePanel from 'views/builder/SidePanel';
 
 import { Grid, Box, AppBar, Toolbar, Typography, IconButton, Stack, Button } from "@mui/material";
@@ -30,10 +30,17 @@ const EditorView = () => {
 	const dispatch = useDispatch();
 	const [editor, setEditor] = useState();
 	const [principal, setPrincipal] = useState();
-	const [eventName, setEventName] = useState();
+	const [eventName, setEventName] = useState('toggleTemplates');
 	const [openDialog, setOpenDialog] = useState(false);
 
 	const [open, setOpen] = useState();
+
+
+	const appState = useSelector((state) => state.app);
+	console.log(appState)
+
+
+	const [templatePickerModal, setTemplatePickerModal] = useState(true);
 
 	const handleEvent =  (event) =>  {
 		setEventName(event.type);
@@ -107,10 +114,10 @@ const EditorView = () => {
 		
 	},[]);
 
-	const handleClose = () => {
-		setEditor();
-		setEventName();
-	};
+	// const handleClose = () => {
+	// 	setEditor();
+	// 	setEventName();
+	// };
 
 	const editorCanvas = principal && (<Editor projectId={projectId} onClickHome={onClickHome} principal={principal} />);
 
@@ -192,6 +199,20 @@ const EditorView = () => {
         </Fragment>
     )
 
+
+	const homeTooltip = (
+        <Fragment>
+            <Typography fontWeight="bold" color="inherit">
+				Back to Dashboard
+				<InfoButton section={SECTION.DASHBOARD} />
+			</Typography>
+			
+            <Typography variant="body" sx={{ mt: '15px' }}>
+				Manage your apps, view analytics and access learning resources
+            </Typography>
+        </Fragment>
+    )
+
 	const shoppingTooltip = (
         <Fragment>
             <Typography fontWeight="bold" color="inherit">
@@ -216,13 +237,15 @@ const EditorView = () => {
 									component="div"
 									sx={{ flexGrow: 1, textAlign: "left" }}
 								>
-									<Button
-										color="inherit"
-										component={RouterLink}
-										to="/"
-									>
-										<Logo />
-									</Button>
+									<HtmlTooltip title={homeTooltip} placement="right-start">
+										<Button
+											color="inherit"
+											component={RouterLink}
+											to="/"
+										>
+											<Logo />
+										</Button>
+									</HtmlTooltip>
 								</Typography>
 								<PublishButton	principal={principal}
 												projectId={projectId}
@@ -298,8 +321,14 @@ const EditorView = () => {
 				</Grid>
 			</Grid>
 			<SidePanel open={open} principal={principal} projectId={projectId} onLeave={() => setOpen()} />
-			<Modal  open={!!editor} 
-					handleClose={handleClose} 
+			<Modal  open={appState.new} 
+					onLeave={() => {
+						dispatch({
+							type: UPDATE_APP,
+							configuration: { new: false }
+						})
+						console.log("dispatched?")
+					}} 
 					editor={editor} 
 					event={eventName} 
 					principal={principal}

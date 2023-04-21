@@ -1,21 +1,25 @@
 import * as React from 'react';
-import { Dialog, Grid, Toolbar, AppBar, IconButton, Typography, Slide } from '@mui/material';
+import { Dialog, Grid, Toolbar, AppBar, IconButton, Typography, Slide, Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import Templates from 'views/modal/Templates';
+// import Templates from 'views/modal/Templates';
 import Launch from 'views/modal/Launch';
 import Users from 'views/modal/Users';
+import InfoButton from 'views/builder/InfoButton';
+import constants from 'constant';
+import Templates from 'views/builder/SidePanel/Templates';
 
+const { SECTION } = constants;
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 
-const ModalManager = ({ open, handleClose, editor, event, principal, projectId }) => {
+const ModalManager = ({ open, onLeave, editor, event, principal, projectId }) => {
       const getTitle = () => {
         let title;
         switch (event) {
             case 'toggleTemplates':
-                title = '🎉 Choose a new template for your current page!';
+                title = 'Choose Template';
                 break;
             case 'toggleLaunch':
                 title = '🚀 Let\'s configure and launch that project!';
@@ -28,34 +32,45 @@ const ModalManager = ({ open, handleClose, editor, event, principal, projectId }
         };
         return title;
       }
+
   return (
     <Dialog
-        fullScreen
         open={open}
-        onClose={handleClose}
+        onClose={onLeave}
         TransitionComponent={Transition}
+        fullScreen
         sx={{ 
+            // width:'80%',
             "& .MuiPaper-root": {
                 padding: "0px"
             },
+            // width:'80vw'
+            // m:2
         }}
     >
-        <AppBar sx={{ position: 'relative', background: "#27293D" }}>
+        <AppBar sx={{ position: 'relative', background: "#fff", borderTop: '5px solid #6366F1' }}>
         <Toolbar>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h2" component="div">
+            <Typography variant="h4" color="black" fontWeight="bolder">
                 {getTitle()}
+                <InfoButton section={SECTION.TEMPLATE} />
             </Typography>
-            <IconButton
+            <Button variant="outlined" elevation={0} sx={{ marginLeft: "auto" }} onClick={onLeave}>
+                Pick Later
+            </Button>
+            {/* <IconButton
                 edge="start"
-                color="inherit"
-                onClick={handleClose}
+                color="primary"
+                onClick={onLeave}
                 aria-label="close"
             >
-            <CloseIcon />
-            </IconButton>
+                <CloseIcon />
+            </IconButton> */}
         </Toolbar>
         </AppBar>
-        <Grid container spacing={2} sx={{ p: 2, background: "#1E1E30", height: '100vh' }}>
+        <Templates fullScreen onLeave={onLeave}/>
+        {/* <Grid container spacing={2} sx={{ p: 2, background: "#fff", height: '100vh' }}>
+            <Templates fullScreen /> */}
+{/*             
             { event === 'toggleTemplates' && (
                 <Templates  editor={editor} 
                             handleClose={handleClose} />
@@ -73,8 +88,8 @@ const ModalManager = ({ open, handleClose, editor, event, principal, projectId }
                         principal={principal}
                         projectId={projectId}
                 />
-            )}
-        </Grid>
+            )} */}
+        {/* </Grid> */}
     </Dialog>
   );
 }

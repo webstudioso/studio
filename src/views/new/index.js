@@ -88,7 +88,7 @@ const NewPage = () => {
 				)
 				dispatch({
 					type: UPDATE_APP,
-					configuration: defaultConfiguration
+					configuration: { new: true }
 				});
 				navigate(`/builder/${appData?.subdomain}`);
 			} catch(e) {
