@@ -102,6 +102,7 @@ html, body {
     max-width: 100% !important;
     overflow: hidden !important;
     overscroll-behavior-y: none !important;
+    // background: #A613F0;
 }
 
 // ==============================|| LIGHT BOX ||============================== //
@@ -120,70 +121,126 @@ html, body {
     margin-right: 8px;
 }
 
-// .signin-container {
-//     height: 100vh;
-//     background: url('../images/signin-background.png');
-//     background-size: cover;
-//     background-repeat: no-repeat;
-//     background-position: center;
-
-    
-// }
-
-
-
-
-
-
-.signin-logo {
-    height: 120px;
-    width: auto;
-    margin: 0 auto;
+.signin {
+    .text {
+        font-weight: lighter;
+        color: #444;
+        font-size: 24px;
+    }
+    .container {
+        padding: 40vh 0vw;
+        text-align: center;
+    }
+    .progress {
+        width: 235px;
+        margin: 10px auto;
+    }
 }
 
-.signin-text {
-    font-weight: lighter;
-    color: white;
-    font-size: 24px;
-}
-
-.signin-loading-container {
-    display: inline-flex;
-    margin-left: 20px;
-}
-
-.fade-in-image { animation: fadeIn 2s; }
+.fade-in { animation: fadeIn 2s; }
 
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }
 }
 
-.signin-container {
-    background: linear-gradient(320deg, #9114fd, #bb10e2);
-    background-size: 400% 400%;
-    height: 100vh;
-    padding-top: 35vh;
-    -webkit-animation: AnimationName 8s ease infinite;
-    -moz-animation: AnimationName 8s ease infinite;
-    animation: AnimationName 8s ease infinite;
+.primary-tab {
+    border-top: 5px solid $primaryMain;
 }
 
-@-webkit-keyframes AnimationName {
-    0%{background-position:19% 0%}
-    50%{background-position:82% 100%}
-    100%{background-position:19% 0%}
+.secondary-tab {
+    border-top: 5px solid $secondaryMain;
 }
-@-moz-keyframes AnimationName {
-    0%{background-position:19% 0%}
-    50%{background-position:82% 100%}
-    100%{background-position:19% 0%}
+
+.tab-title {
+    color: black;
+    font-weight: bold;
+    font-size: 16px;    
+    border-bottom: 1px solid #eaeaea;
+    padding: 15px;
 }
-@keyframes AnimationName {
-    0%{background-position:19% 0%}
-    50%{background-position:82% 100%}
-    100%{background-position:19% 0%}
+
+.tab-content {
+    height: 50vh;
+    padding: 20px;
+    // padding: 50px 80px;
+    overflow-y: scroll;
 }
+
+.project-container {
+    padding: 20px;
+    height: 65vh;
+    overflow: scroll;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// .signin-logo {
+//     height: 150px;
+//     width: auto;
+//     margin: 0 auto;
+// }
+
+// .signin-loading-container {
+//     display: inline-flex;
+//     margin-left: 20px;
+// }
+
+
+
+.signin-container {
+    // background: #9314FC;
+    // background: linear-gradient(45deg, #9314FC, #d931ff);
+    // background-color: #A613F0;
+    // background-image: linear-gradient(30deg, #8001e7 0%, #d42ee0 100%);
+    
+    // background: rgb(72,15,126);
+    // background: linear-gradient(30deg, rgba(72,15,126,1) 0%, rgba(148,18,251,1) 48%, rgba(187,16,226,1) 55%, rgba(198,81,224,1) 100%);
+// background-size: 100% 100%;
+    // height: 100vh;
+    // width: 100vw;
+    // vertical-align:middle;
+    // position: absolute;
+    // padding-top: 35vh;
+    // -webkit-animation: AnimationName 8s ease infinite;
+    // -moz-animation: AnimationName 8s ease infinite;
+    // animation: AnimationName 8s ease infinite;
+}
+
+// @-webkit-keyframes AnimationName {
+//     0%{background-position:19% 0%}
+//     50%{background-position:82% 100%}
+//     100%{background-position:19% 0%}
+// }
+// @-moz-keyframes AnimationName {
+//     0%{background-position:19% 0%}
+//     50%{background-position:82% 100%}
+//     100%{background-position:19% 0%}
+// }
+// @keyframes AnimationName {
+//     0%{background-position:19% 0%}
+//     50%{background-position:82% 100%}
+//     100%{background-position:19% 0%}
+// }
 
 
 

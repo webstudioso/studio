@@ -8,6 +8,7 @@ import { getUrl } from "utils/url";
 import premiumSvg from "assets/images/premium.svg";
 import externalLinkSvg from "assets/images/external-link.svg";
 import { ContentCopy } from "@mui/icons-material";
+import { truncate } from "utils/format";
 import axios from "axios";
 
 const ProjectCard = ({ project = {}, onReload, principal, issuer }) => {
@@ -18,13 +19,13 @@ const ProjectCard = ({ project = {}, onReload, principal, issuer }) => {
 
 	const selectProject = (appConfig) => {
 		dispatch({ type: UPDATE_APP, configuration: project });
-		navigate(`/builder/${project?.id}`);
+		navigate(`/e/${project?.id}`);
 	};
 
 	console.log(project);
-	const premiumIcon = project?.plan && (
-		<Box sx={{ position: 'absolute', left: 15, bottom: 15 }}>
-			<img src={premiumSvg} alt="Premium"></img>
+	const premiumIcon = project?.metadata?.icon && (
+		<Box sx={{ position: 'absolute', left: 15, top: 15 }}>
+			<img src={project?.metadata?.icon} alt={project.name} height={44}></img>
 		</Box>
 	);
 
@@ -79,120 +80,66 @@ const ProjectCard = ({ project = {}, onReload, principal, issuer }) => {
 	return (
 		<Paper
 			data-cy={`${project?.name} box`}
-			className="bordered"
+			className="bordered fade-in"
 			sx={{
-				borderRadius: 2,
-				p: 3,
+				borderRadius: 0,
+				// py: 8,
 				position: "relative",
-				background: "#27293D",
-				color: "#1E1E2F",
+				// color: theme.palette.primary.dark,
+				// background: `url(${project.metadata['icon']})`,
 				backgroundRepeat: "no-repeat",
 				backgroundSize: "cover",
-				height: 210,
-				paddingTop: 9
+				cursor: "pointer",
+				height: "207px",
+				border: '1px solid #eee !important'
 			}}
 			onMouseOver={() => setSelected(project.subdomain)}
 			onMouseOut={() => setSelected()}
-			elevation={selected === project.subdomain ? 5 : 0}
+			elevation={selected === project.subdomain ? 5 : 1}
 		>
-			<Grid container spacing={0.3}>
+			<Grid container>
 				{ premiumIcon }
-				{!isCollaborator() && 
-					(
-						<Button size="large" sx={{ 
-							margin: '0 auto',
-							position: 'absolute',
-							top: 10,
-							right: 10,
-							opacity: selected === project.subdomain ? 0.5 : 0
-						}} onClick={() => setDeleteDialog(true)} >
-							<DeleteOutlineIcon />
-						</Button>
-					)
-				}
-				<AvatarGroup total={1+(project?.collaborators?.length || 0)} 
-							 sx={{ 
-								margin: '0 auto',
-								position: 'absolute',
-								top: 10,
-								left: 10
-							 }}
-							 spacing="small"
-				>
-					{listParticipants()}
-				</AvatarGroup>
 				<Grid item sx={{ mb: 0, textAlign: 'center' }} xs={12}>
-					<Typography variant="h2" sx={{ color: "#aaa" }}>
-						{project.name}
-					</Typography>
-					<Typography variant="h6" fontSize="0.95em" sx={{ ml: '-10px' }}>
-						ID: <b>{project.subdomain}</b>
-						<Box sx={{ display: "inline", position: 'relative' }}>
-							<ContentCopy 
-								fontSize="18px"
-								sx={{
-									color:'#aaa',
-									cursor: 'pointer',
-									position: 'absolute',
-									top: '3px',
-									left: '2px'
-								}} 
-								onClick={() => {
-									try {
-										navigator.clipboard.writeText(project.subdomain);
-										dispatch({
-											type: SNACKBAR_OPEN,
-											open: true,
-											message: 'Copied to Clipboard',
-											variant: "alert",
-											anchorOrigin: { vertical: "bottom", horizontal: "right" },
-											alertSeverity: "success"
-										});
-									} catch(e) {
-										dispatch({
-											type: SNACKBAR_OPEN,
-											open: true,
-											message: e.message,
-											variant: "alert",
-											anchorOrigin: { vertical: "bottom", horizontal: "right" },
-											alertSeverity: "error"
-										});
-									}
-								}}
-							/>
-						</Box>
-					</Typography>
-					<Typography variant="h6" fontSize="0.95em">
-						<a href={getDomainUrl()} target="__blank" style={{
-							'color': '#aaacb3',
-    						textDecoration: 'none',
-							position: 'relative',
-							cursor: "pointer"
-						}}>
-							{project.domain || getUrl(project.subdomain)}
-							<Box sx={{ display: "inline", pt: '10px', position: 'relative' }}>
-								<img src={externalLinkSvg} alt="Link" style={{
-									marginLeft: '3px',
-									position: 'absolute',
-									top: '10px'
-								}}></img>
-							</Box>
-						</a>
+					<Typography variant="h2" sx={{ color: "#777", lineHeight: '207px' }} fontSize="1.3em" fontWeight="bold">
+						{truncate(project.name, 18)}
 					</Typography>
 				</Grid>
-				<Grid item xs={12} sx={{ textAlign: 'center', mt: 1 }}>
-					<Button sx={{ 
-						margin: '0 auto',
-						opacity: selected === project.subdomain ? 1 : 0
-					}} variant="outlined"
-					onClick={() => selectProject(project)}
-					>Launch Editor ✏️</Button>
-				</Grid>
-				{/*<Typography fontSize="1em">
-					Last updated {moment(project.get('updatedAt')).format("lll")}
-								</Typography>*/}
+	
 			</Grid>
+			{selected === project.subdomain && (
+                <Box sx={{
+                    width: '102%',
+                    height: '102%',
+                    background: `rgba(255,255,255,0.85)`,
+                    position: 'absolute',
+                    top: '-1%',
+                    left: '-1%',
+                    zIndex: 1,
+					textAlign: 'center',
+					lineHeight: '207px'
+                }}
+                className="overlay"
+                >
 
+<Button        variant="contained"
+                            sx={{
+                                boxShadow: 'none',
+                                '&:hover': {
+                                    boxShadow: 'none',
+                                },
+                                borderRadius: '50px',
+                                // position: 'absolute',
+                                // top: '40%',
+                                // left: '25%',
+                                // width: '60%',
+								// mx: '20%'
+                            }}
+					onClick={() => selectProject(project)}
+					>Launch Editor</Button>
+
+					</Box>
+
+			)}
 
 			<Dialog
 				open={deleteDialog}

@@ -1,11 +1,10 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, LinearProgress } from '@mui/material'
 import { Magic } from 'magic-sdk'
 import { getUrl } from 'utils/url'
 import { showError } from 'utils/snackbar'
-import logo from 'assets/images/logo.png'
 import constants from 'constant'
 
 const { PATH } = constants
@@ -55,18 +54,13 @@ const Login = () => {
 	}
 
 	return (
-		<Box textAlign="center" className="signin-container">
-			<Box>
-				<img 	src={logo} 
-						alt="Build decentralized websites without code | Webstudio" 
-						className="signin-logo fade-in-image" />
+		<Box className="signin">
+			<Box textAlign="center" className="container fade-in">
+				<Typography variant="body" className="text">
+					Loading <strong>Webstudio</strong>
+				</Typography>
+				<LinearProgress className="progress" />
 			</Box>
-			<Typography variant="body" className="signin-text fade-in-image">
-				Opening <strong>Webstudio</strong>
-				<span className="signin-loading-container">
-					<div className="dot-pulse"></div>
-				</span>
-			</Typography>
 		</Box>
 	)
 }

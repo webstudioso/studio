@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 // project imports
 import { useEffect } from "react";
 import { Magic } from 'magic-sdk';
+import { getUrl } from "utils/url";
 const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY);
 
 // ==============================|| AUTH GUARD ||============================== //
@@ -19,7 +20,7 @@ const ProfileGuard = ({ children }) => {
 		const evalLogin = async() => {
 			const loggedIn = await m.user.isLoggedIn();
 			if (!loggedIn)
-				navigate('/');
+				navigate(getUrl());
 		}
 
 		evalLogin();

@@ -7,17 +7,20 @@ import {
 	Typography,
 	IconButton,
 	Button,
-	Slide
+	Slide,
+	Container
 } from "@mui/material";
 import NameField from "views/new/NameField";
 import TermsAndConditions from "views/new/TermsAndConditions";
 import Loader from "views/new/Loader";
 import CloseIcon from "@mui/icons-material/Close";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from "react-router-dom";
 import { UPDATE_APP } from "store/actions";
 import { defaultConfiguration } from "utils/config";
 import axios from "axios";
 import { Magic } from 'magic-sdk';
+import InfoButton from "views/builder/InfoButton";
 const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY);
 
 const NewPage = () => {
@@ -90,7 +93,7 @@ const NewPage = () => {
 					type: UPDATE_APP,
 					configuration: { new: true }
 				});
-				navigate(`/builder/${appData?.subdomain}`);
+				navigate(`/e/${appData?.subdomain}`);
 			} catch(e) {
 				console.log(e);
 			}
@@ -101,7 +104,7 @@ const NewPage = () => {
 
 	const returnHome = () => {
 		resetConfig();
-		navigate("/profile/projects");
+		navigate("/e");
 	}
 
 	const resetConfig = () => { 
@@ -114,74 +117,42 @@ const NewPage = () => {
 	}
 
 	return (
+		<Container sx={{ py: '15vh' }}>
 		<Slide
 			direction="left"
 			in={true}
 			mountOnEnter
 			unmountOnExit
-			className="new-project-container"
 		>
-			<Grid container>
-				<Grid item xs={12} sm={8}>
-					<Box
-						sx={{ px: 16, py: 8 }}
+			<Box
 						component={Stack}
 						direction="column"
 						justifyContent="left"
 						textAlign="left"
+						sx={{ px: '10vw'}}
 					>
-						<Box className="project-new-container">
-							<Box className="project-new-image"></Box>
-						</Box>
-						{canGoBack && (
-							<Grid container direction="row" sx={{ ml: -8 }}>
-								<Grid item>
-									<IconButton
+				
+				
+							
+								<Box sx={{ py: 2, ml: -2 }}>
+										<Typography variant="h2" color="black" fontWeight="bolder">
+										<IconButton
 										sx={{ color: '#aaacb3' }}
 										aria-label="Back"
 										onClick={returnHome}
 									>
-										<CloseIcon />
+										<ArrowBackIcon />
 									</IconButton>
-								</Grid>
-								<Grid item sx={{ py: 1.25, px: 2 }}>
-									<Typography
-										variant="body"
-										fontSize="1.5em"
-										fontWeight="400"
-									>
-										Create a project (Step{" "}
-										{appState.step ? appState.step + 1 : 1}{" "}
-										of 2)
-									</Typography>
-								</Grid>
-							</Grid>
-						)}
+											Create a new project
+											<InfoButton section='GG' />
+										</Typography>
+									</Box>
+						
+				
 						<Box sx={{ mt: 12 }}>
-							{stepOne}
-							{stepFour}
-							{loader}
+							<NameField onChange={handleStepOne} principal={principal} />
 						</Box>
-						<Grid container sx={{ mt: 8 }} justifyContent="right">
-							{appState.step > 0 && appState.step < 3 && (
-								<Button
-									color="primary"
-									size="large"
-									sx={{ px: 8 }}
-									onClick={() => {
-										appState.step = appState.step - 1;
-										dispatch({
-											type: UPDATE_APP,
-											configuration: appState
-										});
-									}}
-								>
-									Previous
-								</Button>
-							)}
-							{appState.step > 0 && appState.step < 3 && (
-								<Box sx={{ flexGrow: 1 }} />
-							)}
+						{/* <Grid container sx={{ mt: 8  }} justifyContent="right">
 							<Button
 								id="create-project-btn"
 								variant="contained"
@@ -190,15 +161,12 @@ const NewPage = () => {
 								disabled={cantContinue}
 								onClick={handleNextStep}
 							>
-								{appState.step === 3
-									? "Create project"
-									: "Continue"}
+								Create Project
 							</Button>
-						</Grid>
+						</Grid> */}
 					</Box>
-				</Grid>
-			</Grid>
 		</Slide>
+		</Container>
 	);
 };
 

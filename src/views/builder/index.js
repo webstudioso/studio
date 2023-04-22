@@ -241,7 +241,7 @@ const EditorView = () => {
 										<Button
 											color="inherit"
 											component={RouterLink}
-											to="/"
+											to="/e"
 										>
 											<Logo />
 										</Button>
@@ -315,7 +315,7 @@ const EditorView = () => {
 							</Grid>
 						</Grid>
 						<Grid item xs sx={{ py: '15px', px: '30px'}}>
-							{editorCanvas}
+							{projectId && editorCanvas}
 						</Grid>
 					</Grid>
 				</Grid>

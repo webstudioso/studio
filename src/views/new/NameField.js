@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from "@mui/material/styles";
 import {
+	InputAdornment,
 	TextField,
 	Grid,
 	Typography,
@@ -13,12 +14,21 @@ import {
 	DialogTitle,
 	DialogActions,
 	Dialog,
-	DialogContent
+	DialogContent,
+	IconButton,
+	Box
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { getUrl } from "utils/url";
 import axios from "axios";
+import InfoButton from "views/builder/InfoButton";
+import { ArrowRight } from "@mui/icons-material";
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import { getProjectById, createProject } from "api/project";
+import { UPDATE_APP } from "store/actions";
+import { LOADER, SNACKBAR_OPEN } from "store/actions";
+import { useNavigate } from "react-router-dom";
 
 const NameField = ({ onChange, principal }) => {
 	const theme = useTheme();
@@ -27,6 +37,12 @@ const NameField = ({ onChange, principal }) => {
 	const [appSubdomain, setAppSubdomain] = useState(appState.subdomain);
 	const [error, setError] = useState();
 	const [showEditor, setShowEditor] = useState(false);
+
+	const navigate = useNavigate()
+
+
+	const loading = useSelector((state) => state.loader.show);
+    const dispatch = useDispatch();
 
 	const generateSubdomain = async (name) => {
 		setError();
@@ -49,20 +65,12 @@ const NameField = ({ onChange, principal }) => {
 		setAppSubdomain(prefix);
 		setAppName(name);
 		try {
-			
-			const response = await axios.get(`${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${prefix}`,
-				{
-					headers: {
-						"AuthorizeToken": `Bearer ${principal}`,
-						"Content-Type": "application/json",
-						"Accept": "application/json"
-					}
-				}
-			)
-
-			const found = response?.data?.id;
+			const projectId = prefix;
+			dispatch({ type: LOADER, show: true });
+			const found = await getProjectById({ projectId, principal })
+			dispatch({ type: LOADER, show: false });
 			setError(
-				found
+				found?.id
 					? "Project subdomain taken, please select a different subdomain"
 					: null
 			);
@@ -92,6 +100,42 @@ const NameField = ({ onChange, principal }) => {
         Your Webstudio App project subdomain. You can later add and manage multiple templates from the same subdomain and they will all share the branding and look & feel properties as well as the blockchain settings
     `;
 
+	const canCreate = appName && !error && !loading;
+
+
+	const onCreateProject = async () => {
+		const appData = {
+			name: appName,
+			subdomain: appSubdomain,
+			domain: null,
+			metadata: {},
+			plan: null,
+			collaborators: []
+		}
+		
+		try {
+			await createProject({ appData, principal })
+			// const idToken = await m.user.getIdToken();
+			// await axios.post(`${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${appState.subdomain}`,
+			// 	appData,
+			// 	{
+			// 		headers: {
+			// 			"AuthorizeToken": `Bearer ${idToken}`,
+			// 			"Content-Type": "application/json",
+			// 			"Accept": "application/json"
+			// 		}
+			// 	}
+			// )
+			dispatch({
+				type: UPDATE_APP,
+				configuration: { new: true }
+			});
+			navigate(`/e/${appSubdomain}`);
+		} catch(e) {
+			console.log(e);
+		}
+	}
+
 	return (
 		<Grid
 			container
@@ -101,7 +145,13 @@ const NameField = ({ onChange, principal }) => {
 			spacing={2}
 		>
 			<Grid item xs={12}>
-				<Typography variant="h1" fontWeight="regular" sx={{ mb: 5 }}>
+				{/* <Box sx={{ minWidth: 120, m: '15px', py: 1 }}>
+					<Typography variant="h2" color="black" fontWeight="bolder">
+						Let's start with a name for your project
+						<InfoButton section='GG' />
+					</Typography>
+				</Box> */}
+				{/* <Typography variant="h1" fontWeight="regular" sx={{ mb: 5 }}>
 					Let's start with a name for
 					<br />
 					your
@@ -111,7 +161,7 @@ const NameField = ({ onChange, principal }) => {
 							<HelpOutlineIcon />
 						</span>
 					</Tooltip>
-				</Typography>
+				</Typography> */}
 			</Grid>
 			<Grid item xs={12}>
 				<TextField
@@ -126,8 +176,8 @@ const NameField = ({ onChange, principal }) => {
 						input: {
 							"&::placeholder": {
 								fontSize: 34,
-								fontWeight: "500",
-								color: "rgba(255,255,255,0.7)"
+								fontWeight: "lighter",
+								color: "#888"
 							}
 						}
 					}}
@@ -137,6 +187,18 @@ const NameField = ({ onChange, principal }) => {
 							color: theme.palette.primary.dark
 						}
 					}}
+					InputProps={{
+						endAdornment: (
+						  <InputAdornment position="end">
+							<IconButton edge="end" color="primary" size="large" disabled={!canCreate}
+								onClick={onCreateProject}
+							>
+							  <ArrowCircleRightIcon sx={{ fontSize:'1.75em'}} />
+							</IconButton>
+						  </InputAdornment>
+						),
+					  }}
+					
 				/>
 			</Grid>
 			<Grid item xs={12}>
@@ -148,10 +210,13 @@ const NameField = ({ onChange, principal }) => {
 									fontSize: "1.2em",
 									paddingLeft: 1,
 									width: 25,
-									opacity: 0.75
+									opacity: 1
 								}}
 							/>
 						}
+						sx={{
+							color: '#444'
+						}}
 						label={getUrl(appSubdomain)}
 						variant="outlined"
 						onClick={() => setShowEditor(true)}
@@ -189,7 +254,7 @@ const NameField = ({ onChange, principal }) => {
 						id="name"
 						label="Project subdomain"
 						type="text"
-						fullWidth
+						// fullWidth
 						variant="standard"
 						defaultValue={appSubdomain}
 						onChange={(e) => {
