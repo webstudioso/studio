@@ -18,7 +18,7 @@ import HtmlTooltip from './HtmlTooltip';
 
 import constants from 'constant';
 import InfoButton from './InfoButton';
-const { SECTION } = constants;
+const { SECTION, PATH } = constants;
 // import { TITLE } from constants.SIDEPANEL;
 
 
@@ -241,7 +241,7 @@ const EditorView = () => {
 										<Button
 											color="inherit"
 											component={RouterLink}
-											to="/e"
+											to={PATH.LOGIN}
 										>
 											<Logo />
 										</Button>

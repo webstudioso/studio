@@ -9,6 +9,7 @@ import cartReducer from './cartReducer';
 import kanbanReducer from './kanbanReducer';
 import appReducer from 'store/appReducer';
 import loaderReducer from './loaderReducer';
+import account from './accountReducer';
 
 // ==============================|| COMBINE REDUCER ||============================== //
 
@@ -25,7 +26,8 @@ const reducer = combineReducers({
         cartReducer
     ),
     kanban: kanbanReducer,
-    app: appReducer
+    app: appReducer,
+    account
 });
 
 export default reducer;

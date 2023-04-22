@@ -1,11 +1,13 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Box, Typography, LinearProgress } from '@mui/material'
 import { Magic } from 'magic-sdk'
 import { getUrl } from 'utils/url'
 import { showError } from 'utils/snackbar'
 import constants from 'constant'
+import { LOGIN } from 'store/actions'
+import { getAllProjects } from 'api/project'
 
 const { PATH } = constants
 const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY)
@@ -25,7 +27,17 @@ const Login = () => {
 	const authenticate = async () => {
 		const isAuthenticated = await m?.user?.isLoggedIn()
 		if (isAuthenticated) {
-			navigate(PATH.ADMIN)
+			const principal = await m.user.getIdToken();
+			const user = await m.user.getMetadata(principal)
+			const projects = await getAllProjects({ principal })
+			dispatch({ type: LOGIN, payload: { user , principal, projects }})
+			if (projects && projects.length > 0) {
+				// Has some projects created
+				navigate(PATH.ADMIN)
+			} else {
+				// No projects yet created
+				navigate(PATH.CREATE)
+			}
 		} else {
 			authenticateFromQueryParams()
 		}
@@ -47,7 +59,7 @@ const Login = () => {
 	const signInWithMagic = async (email) => {
 		try {
 			await m.auth.loginWithMagicLink({ email })
-			navigate(PATH.ADMIN)
+			authenticate()
 		} catch (e) {
 			showError({ dispatch, error: e.message })
 		}

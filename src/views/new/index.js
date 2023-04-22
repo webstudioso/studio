@@ -24,7 +24,6 @@ import InfoButton from "views/builder/InfoButton";
 const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY);
 
 const NewPage = () => {
-	// const { user, Moralis } = useMoralis();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const appState = useSelector((state) => state.app);
@@ -117,55 +116,36 @@ const NewPage = () => {
 	}
 
 	return (
-		<Container sx={{ py: '15vh' }}>
-		<Slide
-			direction="left"
-			in={true}
-			mountOnEnter
-			unmountOnExit
-		>
+		<Container sx={{ py: '15vh' }} className="fade-in">
 			<Box
-						component={Stack}
-						direction="column"
-						justifyContent="left"
-						textAlign="left"
-						sx={{ px: '10vw'}}
-					>
-				
-				
-							
-								<Box sx={{ py: 2, ml: -2 }}>
-										<Typography variant="h2" color="black" fontWeight="bolder">
-										<IconButton
-										sx={{ color: '#aaacb3' }}
-										aria-label="Back"
-										onClick={returnHome}
-									>
-										<ArrowBackIcon />
-									</IconButton>
-											Create a new project
-											<InfoButton section='GG' />
-										</Typography>
-									</Box>
-						
-				
-						<Box sx={{ mt: 12 }}>
-							<NameField onChange={handleStepOne} principal={principal} />
-						</Box>
-						{/* <Grid container sx={{ mt: 8  }} justifyContent="right">
-							<Button
-								id="create-project-btn"
-								variant="contained"
-								size="large"
-								sx={{ px: 8 }}
-								disabled={cantContinue}
-								onClick={handleNextStep}
+				component={Stack}
+				direction="column"
+				justifyContent="left"
+				textAlign="left"
+				sx={{ px: '10vw'}}
+			>
+		
+		
+					
+						<Box sx={{ py: 2, ml: -2 }}>
+								<Typography variant="h2" color="black" fontWeight="bolder">
+								<IconButton
+								sx={{ color: '#aaacb3' }}
+								aria-label="Back"
+								onClick={returnHome}
 							>
-								Create Project
-							</Button>
-						</Grid> */}
-					</Box>
-		</Slide>
+								<ArrowBackIcon />
+							</IconButton>
+									Create a new project
+									<InfoButton section='GG' />
+								</Typography>
+							</Box>
+				
+		
+				<Box sx={{ mt: 12 }}>
+					<NameField onChange={handleStepOne} principal={principal} />
+				</Box>
+			</Box>
 		</Container>
 	);
 };

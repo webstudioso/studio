@@ -9,7 +9,9 @@ const constants = {
 		METAMASK: "metamask"
 	},
 	PATH: {
-		ADMIN: '/e'
+		ADMIN: '/e',
+		CREATE: '/n',
+		LOGIN: '/'
 	},
 	ERROR: {
 		HANDLE_REGISTERED: "Handle already registered to an account",

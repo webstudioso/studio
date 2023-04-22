@@ -23,7 +23,7 @@ import WSMFonts, { WSMFontStyles } from "wsm-fonts";
 import { AssetManager as assetManager } from "wsm-asset-manager";
 
 // Default Template
-import { template as TutorialLandingPage } from "../../views/templates/content/Tutorial"
+import { template as TutorialLandingPage } from "../../templates/content/Tutorial"
 
 import axios from 'axios';
 
@@ -126,7 +126,7 @@ const Editor = ({ projectId, onClickHome, principal }) => {
         PluginTokenGate,
         PluginNFT,
         PluginActionButton,
-        PluginTailwind,
+        // PluginTailwind,
         PageManager,
         WSMForm,
         WSMToast,

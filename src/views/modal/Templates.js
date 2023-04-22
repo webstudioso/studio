@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Chip, Box, Grid, Paper, Button, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-import availableTemplates from "views/templates/content";
+import availableTemplates from "templates/content";
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,

@@ -29,6 +29,7 @@ import { getProjectById, createProject } from "api/project";
 import { UPDATE_APP } from "store/actions";
 import { LOADER, SNACKBAR_OPEN } from "store/actions";
 import { useNavigate } from "react-router-dom";
+import HtmlTooltip from "views/builder/HtmlTooltip";
 
 const NameField = ({ onChange, principal }) => {
 	const theme = useTheme();
@@ -136,6 +137,8 @@ const NameField = ({ onChange, principal }) => {
 		}
 	}
 
+	const urlTooltip = "Your project webstudio url. You can customize your url by clicking it and editing the field"
+
 	return (
 		<Grid
 			container
@@ -202,7 +205,8 @@ const NameField = ({ onChange, principal }) => {
 				/>
 			</Grid>
 			<Grid item xs={12}>
-				<Tooltip title="A unique identifier subdomain for your project">
+			<HtmlTooltip title={urlTooltip} placement="right-start">
+				{/* <Tooltip title="A unique identifier subdomain for your project"> */}
 					<Chip
 						icon={
 							<EditIcon
@@ -221,7 +225,8 @@ const NameField = ({ onChange, principal }) => {
 						variant="outlined"
 						onClick={() => setShowEditor(true)}
 					/>
-				</Tooltip>
+				{/* </Tooltip> */}
+				</HtmlTooltip>
 			</Grid>
 			<Grid item xs={12} sx={{ p: 0, minHeight: 44 }}>
 				{error && (

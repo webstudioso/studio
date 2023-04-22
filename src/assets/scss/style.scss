@@ -173,8 +173,37 @@ html, body {
     overflow: scroll;
 }
 
+.project-card { 
+    border-radius: 0;
+    position: relative;
+    cursor: pointer;
+    height: 207px;
+    border: 1px solid #eee !important;
 
+    .icon {
+        position: absolute;
+        left: 15px; 
+        top: 15px;
+    }
+}
 
+.project-overlay {
+    width: 102%;
+    height: 102%;
+    background: rgba(255,255,255,0.85);
+    position: absolute;
+    top: -1%;
+    left: -1%;
+    z-index: 1;
+    text-align: center;
+    line-height: 207px;
+}
+
+.project-delete {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+}
 
 
 

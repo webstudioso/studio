@@ -1,7 +1,7 @@
 import { lazy } from 'react'
 import { useRoutes } from 'react-router-dom'
 import Loadable from 'ui-component/Loadable'
-import ProfileGuard from 'utils/route-guard/ProfileGuard'
+import AuthGuard from 'utils/route-guard/AuthGuard'
 
 const CreateProjectView = Loadable(lazy(() => import('views/new')))
 const LoginView = Loadable(lazy(() => import('views/login')))
@@ -19,25 +19,25 @@ const ThemeRoutes = () => {
 		{ 
 			path: '/n', 
 			element: (
-				<ProfileGuard>
+				<AuthGuard>
 					<CreateProjectView />
-				</ProfileGuard> 
+				</AuthGuard> 
 			)
 		},
 		{ 
 			path: '/e', 
 			element: (
-				<ProfileGuard>
+				<AuthGuard>
 					<DashboardView />
-				</ProfileGuard> 
+				</AuthGuard> 
 			)
 		},
 		{ 
 			path: '/e/:projectId', 
 			element: (
-				<ProfileGuard>
+				<AuthGuard>
 					<EditorView />
-				</ProfileGuard> 
+				</AuthGuard> 
 			)
 		}
 	])
