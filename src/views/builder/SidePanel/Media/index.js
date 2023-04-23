@@ -29,9 +29,9 @@ const Media = ({ onLeave, editor }) => {
                     content: base64String
                 }]
             try {
-                const upload = await uploadPagesToIPFS({pages});
+                const upload = await uploadPagesToIPFS({pages})
                 const uploadedFilePath = upload[0].path;
-                window.editor.AssetManager.add([uploadedFilePath]);
+                editor.AssetManager.add([uploadedFilePath])
                 showSuccess({ dispatch, message: 'Media uploaded' })
             } catch(e) {
                 showError({ dispatch, message: e.message })

@@ -11,7 +11,7 @@ const Card = ({ project, principal }) => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const [selected, setSelected] = useState()
-	const isLoading = useSelector((state) => state.loader.show);
+	const isLoading = useSelector((state) => state.loader.show)
 
 	const selectProject = () => {
 		dispatch({ type: SET_PROJECT, project })

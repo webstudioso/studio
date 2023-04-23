@@ -13,7 +13,7 @@ import DraggableDialog from './DraggableDialog'
 import HtmlTooltip from './HtmlTooltip'
 import constants from 'constant'
 import Modal from 'views/templates'
-import TooltipFragment from 'views/TooltipFragment'
+import TooltipFragment from 'views/builder/TooltipFragment'
 const { SECTION, PATH, EVENTS } = constants
 
 const EditorView = () => {

@@ -8,8 +8,9 @@ import { showError } from 'utils/snackbar'
 import constants from 'constant'
 import { LOGIN } from 'store/actions'
 import { getAllProjects } from 'api/project'
+import { trackEvent } from 'utils/analytics'
 
-const { PATH } = constants
+const { PATH, ANALYTICS } = constants
 const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY)
 
 const Login = () => {
@@ -30,6 +31,7 @@ const Login = () => {
 			const principal = await m.user.getIdToken()
 			const user = await m.user.getMetadata(principal)
 			const projects = await getAllProjects({ principal })
+			trackEvent({ name: ANALYTICS.VIEW_PAGE , params: user })
 			dispatch({ type: LOGIN, payload: { user , principal, projects }})
 			if (projects && projects.length > 0) {
 				// Has some projects created

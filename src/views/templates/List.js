@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { Box, Grid, Paper, Button, Typography } from '@mui/material'
+import { Box, Grid, Paper, Button, Typography, CircularProgress } from '@mui/material'
 import { styled } from '@mui/material/styles'
-
-import availableTemplates from "templates/content"
+import { useDispatch, useSelector } from 'react-redux'
+import { LOADER } from 'store/actions'
+import availableTemplates from 'templates/content'
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -13,26 +14,34 @@ const Item = styled(Paper)(({ theme }) => ({
 }))
 
 const Templates = ({ onLeave, fullScreen=false }) => {
-    const [selected, setSelected] = useState();
+    const dispatch = useDispatch()
+    const [selected, setSelected] = useState()
+    const isLoading = useSelector((state) => state.loader.show)
+	const editor = useSelector((state) => state.editor.editor)
 
-    const onHandleSelectTemplate = (template) => {
-        const currentData = window.editor.getProjectData()
-        const currentPage = window.editor.Pages.getSelected()
-        const currId = currentPage.id
-        const index = currentData.pages.findIndex((page) => page.id === currentPage.id)
-        currentData.pages[index].frames = template.template.pages[0].frames
-        const assets = currentData.assets
-        const pages = currentData.pages
-        const styles = template.template.styles
-        window.editor.loadProjectData({
-            assets,
-            pages,
-            styles
-        })
-        window.editor.Pages.select(currId)
-        if (fullScreen)
-            onLeave()
+    const onHandleSelectTemplate = async (template) => {
+        dispatch({ type: LOADER, show: true })
+        setTimeout(() => {
+            const currentData = editor.getProjectData()
+            const currentPage = editor.Pages.getSelected()
+            const currId = currentPage.id
+            const index = currentData.pages.findIndex((page) => page.id === currentPage.id)
+            currentData.pages[index].frames = template.template.pages[0].frames
+            const assets = currentData.assets
+            const pages = currentData.pages
+            const styles = template.template.styles
+            editor.loadProjectData({
+                assets,
+                pages,
+                styles
+            })
+            editor.Pages.select(currId)
+            if (fullScreen)
+                onLeave()
+        }, 500)
     }
+
+    const spinner = isLoading && (<CircularProgress size={18} sx={{ ml: 1 }} />)
 
     const templateList = availableTemplates.map((template, index) => (
         <Grid item xs={fullScreen ? 6:12} md={fullScreen ? 4:6} lg={fullScreen ? 3:6} key={index} sx={{ mb: 3, cursor: 'pointer' }}
@@ -67,6 +76,7 @@ const Templates = ({ onLeave, fullScreen=false }) => {
                     <Button elevation={0} 
                             onClick={() => onHandleSelectTemplate(template)}
                             variant="contained"
+                            disabled={isLoading}
                             sx={{
                                 boxShadow: 'none',
                                 '&:hover': {
@@ -80,6 +90,7 @@ const Templates = ({ onLeave, fullScreen=false }) => {
                             }}
                     >
                         PICK
+                        {spinner}
                     </Button>
                 </Box>)}
                 <Box sx={{p:1}}>

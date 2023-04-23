@@ -7,11 +7,15 @@ import { getCidFromDeployment, getCustomFontsMetadatTags, getPages, getUserConfi
 import { showSuccess, showError } from 'utils/snackbar'
 import { getProjectUrl } from 'utils/project'
 import { queryParams } from 'utils/url'
+import { trackEvent } from 'utils/analytics'
 import HtmlTooltip from '../HtmlTooltip'
 import InfoButton from '../InfoButton'
+import constants from 'constant'
+const { ANALYTICS } = constants
 
 const PublishButton = ({ principal, project }) => {
     const isLoading = useSelector((state) => state.loader.show)
+    const account = useSelector((state) => state.account)
     const dispatch = useDispatch()
 
     const handlePublish = async () => {
@@ -33,7 +37,7 @@ const PublishButton = ({ principal, project }) => {
             if (defaultDomain) {
                 await publishRouting({id: defaultDomain, cid, principal })
             }
-
+            trackEvent({ name: ANALYTICS.PUBLISH_PROJECT, params: account.user })
             showSuccess({ dispatch, message: 'Published' })
           } catch (error) {
             showError({ dispatch, error })

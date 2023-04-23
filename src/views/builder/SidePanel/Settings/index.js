@@ -13,7 +13,7 @@ const { EVENTS } = constants
 
 const Settings = ({ principal, project }) => {
     const defaultMetadata = getDefaultMetadataForProject(project)
-    const isLoading = useSelector((state) => state.loader.show);
+    const isLoading = useSelector((state) => state.loader.show)
     const dispatch = useDispatch()
     const [metadata, setMetadata] = useState(project.metadata || defaultMetadata)
 
@@ -26,7 +26,7 @@ const Settings = ({ principal, project }) => {
         } catch(e) {
             showError({ dispatch, error: e.message})
         } finally {
-            dispatch({ type: LOADER, show: false });
+            dispatch({ type: LOADER, show: false })
         }
     }
 
@@ -49,14 +49,15 @@ const Settings = ({ principal, project }) => {
                     path: 'favicon.jpeg',
                     content: base64String
                 }]
-                const upload = await uploadPagesToIPFS({pages});
-                const uploadedFilePath = upload[0].path;
+                const upload = await uploadPagesToIPFS({pages})
+                const uploadedFilePath = upload[0].path
 
-                const currMeta = {...metadata};
-                currMeta['icon'] = uploadedFilePath;
-                await save(currMeta);
+                const currMeta = {...metadata}
+                currMeta['icon'] = uploadedFilePath
+
+                await save(currMeta)
+                setMetadata(currMeta)
                 // window.editor.store();
-                setMetadata(currMeta);
                 // await publishMetadata({ id: projectId, principal, data  })
 
         };

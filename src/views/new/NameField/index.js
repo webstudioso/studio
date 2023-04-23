@@ -17,16 +17,20 @@ import { getUrl } from 'utils/url'
 import { getProjectById, createProject } from 'api/project'
 import { UPDATE_APP, LOADER, SET_PROJECT } from 'store/actions'
 import { useNavigate } from 'react-router-dom'
+import { trackEvent } from 'utils/analytics'
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight'
+import { getDefaultMetadataForProject } from 'utils/project'
 import EditIcon from '@mui/icons-material/Edit'
 import HtmlTooltip from 'views/builder/HtmlTooltip'
-import { getDefaultMetadataForProject } from 'utils/project'
+import constants from 'constant'
+const { ANALYTICS } = constants
 
 const NameField = ({ principal }) => {
 	const theme = useTheme()
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const appState = useSelector((state) => state.app)
+	const account = useSelector((state) => state.account)
 	const loading = useSelector((state) => state.loader.show)
 	const [appName, setAppName] = useState(appState.name)
 	const [appSubdomain, setAppSubdomain] = useState(appState.subdomain)
@@ -85,6 +89,7 @@ const NameField = ({ principal }) => {
 			const project = await getProjectById({ projectId: appData.subdomain, principal })
 			dispatch({ type: SET_PROJECT, project })
 			dispatch({ type: UPDATE_APP, configuration: { new: true } })
+			trackEvent({ name: ANALYTICS.CREATE_PROJECT, params: account.user })
 			navigate(`/e/${project?.id}`)
 		} catch(e) {
 			console.log(e)

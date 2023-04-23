@@ -1,8 +1,8 @@
 const constants = {
 	ANALYTICS: {
-		SIGNIN: "Sign in",
-		CREATE_PROJECT: "Create project",
-		PUBLISH_PROJECT: "Publish project"
+		CREATE_PROJECT: "project_create",
+		PUBLISH_PROJECT: "project_publish",
+		VIEW_PAGE: "page_view"
 	},
 	AUTH: {
 		MAGIC_LINK: "magicLink",

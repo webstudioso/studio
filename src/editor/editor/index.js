@@ -9,7 +9,7 @@ import PluginScriptEditor from "grapesjs-script-editor";
 import PageManager from "./Plugins/PageManager";
 import PluginEditorPanelButtons from "./Panel/Buttons";
 import { useDispatch } from "react-redux";
-import { LOADER, SET_EDITOR, SNACKBAR_OPEN } from "store/actions";
+import { LOADER, SET_EDITOR } from "store/actions";
 
 // Primitives
 import WSMBasic from "wsm-basic";
@@ -18,12 +18,9 @@ import WSMForm from "wsm-form";
 import WSMWalletConnect from "wsm-wallet-connect";
 import WSMAnimations from "wsm-animations";
 import WSMFonts, { WSMFontStyles } from "wsm-fonts";
-
-// Default Template
-import { template as TutorialLandingPage } from "templates/content/Tutorial"
-
 import axios from 'axios';
 import constants from 'constant'
+import { showError, showSuccess } from "utils/snackbar";
 const { EVENTS } = constants
 
 const Editor = ({ project, onClickHome, principal }) => {
@@ -167,36 +164,24 @@ const Editor = ({ project, onClickHome, principal }) => {
 
     // Storage events
     editor.on('storage:error', (e) => {
-      dispatch({
-          type: SNACKBAR_OPEN,
-          open: true,
-          message: e.message,
-          variant: "alert",
-          anchorOrigin: { vertical: "bottom", horizontal: "right" },
-          alertSeverity: "error"
-      });
+      dispatch({ type: LOADER, show: false })
+      showError({ dispatch, message: e.message })
     });
 
     editor.on('storage:store', () => {
-      dispatch({
-          type: SNACKBAR_OPEN,
-          open: true,
-          message: "Auto Saved",
-          variant: "alert",
-          anchorOrigin: { vertical: "bottom", horizontal: "right" },
-          alertSeverity: "success"
-      });
+      dispatch({ type: LOADER, show: false })
+      showSuccess({ dispatch, message: 'Auto saved'})
     });
 
-    // Used to load default template "Tutorial" only if no other template is loaded after API Call
-    editor.on('storage:end:load', (data) => {
-        if (!data?.pages) {
-            console.log('No data loaded from API, launching starter template')
-            editor.loadProjectData(TutorialLandingPage)
-        } else {
-            console.log('Template loaded from API')
-        }
-    })
+    // // Used to load default template "Tutorial" only if no other template is loaded after API Call
+    // editor.on('storage:end:load', (data) => {
+    //     if (!data?.pages) {
+    //         console.log('No data loaded from API, launching starter template')
+    //         editor.loadProjectData(TutorialLandingPage)
+    //     } else {
+    //         console.log('Template loaded from API')
+    //     }
+    // })
 
   // define this event handler after editor is defined
   // like in const editor = grapesjs.init({ ...config });
