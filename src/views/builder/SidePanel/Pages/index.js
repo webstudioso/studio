@@ -1,7 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
-
-import draganddrop from "assets/images/draganddrop.jpg";
-
+import { useState, useEffect, useRef } from 'react'
 // material-ui
 import {
     Box,
@@ -10,121 +7,36 @@ import {
     Button,
     TextField,
     IconButton
-} from '@mui/material';
-import { gridSpacing } from 'store/constant';
-import Templates from 'views/templates/List';
-import { IconTrash } from '@tabler/icons';
-import { getProjectUrl } from 'utils/project';
-import { truncate } from 'utils/format';
+} from '@mui/material'
+import { gridSpacing } from 'store/constant'
+import { IconTrash } from '@tabler/icons'
+import { getProjectUrl } from 'utils/project'
+import { truncate } from 'utils/format'
 
-const Pages = ({ onLeave }) => {
+const Pages = ({ editor }) => {
     const ref = useRef(null);
-    const [pages, setPages] = useState([]);
-    const [selectedPage, setSelectedPage] = useState();
-
-    // console.log("SidepNale")
-    // console.log(window.editor);
-    // console.log(editor);
-
-
-
-    // drawer on/off
-    // const [open, setOpen] = useState(false);
-    // const handleToggle = () => {
-    //     console.log("toggling")
-    //     // setOpen(!open);
-    //     setTimeout(()=>{
-            
-
-
-
-    //         //cats
-
-    //         const cats = window?.editor?.Blocks?.getCategories().models.map((cat) => cat.attributes);
-    //         console.log(cats);
-    //         setCategories(cats)
-    //     },500)
-        
-    // };
-
-    // useEffect(() => {
-    //         handleToggle()
-    // }, [])
+    const [pages, setPages] = useState([])
+    const [selectedPage, setSelectedPage] = useState()
 
     const loadPages = () => {
-        const editor = window.editor;
         const pageManager = editor.Pages;
-
         const allPages = pageManager.getAll();
         setPages(allPages);
-
         const selected = pageManager.getSelected();
         setName(getName(selected))
         setSelectedPage(selected);
     }
 
     const getHomePage = () => {
-        const editor = window.editor;
         const pageManager = editor.Pages;
-
         const allPages = pageManager.getAll();
         return allPages.find((page) => page.attributes.type === 'main' )
     }
 
     useEffect(() => {
-        // if (!filter) return;
         loadPages()
-        // console.log(pageManager);
-
-        // blockManager.render(filtered);
-        // Or a new set from an array
-        // blockManager.render([
-        // {label: 'Label text', content: '<div>Content</div>'}
-        // ]);
-
-        // Back to blocks from the global collection
-        // blockManager.render();
-
-        // You can also render your blocks outside of the main block container
-        // const canvasComponent = pageManager.render();
-        // console.log(canvasComponent);
-        // const blockco = document.getElementById('myPages');
-        // console.log(blockco);
-        // ref.current.appendChild(canvasComponent);
-        // console.log(ref);
-        // setBlocks(blockco)
-        // console.log(ref)
-
-
-        // When dragging of a block starts, hide side panel
-        // editor.on('block:drag', () => onLeave())
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
-    // useEffect(() => {
-    //     // 👇️ call method in useEffect hook
-    //     const el = document.getElementById('myBlocks');
-    //     console.log(el);
-    //   }, []);
-
-    // const catList = categories?.map((cat) => 
-    //     <Grid   id={cat.id} 
-    //             item 
-    //             sx={{ 
-    //                 p: '5px 10px', 
-    //                 m: '0px 10px',
-    //                 cursor: 'pointer',
-    //                 borderRadius: '50px',
-    //                 background: filter === cat.id ? '#E8E8FF' : 'transparent'
-    //             }} 
-    //             onMouseEnter={(e) => {
-    //                 setFilter(cat.id);
-    //             }}
-    //     >
-    //         <Typography fontWeight="normal" color={
-    //             filter === cat.id ? '#3F41A4' : 'black'
-    //         } fontSize={12}>{cat.label}</Typography>
-    //     </Grid> 
-    // )
 
     const getName = (page) => {
         return page.attributes.type === 'main' ? 'index' : page.attributes.name

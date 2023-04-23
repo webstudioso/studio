@@ -78,6 +78,11 @@ const constants = {
 		DASHBOARD: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
 		NEW_TITLE: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08'
 	},
+	EVENTS: {
+		CLOSE_DELAY: 'addCloseDelay',
+		TOGGLE_SETTINGS_MODAL: 'toggleSettingsModal',
+		TOGGLE_ASSETS_MODAL: 'toggleAssetsModal'
+	},
 	IMAGE_PLACEHOLDER:
 		"https://media.istockphoto.com/vectors/image-preview-icon-picture-placeholder-for-website-or-uiux-design-vector-id1222357475?k=20&m=1222357475&s=170667a&w=0&h=YGycIDbBRAWkZaSvdyUFvotdGfnKhkutJhMOZtIoUKY="
 };

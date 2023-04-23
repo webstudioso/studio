@@ -1,79 +1,19 @@
-import { useState, useEffect, useRef } from 'react';
-import { Chip, Box, Grid, Paper, Button, Typography, TextField, IconButton } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { IconCloudUpload, IconUpload } from '@tabler/icons';
-import { uploadPagesToIPFS } from 'api/publish';
-import { LOADER, SNACKBAR_OPEN } from "store/actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useState, useRef } from 'react'
+import { Box, Grid, Paper, Button, Typography } from '@mui/material'
+import { uploadPagesToIPFS } from 'api/publish'
+import { LOADER } from 'store/actions'
+import { useDispatch } from 'react-redux'
+import constants from 'constant'
+import { showError, showSuccess } from 'utils/snackbar'
+const { EVENTS } = constants
 
-const Media = ({ onLeave }) => {
-    const dispatch = useDispatch();
+const Media = ({ onLeave, editor }) => {
+    const dispatch = useDispatch()
     const ref = useRef(null)
-
-    // const handleTemplateSelect = (template) => {
-    //     if (template.html) {
-    //         editor.setComponents(template.html);
-    //         editor.setStyle(template.style);
-    //     } else if (template.template) {
-    //         editor.loadProjectData(template.template);
-    //     }
-
-    //     handleClose();
-    // }
-
-
-    useEffect(() => {
-        const editor = window.editor;
-        // console.log("MEDIA")
-        // console.log(editor);
-        const manager = editor.AssetManager;
-        manager.onClick();
-        // Render new set of blocks
-        // const blocks = blockManager.getAll();
-        // console.log(blocks);
-        // console.log(filter);
-        // const filtered = blocks.filter(block => {
-            // const cat = block.get('category')
-            // console.log(cat.id)
-            // return cat.id == filter
-        // })
-
-        // blockManager.render(filtered);
-        // Or a new set from an array
-        // blockManager.render([
-        // {label: 'Label text', content: '<div>Content</div>'}
-        // ]);
-
-        // Back to blocks from the global collection
-        // blockManager.render();
-
-        // console.log(manager.getAll())
-        // You can also render your blocks outside of the main block container
-        // const newBlocksEl = manager.render();
-        // console.log(newBlocksEl);
-        // const blockco = document.getElementById('myBlocks');
-        // console.log(blockco);
-        // ref.current.appendChild(newBlocksEl);
-        // console.log(ref);
-        // setBlocks(blockco)
-        // console.log(ref)
-
-
-        // When dragging of a block starts, hide side panel
-        // editor.on('block:drag', () => onLeave())
-        return () => {
-            window?.editor?.AssetManager?.close();
-        }
-    }, [])
-
     const [selected, setSelected] = useState()
 
-
-
     const handleMediaUpload = async (e) => {
-
-        document.dispatchEvent(new CustomEvent('addCloseDelay'));
-
+        document.dispatchEvent(new CustomEvent(EVENTS.CLOSE_DELAY));
         dispatch({ type: LOADER, show: true });
         const file = e.target.files[0];
 
@@ -88,32 +28,19 @@ const Media = ({ onLeave }) => {
                     path: file.name,
                     content: base64String
                 }]
-
-                try {
-                    
+            try {
                 const upload = await uploadPagesToIPFS({pages});
                 const uploadedFilePath = upload[0].path;
                 window.editor.AssetManager.add([uploadedFilePath]);
-
+                showSuccess({ dispatch, message: 'Media uploaded' })
             } catch(e) {
-                dispatch({
-                    type: SNACKBAR_OPEN,
-                    open: true,
-                    message: e.message,
-                    variant: "alert",
-                    anchorOrigin: { vertical: "bottom", horizontal: "right" },
-                    alertSeverity: "error"
-                });
+                showError({ dispatch, message: e.message })
             } finally {
                 dispatch({ type: LOADER, show: false });
             }
-                // window.editor.AssetManager.store();
-                // await publishMetadata({ id: projectId, principal, data  })
 
-        };
-        reader.readAsDataURL(file);
-
-
+        }
+        reader.readAsDataURL(file)
     }
 
     const getSelectedImage = () => {
@@ -134,24 +61,24 @@ const Media = ({ onLeave }) => {
             }}
             ref={ref}
         >
-                        <Box sx={{ position:'absolute', right:20, top: 18}}>
-                            <Button color="primary" variant="outlined" component="label">
-                            Upload New Media
-                                <input
-                                    type="file"
-                                    accept="image/*"
-                                    hidden
-                                    onClick={() => document.dispatchEvent(new CustomEvent('addCloseDelay')) }
-                                    onChange={handleMediaUpload}
-                                />
-                            </Button>
-                        </Box>
+            <Box sx={{ position:'absolute', right:20, top: 18}}>
+                <Button color="primary" variant="outlined" component="label">
+                Upload New Media
+                    <input
+                        type="file"
+                        accept="image/*"
+                        hidden
+                        onClick={() => document.dispatchEvent(new CustomEvent(EVENTS.CLOSE_DELAY)) }
+                        onChange={handleMediaUpload}
+                    />
+                </Button>
+            </Box>
 
 
-            {window.editor.AssetManager.getAll().models.map((item) => (
+            {editor.AssetManager.getAll().models.map((item) => (
                 <Grid item xs={6} sx={{ cursor: getSelectedImage() ? 'pointer' : 'normal', position:'relative', padding:'0px !important'}} onMouseEnter={() => setSelected(item.id)}>
                     <Paper elevation={0} sx={{ p:1, background:'transparent' }} className={selected === item.id && getSelectedImage() ? "blurred" : ""}>
-                        <img src={item.attributes.src} width="100%" height="auto" />
+                        <img src={item.attributes.src} width="100%" height="auto" alt={item.id} />
                         <Typography fontSize={12} color="#333" fontWeight="light">{item.attributes.src.split('/').pop()}</Typography>
                     </Paper>
 
@@ -171,10 +98,10 @@ const Media = ({ onLeave }) => {
                                     onClick={() => {
                                         const selectedImage = getSelectedImage()
                                         if (selectedImage) {
-                                            selectedImage.addAttributes({ src: item.attributes.src });
+                                            selectedImage.addAttributes({ src: item.attributes.src })
                                             // The default AssetManager UI will trigger `select(asset, false)`
                                             // on asset click and `select(asset, true)` on double-click
-                                            onLeave();
+                                            onLeave()
                                         }
                                     }}
                                     variant="contained"
@@ -200,4 +127,4 @@ const Media = ({ onLeave }) => {
     )
 }
 
-export default Media;
+export default Media

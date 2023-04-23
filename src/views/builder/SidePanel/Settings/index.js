@@ -1,20 +1,15 @@
-import { useState, useEffect } from 'react';
-import { Grid, Paper, Button,TextField, Typography, Box, IconButton, Stack } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { Magic } from 'magic-sdk';
-import { getProjectById } from 'api/project';
-import { publishMetadata, uploadPagesToIPFS } from 'api/publish';
-import { LOADER, SNACKBAR_OPEN, SET_PROJECT } from "store/actions";
-import { useDispatch, useSelector } from "react-redux";
-import SubCard from 'ui-component/cards/SubCard';
+import { useState } from 'react'
+import { Grid, Button,TextField, Typography, Box, Stack } from '@mui/material'
+import { getProjectById } from 'api/project'
+import { publishMetadata, uploadPagesToIPFS } from 'api/publish'
+import { LOADER, SET_PROJECT } from "store/actions";
+import { useDispatch, useSelector } from 'react-redux'
+import { getDefaultMetadataForProject } from 'utils/project'
+import { showError, showSuccess } from 'utils/snackbar'
+import tabFrame from 'assets/images/browserTabSkeleton.png'
+import constants from 'constant'
+const { EVENTS } = constants
 
-import tabFrame from "assets/images/browserTabSkeleton.png";
-import { fontSize } from '@mui/system';
-import { IconUpload } from '@tabler/icons';
-import { getPrimaryUrl } from 'utils/url';
-import { getDefaultMetadataForProject } from 'utils/project';
-import { showError, showSuccess } from 'utils/snackbar';
-const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY);
 
 const Settings = ({ principal, project }) => {
     const defaultMetadata = getDefaultMetadataForProject(project)
@@ -146,7 +141,7 @@ const Settings = ({ principal, project }) => {
             <Grid item xs={4} sx={{ mt: 1 }}>
                     <Typography>Your Favicon</Typography>
                     <Stack direction="horizontal">
-                        <img src={metadata?.icon} height="44px" width="44px"/>
+                        <img src={metadata?.icon} height="44px" width="44px" alt="Upload favicon" />
                         <Box sx={{ py:1, ml: 1 }}>
                             <Button color="primary" size="small" variant="outlined" component="label">
                                 Upload
@@ -154,7 +149,7 @@ const Settings = ({ principal, project }) => {
                                     type="file"
                                     accept="image/*"
                                     hidden
-                                    onClick={() => document.dispatchEvent(new CustomEvent('addCloseDelay'))}
+                                    onClick={() => document.dispatchEvent(new CustomEvent(EVENTS.CLOSE_DELAY))}
                                     onChange={handleFaviconChange}
                                 />
                             </Button>
@@ -164,8 +159,9 @@ const Settings = ({ principal, project }) => {
             <Grid item xs={8} sx={{ mt: 1 }}>
                     <Typography>Preview in browser</Typography>
                     <Box sx={{ position:'relative' }}>
-                        <img src={tabFrame} height={41} />
+                        <img src={tabFrame} height={41} alt="Preview" />
                         <img src={metadata?.icon} 
+                            alt="Icon" 
                             style={{
                                 position: 'absolute',
                                 top: 15,
@@ -187,7 +183,7 @@ const Settings = ({ principal, project }) => {
                     </Box>
             </Grid>
         </Grid>
-    );
+    )
 
     const social = (
         <Grid container spacing={1} sx={{mb:3, background: '#fdfdfd', border:'1px solid #f3f3f3' }}>
@@ -200,7 +196,7 @@ const Settings = ({ principal, project }) => {
                 </Typography>
             </Grid>
             <Grid item xs={12} sx={{ mt: 1, pr: 1, pb: 1 }}>
-                <img src={metadata ? metadata['og:image']: ''} height="auto" width="100%"/>
+                <img src={metadata ? metadata['og:image']: ''} height="auto" width="100%" alt="Social" />
             </Grid>
             <Grid xs={12}>
                 <Box sx={{ pb:1, ml: 1 }}>

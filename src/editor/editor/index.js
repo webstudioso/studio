@@ -19,13 +19,12 @@ import WSMWalletConnect from "wsm-wallet-connect";
 import WSMAnimations from "wsm-animations";
 import WSMFonts, { WSMFontStyles } from "wsm-fonts";
 
-// Plugins
-import { AssetManager as assetManager } from "wsm-asset-manager";
-
 // Default Template
 import { template as TutorialLandingPage } from "../../templates/content/Tutorial"
 
 import axios from 'axios';
+import constants from 'constant'
+const { EVENTS } = constants
 
 const Editor = ({ project, onClickHome, principal }) => {
     // const [editor, setEditor] = useState({});
@@ -74,7 +73,7 @@ const Editor = ({ project, onClickHome, principal }) => {
       assetManager: {
         custom: {
           open(props) {
-            document.dispatchEvent(new CustomEvent('toggleAssetsModal'))
+            document.dispatchEvent(new CustomEvent(EVENTS.TOGGLE_ASSETS_MODAL))
             // `props` are the same used in `asset:custom` event
             // ...
             // Init and open your external Asset Manager

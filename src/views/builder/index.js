@@ -5,8 +5,7 @@ import { Grid, Box, AppBar, Toolbar, Typography, IconButton, Button } from '@mui
 import { IconSettings, IconPlus, IconFiles, IconTemplate, IconPhoto } from '@tabler/icons'
 import { Editor } from 'editor'
 import { useDispatch, useSelector } from 'react-redux'
-import { LOADER, UPDATE_APP } from 'store/actions'
-import { showError, showSuccess } from 'utils/snackbar'
+import { UPDATE_APP } from 'store/actions'
 import SidePanel from 'views/builder/SidePanel'
 import Logo from 'common/Logo'
 import PublishButton from './PublishButton'
@@ -15,7 +14,7 @@ import HtmlTooltip from './HtmlTooltip'
 import constants from 'constant'
 import Modal from 'views/templates'
 import TooltipFragment from 'views/TooltipFragment'
-const { SECTION, PATH } = constants
+const { SECTION, PATH, EVENTS } = constants
 
 const EditorView = () => {
 	const navigate = useNavigate()
@@ -23,55 +22,19 @@ const EditorView = () => {
 	const [openDialog, setOpenDialog] = useState(false);
 	const [open, setOpen] = useState();
 
-
 	const appState = useSelector((state) => state.app);
 	const account = useSelector((state) => state.account)
 	const project = useSelector((state) => state.editor.project)
-	const editor = useSelector((state) => state.editor.project)
-
-
-	const handleAssetUploadStart = () => {
-		dispatch({ type: LOADER, show: true });
-	}
-
-	const handleAssetUploadEnd = () => {
-		dispatch({ type: LOADER, show: false })
-		showSuccess({ dispatch, message: 'Uploaded' })
-	}
-
-	const handleAssetUploadError = () => {
-		dispatch({ type: LOADER, show: false });
-		showError({ dispatch, message: 'Upload failed, please reach out to contact@webstudio.so for help' })
-	}
-
-	const addEditorListeners = () => {
-		// document.addEventListener('toggleTemplates', handleEvent);
-		// document.addEventListener('toggleLaunch', handleEvent);
-		// document.addEventListener('toggleUsers', handleEvent);
-		// Modal assets
-		document.addEventListener('assetUploadStart', handleAssetUploadStart);
-		document.addEventListener('assetUploadEnd', handleAssetUploadEnd);
-		document.addEventListener('assetUploadError', handleAssetUploadError);
-
-		document.addEventListener('toggleSettingsModal', () => setOpenDialog(true));
-		document.addEventListener('toggleAssetsModal', () => setOpen(SECTION.MEDIA));
-	}
+	const editor = useSelector((state) => state.editor.editor)
 
 	useEffect(() => {
-		addEditorListeners();
-		// loadPrincipal();
+		document.addEventListener(EVENTS.TOGGLE_SETTINGS_MODAL, () => setOpenDialog(true));
+		document.addEventListener(EVENTS.TOGGLE_ASSETS_MODAL, () => setOpen(SECTION.MEDIA));
 		return () => {
-			// document.removeEventListener('toggleTemplates', () => {});
-			// document.removeEventListener('toggleLaunch', () => {});
-			// document.removeEventListener('toggleUsers', () => {});
-			document.removeEventListener('assetUploadStart', () => {});
-			document.removeEventListener('assetUploadEnd', () => {});
-			document.removeEventListener('assetUploadError', () => {});
-			document.removeEventListener('toggleSettingsModal', () => {});
-			document.removeEventListener('toggleAssetsModal', () => {});
+			document.removeEventListener(EVENTS.TOGGLE_SETTINGS_MODAL, () => {});
+			document.removeEventListener(EVENTS.TOGGLE_ASSETS_MODAL, () => {});
 		}
-		
-	},[])
+	}, [])
 
 	return (
 		<>
@@ -126,13 +89,6 @@ const EditorView = () => {
 										</IconButton>
 									</HtmlTooltip>
 								</Grid>
-								{/* <Grid item xs={12}>
-									<HtmlTooltip title={styleTooltip} placement="right-start">
-										<IconButton color="primary" size="large" onClick={() => setOpen(open !== SECTION.STYLE ? SECTION.STYLE : null)}>
-											<IconPalette />
-										</IconButton>
-									</HtmlTooltip>
-								</Grid> */}
 								<Grid item xs={12}>
 									<HtmlTooltip title={<TooltipFragment section={SECTION.SETTINGS} />} placement="right-start">
 										<IconButton color="primary" size="large" onClick={() => setOpen(open !== SECTION.SETTINGS ? SECTION.SETTINGS : null)}>
@@ -154,13 +110,6 @@ const EditorView = () => {
 										</IconButton>
 									</HtmlTooltip>
 								</Grid>
-								{/* <Grid item xs={12}>
-									<HtmlTooltip title={shoppingTooltip} placement="right-start">
-										<IconButton color="primary" size="large" onClick={() => setOpen(SECTION.MARKETPLACE)}>
-											<IconShoppingCart />
-										</IconButton>
-									</HtmlTooltip>
-								</Grid> */}
 							</Grid>
 						</Grid>
 						<Grid item xs sx={{ py: '15px', px: '30px'}}>
@@ -172,7 +121,7 @@ const EditorView = () => {
 					</Grid>
 				</Grid>
 			</Grid>
-			<SidePanel open={open} principal={account.principal} project={project} onLeave={() => setOpen()} />
+			<SidePanel open={open} principal={account.principal} project={project} editor={editor} onLeave={() => setOpen()} />
 			<Modal  open={appState.new} 
 					onLeave={() => {
 						dispatch({
@@ -185,7 +134,7 @@ const EditorView = () => {
 			/>
 			<DraggableDialog open={openDialog} handleClose={() => setOpenDialog(false)}></DraggableDialog>
 		</>
-	);
-};
+	)
+}
 
-export default EditorView;
+export default EditorView

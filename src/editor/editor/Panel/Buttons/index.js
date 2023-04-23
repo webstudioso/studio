@@ -1,5 +1,7 @@
 import { getProjectUrl } from "utils/project";
 import { queryParams } from "utils/url";
+import constants from 'constant'
+const { EVENTS } = constants
 
 const cmdPublish = "publish";
 const cmdDeviceDesktop = "set-device-desktop";
@@ -341,7 +343,7 @@ const Plugin = (editor, config) => {
 
   cmdm.add('tlb-settings', (ed) => {
   
-    document.dispatchEvent(new CustomEvent('toggleSettingsModal', {
+    document.dispatchEvent(new CustomEvent(EVENTS.TOGGLE_SETTINGS_MODAL, {
       detail: ed
     }));  
   
