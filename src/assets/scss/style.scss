@@ -24,6 +24,8 @@ $background-color: '#fafafa';
     filter: blur(2px);
 }
 .overlay {
+    color: white !important;
+    font-weight: bold;
     -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
     -moz-animation: fadein 0.5s; /* Firefox < 16 */
      -ms-animation: fadein 0.5s; /* Internet Explorer */
@@ -136,6 +138,7 @@ html, body {
     .container {
         padding: 40vh 0vw;
         text-align: center;
+        height: 100vh;
     }
     .progress {
         width: 235px;

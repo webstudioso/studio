@@ -24,7 +24,6 @@ const Blocks = ({ onLeave }) => {
     // drawer on/off
     // const [open, setOpen] = useState(false);
     const handleToggle = () => {
-        console.log("toggling")
         // setOpen(!open);
         setTimeout(()=>{
             
@@ -34,7 +33,7 @@ const Blocks = ({ onLeave }) => {
             //cats
 
             const cats = window?.editor?.Blocks?.getCategories().models.map((cat) => cat.attributes);
-            console.log(cats);
+        
             setCategories(cats)
         },500)
         
@@ -50,11 +49,10 @@ const Blocks = ({ onLeave }) => {
         const blockManager = editor.Blocks;
         // Render new set of blocks
         const blocks = blockManager.getAll();
-        console.log(blocks);
-        console.log(filter);
+   
         const filtered = blocks.filter(block => {
             const cat = block.get('category')
-            console.log(cat.id)
+    
             return cat.id == filter
         })
 
@@ -69,7 +67,6 @@ const Blocks = ({ onLeave }) => {
 
         // You can also render your blocks outside of the main block container
         const newBlocksEl = blockManager.render(filtered, {ignoreCategories:true});
-        console.log(newBlocksEl);
         const blockco = document.getElementById('myBlocks');
         // console.log(blockco);
         ref.current.appendChild(newBlocksEl);
@@ -85,7 +82,6 @@ const Blocks = ({ onLeave }) => {
     useEffect(() => {
         // 👇️ call method in useEffect hook
         const el = document.getElementById('myBlocks');
-        console.log(el);
       }, []);
 
     const catList = categories?.map((cat) => 

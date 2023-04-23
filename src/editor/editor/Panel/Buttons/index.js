@@ -341,7 +341,6 @@ const Plugin = (editor, config) => {
 
   cmdm.add('tlb-settings', (ed) => {
   
-    console.log("Toggle settings modal");
     document.dispatchEvent(new CustomEvent('toggleSettingsModal', {
       detail: ed
     }));  

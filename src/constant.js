@@ -51,12 +51,20 @@ const constants = {
 			SETTINGS: 'Configure Settings',
 			TEMPLATE: 'Change Template',
 			MARKETPLACE: 'Open Marketplace',
-			MEDIA: 'Media'
+			MEDIA: 'Media',
+			DASHBOARD: 'Back to Dashboard'
 		}
 	},
 	INFO_TOOLTIP: {
 		NEW_TITLE: 'The name will help your online audience identify your brand (4-30 characters)',
-		DASHBOARD_TITLE: 'Launch the no-code editor for existing projects or create a new one. Here you can also delete projects'
+		DASHBOARD_TITLE: 'Launch the no-code editor for existing projects or create a new one. Here you can also delete projects',
+		STYLE: 'Configure global color palette, fonts and general style',
+		BLOCKS: 'Drag and drop new components into the canvas 👉',
+		PAGES: 'Select current page, add new and manage existing pages',
+		SETTINGS: 'Edit SEO settings, metadata tags and launch properties',
+		TEMPLATE: 'Replace the current page template. This will discard all changes to the current page',
+		MEDIA: 'Upload images and multimedia to your cloud storage to quickly use them in the editor',
+		DASHBOARD: 'Manage your apps, view analytics and access learning resources'
 	},
 	INFO_URL: {
 		BLOCKS: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',

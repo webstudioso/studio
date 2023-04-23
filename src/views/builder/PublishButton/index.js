@@ -1,26 +1,23 @@
-import { Fragment } from "react"
-import { Button, Typography, CircularProgress, IconButton } from "@mui/material"
-import { getProjectById } from "api/project"
-import { uploadPagesToIPFS, publishRouting } from "api/publish"
-import { useDispatch, useSelector } from "react-redux"
-import { showLoader } from "utils/loader"
-import { getCidFromDeployment, getCustomFontsMetadatTags, getPages, getUserConfiguredMetadataTags, getWebstudioUrl } from "utils/publish"
-import { showSuccess, showError } from "utils/snackbar"
-import { IconInfoCircle } from '@tabler/icons';
-import { getProjectUrl } from "utils/project";
-import HtmlTooltip from "./HtmlTooltip"
-import InfoButton from "./InfoButton"
-import { queryParams } from "utils/url"
+import { Fragment } from 'react'
+import { Button, Typography, CircularProgress } from '@mui/material'
+import { uploadPagesToIPFS, publishRouting } from 'api/publish'
+import { useDispatch, useSelector } from 'react-redux'
+import { showLoader } from 'utils/loader'
+import { getCidFromDeployment, getCustomFontsMetadatTags, getPages, getUserConfiguredMetadataTags, getWebstudioUrl } from 'utils/publish'
+import { showSuccess, showError } from 'utils/snackbar'
+import { getProjectUrl } from 'utils/project'
+import { queryParams } from 'utils/url'
+import HtmlTooltip from '../HtmlTooltip'
+import InfoButton from '../InfoButton'
 
-const PublishButton = ({ principal, projectId }) => {
-    const isLoading = useSelector((state) => state.loader.show);
+const PublishButton = ({ principal, project }) => {
+    const isLoading = useSelector((state) => state.loader.show)
     const dispatch = useDispatch()
 
     const handlePublish = async () => {
         try {
             showLoader({ dispatch, show: true })
 
-            const project = await getProjectById({ projectId, principal })
             const tags = getUserConfiguredMetadataTags({ project })
             const fonts = getCustomFontsMetadatTags()
             const pages = getPages({ tags, fonts })
@@ -28,13 +25,13 @@ const PublishButton = ({ principal, projectId }) => {
             const cid = getCidFromDeployment({ upload })
 
             // Register in AWS deploy defult subdomain
-            const defaultSubdomain = getWebstudioUrl({ projectId });
-            await publishRouting({id: defaultSubdomain, cid, principal });
+            const defaultSubdomain = getWebstudioUrl({ projectId: project.id })
+            await publishRouting({id: defaultSubdomain, cid, principal })
     
             // Register in AWS deploy if custom domain
-            const defaultDomain = project?.domain;
+            const defaultDomain = project?.domain
             if (defaultDomain) {
-                await publishRouting({id: defaultDomain, cid, principal });
+                await publishRouting({id: defaultDomain, cid, principal })
             }
 
             showSuccess({ dispatch, message: 'Published' })
@@ -84,7 +81,7 @@ const PublishButton = ({ principal, projectId }) => {
                 { spinner }
             </Button>
         </HtmlTooltip>
-	);
-};
+	)
+}
 
 export default PublishButton

@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Chip, Box, Grid, Paper, Button, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { useState } from 'react'
+import { Box, Grid, Paper, Button, Typography } from '@mui/material'
+import { styled } from '@mui/material/styles'
 
-import availableTemplates from "templates/content";
+import availableTemplates from "templates/content"
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -10,22 +10,29 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
     height: 450,
     borderRadius: '4px'
-}));
+}))
 
 const Templates = ({ onLeave, fullScreen=false }) => {
-
-    // const handleTemplateSelect = (template) => {
-    //     if (template.html) {
-    //         editor.setComponents(template.html);
-    //         editor.setStyle(template.style);
-    //     } else if (template.template) {
-    //         editor.loadProjectData(template.template);
-    //     }
-
-    //     handleClose();
-    // }
-
     const [selected, setSelected] = useState();
+
+    const onHandleSelectTemplate = (template) => {
+        const currentData = window.editor.getProjectData()
+        const currentPage = window.editor.Pages.getSelected()
+        const currId = currentPage.id
+        const index = currentData.pages.findIndex((page) => page.id === currentPage.id)
+        currentData.pages[index].frames = template.template.pages[0].frames
+        const assets = currentData.assets
+        const pages = currentData.pages
+        const styles = template.template.styles
+        window.editor.loadProjectData({
+            assets,
+            pages,
+            styles
+        })
+        window.editor.Pages.select(currId)
+        if (fullScreen)
+            onLeave()
+    }
 
     const templateList = availableTemplates.map((template, index) => (
         <Grid item xs={fullScreen ? 6:12} md={fullScreen ? 4:6} lg={fullScreen ? 3:6} key={index} sx={{ mb: 3, cursor: 'pointer' }}
@@ -58,55 +65,7 @@ const Templates = ({ onLeave, fullScreen=false }) => {
                 className="overlay"
                 >
                     <Button elevation={0} 
-                            onClick={() => {
-                                const currentData = window.editor.getProjectData();
-                                const currentPage = window.editor.Pages.getSelected();
-                                const currId = currentPage.id;
-                                // console.log(currentData)
-
-                                // console.log(currentPage)
-                                const index = currentData.pages.findIndex((page) => page.id === currentPage.id)
-
-                                // console.log(index)
-                                // console.log(template.template.pages[0])
-
-                                // const assets = template.template.assets;
-                                // const pages = template.template.pages;
-                                // const styles = template.template.styles;
-                                currentData.pages[index].frames = template.template.pages[0].frames
-
-                                // console.log(currentData.pages)
-                                // Get current assets, not from templates
-                                const assets = currentData.assets
-                                const pages = currentData.pages
-                                const styles = template.template.styles//{...template.template.styles, ...currentData.styles}
-                                console.log(styles)
-                                // console.log(styles)
-                                // console.log(currentData.styles)
-                                // console.log(pages)
-                                // console.log("????---???")
-                                // console.log(template.template.assets)
-                                // console.log(assets)
-
-                                // currentData.pages[index] = template.template.pages[0]
-                                window.editor.loadProjectData({
-                                    assets,
-                                    pages,
-                                    styles
-                                });
-
-                                window.editor.Pages.select(currId);
-                                
-
-                                if (fullScreen)
-                                    onLeave()
-                                // window.editor.loadProjectData(template.template);
-                                // onLeave()
-                                // console.log("clicking??")
-                                // 
-                                // console.log(page)
-                                // window.editor.getComponents().add(template.template)
-                            }}
+                            onClick={() => onHandleSelectTemplate(template)}
                             variant="contained"
                             sx={{
                                 boxShadow: 'none',
@@ -123,34 +82,12 @@ const Templates = ({ onLeave, fullScreen=false }) => {
                         PICK
                     </Button>
                 </Box>)}
-                {/* <Grid container>
-                    <Grid item xs={12}>
-                        
-                        <Box sx={{ p: 2 }}>
-                            <Typography variant="h3" fontSize={16} sx={{ mb: 1 }}>{template.metadata.name}</Typography>
-                            <span>
-                                {template.metadata.description}
-                            </span>
-                            <Grid container direction="row" sx={{ mt: 1 }} spacing={1}>
-                                <Grid item>
-                                    {template.metadata.tags.map((tag, index) => {
-                                        return (<Chip label={tag} variant="outlined" color="secondary" />)
-                                    })}
-                                </Grid>
-                                <Box sx={{ flexGrow: 1 }}/>
-                                <Grid item>
-                                    <Button variant="outlined" onClick={() => handleTemplateSelect(template)}>Select</Button>
-                                </Grid>
-                            </Grid>
-                        </Box>
-                    </Grid>
-                </Grid> */}
                 <Box sx={{p:1}}>
                     <Typography variant="body" fontWeight="bold" color="#555" fontSize={16}>{template.metadata.name}</Typography>
                 </Box>
             </Item>
         </Grid>
-    ));
+    ))
 
     return (
         <Grid container spacing={2} sx={{ 
@@ -158,7 +95,6 @@ const Templates = ({ onLeave, fullScreen=false }) => {
             overflow: 'scroll', 
             background: '#f7f8f8', 
             border: '1px solid #dfe5eb',
-            // margin: 2,
             borderLeft: '0px',
             marginTop: '0px',
             p: 2,
@@ -169,4 +105,4 @@ const Templates = ({ onLeave, fullScreen=false }) => {
     )
 }
 
-export default Templates;
+export default Templates

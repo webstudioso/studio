@@ -46,11 +46,10 @@ export default function BasicTabs() {
     // Styles
     const styleManager = editor.StyleManager;
     const selectorMnager = editor.SelectorManager;
-    console.log(editor)
-    console.log(selectorMnager);
+   
     const styleBlock = styleManager.render();
     const allSelectors = selectorMnager.getSelected()
-    console.log(allSelectors)
+
     const selectBlock = selectorMnager.render(allSelectors);
     const designTab = document.getElementById('designTab');
     // designTab.firstElementChild?.remove();

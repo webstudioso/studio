@@ -85,7 +85,7 @@ PresetColor.propTypes = {
 
 // ==============================|| LIVE CUSTOMIZATION ||============================== //
 
-const SidePanel = ({ open, onLeave, principal, projectId }) => {
+const SidePanel = ({ open, onLeave, principal, project }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const customization = useSelector((state) => state.customization);
@@ -96,6 +96,11 @@ const SidePanel = ({ open, onLeave, principal, projectId }) => {
     const [categories, setCategories] = useState([]);
     const [filter, setFilter] = useState();
 
+    // const project = useSelector((state) => state.editor.project)
+  
+    // const [project] = useState(window?.webstudio?.project)
+    // console.log(project)
+    // console.log(window.webstudio.project)
     // console.log("SidepNale")
     // console.log(window.editor);
     // console.log(editor);
@@ -107,7 +112,6 @@ const SidePanel = ({ open, onLeave, principal, projectId }) => {
 
         // Render all blocks (inside the global collection)
         // blockManager.render();
-        console.log(window.editor);
         
 
 
@@ -116,7 +120,6 @@ const SidePanel = ({ open, onLeave, principal, projectId }) => {
     // drawer on/off
     // const [open, setOpen] = useState(false);
     const handleToggle = () => {
-        console.log("toggling")
         // setOpen(!open);
         setTimeout(()=>{
             
@@ -126,7 +129,7 @@ const SidePanel = ({ open, onLeave, principal, projectId }) => {
             //cats
 
             const cats = window?.editor?.Blocks?.getCategories().models.map((cat) => cat.attributes);
-            console.log(cats);
+            
             setCategories(cats)
         },500)
         
@@ -142,11 +145,10 @@ const SidePanel = ({ open, onLeave, principal, projectId }) => {
         const blockManager = editor.Blocks;
         // Render new set of blocks
         const blocks = blockManager.getAll();
-        console.log(blocks);
-        console.log(filter);
+       
         const filtered = blocks.filter(block => {
             const cat = block.get('category')
-            console.log(cat.id)
+     
             return cat.id == filter
         })
 
@@ -161,13 +163,12 @@ const SidePanel = ({ open, onLeave, principal, projectId }) => {
 
         // You can also render your blocks outside of the main block container
         const newBlocksEl = blockManager.render(filtered, {ignoreCategories:true});
-        console.log(newBlocksEl);
+    
         const blockco = document.getElementById('myBlocks');
         // console.log(blockco);
         ref.current.appendChild(newBlocksEl);
-        console.log(ref);
+    
         setBlocks(blockco)
-        console.log(ref)
 
 
         // When dragging of a block starts, hide side panel
@@ -302,7 +303,7 @@ const SidePanel = ({ open, onLeave, principal, projectId }) => {
 
     const onClose = () => {
         window?.editor?.AssetManager?.close();
-        console.log("close?")
+
         setFilter()
         onLeave()
     }
@@ -311,7 +312,7 @@ const SidePanel = ({ open, onLeave, principal, projectId }) => {
 
     const dismiss = () => {            
         // Do we have an action delaying closure?
-        console.log(delay)
+     
         if (delay) {
             setTimeout(() => {
                 
@@ -398,7 +399,7 @@ const SidePanel = ({ open, onLeave, principal, projectId }) => {
                         {open === SECTION.BLOCKS && (<Blocks onLeave={onLeave} />)}
                         {open === SECTION.PAGES && (<Pages onLeave={onLeave} />)}
                         {open === SECTION.TEMPLATE && (<Templates onLeave={onLeave} />)}
-                        {open === SECTION.SETTINGS && (<Settings onLeave={onLeave} principal={principal} projectId={projectId} />)}
+                        {open === SECTION.SETTINGS && (<Settings onLeave={onLeave} principal={principal} project={project} />)}
                         {open === SECTION.MEDIA && (<Media onLeave={onLeave} />)}
                     </Grid>
                 </Grid>

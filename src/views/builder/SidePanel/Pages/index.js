@@ -56,11 +56,9 @@ const Pages = ({ onLeave }) => {
         const pageManager = editor.Pages;
 
         const allPages = pageManager.getAll();
-        console.log(allPages)
         setPages(allPages);
 
         const selected = pageManager.getSelected();
-        console.log(selected)
         setName(getName(selected))
         setSelectedPage(selected);
     }

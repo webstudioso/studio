@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Paper, Grid, Typography, Box, Button, IconButton } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { LOADER, UPDATE_APP } from 'store/actions'
+import { LOADER, SET_PROJECT } from 'store/actions'
 import { truncate } from 'utils/format'
 import { deleteProject } from 'api/project'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
@@ -14,7 +14,7 @@ const Card = ({ project, principal }) => {
 	const isLoading = useSelector((state) => state.loader.show);
 
 	const selectProject = () => {
-		dispatch({ type: UPDATE_APP, configuration: project })
+		dispatch({ type: SET_PROJECT, project })
 		navigate(`/e/${project?.id}`)
 	}
 
@@ -56,12 +56,13 @@ const Card = ({ project, principal }) => {
 						<DeleteOutlineIcon />
 					</IconButton>
 					<Button variant="contained"
+							color="primary"
                             sx={{
                                 boxShadow: 'none',
                                 '&:hover': {
                                     boxShadow: 'none',
                                 },
-                                borderRadius: '50px',
+                                borderRadius: '50px'
                             }}
 							disabled={isLoading}
 							onClick={() => selectProject(project)}>

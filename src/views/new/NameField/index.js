@@ -13,7 +13,7 @@ import {
 	DialogContent,
 	IconButton,
 } from '@mui/material'
-import { getPrimaryUrl, getUrl } from 'utils/url'
+import { getUrl } from 'utils/url'
 import { getProjectById, createProject } from 'api/project'
 import { UPDATE_APP } from 'store/actions'
 import { LOADER } from 'store/actions'
@@ -21,6 +21,7 @@ import { useNavigate } from 'react-router-dom'
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight'
 import EditIcon from '@mui/icons-material/Edit'
 import HtmlTooltip from 'views/builder/HtmlTooltip'
+import { getDefaultMetadataForProject } from 'utils/project'
 
 const NameField = ({ principal }) => {
 	const theme = useTheme()
@@ -71,36 +72,14 @@ const NameField = ({ principal }) => {
 	const canCreate = appName && !error && !loading
 
 	const onCreateProject = async () => {
-		const icon = 'https://bafybeiegsrpk6d3kxibpp24gtnzkrty4t7l4rroki7ja6tjpokt447gji4.ipfs.w3s.link/Transparent.png'
-		const banner = 'https://bafybeifsv6zg4ba2sdeyajuqfe2z7vww2n2qh7ujqxyzrdmivzeu5m6s2i.ipfs.w3s.link/Banner.png'
-		const description = 'Created with Webstudio'
-		const url = getPrimaryUrl(appSubdomain)
 		const appData = {
 			name: appName,
 			subdomain: appSubdomain,
 			domain: null,
-			metadata: {
-				"title": appName,
-				"description": description,
-				"author": url,
-				"og:locale": "en_US",
-				"og:type": "website",
-				"og:url": url,
-				"og:site_name": appName,
-				"article:publisher": url,
-				"og:title": appName,
-				"og:description": description,
-				"og:image": banner,
-				"twitter:card": "summary_large_image",
-				"twitter:url": url,
-				"twitter:title": appName,
-				"twitter:description": description,
-				"twitter:image": banner,
-				"icon": icon
-			},
 			plan: null,
 			collaborators: []
 		}
+		appData.metadata = getDefaultMetadataForProject(appData)
 		try {
 			await createProject({ appData, principal })
 			dispatch({ type: UPDATE_APP, configuration: { new: true } })

@@ -9,7 +9,7 @@ import PluginScriptEditor from "grapesjs-script-editor";
 import PageManager from "./Plugins/PageManager";
 import PluginEditorPanelButtons from "./Panel/Buttons";
 import { useDispatch } from "react-redux";
-import { LOADER, SNACKBAR_OPEN } from "store/actions";
+import { LOADER, SET_EDITOR, SNACKBAR_OPEN } from "store/actions";
 
 // Primitives
 import WSMBasic from "wsm-basic";
@@ -27,7 +27,7 @@ import { template as TutorialLandingPage } from "../../templates/content/Tutoria
 
 import axios from 'axios';
 
-const Editor = ({ projectId, onClickHome, principal }) => {
+const Editor = ({ project, onClickHome, principal }) => {
     // const [editor, setEditor] = useState({});
     const dispatch = useDispatch();
 
@@ -35,7 +35,7 @@ const Editor = ({ projectId, onClickHome, principal }) => {
 
       try {
         dispatch({ type: LOADER, show: true });
-        const response = await axios.get(`${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${projectId}`,
+        const response = await axios.get(`${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${project.id}`,
           {
             headers: {
               "AuthorizeToken": `Bearer ${principal}`,
@@ -56,7 +56,7 @@ const Editor = ({ projectId, onClickHome, principal }) => {
       }
   };
 
-  const projectEndpoint = `${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${projectId}/content`;
+  const projectEndpoint = `${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${project.id}/content`;
 
   const loadEditor = () => {
 
@@ -64,7 +64,7 @@ const Editor = ({ projectId, onClickHome, principal }) => {
     const escapeName = (name) =>
       `${name}`.trim().replace(/([^a-z0-9\w-:/]+)/gi, "-");
 
-    const editorUI = grapesjs.init({
+    const editor = grapesjs.init({
       container: "#gjs",
       height: "100vh",
       width: "100%",
@@ -74,9 +74,7 @@ const Editor = ({ projectId, onClickHome, principal }) => {
       assetManager: {
         custom: {
           open(props) {
-            console.log("ONOPEN-----")
-            console.log(props)
-            document.dispatchEvent(new CustomEvent('toggleAssetsModal'));  
+            document.dispatchEvent(new CustomEvent('toggleAssetsModal'))
             // `props` are the same used in `asset:custom` event
             // ...
             // Init and open your external Asset Manager
@@ -88,8 +86,8 @@ const Editor = ({ projectId, onClickHome, principal }) => {
             // example: myAssetManager.on('close', () => props.close())
           },
           close(props) {
-            console.log("ONCLOSE-----")
-            console.log(props)
+            // console.log("ONCLOSE-----")
+            // console.log(props)
             // Close the external Asset Manager
           },
         }
@@ -112,7 +110,7 @@ const Editor = ({ projectId, onClickHome, principal }) => {
             // As the API stores projects in this format `{id: 1, data: projectData }`,
             // we have to properly update the body before the store and extract the
             // project data from the response result.
-            onStore: data => ({ id: projectId, data }),
+            onStore: data => ({ id: project.id, data }),
             onLoad: result => result.data,
           }
         }
@@ -169,7 +167,7 @@ const Editor = ({ projectId, onClickHome, principal }) => {
     // ]);
 
     // Storage events
-    editorUI.on('storage:error', (e) => {
+    editor.on('storage:error', (e) => {
       dispatch({
           type: SNACKBAR_OPEN,
           open: true,
@@ -180,7 +178,7 @@ const Editor = ({ projectId, onClickHome, principal }) => {
       });
     });
 
-    editorUI.on('storage:store', () => {
+    editor.on('storage:store', () => {
       dispatch({
           type: SNACKBAR_OPEN,
           open: true,
@@ -192,10 +190,10 @@ const Editor = ({ projectId, onClickHome, principal }) => {
     });
 
     // Used to load default template "Tutorial" only if no other template is loaded after API Call
-    editorUI.on('storage:end:load', (data) => {
+    editor.on('storage:end:load', (data) => {
         if (!data?.pages) {
             console.log('No data loaded from API, launching starter template')
-            editorUI.loadProjectData(TutorialLandingPage)
+            editor.loadProjectData(TutorialLandingPage)
         } else {
             console.log('Template loaded from API')
         }
@@ -203,7 +201,7 @@ const Editor = ({ projectId, onClickHome, principal }) => {
 
   // define this event handler after editor is defined
   // like in const editor = grapesjs.init({ ...config });
-  editorUI.on('component:selected', () => {
+  editor.on('component:selected', () => {
 
     // whenever a component is selected in the editor
 
@@ -212,7 +210,7 @@ const Editor = ({ projectId, onClickHome, principal }) => {
     const commandIcon = 'fa fa-cog';
 
     // get the selected componnet and its default toolbar
-    const selectedComponent = editorUI.getSelected();
+    const selectedComponent = editor.getSelected();
     const defaultToolbar = selectedComponent.get('toolbar');
 
     // check if this command already exists on this component toolbar
@@ -254,7 +252,7 @@ const Editor = ({ projectId, onClickHome, principal }) => {
     //   }
     // })
 
-    editorUI.on("run:preview",()=>{
+    editor.on("run:preview",()=>{
 
       const ed = document.getElementById('gjs');
       console.log(ed);
@@ -264,7 +262,7 @@ const Editor = ({ projectId, onClickHome, principal }) => {
       ed.style.zIndex='1203';
     });
 
-    editorUI.on("stop:preview",()=>{
+    editor.on("stop:preview",()=>{
       const ed = document.getElementById('gjs');
       ed.style.position='relative';
       ed.style.zIndex='1200';
@@ -281,7 +279,8 @@ const Editor = ({ projectId, onClickHome, principal }) => {
     //   console.log("hover out")
     // })
 
-    window.editor = editorUI;
+    window.editor = editor;
+    dispatch({ type: SET_EDITOR, editor })
   };
 
   useEffect(() => {

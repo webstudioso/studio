@@ -27,7 +27,6 @@ const Media = ({ onLeave }) => {
         // console.log("MEDIA")
         // console.log(editor);
         const manager = editor.AssetManager;
-        console.log(manager)
         manager.onClick();
         // Render new set of blocks
         // const blocks = blockManager.getAll();
@@ -64,7 +63,6 @@ const Media = ({ onLeave }) => {
         // editor.on('block:drag', () => onLeave())
         return () => {
             window?.editor?.AssetManager?.close();
-            console.log("closing??????")
         }
     }, [])
 
@@ -85,8 +83,7 @@ const Media = ({ onLeave }) => {
             // Use a regex to remove data url part
             const base64String = reader.result
                 .replace('data:', '')
-                .replace(/^.+,/, '');
-                console.log(base64String)
+                .replace(/^.+,/, '')
                 const pages = [{
                     path: file.name,
                     content: base64String

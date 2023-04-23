@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 import { Magic } from 'magic-sdk';
 import { getProjectById } from 'api/project';
 import { publishMetadata, uploadPagesToIPFS } from 'api/publish';
-import { LOADER, SNACKBAR_OPEN } from "store/actions";
+import { LOADER, SNACKBAR_OPEN, SET_PROJECT } from "store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import SubCard from 'ui-component/cards/SubCard';
 
@@ -12,116 +12,24 @@ import tabFrame from "assets/images/browserTabSkeleton.png";
 import { fontSize } from '@mui/system';
 import { IconUpload } from '@tabler/icons';
 import { getPrimaryUrl } from 'utils/url';
+import { getDefaultMetadataForProject } from 'utils/project';
+import { showError, showSuccess } from 'utils/snackbar';
 const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY);
 
-const Settings = ({ onLeave, principal, projectId }) => {
+const Settings = ({ principal, project }) => {
+    const defaultMetadata = getDefaultMetadataForProject(project)
     const isLoading = useSelector((state) => state.loader.show);
     const dispatch = useDispatch()
-    const [metadata, setMetadata] = useState()
-
-    const loadMetadata = async() => {
-
-
-              // console.log()
-              const currentProject = await getProjectById({ 
-                projectId: window.webstudio.project.id, 
-                principal
-            });
-            console.log(currentProject)
-            console.log(currentProject.metadata)
-
-            if (currentProject?.metadata) {
-                setMetadata(currentProject?.metadata)
-            } else {
-                console.log("LOADING DEFAULT META?")
-                setMetadata({
-                    "title": window.webstudio.project.name,
-                    "description": "This App does X,Y,Z under 50 characters",
-                    "keywords": "Web3, no code, dapp, builder",
-                    "author": getPrimaryUrl(window.webstudio.project),
-                    // Open graph / facebook tags
-                    "og:locale": "en_US",
-                    "og:type": "website",
-                    "og:url": getPrimaryUrl(window.webstudio.project),
-                    "og:site_name": getPrimaryUrl(window.webstudio.project),
-                    "article:publisher": getPrimaryUrl(window.webstudio.project),
-                    "og:title": window.webstudio.project.name,
-                    "og:description": "The simplest way to build and launch web3 apps",
-                    "og:image": "https://i.ibb.co/L9cpg3y/Screenshot-2022-08-22-at-11-46-45.png",
-                    // Twitter social tags
-                    "twitter:card": "summary_large_image",
-                    "twitter:url": getPrimaryUrl(window.webstudio.project),
-                    "twitter:title": window.webstudio.project.name,
-                    "twitter:description": "The simplest way to build and launch web3 apps",
-                    "twitter:image": "https://i.ibb.co/L9cpg3y/Screenshot-2022-08-22-at-11-46-45.png",
-                    "twitter:creator": "@WebstudioWeb3",
-                    "icon": "https://i.ibb.co/K5YxKKM/logo.png"
-                })
-            }
-            // setProject(currentProject);
-            // const mData = currentProject?.metadata;
-            // if (mData) {
-            //     setMetadata(mData);
-            // }
-    }
-
-    useState(() => {
-        loadMetadata()
-    }, [])
-
-    // const metaItems = metadata && (
-    //     <Grid container fullWidth spacing={2} 
-    //         sx={{ 
-    //             px: 5,
-    //             height: 'calc(100vh - 210px)', 
-    //             overflow: 'scroll', 
-    //         }}>
-    //         { Object.keys(defaultMetadata).map((key) => {
-    //             const value = metadata[key];
-    //             return (
-    //                 <Grid item xs={12} key={key}>
-    //                     <TextField
-    //                         id={`meta-${key}`}
-    //                         label={key} 
-    //                         variant="standard" 
-    //                         defaultValue={value}
-    //                         onChange={(e) => {
-    //                             const val = e.target.value;
-    //                             const currMeta = {...metadata};
-    //                             currMeta[key] = val;
-    //                             setMetadata(currMeta);
-    //                         }}
-    //                         fullWidth
-    //                     />
-    //                 </Grid>
-    //             )
-    //         })}
-    //     </Grid>
-    // );
+    const [metadata, setMetadata] = useState(project.metadata || defaultMetadata)
 
     const save = async (data) =>{
-        console.log(`saving`)
-        console.log(data)
         try {
-            
-            await publishMetadata({ id: projectId, principal, metadata: data  })
-            dispatch({
-                type: SNACKBAR_OPEN,
-                open: true,
-                message: 'Metadata saved',
-                variant: "alert",
-                anchorOrigin: { vertical: "bottom", horizontal: "right" },
-                alertSeverity: "success"
-            });
+            await publishMetadata({ id: project.id, principal, metadata: data  })
+            showSuccess({ dispatch, message: 'Metadata saved'})
+            const updatedProject = await getProjectById({ projectId: project.id, principal })
+            dispatch({ type: SET_PROJECT, project:updatedProject })
         } catch(e) {
-            dispatch({
-                type: SNACKBAR_OPEN,
-                open: true,
-                message: e.message,
-                variant: "alert",
-                anchorOrigin: { vertical: "bottom", horizontal: "right" },
-                alertSeverity: "error"
-            });
+            showError({ dispatch, error: e.message})
         } finally {
             dispatch({ type: LOADER, show: false });
         }
@@ -141,8 +49,7 @@ const Settings = ({ onLeave, principal, projectId }) => {
             // Use a regex to remove data url part
             const base64String = reader.result
                 .replace('data:', '')
-                .replace(/^.+,/, '');
-                console.log(base64String)
+                .replace(/^.+,/, '')
                 const pages = [{
                     path: 'favicon.jpeg',
                     content: base64String
@@ -174,8 +81,7 @@ const Settings = ({ onLeave, principal, projectId }) => {
             // Use a regex to remove data url part
             const base64String = reader.result
                 .replace('data:', '')
-                .replace(/^.+,/, '');
-                console.log(base64String)
+                .replace(/^.+,/, '')
                 const pages = [{
                     path: 'favicon.jpeg',
                     content: base64String
@@ -196,7 +102,7 @@ const Settings = ({ onLeave, principal, projectId }) => {
 
     }
 
-    const title = metadata && (
+    const title = (
         <Grid container spacing={1} sx={{ mb:3, pb: 1, background: '#fdfdfd', border:'1px solid #f3f3f3' }}>
             <Grid item xs={12}>
                 <Typography fontWeight="bold" color="#222" fontSize={14}>Title</Typography>
@@ -211,7 +117,8 @@ const Settings = ({ onLeave, principal, projectId }) => {
                                 variant="standard"
                                 placeholder="e.g The best way to build websites | Webstudio"
                                 sx={{ mr: 5 }}
-                                value={metadata.description}
+                                value={metadata?.description}
+                                disabled={isLoading}
                                 onMouseLeave={handleSaveMetadata}
                                 onChange={(e) => {
                                     const text = e.target.value;
@@ -226,7 +133,7 @@ const Settings = ({ onLeave, principal, projectId }) => {
         </Grid>
     );
 
-    const favIcon = metadata && (
+    const favIcon = (
         <Grid container spacing={1} sx={{ mb:3, pb: 1, background: '#fdfdfd', border:'1px solid #f3f3f3' }}>
             <Grid item xs={12}>
                 <Typography fontWeight="bold" color="#222" fontSize={14}>Favicon</Typography>
@@ -282,7 +189,7 @@ const Settings = ({ onLeave, principal, projectId }) => {
         </Grid>
     );
 
-    const social = metadata && (
+    const social = (
         <Grid container spacing={1} sx={{mb:3, background: '#fdfdfd', border:'1px solid #f3f3f3' }}>
             <Grid item xs={12}>
                 <Typography fontWeight="bold" color="#222" fontSize={14}>Social Image</Typography>
@@ -293,7 +200,7 @@ const Settings = ({ onLeave, principal, projectId }) => {
                 </Typography>
             </Grid>
             <Grid item xs={12} sx={{ mt: 1, pr: 1, pb: 1 }}>
-                <img src={metadata['og:image']} height="auto" width="100%"/>
+                <img src={metadata ? metadata['og:image']: ''} height="auto" width="100%"/>
             </Grid>
             <Grid xs={12}>
                 <Box sx={{ pb:1, ml: 1 }}>

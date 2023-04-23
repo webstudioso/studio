@@ -156,7 +156,6 @@ class PagesApp extends UI {
 
     render() {
         const { $ } = this;
-        console.log("RENDERING PAGE?")
         // Do stuff on render
         this.onRender();
         this.$el?.remove();
