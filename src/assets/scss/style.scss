@@ -11,13 +11,13 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 $primary-font:  'Montserrat';
+$background-color: '#fafafa';
 
 @media (min-width: 1280px) {
     .container {
         max-width: 100% !important;
     }
 }
-
 
 .blurred {
     -webkit-filter: blur(2px);
@@ -99,10 +99,15 @@ $primary-font:  'Montserrat';
 }
 
 html, body {
-    max-width: 100% !important;
-    overflow: hidden !important;
-    overscroll-behavior-y: none !important;
-    // background: #A613F0;
+    max-width: 100%;
+    overflow: hidden;
+    overscroll-behavior-y: none;
+    background-color: $background-color;
+    margin: 0px;
+}
+
+.container {
+    background-color: transparent;
 }
 
 // ==============================|| LIGHT BOX ||============================== //
@@ -121,12 +126,13 @@ html, body {
     margin-right: 8px;
 }
 
+.title-text {
+    font-weight: lighter;
+    color: #444;
+    font-size: 24px;
+}
+
 .signin {
-    .text {
-        font-weight: lighter;
-        color: #444;
-        font-size: 24px;
-    }
     .container {
         padding: 40vh 0vw;
         text-align: center;

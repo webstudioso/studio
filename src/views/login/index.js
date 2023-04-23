@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Box, Typography, LinearProgress } from '@mui/material'
 import { Magic } from 'magic-sdk'
 import { getUrl } from 'utils/url'
@@ -27,7 +27,7 @@ const Login = () => {
 	const authenticate = async () => {
 		const isAuthenticated = await m?.user?.isLoggedIn()
 		if (isAuthenticated) {
-			const principal = await m.user.getIdToken();
+			const principal = await m.user.getIdToken()
 			const user = await m.user.getMetadata(principal)
 			const projects = await getAllProjects({ principal })
 			dispatch({ type: LOGIN, payload: { user , principal, projects }})
@@ -68,7 +68,7 @@ const Login = () => {
 	return (
 		<Box className="signin">
 			<Box textAlign="center" className="container fade-in">
-				<Typography variant="body" className="text">
+				<Typography variant="body" className="title-text">
 					Loading <strong>Webstudio</strong>
 				</Typography>
 				<LinearProgress className="progress" />

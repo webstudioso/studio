@@ -12,7 +12,7 @@ import {
     IconButton
 } from '@mui/material';
 import { gridSpacing } from 'store/constant';
-import Templates from 'views/modal/Templates';
+import Templates from 'views/templates/List';
 import { IconTrash } from '@tabler/icons';
 import { getProjectUrl } from 'utils/project';
 import { truncate } from 'utils/format';

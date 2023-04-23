@@ -6,6 +6,9 @@ import { useSelector } from 'react-redux'
 import InfoButton from 'views/builder/InfoButton'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import Card from 'views/projects/Card'
+import constants from 'constant'
+
+const { SECTION } = constants
 
 const Projects = () => {
 	const [selected, setSelected] = useState();
@@ -67,9 +70,9 @@ const Projects = () => {
 						
 					>
 						<Box sx={{ minWidth: 120, m: '15px', py: 1 }}>
-							<Typography variant="h2" color="black" fontWeight="bolder">
+							<Typography variant="h2" className="title-text">
 								My Projects
-								<InfoButton section='GG' />
+								<InfoButton section={SECTION.DASHBOARD_TITLE} />
 							</Typography>
 						</Box>
 					

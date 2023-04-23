@@ -45,7 +45,7 @@ import InfoButton from '../InfoButton';
 import constants from 'constant'
 import Blocks from './Blocks';
 import Pages from './Pages';
-import Templates from './Templates';
+import Templates from '../../templates/List';
 import Settings from './Settings';
 import Media from "./Media";
 const { SIDEPANEL, SECTION } = constants

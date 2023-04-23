@@ -4,8 +4,8 @@ import { Paper, Grid, Typography, Box, Button, IconButton } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { LOADER, UPDATE_APP } from 'store/actions'
 import { truncate } from 'utils/format'
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import { deleteProject } from 'api/project'
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 
 const Card = ({ project, principal }) => {
 	const navigate = useNavigate()

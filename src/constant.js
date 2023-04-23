@@ -39,7 +39,9 @@ const constants = {
 		TEMPLATE: 'TEMPLATE',
 		MARKETPLACE: 'MARKETPLACE',
 		MEDIA: 'MEDIA',
-		DASHBOARD: 'DASHBOARD'
+		DASHBOARD: 'DASHBOARD',
+		NEW_TITLE: 'NEW_TITLE',
+		DASHBOARD_TITLE: 'DASHBOARD_TITLE'
 	},
 	SIDEPANEL: {
 		TITLE: {
@@ -52,6 +54,10 @@ const constants = {
 			MEDIA: 'Media'
 		}
 	},
+	INFO_TOOLTIP: {
+		NEW_TITLE: 'The name will help your online audience identify your brand (4-30 characters)',
+		DASHBOARD_TITLE: 'Launch the no-code editor for existing projects or create a new one. Here you can also delete projects'
+	},
 	INFO_URL: {
 		BLOCKS: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
 		PAGES: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
@@ -61,7 +67,8 @@ const constants = {
 		MARKETPLACE: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
 		PUBLISH: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
 		MEDIA: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
-		DASHBOARD: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08'
+		DASHBOARD: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
+		NEW_TITLE: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08'
 	},
 	IMAGE_PLACEHOLDER:
 		"https://media.istockphoto.com/vectors/image-preview-icon-picture-placeholder-for-website-or-uiux-design-vector-id1222357475?k=20&m=1222357475&s=170667a&w=0&h=YGycIDbBRAWkZaSvdyUFvotdGfnKhkutJhMOZtIoUKY="

@@ -2,7 +2,7 @@
 import { useEffect, useState, Fragment } from 'react';
 import { useParams, useNavigate, Link as RouterLink } from "react-router-dom";
 import { Editor } from "editor";
-import Modal from "views/modal";
+import Modal from 'views/templates';
 import { Magic } from 'magic-sdk';
 import { useDispatch, useSelector } from "react-redux";
 import { LOADER, SNACKBAR_OPEN, UPDATE_APP } from "store/actions";
@@ -37,6 +37,7 @@ const EditorView = () => {
 
 
 	const appState = useSelector((state) => state.app);
+	const account = useSelector((state) => state.account)
 	console.log(appState)
 
 
@@ -88,19 +89,19 @@ const EditorView = () => {
 		document.addEventListener('toggleAssetsModal', () => setOpen(SECTION.MEDIA));
 	};
 
-	const loadPrincipal = async () => {
-		// 6 hour session in editor
-		const idToken = await m.user.getIdToken({ lifespan: 21600 });
-		setPrincipal(idToken);
-	};
+	// const loadPrincipal = async () => {
+	// 	// 6 hour session in editor
+	// 	const idToken = await m.user.getIdToken({ lifespan: 21600 });
+	// 	setPrincipal(idToken);
+	// };
 
 	const onClickHome = () => {
-		navigate("/profile/projects", { replace: true });
+		navigate(PATH.LOGIN, { replace: true });
 	};
 
 	useEffect(() => {
 		addEditorListeners();
-		loadPrincipal();
+		// loadPrincipal();
 		return () => {
 			document.removeEventListener('toggleTemplates', () => {});
 			document.removeEventListener('toggleLaunch', () => {});
@@ -119,7 +120,7 @@ const EditorView = () => {
 	// 	setEventName();
 	// };
 
-	const editorCanvas = principal && (<Editor projectId={projectId} onClickHome={onClickHome} principal={principal} />);
+	const editorCanvas = (<Editor projectId={projectId} onClickHome={onClickHome} principal={account.principal} />);
 
 	const addTooltip = (
         <Fragment>
@@ -247,7 +248,7 @@ const EditorView = () => {
 										</Button>
 									</HtmlTooltip>
 								</Typography>
-								<PublishButton	principal={principal}
+								<PublishButton	principal={account.principal}
 												projectId={projectId}
 								/>
 							</Toolbar>
@@ -320,7 +321,7 @@ const EditorView = () => {
 					</Grid>
 				</Grid>
 			</Grid>
-			<SidePanel open={open} principal={principal} projectId={projectId} onLeave={() => setOpen()} />
+			<SidePanel open={open} principal={account.principal} projectId={projectId} onLeave={() => setOpen()} />
 			<Modal  open={appState.new} 
 					onLeave={() => {
 						dispatch({
@@ -331,7 +332,7 @@ const EditorView = () => {
 					}} 
 					editor={editor} 
 					event={eventName} 
-					principal={principal}
+					principal={account.principal}
 					projectId={projectId}
 			/>
 			<DraggableDialog open={openDialog} handleClose={() => setOpenDialog(false)}></DraggableDialog>
