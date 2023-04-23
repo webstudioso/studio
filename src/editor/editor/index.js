@@ -4,7 +4,7 @@ import grapesjs from "grapesjs";
 import PluginTokenGate from "../primitives/token-gated-container";
 import PluginNFT from "../primitives/nft-card";
 import PluginActionButton from "../primitives/action-button";
-import PluginTailwind from "grapesjs-tailwind";
+// import PluginTailwind from "grapesjs-tailwind";
 import PluginScriptEditor from "grapesjs-script-editor";
 import PageManager from "./Plugins/PageManager";
 import PluginEditorPanelButtons from "./Panel/Buttons";
@@ -206,7 +206,7 @@ const Editor = ({ project, onClickHome, principal }) => {
 
     // set your command and icon here
     const commandToAdd = 'tlb-settings';
-    const commandIcon = 'fa fa-cog';
+    // const commandIcon = 'fa fa-cog';
 
     // get the selected componnet and its default toolbar
     const selectedComponent = editor.getSelected();

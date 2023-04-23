@@ -1,16 +1,13 @@
-import { useRef, useEffect } from 'react';
-import { Typography, Box, Stack } from '@mui/material';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Paper, { PaperProps } from '@mui/material/Paper';
-import Draggable from 'react-draggable';
-import ConfigTabs from "../ConfigTabs";
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
+import { useRef } from 'react'
+import { Typography} from '@mui/material'
+import Dialog from '@mui/material/Dialog'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+import Paper from '@mui/material/Paper'
+import Draggable from 'react-draggable'
+import ConfigTabs from "../ConfigTabs"
+import IconButton from '@mui/material/IconButton'
+import CloseIcon from '@mui/icons-material/Close'
 
 function PaperComponent(props) {
   return (
@@ -23,19 +20,8 @@ function PaperComponent(props) {
   );
 }
 
-export default function DraggableDialog({ open, handleClose }) {
-//   const [open, setOpen] = React.useState(false);
-const ref = useRef(null);
-//   const handleClickOpen = () => {
-//     setOpen(true);
-//   };
-
-//   const handleClose = () => {
-//     setOpen(false);
-//   };
-
-
-//window?.editor?.getSelected()?.attributes?.tagName
+const DraggableDialog = ({ open, handleClose, editor }) => {
+  const ref = useRef(null);
 
   return (
       <Dialog
@@ -54,7 +40,7 @@ const ref = useRef(null);
                     borderRadius: '4px',
                     color: 'white',
                     marginRight: '5px'
-                }}>{window?.editor?.getSelected()?.attributes?.tagName}</span>
+                }}>{editor?.getSelected()?.attributes?.tagName}</span>
                 Configuration
             </Typography>
           <IconButton
@@ -70,18 +56,15 @@ const ref = useRef(null);
             <CloseIcon />
             </IconButton>
         </DialogTitle>
-        <DialogContent ref={ref}         sx={{
-            width: 400,
-            height: 450
-        }}>
+        <DialogContent  ref={ref}         
+                        sx={{
+                            width: 400,
+                            height: 450
+                        }}>
             <ConfigTabs />
         </DialogContent>
-        {/* <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button onClick={handleClose}>Subscribe</Button>
-        </DialogActions> */}
       </Dialog>
-  );
+  )
 }
+
+export default DraggableDialog

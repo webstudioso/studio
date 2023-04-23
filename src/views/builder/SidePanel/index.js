@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import {
     Drawer,
     Box,
@@ -19,21 +19,7 @@ const { TITLE } = SIDEPANEL
 // ==============================|| LIVE CUSTOMIZATION ||============================== //
 
 const SidePanel = ({ open, onLeave, principal, project, editor}) => {
-
-    const ref = useRef(null)
-    const [filter, setFilter] = useState()
     const [delay, setDelay] = useState(false)
-
-    useEffect(() => {
-        if (!filter) return
-        const blockManager = editor.Blocks
-        const blocks = blockManager.getAll()
-        const filtered = blocks.filter(block => block.get('category') === filter)
-        const blockContainer = blockManager.render(filtered, {ignoreCategories:true})
-        ref.current.appendChild(blockContainer)
-        editor.on('block:drag', () => dismiss())
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [filter])
 
     useEffect(() => {
         document.addEventListener(EVENTS.CLOSE_DELAY, () => setDelay(true))
@@ -42,7 +28,6 @@ const SidePanel = ({ open, onLeave, principal, project, editor}) => {
 
     const onClose = () => {
         editor.AssetManager?.close()
-        setFilter()
         onLeave()
     }
 
@@ -94,10 +79,10 @@ const SidePanel = ({ open, onLeave, principal, project, editor}) => {
                     </Stack>
                 </Grid>
                 <Grid item>
-                    {open === SECTION.BLOCKS && (<Blocks onLeave={onLeave} />)}
+                    {open === SECTION.BLOCKS && (<Blocks onLeave={onLeave} editor={editor} />)}
                     {open === SECTION.PAGES && (<Pages onLeave={onLeave} editor={editor} />)}
-                    {open === SECTION.TEMPLATE && (<Templates onLeave={onLeave} />)}
-                    {open === SECTION.SETTINGS && (<Settings onLeave={onLeave} principal={principal} project={project} />)}
+                    {open === SECTION.TEMPLATE && (<Templates onLeave={onLeave} editor={editor} />)}
+                    {open === SECTION.SETTINGS && (<Settings onLeave={onLeave} principal={principal} project={project} editor={editor} />)}
                     {open === SECTION.MEDIA && (<Media onLeave={onLeave} editor={editor} />)}
                 </Grid>
             </Grid>

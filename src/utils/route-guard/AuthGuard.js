@@ -16,7 +16,7 @@ const AuthGuard = ({ children }) => {
 		if (!account?.principal) {
 			navigate('/')
 		}
-	}, [navigate])
+	}, [navigate, account?.principal])
 
 	return children;
 }

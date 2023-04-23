@@ -132,7 +132,7 @@ const EditorView = () => {
 					editor={editor} 
 					principal={account.principal}
 			/>
-			<DraggableDialog open={openDialog} handleClose={() => setOpenDialog(false)}></DraggableDialog>
+			<DraggableDialog open={openDialog} editor={editor} handleClose={() => setOpenDialog(false)}></DraggableDialog>
 		</>
 	)
 }

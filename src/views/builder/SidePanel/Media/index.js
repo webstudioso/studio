@@ -74,7 +74,6 @@ const Media = ({ onLeave, editor }) => {
                 </Button>
             </Box>
 
-
             {editor.AssetManager.getAll().models.map((item) => (
                 <Grid item xs={6} sx={{ cursor: getSelectedImage() ? 'pointer' : 'normal', position:'relative', padding:'0px !important'}} onMouseEnter={() => setSelected(item.id)}>
                     <Paper elevation={0} sx={{ p:1, background:'transparent' }} className={selected === item.id && getSelectedImage() ? "blurred" : ""}>
