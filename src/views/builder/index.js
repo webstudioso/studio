@@ -57,7 +57,7 @@ const EditorView = () => {
 											<Logo />
 										</Button>
 									</HtmlTooltip>
-									{project.name}
+									{project?.name}
 								</Typography>
 								<PublishButton	principal={account.principal}
 												project={project}

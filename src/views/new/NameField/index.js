@@ -15,8 +15,7 @@ import {
 } from '@mui/material'
 import { getUrl } from 'utils/url'
 import { getProjectById, createProject } from 'api/project'
-import { UPDATE_APP } from 'store/actions'
-import { LOADER } from 'store/actions'
+import { UPDATE_APP, LOADER, SET_PROJECT } from 'store/actions'
 import { useNavigate } from 'react-router-dom'
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight'
 import EditIcon from '@mui/icons-material/Edit'
@@ -72,6 +71,7 @@ const NameField = ({ principal }) => {
 	const canCreate = appName && !error && !loading
 
 	const onCreateProject = async () => {
+		dispatch({ type: LOADER, show: true })
 		const appData = {
 			name: appName,
 			subdomain: appSubdomain,
@@ -82,10 +82,14 @@ const NameField = ({ principal }) => {
 		appData.metadata = getDefaultMetadataForProject(appData)
 		try {
 			await createProject({ appData, principal })
+			const project = await getProjectById({ projectId: appData.subdomain, principal })
+			dispatch({ type: SET_PROJECT, project })
 			dispatch({ type: UPDATE_APP, configuration: { new: true } })
-			navigate(`/e/${appSubdomain}`)
+			navigate(`/e/${project?.id}`)
 		} catch(e) {
 			console.log(e)
+		} finally {
+			dispatch({ type: LOADER, show: false })
 		}
 	}
 
