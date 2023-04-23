@@ -20,7 +20,7 @@ import WSMAnimations from "wsm-animations";
 import WSMFonts, { WSMFontStyles } from "wsm-fonts";
 
 // Default Template
-import { template as TutorialLandingPage } from "../../templates/content/Tutorial"
+import { template as TutorialLandingPage } from "templates/content/Tutorial"
 
 import axios from 'axios';
 import constants from 'constant'
