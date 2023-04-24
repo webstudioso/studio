@@ -67,7 +67,7 @@ const EditorView = () => {
 					</Box>
 				</Grid>
 				<Grid item>
-					<Grid container direction="row" sx={{ height: 'calc(100vh - 50px)' }} id="sideMenu">
+					<Grid container direction="row" sx={{ height: 'calc(100vh - 55px)' }} id="sideMenu">
 						<Grid item sx={{
 							background:'white', 
 							width: '60px', 

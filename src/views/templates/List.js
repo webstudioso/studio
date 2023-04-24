@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Box, Grid, Paper, Button, Typography, CircularProgress } from '@mui/material'
+import { Box, Grid, Paper, Button, Typography, CircularProgress, Chip } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { LOADER } from 'store/actions'
@@ -22,29 +22,16 @@ const Templates = ({ onLeave, fullScreen=false }) => {
     const onHandleSelectTemplate = async (template) => {
         dispatch({ type: LOADER, show: true })
         setTimeout(() => {
-            const currentData = editor.getProjectData()
-            const currentPage = editor.Pages.getSelected()
-            const currId = currentPage.id
-            const index = currentData.pages.findIndex((page) => page.id === currentPage.id)
-            currentData.pages[index].frames = template.template.pages[0].frames
-            const assets = currentData.assets
-            const pages = currentData.pages
-            const styles = template.template.styles
-            editor.loadProjectData({
-                assets,
-                pages,
-                styles
-            })
-            editor.Pages.select(currId)
-            if (fullScreen)
-                onLeave()
-        }, 500)
+            editor.setComponents(template.template)
+            editor.setStyle(template.style)
+            if (fullScreen) onLeave()
+        }, 250)
     }
 
     const spinner = isLoading && (<CircularProgress size={18} sx={{ ml: 1 }} />)
 
     const templateList = availableTemplates.map((template, index) => (
-        <Grid item xs={fullScreen ? 6:12} md={fullScreen ? 4:6} lg={fullScreen ? 3:6} key={index} sx={{ mb: 3, cursor: 'pointer' }}
+        <Grid item xs={fullScreen ? 6:12} md={fullScreen ? 4:6} lg={fullScreen ? 3:6} key={index} sx={{ mb: 5, cursor: 'pointer' }}
             onMouseEnter={() => {
                 setSelected(index)
             }}
@@ -92,9 +79,30 @@ const Templates = ({ onLeave, fullScreen=false }) => {
                         PICK
                         {spinner}
                     </Button>
+                    <Box sx={{
+                        position: 'absolute',
+                        top: '55%',
+                        left: '10%',
+                        width: '80%',
+                        color: 'black',
+                        textAlign: 'center'
+                    }}>
+                        <Typography variant="body" fontWeight="bold" color="#555" fontSize={16}>{template.metadata.description}</Typography>
+                    </Box>
                 </Box>)}
-                <Box sx={{p:1}}>
-                    <Typography variant="body" fontWeight="bold" color="#555" fontSize={16}>{template.metadata.name}</Typography>
+                <Box sx={{py:2, px: 1 }}>
+                    <Grid container direction="row">
+                        <Grid item>
+                            <Typography variant="body" fontWeight="bold" color="#555" fontSize={16}>{template.metadata.name}</Typography>
+                        </Grid>
+                        <Box flexGrow={1}></Box>
+                        <Grid item>
+                            <Chip label="Free" color="primary" size="small" />
+                        </Grid>
+                      
+                    </Grid>
+                    
+
                 </Box>
             </Item>
         </Grid>

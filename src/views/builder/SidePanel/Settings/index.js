@@ -24,6 +24,7 @@ const Settings = ({ principal, project }) => {
             const updatedProject = await getProjectById({ projectId: project.id, principal })
             dispatch({ type: SET_PROJECT, project:updatedProject })
         } catch(e) {
+            console.log(e)
             showError({ dispatch, error: e.message})
         } finally {
             dispatch({ type: LOADER, show: false })
