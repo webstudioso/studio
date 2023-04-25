@@ -1,12 +1,17 @@
 import { useState } from 'react'
-import { Typography, Grid, Box, Paper, Container, Stack } from '@mui/material'
+import { Typography, Grid, Box, Paper, Container, Stack, IconButton } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { Magic } from 'magic-sdk'
 import InfoButton from 'views/builder/InfoButton'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
+import LogoutIcon from '@mui/icons-material/Logout';
 import Card from 'views/projects/Card'
 import constants from 'constant'
+import Logo from 'common/Logo'
+
+const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY)
 
 const { SECTION } = constants
 
@@ -16,6 +21,11 @@ const Projects = () => {
 	const theme = useTheme();
 	const account = useSelector((state) => state.account)
 	
+	const logout = async () => {
+		await m.user.logout()
+		navigate('/')
+	}
+
 	const newCard = (
 		<Grid item xs={12} sm={6} md={4} key={0}>
 			<Box>
@@ -60,20 +70,29 @@ const Projects = () => {
 
 	return (
 		<Container sx={{ py: '15vh' }} className="fade-in">
-			<Box sx={{ px: '10vw'}}>
+			<Box sx={{ px: '10vw' }}>
 				<Grid item>
 					<Stack
 						direction="row"
 						justifyContent="left"
 						alignItems="left"
 						spacing={1}
-						
+						sx={{ borderBottom: '1px solid #f0f0f0', mb: 1, pb: 1 }}
 					>
-						<Box sx={{ minWidth: 120, m: '15px', py: 1 }}>
+						<Box display="flex" alignItems="center">
+							<Logo />
+						</Box>
+						<Box sx={{ minWidth: 120 }} display="flex" alignItems="center">
 							<Typography variant="h2" className="title-text">
 								My Projects
 								<InfoButton section={SECTION.DASHBOARD_TITLE} />
 							</Typography>
+						</Box>
+						<Box flexGrow={1}></Box>
+						<Box display="flex" alignItems="center">
+							<IconButton color="primary" onClick={logout}>
+								<LogoutIcon />
+							</IconButton>
 						</Box>
 					
 					</Stack>

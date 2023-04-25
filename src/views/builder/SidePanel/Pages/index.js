@@ -13,7 +13,7 @@ import { IconTrash } from '@tabler/icons'
 import { getProjectUrl } from 'utils/project'
 import { truncate } from 'utils/format'
 
-const Pages = ({ editor }) => {
+const Pages = ({ editor, project }) => {
     const ref = useRef(null);
     const [pages, setPages] = useState([])
     const [selectedPage, setSelectedPage] = useState()
@@ -44,6 +44,7 @@ const Pages = ({ editor }) => {
 
     const pageList = pages?.map((page) => 
         <Grid   id={page.id} 
+                key={page.id}
                 item 
                 sx={{ 
                     p: '5px 10px', 
@@ -55,7 +56,6 @@ const Pages = ({ editor }) => {
                 }} 
                 onClick={(e) => {
                     // setFilter(cat.id);
-                    const editor = window.editor;
                     const pageManager = editor.Pages;
                     pageManager.select(page.id);
                     setName(getName(page))
@@ -71,9 +71,8 @@ const Pages = ({ editor }) => {
     const [name, setName] = useState()
 
     const saveAndReload =  async() => {
-        const data = window.editor.getProjectData();
-        await window.editor.Storage.store(data);
-        // await window.editor.store();
+        const data = editor.getProjectData()
+        await editor.Storage.store(data)
         loadPages()
     }
 
@@ -84,7 +83,7 @@ const Pages = ({ editor }) => {
     // const ALPHA_NUMERIC_DASH_REGEX = /^[a-z0-9]+$/;
 
     const getPageNme = () => isHome() ? '' : `/${name}`
-    const getPagePath = () => `${getProjectUrl()}${getPageNme()}`
+    const getPagePath = () => `${getProjectUrl({ project })}${getPageNme()}`
 
     return (
         <Grid container>
@@ -104,14 +103,6 @@ const Pages = ({ editor }) => {
                     onClick={() => {
                         setName('')
                         setSelectedPage(null)
-                            // const editor = window.editor;
-                            // const pageManager = editor.Pages;
-                            // pageManager.add({
-                            //     name,
-                            //     component: `<div>New page ${name}</div>`
-                            // });
-                            // loadPages()
-
                 }}>Add a new page</Button>
             </Grid>
             <Grid item xs={8} sx={{ 
@@ -128,7 +119,6 @@ const Pages = ({ editor }) => {
                                         size="small"
                                         style={{ float: 'right' }}
                                         onClick={() => {
-                                            const editor = window.editor;
                                             const pageManager = editor.Pages;
                                             pageManager.remove(selectedPage.id)
                                             const home = getHomePage()
@@ -166,7 +156,6 @@ const Pages = ({ editor }) => {
                             disabled={isHome() || !name}
                             // sx={{ mt: 1 }}
                             onClick={() => {
-                                    const editor = window.editor;
                                     const pageManager = editor.Pages;
 
                                     if (selectedPage) {

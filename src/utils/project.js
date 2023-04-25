@@ -10,36 +10,39 @@ export const saveProject = async ({ project, provider, user }) => {
 	await proj.save()
 }
 
-export const getProjectUrl = () => {
-	const project = window?.webstudio?.project
-	if (!project) return
-	const domain = project.custom ? `https://${project.custom}` : getUrl(project.subdomain)
+export const getProjectUrl = ({ project }) => {
+	const target = project || window.project
+	if (!target) return
+	const domain = target.custom ? `https://${target.custom}` : getUrl(target.subdomain)
 	return domain
 }
 
-export const getDefaultMetadataForProject = ({ project={} }) => {
+export const getDefaultMetadataForProject = ({ project }) => {
 	const icon = 'https://bafybeiegsrpk6d3kxibpp24gtnzkrty4t7l4rroki7ja6tjpokt447gji4.ipfs.w3s.link/Transparent.png'
 	const banner = 'https://bafybeifsv6zg4ba2sdeyajuqfe2z7vww2n2qh7ujqxyzrdmivzeu5m6s2i.ipfs.w3s.link/Banner.png'
-	const description = 'Created with Webstudio'
+	const name = project.name
 	const url = getPrimaryUrl(project)
 	const metadata = {
-		"title": project.name,
-		"description": description,
-		"author": url,
-		"og:locale": "en_US",
-		"og:type": "website",
-		"og:url": url,
-		"og:site_name": project.name,
-		"article:publisher": url,
-		"og:title": project.name,
-		"og:description": description,
-		"og:image": banner,
-		"twitter:card": "summary_large_image",
-		"twitter:url": url,
-		"twitter:title": project.name,
-		"twitter:description": description,
-		"twitter:image": banner,
-		"icon": icon
+		"icon": icon,							// link rel
+		"title": name, 							// name, content
+		"description": name, 					// name, content
+		"author": url, 							// name, content
+		"article:publisher": url,				// name, content
+		// <!-- Open Graph / Facebook -->
+		"og:locale": "en_US", 					// property, content
+		"og:type": "website",					// property, content
+		"og:url": url,							// property, content
+		"og:site_name": name,					// property, content
+		"og:title": name,						// property, content
+		"og:description": name, 				// property, content
+		"og:image": banner,						// property, content
+		// <!-- Twitter -->
+		"twitter:card": "summary_large_image", 	// property, content
+		"twitter:title": name,					// property, content
+		"twitter:url": url,						// property, content
+		"twitter:description": name,			// property, content
+		"twitter:image": banner,				// property, content
+		"twitter:creator": url					// name, content
 	}
 
 	return metadata

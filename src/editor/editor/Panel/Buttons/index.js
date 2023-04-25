@@ -227,9 +227,9 @@ const Plugin = (editor, config) => {
     {
       id: 'alert-button',
       className: 'project-link-button',
-      label: `🌐 ${getProjectUrl()}`,
+      label: `🌐 ${getProjectUrl({})}`,
       command(editor) {
-        window.open(`${getProjectUrl()}${queryParams()}`, "_blank");
+        window.open(`${getProjectUrl({})}${queryParams()}`, "_blank");
       }
     },
     {

@@ -69,7 +69,6 @@ const NameField = ({ principal }) => {
 		} catch (e) {
 			// Not found any project, good to go
 		}
-
 	}
 
 	const canCreate = appName && !error && !loading
@@ -83,7 +82,7 @@ const NameField = ({ principal }) => {
 			plan: null,
 			collaborators: []
 		}
-		appData.metadata = getDefaultMetadataForProject(appData)
+		appData.metadata = getDefaultMetadataForProject({ project: appData })
 		try {
 			await createProject({ appData, principal })
 			const project = await getProjectById({ projectId: appData.subdomain, principal })

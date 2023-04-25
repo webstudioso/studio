@@ -15,9 +15,11 @@ const InfoButton = ({ section }) => {
 	)
 	return (
 		<HtmlTooltip title={tooltip} placement="right-start">
-			<IconButton color="primary" size="small" onClick={() => window.open(INFO_URL[section], '__blank')}>
-				<IconInfoCircle />
-			</IconButton>
+			<span>
+				<IconButton color="primary" size="small" onClick={() => window.open(INFO_URL[section], '__blank')}>
+					<IconInfoCircle />
+				</IconButton>
+			</span>
 		</HtmlTooltip>
 
 	)

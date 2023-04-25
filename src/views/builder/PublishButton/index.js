@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { Button, Typography, CircularProgress } from '@mui/material'
+import { Button, Typography, CircularProgress, IconButton } from '@mui/material'
 import { uploadPagesToIPFS, publishRouting } from 'api/publish'
 import { useDispatch, useSelector } from 'react-redux'
 import { showLoader } from 'utils/loader'
@@ -8,12 +8,12 @@ import { showSuccess, showError } from 'utils/snackbar'
 import { getProjectUrl } from 'utils/project'
 import { queryParams } from 'utils/url'
 import { trackEvent } from 'utils/analytics'
+import { IconInfoCircle } from '@tabler/icons'
 import HtmlTooltip from '../HtmlTooltip'
-import InfoButton from '../InfoButton'
 import constants from 'constant'
 const { ANALYTICS } = constants
 
-const PublishButton = ({ principal, project }) => {
+const PublishButton = ({ principal, project, editor }) => {
     const isLoading = useSelector((state) => state.loader.show)
     const account = useSelector((state) => state.account)
     const dispatch = useDispatch()
@@ -21,10 +21,11 @@ const PublishButton = ({ principal, project }) => {
     const handlePublish = async () => {
         try {
             showLoader({ dispatch, show: true })
-
+            // Get latest stored data
+            await editor.load()
             const tags = getUserConfiguredMetadataTags({ project })
             const fonts = getCustomFontsMetadatTags()
-            const pages = getPages({ tags, fonts })
+            const pages = getPages({ tags, fonts, editor })
             const upload = await uploadPagesToIPFS({ pages })
             const cid = getCidFromDeployment({ upload })
 
@@ -37,6 +38,7 @@ const PublishButton = ({ principal, project }) => {
             if (defaultDomain) {
                 await publishRouting({id: defaultDomain, cid, principal })
             }
+            window.open(`${getProjectUrl({ project })}${queryParams()}`, '__blank')
             trackEvent({ name: ANALYTICS.PUBLISH_PROJECT, params: account.user })
             showSuccess({ dispatch, message: 'Published' })
           } catch (error) {
@@ -49,13 +51,15 @@ const PublishButton = ({ principal, project }) => {
     const publishTooltip = (
         <Fragment>
             <Typography fontWeight="bold" color="inherit">Publish
-                <InfoButton section='PUBLISH' />
+                <IconButton color="primary" size="small" sx={{ pb:1 }} onClick={() => window.open(constants.INFO_URL['PUBLISH'], '__blank')}>
+                    <IconInfoCircle />
+                </IconButton>
             </Typography>
             <Typography variant="body" sx={{ mt: '15px' }}>
                 Click Publish to go live with your latest changes. Your website will be hosted in the<br/>
                 <a style={{ color: '#6366F1'}} href="https://docs.ipfs.tech/concepts/faq/#what-is-ipfs" target="__blank">Interplanetary File System</a>
             </Typography>
-            <Button href={`${getProjectUrl()}${queryParams()}`} target="__blank">View site</Button>
+            <Button href={`${getProjectUrl({ project })}${queryParams()}`} target="__blank">View site</Button>
         </Fragment>
     )
 
@@ -63,27 +67,29 @@ const PublishButton = ({ principal, project }) => {
 
 	return (
         <HtmlTooltip title={publishTooltip}>
-            <Button
-                variant="contained" 
-                color="primary"
-                onClick={handlePublish}
-                size="large"
-                disabled={isLoading}
-                sx={{ 
-                    mx: 2, 
-                    boxShadow: 'none',
-                    '&:hover': {
+            <span>
+                <Button
+                    variant="contained" 
+                    color="primary"
+                    onClick={handlePublish}
+                    size="large"
+                    disabled={isLoading}
+                    sx={{ 
+                        mx: 2, 
                         boxShadow: 'none',
-                    },
-                    borderRadius: 25,
-                    minWidth: 120
-                }} 
-            >
-                <Typography fontWeight="bold">
-                    Publish
-                </Typography>
-                { spinner }
-            </Button>
+                        '&:hover': {
+                            boxShadow: 'none',
+                        },
+                        borderRadius: 25,
+                        minWidth: 120
+                    }} 
+                >
+                    <Typography fontWeight="bold">
+                        Publish
+                    </Typography>
+                    { spinner }
+                </Button>
+            </span>
         </HtmlTooltip>
 	)
 }

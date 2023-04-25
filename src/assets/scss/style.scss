@@ -134,7 +134,7 @@ html, body {
 
 .signin {
     .container {
-        padding: 40vh 0vw;
+        padding: 45vh 0vw;
         text-align: center;
         height: 100vh;
     }
@@ -180,8 +180,7 @@ html, body {
     overflow: scroll;
 }
 
-.project-card { 
-    border-radius: 0;
+.project-card {
     position: relative;
     cursor: pointer;
     height: 207px;
@@ -191,7 +190,12 @@ html, body {
         position: absolute;
         left: 15px; 
         top: 15px;
+        overflow: hidden;
     }
+}
+
+.curved {
+    border-radius: 4px;
 }
 
 .project-overlay {

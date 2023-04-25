@@ -19,22 +19,37 @@ const { SECTION, PATH, EVENTS } = constants
 const EditorView = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
-	const [openDialog, setOpenDialog] = useState(false);
-	const [open, setOpen] = useState();
+	const [openDialog, setOpenDialog] = useState(false)
+	const [openCategory, setOpenCategory] = useState()
+	const [open, setOpen] = useState(false)
 
-	const appState = useSelector((state) => state.app);
+	const appState = useSelector((state) => state.app)
 	const account = useSelector((state) => state.account)
 	const project = useSelector((state) => state.editor.project)
 	const editor = useSelector((state) => state.editor.editor)
 
 	useEffect(() => {
 		document.addEventListener(EVENTS.TOGGLE_SETTINGS_MODAL, () => setOpenDialog(true));
-		document.addEventListener(EVENTS.TOGGLE_ASSETS_MODAL, () => setOpen(SECTION.MEDIA));
+		document.addEventListener(EVENTS.TOGGLE_ASSETS_MODAL, () => handleOpenSidePanel(SECTION.MEDIA));
 		return () => {
 			document.removeEventListener(EVENTS.TOGGLE_SETTINGS_MODAL, () => {});
 			document.removeEventListener(EVENTS.TOGGLE_ASSETS_MODAL, () => {});
 		}
 	}, [])
+
+	const handleOpenSidePanel = (section) => {
+		if (!section) {
+			handleCloseSidePanel()
+			return
+		}
+		setOpen(true)
+		setOpenCategory(section)
+	}
+
+	const handleCloseSidePanel = () => {
+		setOpen(false)
+		setOpenCategory()
+	}
 
 	return (
 		<>
@@ -57,10 +72,11 @@ const EditorView = () => {
 											<Logo />
 										</Button>
 									</HtmlTooltip>
-									{project?.name}
+									<strong>{project?.name}</strong>
 								</Typography>
 								<PublishButton	principal={account.principal}
 												project={project}
+												editor={editor}
 								/>
 							</Toolbar>
 						</AppBar>
@@ -77,35 +93,35 @@ const EditorView = () => {
 							<Grid container sx={{ px: '5px', py: '35px' }}>
 								<Grid item xs={12}>
 									<HtmlTooltip title={<TooltipFragment section={SECTION.BLOCKS} />} placement="right-start">
-										<IconButton color="primary" size="large" onClick={() => setOpen(open !== SECTION.BLOCKS ? SECTION.BLOCKS : null)}>
+										<IconButton color="primary" size="large" onClick={() => handleOpenSidePanel(openCategory !== SECTION.BLOCKS ? SECTION.BLOCKS : null)}>
 											<IconPlus />
 										</IconButton>
 									</HtmlTooltip>
 								</Grid>
 								<Grid item xs={12}>
 									<HtmlTooltip title={<TooltipFragment section={SECTION.PAGES} />} placement="right-start">
-										<IconButton color="primary" size="large" onClick={() => setOpen(open !== SECTION.PAGES ? SECTION.PAGES : null)}>
+										<IconButton color="primary" size="large" onClick={() => handleOpenSidePanel(openCategory !== SECTION.PAGES ? SECTION.PAGES : null)}>
 											<IconFiles />
 										</IconButton>
 									</HtmlTooltip>
 								</Grid>
 								<Grid item xs={12}>
 									<HtmlTooltip title={<TooltipFragment section={SECTION.SETTINGS} />} placement="right-start">
-										<IconButton color="primary" size="large" onClick={() => setOpen(open !== SECTION.SETTINGS ? SECTION.SETTINGS : null)}>
+										<IconButton color="primary" size="large" onClick={() => handleOpenSidePanel(openCategory !== SECTION.SETTINGS ? SECTION.SETTINGS : null)}>
 											<IconSettings />
 										</IconButton>
 									</HtmlTooltip>
 								</Grid>
 								<Grid item xs={12}>
 									<HtmlTooltip title={<TooltipFragment section={SECTION.TEMPLATE} />} placement="right-start">
-										<IconButton color="primary" size="large" onClick={() => setOpen(open !== SECTION.TEMPLATE ? SECTION.TEMPLATE : null)}>
+										<IconButton color="primary" size="large" onClick={() => handleOpenSidePanel(openCategory !== SECTION.TEMPLATE ? SECTION.TEMPLATE : null)}>
 											<IconTemplate />
 										</IconButton>
 									</HtmlTooltip>
 								</Grid>
 								<Grid item xs={12}>
 									<HtmlTooltip title={<TooltipFragment section={SECTION.MEDIA} />} placement="right-start">
-										<IconButton color="primary" size="large" onClick={() => setOpen(open !== SECTION.MEDIA ? SECTION.MEDIA : null)}>
+										<IconButton color="primary" size="large" onClick={() => handleOpenSidePanel(openCategory !== SECTION.MEDIA ? SECTION.MEDIA : null)}>
 											<IconPhoto />
 										</IconButton>
 									</HtmlTooltip>
@@ -113,7 +129,7 @@ const EditorView = () => {
 							</Grid>
 						</Grid>
 						<Grid item xs sx={{ py: '15px', px: '30px'}}>
-							<Editor project={project} 
+							<Editor project={project}
 									onClickHome={() => navigate(PATH.LOGIN, { replace: true })} 
 									principal={account.principal} 
 							/>
@@ -121,7 +137,7 @@ const EditorView = () => {
 					</Grid>
 				</Grid>
 			</Grid>
-			<SidePanel open={open} principal={account.principal} project={project} editor={editor} onLeave={() => setOpen()} />
+			<SidePanel open={open} openCategory={openCategory} principal={account.principal} project={project} editor={editor} onLeave={handleCloseSidePanel} />
 			<Modal  open={appState.new} 
 					onLeave={() => {
 						dispatch({

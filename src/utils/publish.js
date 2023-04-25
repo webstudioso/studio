@@ -5,11 +5,10 @@ export const getUserConfiguredMetadataTags = ({ project }) => {
     if (!metadata) return;
 
     const tags = Object.keys(metadata).map((key) => {
-        const value = metadata[key];
-        return `
-            <meta name="${key}" content="${value}"></meta>
-            <meta property="${key}" content="${value}"></meta>
-        `
+        const value = metadata[key]
+        const isProperty =  key.startsWith('og:')      || 
+                            key.startsWith('twitter:')
+        return `<meta ${ isProperty? "property" : "name" }="${key}" content="${value}"></meta>`
     })
     tags.push(`
         <title>${metadata.description}</title>
@@ -22,10 +21,9 @@ export const getUserConfiguredMetadataTags = ({ project }) => {
 
 export const getCustomFontsMetadatTags = () => WSMFontStyles.map((font) => `<link rel="stylesheet" href="${font}" />`)
 
-export const getPages = ({ tags=[], fonts=[] }) => {
+export const getPages = ({ tags=[], fonts=[], editor }) => {
 
     const pages = []
-    const editor = window?.editor
     const pageManager = editor?.Pages
     const currentPageId = pageManager.getSelected().id
     pageManager.getAll().forEach(async (page) => {

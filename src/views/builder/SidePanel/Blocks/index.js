@@ -35,6 +35,7 @@ const Blocks = ({ onLeave, editor }) => {
 
     const categoryList = categories?.map((cat) => 
         <Grid   id={cat.id} 
+                key={cat.id}
                 item 
                 sx={{ 
                     p: '5px 10px', 

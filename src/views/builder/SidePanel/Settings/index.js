@@ -12,7 +12,7 @@ const { EVENTS } = constants
 
 
 const Settings = ({ principal, project }) => {
-    const defaultMetadata = getDefaultMetadataForProject(project)
+    const defaultMetadata = getDefaultMetadataForProject({ project })
     const isLoading = useSelector((state) => state.loader.show)
     const dispatch = useDispatch()
     const [metadata, setMetadata] = useState(project.metadata || defaultMetadata)
@@ -55,11 +55,8 @@ const Settings = ({ principal, project }) => {
 
                 const currMeta = {...metadata}
                 currMeta['icon'] = uploadedFilePath
-
                 await save(currMeta)
                 setMetadata(currMeta)
-                // window.editor.store();
-                // await publishMetadata({ id: projectId, principal, data  })
 
         };
         reader.readAsDataURL(file);
@@ -91,7 +88,6 @@ const Settings = ({ principal, project }) => {
                 currMeta['twitter:image'] = uploadedFilePath;
                 await save(currMeta);
                 setMetadata(currMeta);
-                // await publishMetadata({ id: projectId, principal, data  })
 
         };
         reader.readAsDataURL(file);
@@ -114,7 +110,7 @@ const Settings = ({ principal, project }) => {
                                 variant="standard"
                                 placeholder="e.g The best way to build websites | Webstudio"
                                 sx={{ mr: 5 }}
-                                value={metadata?.description}
+                                defaultValue={metadata?.description}
                                 disabled={isLoading}
                                 onMouseLeave={handleSaveMetadata}
                                 onChange={(e) => {
@@ -142,7 +138,7 @@ const Settings = ({ principal, project }) => {
             </Grid>
             <Grid item xs={4} sx={{ mt: 1 }}>
                     <Typography>Your Favicon</Typography>
-                    <Stack direction="horizontal">
+                    <Stack direction="row">
                         <img src={metadata?.icon} height="44px" width="44px" alt="Upload favicon" />
                         <Box sx={{ py:1, ml: 1 }}>
                             <Button color="primary" size="small" variant="outlined" component="label">
@@ -200,7 +196,7 @@ const Settings = ({ principal, project }) => {
             <Grid item xs={12} sx={{ mt: 1, pr: 1, pb: 1 }}>
                 <img src={metadata ? metadata['og:image']: ''} height="auto" width="100%" alt="Social" />
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
                 <Box sx={{ pb:1, ml: 1 }}>
                     <Button color="primary" size="small" variant="outlined" component="label">
                         Upload

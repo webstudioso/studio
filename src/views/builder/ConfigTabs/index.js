@@ -31,7 +31,7 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs() {
+export default function BasicTabs({ editor }) {
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -40,7 +40,6 @@ export default function BasicTabs() {
 
   useEffect(() => {
     // if (!filter) return;
-    const editor = window.editor;
     if (!editor) return;
 
     // Styles
@@ -62,7 +61,7 @@ export default function BasicTabs() {
     const traitTab = document.getElementById('propertyTab');
     // traitTab.firstElementChild?.remove();
     traitTab.prepend(traitBlock);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [])
 
   return (

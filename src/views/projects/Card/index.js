@@ -20,7 +20,7 @@ const Card = ({ project, principal }) => {
 
 	const favIcon = project?.metadata?.icon && (
 		<Box className="icon">
-			<img className="fade-in" src={project?.metadata?.icon} alt={project.name} height={44}></img>
+			<img className="fade-in curved" src={project?.metadata?.icon} alt={project.name} height={44}></img>
 		</Box>
 	)
 

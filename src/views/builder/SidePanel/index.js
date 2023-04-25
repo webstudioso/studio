@@ -18,7 +18,7 @@ const { TITLE } = SIDEPANEL
 
 // ==============================|| LIVE CUSTOMIZATION ||============================== //
 
-const SidePanel = ({ open, onLeave, principal, project, editor}) => {
+const SidePanel = ({ open, openCategory, onLeave, principal, project, editor}) => {
     const [delay, setDelay] = useState(false)
 
     useEffect(() => {
@@ -49,7 +49,7 @@ const SidePanel = ({ open, onLeave, principal, project, editor}) => {
             onMouseLeave={dismiss}
             PaperProps={{
                 sx: {
-                    width: open === SECTION.TEMPLATE ? 650 : 450,
+                    width: openCategory === SECTION.TEMPLATE ? '45vw' : '35vw',
                     ml: '60px',
                     mt: '56px',
                     boxShadow: '15px 15px 15px 0px rgba(0,0,0,0.15)',
@@ -65,25 +65,24 @@ const SidePanel = ({ open, onLeave, principal, project, editor}) => {
                         justifyContent="left"
                         alignItems="left"
                         spacing={1}
-                        fullWidth
                         sx={{
                             borderTop: '5px solid #6366F1',
                         }}
                     >
                         <Box sx={{ minWidth: 120, m: '15px' }}>
                             <Typography variant="h4" color="black" fontWeight="bolder">
-                                {TITLE[open]}
-                                <InfoButton section={open} />
+                                {TITLE[openCategory]}
+                                <InfoButton section={openCategory} />
                             </Typography>
                         </Box>
                     </Stack>
                 </Grid>
                 <Grid item>
-                    {open === SECTION.BLOCKS && (<Blocks onLeave={onLeave} editor={editor} />)}
-                    {open === SECTION.PAGES && (<Pages onLeave={onLeave} editor={editor} />)}
-                    {open === SECTION.TEMPLATE && (<Templates onLeave={onLeave} editor={editor} />)}
-                    {open === SECTION.SETTINGS && (<Settings onLeave={onLeave} principal={principal} project={project} editor={editor} />)}
-                    {open === SECTION.MEDIA && (<Media onLeave={onLeave} editor={editor} />)}
+                    {openCategory === SECTION.BLOCKS && (<Blocks onLeave={onLeave} editor={editor} project={project} />)}
+                    {openCategory === SECTION.PAGES && (<Pages onLeave={onLeave} editor={editor} project={project} />)}
+                    {openCategory === SECTION.TEMPLATE && (<Templates onLeave={onLeave} editor={editor} project={project} />)}
+                    {openCategory === SECTION.SETTINGS && (<Settings onLeave={onLeave} principal={principal} project={project} editor={editor} />)}
+                    {openCategory === SECTION.MEDIA && (<Media onLeave={onLeave} editor={editor} project={project} />)}
                 </Grid>
             </Grid>
         </Drawer>

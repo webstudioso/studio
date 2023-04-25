@@ -32,11 +32,11 @@ const DraggableDialog = ({ open, handleClose, editor }) => {
         aria-labelledby="draggable-dialog-title"
       >
         <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-            <Typography fontWeight="bold" color="black">
+            <Typography className="title-text">
                 <span style={{ 
                     background: '#7572F9', 
                     padding: '5px', 
-                    border: '1px solid #2A3EB1;',
+                    border: '1px solid #2A3EB1',
                     borderRadius: '4px',
                     color: 'white',
                     marginRight: '5px'
@@ -48,8 +48,8 @@ const DraggableDialog = ({ open, handleClose, editor }) => {
             onClick={handleClose}
             sx={{
                 position: 'absolute',
-                right: 8,
-                top: 8,
+                right: 24,
+                top: 24,
                 color: (theme) => theme.palette.grey[500],
             }}
             >
@@ -61,7 +61,7 @@ const DraggableDialog = ({ open, handleClose, editor }) => {
                             width: 400,
                             height: 450
                         }}>
-            <ConfigTabs />
+            <ConfigTabs editor={editor} />
         </DialogContent>
       </Dialog>
   )

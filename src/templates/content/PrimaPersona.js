@@ -219,7 +219,7 @@ const metadata = {
    image: 'https://bafybeibbafcvyrp2h765rnx6tq4fsnea2m6hyfnlkyq56nwupe4owk5tde.ipfs.w3s.link/ProfilePreview.png',
    preview: 'https://bafybeicvszfap2mkwpj3oiagds4gpvsdh33j3lsuy7aaq3kc7c2of7yspu.ipfs.w3s.link/Profile.png',
    name: 'Prima Persona',
-   description: 'An eye-catching persona website',
+   description: 'An eye-catching personal website',
    tags: ['Landing Page'],
    premium: false
 }

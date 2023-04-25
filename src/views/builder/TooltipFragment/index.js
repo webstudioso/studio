@@ -1,7 +1,7 @@
 
 import { Fragment } from 'react'
-import { Typography } from '@mui/material'
-import InfoButton from 'views/builder/InfoButton'
+import { Typography, IconButton } from '@mui/material'
+import { IconInfoCircle } from '@tabler/icons'
 import constants from 'constant'
 
 const TooltipFragment = ({ section }) => {
@@ -10,7 +10,9 @@ const TooltipFragment = ({ section }) => {
         <Fragment>
             <Typography fontWeight="bold" color="inherit">
                 {constants.SIDEPANEL.TITLE[section]}
-                <InfoButton section={section} />
+                <IconButton color="primary" sx={{ pb:1 }} size="small" onClick={() => window.open(constants.INFO_URL[section], '__blank')}>
+                    <IconInfoCircle />
+                </IconButton>
             </Typography>
             
             <Typography variant="body" sx={{ mt: '15px' }}>

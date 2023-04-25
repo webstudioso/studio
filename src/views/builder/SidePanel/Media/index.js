@@ -44,7 +44,7 @@ const Media = ({ onLeave, editor }) => {
     }
 
     const getSelectedImage = () => {
-        const selected = window.editor.getSelected();
+        const selected = editor.getSelected();
         return selected && selected.is('image') ? selected : null
     }
 
@@ -74,8 +74,8 @@ const Media = ({ onLeave, editor }) => {
                 </Button>
             </Box>
 
-            {editor.AssetManager.getAll().models.map((item) => (
-                <Grid item xs={6} sx={{ cursor: getSelectedImage() ? 'pointer' : 'normal', position:'relative', padding:'0px !important'}} onMouseEnter={() => setSelected(item.id)}>
+            {editor.AssetManager.getAll().models.map((item, index) => (
+                <Grid item xs={6} key={index} sx={{ cursor: getSelectedImage() ? 'pointer' : 'normal', position:'relative', padding:'0px !important'}} onMouseEnter={() => setSelected(item.id)}>
                     <Paper elevation={0} sx={{ p:1, background:'transparent' }} className={selected === item.id && getSelectedImage() ? "blurred" : ""}>
                         <img src={item.attributes.src} width="100%" height="auto" alt={item.id} />
                         <Typography fontSize={12} color="#333" fontWeight="light">{item.attributes.src.split('/').pop()}</Typography>
@@ -94,12 +94,12 @@ const Media = ({ onLeave, editor }) => {
                         className="overlay"
                         >
                             <Button elevation={0} 
-                                    onClick={() => {
+                                    onClick={async () => {
                                         const selectedImage = getSelectedImage()
                                         if (selectedImage) {
-                                            selectedImage.addAttributes({ src: item.attributes.src })
-                                            // The default AssetManager UI will trigger `select(asset, false)`
-                                            // on asset click and `select(asset, true)` on double-click
+                                            selectedImage.setAttributes({ src: item.attributes.src })
+                                            editor.store()
+                                            editor.AssetManager.close()
                                             onLeave()
                                         }
                                     }}
