@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { Box, Typography, LinearProgress } from '@mui/material'
+import { Box, Typography, LinearProgress, Chip } from '@mui/material'
 import { Magic } from 'magic-sdk'
 import { getUrl } from 'utils/url'
 import { showError } from 'utils/snackbar'
@@ -72,9 +72,11 @@ const Login = () => {
 		<Box className="signin">
 			<Box textAlign="center" className="container fade-in">
 				<Typography variant="body" className="title-text">
-					Loading <strong>Webstudio</strong>
+					<strong>Webstudio</strong>
+					<Chip size="small" label="BETA" color="secondary" sx={{ px:1, ml: 1 }} />
 				</Typography>
 				<LinearProgress className="progress" />
+				<Typography fontSize={16}>Version {process.env.REACT_APP_VERSION}</Typography>
 			</Box>
 		</Box>
 	)

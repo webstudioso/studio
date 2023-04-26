@@ -14,7 +14,7 @@ import HtmlTooltip from './HtmlTooltip'
 import constants from 'constant'
 import Modal from 'views/templates'
 import TooltipFragment from 'views/builder/TooltipFragment'
-const { SECTION, PATH, EVENTS } = constants
+const { SECTION, PATH, EVENTS, REPO_URL } = constants
 
 const EditorView = () => {
 	const navigate = useNavigate()
@@ -73,7 +73,12 @@ const EditorView = () => {
 										</Button>
 									</HtmlTooltip>
 									<strong>{project?.name}</strong>
+									{/* <strong>Webstudio</strong> */}
 								</Typography>
+								<Button color="primary" onClick={() => window.open(REPO_URL, '__blank')}>
+									BETA Version {process.env.REACT_APP_VERSION}
+								</Button>
+								<Box flexGrow={1} display />
 								<PublishButton	principal={account.principal}
 												project={project}
 												editor={editor}
