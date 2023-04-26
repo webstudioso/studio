@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { Button, Typography, CircularProgress, IconButton } from '@mui/material'
 import { uploadPagesToIPFS, publishRouting } from 'api/publish'
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,7 +6,7 @@ import { showLoader } from 'utils/loader'
 import { getCidFromDeployment, getCustomFontsMetadatTags, getPages, getUserConfiguredMetadataTags, getWebstudioUrl } from 'utils/publish'
 import { showSuccess, showError } from 'utils/snackbar'
 import { getProjectUrl } from 'utils/project'
-import { queryParams } from 'utils/url'
+import { queryParams, getUrl } from 'utils/url'
 import { trackEvent } from 'utils/analytics'
 import { IconInfoCircle } from '@tabler/icons'
 import HtmlTooltip from '../HtmlTooltip'
@@ -16,7 +16,10 @@ const { ANALYTICS } = constants
 const PublishButton = ({ principal, project, editor }) => {
     const isLoading = useSelector((state) => state.loader.show)
     const account = useSelector((state) => state.account)
+    const [release, setRelease] = useState()
     const dispatch = useDispatch()
+
+    const getCidReleaseUrl = () => `https://ipfs.moralis.io:2053/ipfs/${release}`
 
     const handlePublish = async () => {
         try {
@@ -28,6 +31,7 @@ const PublishButton = ({ principal, project, editor }) => {
             const pages = getPages({ tags, fonts, editor })
             const upload = await uploadPagesToIPFS({ pages })
             const cid = getCidFromDeployment({ upload })
+            setRelease(cid)
 
             // Register in AWS deploy defult subdomain
             const defaultSubdomain = getWebstudioUrl({ projectId: project.id })
@@ -55,11 +59,12 @@ const PublishButton = ({ principal, project, editor }) => {
                     <IconInfoCircle />
                 </IconButton>
             </Typography>
-            <Typography variant="body" sx={{ mt: '15px' }}>
+            <Typography variant="body">
                 Click Publish to go live with your latest changes. Your website will be hosted in the<br/>
                 <a style={{ color: '#6366F1'}} href="https://docs.ipfs.tech/concepts/faq/#what-is-ipfs" target="__blank">Interplanetary File System</a>
             </Typography>
-            <Button href={`${getProjectUrl({ project })}${queryParams()}`} target="__blank">View site</Button>
+            <Button size="small" sx={{ my: 1 }} href={`${getProjectUrl({ project })}${queryParams()}`} target="__blank">View site 🌐</Button>
+            {release && (<Button size="small" sx={{ m: 1 }} href={getCidReleaseUrl()} target="__blank">View in IPFS ✨</Button>)}
         </Fragment>
     )
 
