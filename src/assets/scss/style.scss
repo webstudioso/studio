@@ -175,9 +175,9 @@ html, body {
 }
 
 .project-container {
-    padding: 20px;
+    padding: 10px;
     height: 65vh;
-    overflow: scroll;
+    overflow-y: auto;
 }
 
 .project-card {

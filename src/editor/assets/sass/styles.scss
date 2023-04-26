@@ -145,16 +145,17 @@ $quaternaryColor: #605ed8;
 
 .gjs-pn-commands {
     box-shadow:none;
-    border-bottom: 1px solid rgba(84, 84, 84, 0.15);
+    border-bottom: none;
     width:100%;
 }
 
 .gjs-cv-canvas {
     width: 100% !important;
+    border-top: 1px solid #efefef;
 }
 
 .gjs-editor {
-    box-shadow: 1px 15px 10px 2px rgba(0, 0, 0, 0.075);
+    box-shadow: 1px 5px 10px 2px rgba(0, 0, 0, 0.075);
 }
 
 .gjs-pn-views-container {

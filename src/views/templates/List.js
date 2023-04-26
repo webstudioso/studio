@@ -43,7 +43,7 @@ const Templates = ({ onLeave, fullScreen=false }) => {
                     background: `url(${template.metadata.image})`,
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'top'
+                    backgroundPosition: 'top',
                 }}
                 className={index === selected ? "blurred" : ""}
                 >
@@ -111,7 +111,7 @@ const Templates = ({ onLeave, fullScreen=false }) => {
     return (
         <Grid container spacing={2} sx={{ 
             height: fullScreen ? 'calc(100vh - 70px)' : 'calc(100vh - 120px)', 
-            overflow: 'scroll', 
+            overflow: 'auto', 
             background: '#f7f8f8', 
             border: '1px solid #dfe5eb',
             borderLeft: '0px',

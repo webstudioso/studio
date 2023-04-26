@@ -1,4 +1,5 @@
 const constants = {
+	SESSION_DURATION_SEC: '21600', // 6 hours
 	ANALYTICS: {
 		CREATE_PROJECT: "project_create",
 		PUBLISH_PROJECT: "project_publish",

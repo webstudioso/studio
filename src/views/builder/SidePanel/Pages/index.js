@@ -8,7 +8,6 @@ import {
     TextField,
     IconButton
 } from '@mui/material'
-import { gridSpacing } from 'store/constant'
 import { IconTrash } from '@tabler/icons'
 import { getProjectUrl } from 'utils/project'
 import { truncate } from 'utils/format'
@@ -49,6 +48,7 @@ const Pages = ({ editor, project }) => {
                 sx={{ 
                     p: '5px 10px', 
                     m: '0px 10px',
+                    overflowY: 'none',
                     cursor: 'pointer',
                     borderRadius: '50px',
                     background: selectedPage?.id === page.id ? '#E8E8FF' : 'transparent',
@@ -89,7 +89,7 @@ const Pages = ({ editor, project }) => {
         <Grid container>
             <Grid item xs={4} sx={{ 
                 height: 'calc(100vh - 110px)', 
-                overflow: 'scroll', 
+                overflow: 'auto', 
                 background: '#f7f8f8', 
                 border: '1px solid #dfe5eb',
                 borderLeft: '0px',
@@ -107,10 +107,10 @@ const Pages = ({ editor, project }) => {
             </Grid>
             <Grid item xs={8} sx={{ 
                 height: 'calc(100vh - 110px)', 
-                overflow: 'scroll',
+                overflow: 'auto',
                 borderTop: '1px solid #dfe5eb',
             }}>
-                <Grid container spacing={gridSpacing} sx={{ p: 3 }} id="myPages" ref={ref}>
+                <Grid container sx={{ p: 3 }} id="myPages" ref={ref}>
                     <Grid item xs={12}>
                         <Grid item sx={{ height: 25 }}>
                             <Typography fontWeight="bold" color="black" style={{ float: 'left' }}>Page Configuration</Typography>
@@ -145,7 +145,7 @@ const Pages = ({ editor, project }) => {
                                         setName(name)
                                     }} 
                         />
-                        <Box className="project-link-button" sx={{ fontSize: '11px !important', my: 1, width: '100%', color:'black' }}>
+                        <Box className="project-link-button" sx={{ fontSize: '11px !important', my: 1, color:'black' }}>
                              🌐 {truncate(getPagePath(), 37)}
                         </Box>
                         <Button 

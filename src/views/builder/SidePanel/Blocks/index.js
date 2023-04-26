@@ -59,7 +59,7 @@ const Blocks = ({ onLeave, editor }) => {
         <Grid container>
             <Grid item xs={4} sx={{ 
                 height: 'calc(100vh - 110px)', 
-                overflow: 'scroll', 
+                overflow: 'auto', 
                 background: '#f7f8f8', 
                 border: '1px solid #dfe5eb',
                 borderLeft: '0px',
@@ -69,7 +69,7 @@ const Blocks = ({ onLeave, editor }) => {
             </Grid>
             <Grid item xs={8} sx={{ 
                 height: 'calc(100vh - 110px)', 
-                overflow: 'scroll',
+                overflow: 'auto',
                 borderTop: '1px solid #dfe5eb',
             }}>
                 <Grid container spacing={gridSpacing} sx={{ p: 3 }} id="myBlocks" ref={ref}>

@@ -51,7 +51,7 @@ const Media = ({ onLeave, editor }) => {
     return (
         <Grid container spacing={2} sx={{ 
                 height: 'calc(100vh - 120px)', 
-                overflow: 'scroll', 
+                overflow: 'auto', 
                 background: '#f7f8f8', 
                 border: '1px solid #dfe5eb',
                 borderLeft: '0px',

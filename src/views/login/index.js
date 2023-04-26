@@ -5,10 +5,11 @@ import { Box, Typography, LinearProgress } from '@mui/material'
 import { Magic } from 'magic-sdk'
 import { getUrl } from 'utils/url'
 import { showError } from 'utils/snackbar'
-import constants from 'constant'
 import { LOGIN } from 'store/actions'
 import { getAllProjects } from 'api/project'
 import { trackEvent } from 'utils/analytics'
+import constants from 'constant'
+const { SESSION_DURATION_SEC } = constants
 
 const { PATH, ANALYTICS } = constants
 const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY)
@@ -28,7 +29,7 @@ const Login = () => {
 	const authenticate = async () => {
 		const isAuthenticated = await m?.user?.isLoggedIn()
 		if (isAuthenticated) {
-			const principal = await m.user.getIdToken()
+			const principal = await m.user.getIdToken({ lifespan: SESSION_DURATION_SEC })
 			const user = await m.user.getMetadata(principal)
 			const projects = await getAllProjects({ principal })
 			trackEvent({ name: ANALYTICS.VIEW_PAGE , params: user })

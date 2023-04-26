@@ -109,7 +109,6 @@ const Settings = ({ principal, project }) => {
                     <TextField  fullWidth
                                 variant="standard"
                                 placeholder="e.g The best way to build websites | Webstudio"
-                                sx={{ mr: 5 }}
                                 defaultValue={metadata?.description}
                                 disabled={isLoading}
                                 onMouseLeave={handleSaveMetadata}
@@ -215,7 +214,7 @@ const Settings = ({ principal, project }) => {
     return (
         <Grid container spacing={2} sx={{ 
             height: 'calc(100vh - 110px)', 
-            overflow: 'scroll', 
+            overflow: 'auto', 
             background: '#fff', 
             border: '1px solid #dfe5eb',
             borderLeft: '0px',
