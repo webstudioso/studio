@@ -142,7 +142,7 @@ const EditorView = () => {
 					</Grid>
 				</Grid>
 			</Grid>
-			<SidePanel open={true} openCategory={openCategory} principal={account.principal} project={project} editor={editor} onLeave={()=>{}} />
+			<SidePanel open={open} openCategory={openCategory} principal={account.principal} project={project} editor={editor} onLeave={handleCloseSidePanel} />
 			<Modal  open={appState.new} 
 					onLeave={() => {
 						dispatch({
