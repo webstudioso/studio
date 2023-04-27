@@ -72,7 +72,7 @@ const Blocks = ({ onLeave, editor }) => {
                 overflow: 'auto',
                 borderTop: '1px solid #dfe5eb',
             }}>
-                <Grid container spacing={gridSpacing} sx={{ p: 3 }} ref={ref}>
+                <Grid container spacing={gridSpacing} sx={{ p: 0, m: 0, width: '100%' }} ref={ref}>
                     {!filter && (
                     <Box sx={{ mx: '10px', p: '5px' }} textAlign="center" justifyContent="center">
                         <img src={draganddrop} width="100%" height="auto" alt="Drag and drop into the canvas" />

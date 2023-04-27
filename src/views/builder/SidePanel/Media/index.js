@@ -115,6 +115,7 @@ const Media = ({ onLeave, editor }) => {
                                         left: '25%',
                                         width: '50%'
                                     }}
+                                    className="primary-color"
                             >
                                 PICK
                             </Button>
