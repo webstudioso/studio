@@ -20,7 +20,7 @@ const Card = ({ project, principal }) => {
 
 	const favIcon = project?.metadata?.icon && (
 		<Box className="icon">
-			<img className="fade-in curved" src={project?.metadata?.icon} alt={project.name} height={44}></img>
+			<img className="fade-in curved" src={project?.metadata?.icon} alt={project.name} height={28} width={28}></img>
 		</Box>
 	)
 
@@ -65,6 +65,7 @@ const Card = ({ project, principal }) => {
                                 borderRadius: '50px'
                             }}
 							disabled={isLoading}
+							className="primary-color"
 							onClick={() => selectProject(project)}>
 						Launch Editor
 					</Button>

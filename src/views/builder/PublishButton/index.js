@@ -88,6 +88,7 @@ const PublishButton = ({ principal, project, editor }) => {
                         borderRadius: 25,
                         minWidth: 120
                     }} 
+                    className="primary-color"
                 >
                     <Typography fontWeight="bold">
                         Publish

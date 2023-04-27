@@ -11,6 +11,11 @@ import PluginScriptEditor from '@auth0/auth0-spa-js'
 import PageManager from './Plugins/PageManager'
 import PluginEditorPanelButtons from './Panel/Buttons'
 
+import TextBlocks from '../blocks/text'
+import ImageBlocks from '../blocks/images'
+import VideoBlocks from '../blocks/video'
+import ButtonBlocks from '../blocks/buttons'
+
 // Primitives
 import WSMBasic from 'wsm-basic'
 import WSMToast from 'wsm-toast'
@@ -66,18 +71,23 @@ const Editor = ({ project, principal }) => {
       },
       panels: { defaults: [] },
       plugins: [
-        WSMBasic,
+        // WSMBasic,
         PluginEditorPanelButtons,
         PluginScriptEditor,
-        WSMWalletConnect,
-        PluginTokenGate,
-        PluginNFT,
-        PluginActionButton,
+        // WSMWalletConnect,
+        // PluginTokenGate,
+        // PluginNFT,
+        // PluginActionButton,
         PageManager,
-        WSMForm,
-        WSMToast,
+        // WSMForm,
+        // WSMToast,
         WSMAnimations,
-        WSMFonts
+        WSMFonts,
+        TextBlocks,
+        ButtonBlocks,
+        ImageBlocks,
+        VideoBlocks,
+        WSMForm
       ],
       pluginsOpts: {},
       canvas: {

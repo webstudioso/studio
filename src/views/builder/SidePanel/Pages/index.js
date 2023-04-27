@@ -64,7 +64,7 @@ const Pages = ({ editor, project }) => {
         >
             <Typography fontWeight="normal" color={
                 selectedPage?.id === page.id ? '#3F41A4' : 'black'
-            } fontSize={12}>{truncate(getName(page), 18)}</Typography>
+            } fontSize={14}>{truncate(getName(page), 18)}</Typography>
         </Grid> 
     )
 

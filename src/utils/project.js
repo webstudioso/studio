@@ -18,7 +18,7 @@ export const getProjectUrl = ({ project }) => {
 }
 
 export const getDefaultMetadataForProject = ({ project }) => {
-	const icon = 'https://bafybeiegsrpk6d3kxibpp24gtnzkrty4t7l4rroki7ja6tjpokt447gji4.ipfs.w3s.link/Transparent.png'
+	const icon = 'https://i.ibb.co/t88r0BM/logo.png'
 	const banner = 'https://bafybeifsv6zg4ba2sdeyajuqfe2z7vww2n2qh7ujqxyzrdmivzeu5m6s2i.ipfs.w3s.link/Banner.png'
 	const name = project.name
 	const url = getPrimaryUrl(project)

@@ -75,6 +75,7 @@ const Templates = ({ onLeave, fullScreen=false }) => {
                                 left: '25%',
                                 width: '50%'
                             }}
+                            className="primary-color"
                     >
                         PICK
                         {spinner}

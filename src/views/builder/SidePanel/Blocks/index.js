@@ -51,7 +51,7 @@ const Blocks = ({ onLeave, editor }) => {
         >
             <Typography fontWeight="normal" color={
                 filter === cat.id ? '#3F41A4' : 'black'
-            } fontSize={12}>{cat.label}</Typography>
+            } fontSize={14}>{cat.label}</Typography>
         </Grid> 
     )
 
@@ -72,7 +72,7 @@ const Blocks = ({ onLeave, editor }) => {
                 overflow: 'auto',
                 borderTop: '1px solid #dfe5eb',
             }}>
-                <Grid container spacing={gridSpacing} sx={{ p: 3 }} id="myBlocks" ref={ref}>
+                <Grid container spacing={gridSpacing} sx={{ p: 3 }} ref={ref}>
                     {!filter && (
                     <Box sx={{ mx: '10px', p: '5px' }} textAlign="center" justifyContent="center">
                         <img src={draganddrop} width="100%" height="auto" alt="Drag and drop into the canvas" />

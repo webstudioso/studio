@@ -11,10 +11,31 @@
 $primary-font:  'Montserrat';
 $background-color: '#fafafa';
 
+html, body {
+    max-width: 100%;
+    overflow: hidden;
+    overscroll-behavior-y: none;
+    background-color: $background-color;
+    margin: 0px;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @media (min-width: 1280px) {
     .container {
         max-width: 100% !important;
     }
+}
+
+.primary-color {
+    background-color: #7572F9 !important;
+    color: white;
+}
+
+.selected-font {
+    font-family: sans-serif;
 }
 
 .blurred {
@@ -96,14 +117,6 @@ $background-color: '#fafafa';
     &:hover {
         opacity: 1;
     }
-}
-
-html, body {
-    max-width: 100%;
-    overflow: hidden;
-    overscroll-behavior-y: none;
-    background-color: $background-color;
-    margin: 0px;
 }
 
 .container {

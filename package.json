@@ -50,20 +50,23 @@
         "wsm-animations": "^0.0.2",
         "wsm-basic": "^0.0.1",
         "wsm-fonts": "^0.0.5",
-        "wsm-form": "^0.0.32",
+        "wsm-form": "^0.0.37",
         "wsm-toast": "^1.0.4",
         "wsm-wallet-connect": "^0.0.23",
         "yup": "^0.32.9"
     },
     "devDependencies": {
         "@babel/preset-env": "^7.20.2",
+        "autoprefixer": "^10.4.14",
         "env-cmd": "^10.1.0",
         "eslint": "^8.23.0",
         "eslint-config-react-app": "^7.0.1",
         "husky": "^8.0.3",
         "jest-mock-axios": "^4.7.0-beta4",
         "lint-staged": "^13.1.0",
-        "sass": "^1.56.2"
+        "postcss": "^8.4.23",
+        "sass": "^1.56.2",
+        "tailwindcss": "^3.3.2"
     },
     "jest": {
         "setupFilesAfterEnv": [
