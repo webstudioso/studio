@@ -1,16 +1,176 @@
 // Palette variables
-$primaryColor: #27293D;
-$secondaryColor: #fffc;
+$primaryColor: #fff;
+$secondaryColor: #9795fb;
 $tertiaryColor: #ec5896;
-$quaternaryColor: #7572F9;
+$quaternaryColor: #605ed8;
 
-body {
-  margin: 0px;
-}
-
+// body {
+//   margin: 0px;
+//   overflow:hidden;
+// //   background: white;
+// }
 
 @import 'material-icons/iconfont/material-icons.scss';
 @import 'grapesjs/src/styles/scss/main.scss';
+
+.gjs-clm-tag-status svg, .gjs-clm-tag-close svg {
+    vertical-align: unset;
+}
+
+.gjs-block__media {
+    min-width: 20vw;
+    // min-height: 70px;
+}
+
+.gjs-clm-tag {
+    background: $quaternaryColor;
+    color:white;
+    height:24px;
+}
+
+.gjs-two-color {
+    color: black;
+}
+
+.gjs-sm-sector-title {
+    background: #f7f8f8;
+    // border: 1px solid #dfe5eb;
+    border-color: #dfe5eb;
+}
+
+.gjs-category-open, .gjs-block-category.gjs-open, .gjs-sm-sector.gjs-sm-open {
+    border-bottom: 1px solid #dfe5eb;
+}
+
+.gjs-editor-cont .sp-container button, .gjs-editor-cont .sp-container button:hover, .gjs-editor-cont .sp-container button:active {
+    background: #6366F1;
+    border-color: #6366F1;
+}
+
+.gjs-radio-item {
+    border-left: 1px solid #D7D6FF;
+}
+
+.gjs-radio-item:hover {
+    background-color: #6366F1;
+    color: white;
+    opacity: 0.8;
+}
+
+.gjs-radio-item input:checked + .gjs-radio-item-label {
+    background-color: #6366F1;
+    color: white;
+}
+
+.gjs-color-main, .gjs-sm-stack #gjs-sm-add, .gjs-off-prv {
+    color: #6366F1;
+    fill: #6366F1;
+}
+
+.gjs-field .gjs-d-s-arrow {
+    border-top: 4px solid #7572f9;
+}
+
+.gjs-field-arrow-u {
+    border-bottom: 4px solid #7572f9;
+}
+
+.gjs-field-arrow-d {
+    border-top: 4px solid #7572f9;
+}
+
+.gjs-field {
+    background-color: #F6F6FF;
+    border: 1px solid #D7D6FF;
+    border-radius: 4px;
+}
+
+.gjs-sm-field.gjs-sm-composite {
+    background-color: #F3F3FF;
+    border: 1px solid #D7D6FF;
+}
+
+.gjs-clm-tags #gjs-clm-new {
+    color: black !important;
+}
+
+.gjs-toolbar {
+    position: absolute;
+    background-color: #3b97e3;
+    white-space: nowrap;
+    color: white;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    padding: 0px 10px 0px 10px;
+}
+
+.gjs-pn-views { 
+    border-bottom: none;
+    width: auto !important;
+}
+
+.gjs-pn-options {
+    left: 10%;
+}
+
+.address-bar__dots span.dot-1 {
+    background-color: #f26c6f;
+}
+.address-bar__dots span {
+    border-radius: 50%;
+    display: inline-block;
+    height: 12px;
+    margin: 0px 8px 0 0;
+    width: 12px;
+}
+.address-bar__dots span.dot-2 {
+    background-color: #ffc554;
+}
+.address-bar__dots span.dot-3 {
+    background-color: #5dce91;
+    margin-right: 30px;
+}
+.project-link-button {
+    // border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 25px;
+    /* height: 20px; */
+    background: #f4f4f4;
+    // text-decoration: underline;
+    padding: 0px 10px !important;
+    /* height: 10px; */
+    min-height: 24px !important;
+    // margin: 5px 15%;
+    font-size: 14px;
+    color: #333 !important;
+    line-height:24px !important;
+    margin-right: 30px !important;
+    border: 1px solid #eee !important;
+}
+
+.gjs-one-bg {
+    background: white;
+}
+
+.gjs-pn-commands {
+    box-shadow:none;
+    border-bottom: none;
+    width:100%;
+}
+
+.gjs-cv-canvas {
+    width: 100% !important;
+    border-top: 1px solid #efefef;
+}
+
+.gjs-editor {
+    box-shadow: 1px 5px 10px 2px rgba(0, 0, 0, 0.075);
+}
+
+.gjs-pn-views-container {
+    z-index:0 !important;
+    display: none;
+}
 
 // Devices
 .device-tablet {
@@ -23,6 +183,15 @@ body {
   line-height: 21px;
   padding: 6px 10px;
   margin-right: 0px;
+  color: $secondaryColor;
+}
+
+.gjs-sm-field select {
+    color: #333;
+}
+
+.gjs-pn-active {
+    color: $quaternaryColor;
 }
 
 .gjs-pn-btn svg {
@@ -47,17 +216,14 @@ body {
 }
 
 // Panels
-.gjs-pn-views-container {
-  padding-top: 40px;
-}
-
 .gjs-layer-caret {
   padding: 8px 2px;
 }
 
 .gjs-pn-views-container {
-  width: 15%;
-  z-index: 1;
+    padding-top: 40px;
+    width: 15%;
+    z-index: 1;
 }
 
 // Modal
@@ -70,23 +236,28 @@ body {
   background-color: rgba(0, 0, 0, 0.85);
 }
 
-// .gjs-block-label {  
+.gjs-block-label {  
+    font-size: 0.85rem;
 //   border: 2px solid $secondaryColor;
 //   border-radius: 12px;
-// }
-
-.gjs-block-label svg {
-  width: 100%;
-  height: 110px;
-  fill: transparent;
 }
+
+// .gjs-block-label svg {
+//   width: 100%;
+//   height: 110px;
+//   fill: transparent;
+// }
 
 .gjs-block {
   width: 100%;
-  margin: 3%;
-  border: 2px solid #b4b4b4;
-  background: #fff;
-  border-radius: 4px;
+  border: 0px;
+  text-align: left;
+  min-height: 10px;
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.08);
+//   margin: 3%;
+//   border: 2px solid #b4b4b4;
+//   background: #fff;
+//   border-radius: 4px;
     /* margin: 3%; */
     /* border: 4px solid #6366F1; */
     /* background: #fff; */
@@ -108,7 +279,7 @@ $mainColor: $secondaryColor;
     --border-color: rgba(0, 0, 0, 0.15);
     --background-color: #3c4a49;
 
-    --background-box-title: #263332;
+    --background-box-title: black;
 }
 
 .app {

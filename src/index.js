@@ -17,15 +17,13 @@ import config from "config";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<PersistGate loading={null} persistor={persister}>
-				<BrowserRouter basename={config.basename}>
-					<App />
-				</BrowserRouter>
-			</PersistGate>
-		</Provider>
-	</React.StrictMode>
+	<Provider store={store}>
+		<PersistGate loading={null} persistor={persister}>
+			<BrowserRouter basename={config.basename}>
+				<App />
+			</BrowserRouter>
+		</PersistGate>
+	</Provider>
 );
 
 // If you want your app to work offline and load faster, you can change

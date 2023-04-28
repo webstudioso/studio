@@ -32,3 +32,18 @@ export const isEditorBuilder = (appState) => {
 		appState.template[templates[0]].editor === EDITOR.BUILDER
 	);
 };
+
+export const queryParams = () => {
+	const t = Math.floor(Math.random() * 100000);
+	return `?t=${t}`;
+};
+
+export const getPrimaryUrl = (project) => {
+	let primaryUrl
+	if (project.domain) {
+		primaryUrl = `https://${project.domain}`
+	} else {
+		primaryUrl = getUrl(project.subdomain)
+	}
+	return primaryUrl
+}

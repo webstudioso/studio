@@ -1,32 +1,25 @@
 // action - state management
-import { LOGIN, LOGOUT, REGISTER } from './actions';
+import { LOGIN, LOGOUT } from './actions';
 
 // ==============================|| ACCOUNT REDUCER ||============================== //
 
 const accountReducer = (state, action) => {
     switch (action.type) {
-        case REGISTER: {
-            const { user } = action.payload;
-            return {
-                ...state,
-                user
-            };
-        }
         case LOGIN: {
-            const { user } = action.payload;
+            const { user, principal, projects } = action.payload;
             return {
                 ...state,
-                isLoggedIn: true,
-                isInitialized: true,
-                user
+                user,
+                principal,
+                projects
             };
         }
         case LOGOUT: {
             return {
                 ...state,
-                isInitialized: true,
-                isLoggedIn: false,
-                user: null
+                principal: null,
+                user: null,
+                projects: null
             };
         }
         default: {

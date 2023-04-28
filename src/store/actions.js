@@ -59,3 +59,7 @@ export const CLEAR_APP = '@app/CLEAR_APP';
 
 // action - loader
 export const LOADER = '@loader/SHOW';
+
+// action - editor
+export const SET_EDITOR = '@editor/SET_EDITOR';
+export const SET_PROJECT = '@editor/SET_PROJECT';
