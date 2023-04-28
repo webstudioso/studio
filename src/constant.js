@@ -43,7 +43,8 @@ const constants = {
 		MEDIA: 'MEDIA',
 		DASHBOARD: 'DASHBOARD',
 		NEW_TITLE: 'NEW_TITLE',
-		DASHBOARD_TITLE: 'DASHBOARD_TITLE'
+		DASHBOARD_TITLE: 'DASHBOARD_TITLE',
+		HELP: 'HELP'
 	},
 	SIDEPANEL: {
 		TITLE: {
@@ -78,7 +79,8 @@ const constants = {
 		PUBLISH: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
 		MEDIA: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
 		DASHBOARD: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
-		NEW_TITLE: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08'
+		NEW_TITLE: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
+		HELP: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08'
 	},
 	EVENTS: {
 		CLOSE_DELAY: 'addCloseDelay',

@@ -14,6 +14,7 @@ import HtmlTooltip from './HtmlTooltip'
 import constants from 'constant'
 import Modal from 'views/templates'
 import TooltipFragment from 'views/builder/TooltipFragment'
+import HelpButton from './HelpButton'
 const { SECTION, PATH, EVENTS, REPO_URL } = constants
 
 const EditorView = () => {
@@ -131,6 +132,19 @@ const EditorView = () => {
 										</IconButton>
 									</HtmlTooltip>
 								</Grid>
+
+								<Grid item xs={12}>
+									<HtmlTooltip title={<TooltipFragment section={SECTION.MEDIA} />} placement="right-start">
+										<IconButton color="primary" size="large" onClick={() => handleOpenSidePanel(openCategory !== SECTION.MEDIA ? SECTION.MEDIA : null)}>
+											<IconPhoto />
+										</IconButton>
+									</HtmlTooltip>
+								</Grid>
+
+								<Grid item xs={12}>
+									<HelpButton />
+								</Grid>
+
 							</Grid>
 						</Grid>
 						<Grid item xs sx={{ py: '15px', px: '30px'}}>
