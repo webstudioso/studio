@@ -155,8 +155,9 @@ html, body {
 .bg-container { 
     background: url(../images/bg.jpg);
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-position: center;
+    max-width: 100%;
 }
 
 .signin {
