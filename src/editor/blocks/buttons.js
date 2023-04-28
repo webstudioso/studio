@@ -60,7 +60,7 @@ const Plugin = (editor) => {
         const id = `button-type-${index}`
         const block = { 
             category: 'Button',
-            media: `<button class="${classes}">I am a button</button>`,
+            media: `<a class="${classes}">I am a button</a>`,
             content: { 
                 type: 'button', 
                 text: 'I am a button',

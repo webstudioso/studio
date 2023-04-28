@@ -69,7 +69,7 @@ const Projects = () => {
 
 
 	return (
-		<Container sx={{ py: '15vh' }} className="fade-in">
+		<Box sx={{ py: '15vh' }} className="fade-in bg-container">
 			<Box sx={{ px: '10vw' }}>
 				<Grid item>
 					<Stack
@@ -106,7 +106,7 @@ const Projects = () => {
 				))}
 			</Grid>
 			</Box>
-		</Container>
+		</Box>
 	);
 };
 

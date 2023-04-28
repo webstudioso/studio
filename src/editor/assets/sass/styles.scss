@@ -17,6 +17,11 @@ $quaternaryColor: #605ed8;
     vertical-align: unset;
 }
 
+.gjs-block__media {
+    min-width: 20vw;
+    // min-height: 70px;
+}
+
 .gjs-clm-tag {
     background: $quaternaryColor;
     color:white;

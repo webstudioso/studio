@@ -70,13 +70,12 @@ const Login = () => {
 
 	return (
 		<Box className="signin">
-			<Box textAlign="center" className="container fade-in">
-				<Typography variant="body" className="title-text">
-					<strong>Webstudio</strong>
-					<Chip size="small" label="BETA" color="secondary" sx={{ px:1, ml: 1 }} />
+			<Box textAlign="center" className="container fade-in bg-container">
+				<Typography variant="body" className="super-title-text">
+					Webstudio
+				<Chip size="small" variant="contained" label='BETA' color="secondary" sx={{ ml: 1 }}/>
 				</Typography>
-				<LinearProgress className="progress" />
-				<Typography fontSize={16}>Version {process.env.REACT_APP_VERSION}</Typography>
+				<LinearProgress color="primary" className="progress" />
 			</Box>
 		</Box>
 	)

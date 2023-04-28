@@ -7,3 +7,4 @@ firebase*
 *pem
 .firebase*
 .eslintcache
+.DS_Store

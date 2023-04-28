@@ -15,6 +15,7 @@ import TextBlocks from '../blocks/text'
 import ImageBlocks from '../blocks/images'
 import VideoBlocks from '../blocks/video'
 import ButtonBlocks from '../blocks/buttons'
+import ToastBlocks from '../blocks/toast'
 
 // Primitives
 import WSMBasic from 'wsm-basic'
@@ -87,7 +88,8 @@ const Editor = ({ project, principal }) => {
         VideoBlocks,
         WSMForm,
         WSMWalletConnect,
-        WSMToast,
+        // WSMToast,
+        ToastBlocks
       ],
       pluginsOpts: {},
       canvas: {

@@ -35,11 +35,10 @@ const DraggableDialog = ({ open, handleClose, editor }) => {
             <Typography className="title-text">
                 <span style={{ 
                     background: '#7572F9', 
-                    padding: '5px', 
-                    border: '1px solid #2A3EB1',
+                    padding: '3px 6px',
                     borderRadius: '4px',
                     color: 'white',
-                    marginRight: '5px'
+                    marginRight: '8px'
                 }}>{editor?.getSelected()?.attributes?.tagName}</span>
                 Configuration
             </Typography>
