@@ -132,15 +132,6 @@ const EditorView = () => {
 										</IconButton>
 									</HtmlTooltip>
 								</Grid>
-
-								<Grid item xs={12}>
-									<HtmlTooltip title={<TooltipFragment section={SECTION.MEDIA} />} placement="right-start">
-										<IconButton color="primary" size="large" onClick={() => handleOpenSidePanel(openCategory !== SECTION.MEDIA ? SECTION.MEDIA : null)}>
-											<IconPhoto />
-										</IconButton>
-									</HtmlTooltip>
-								</Grid>
-
 								<Grid item xs={12}>
 									<HelpButton />
 								</Grid>
