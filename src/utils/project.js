@@ -19,7 +19,7 @@ export const getProjectUrl = ({ project }) => {
 
 export const getDefaultMetadataForProject = ({ project }) => {
 	const icon = 'https://i.ibb.co/t88r0BM/logo.png'
-	const banner = 'https://i.ibb.co/7t5YFtj/Banner-New.png'
+	const banner = 'https://i.ibb.co/Jn4xKgR/Banner-New-Regular-White.png'
 	const name = project.name
 	const url = getPrimaryUrl(project)
 	const metadata = {
