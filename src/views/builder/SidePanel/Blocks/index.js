@@ -1,7 +1,5 @@
-import { useState, useEffect, useRef } from 'react'
-import draganddrop from 'assets/images/draganddrop.jpg'
+import { useState, useEffect, useRef, memo } from 'react'
 import {
-    Box,
     Grid,
     Typography
 } from '@mui/material'
@@ -10,7 +8,7 @@ import { gridSpacing } from 'store/constant'
 const Blocks = ({ onLeave, editor }) => {
     const ref = useRef(null)
     const [categories, setCategories] = useState([])
-    const [filter, setFilter] = useState()
+    const [filter, setFilter] = useState('Text')
 
     const handleToggle = () => {
         const categoryList = editor.Blocks.getCategories().models.map((category) => category.attributes)
@@ -73,15 +71,10 @@ const Blocks = ({ onLeave, editor }) => {
                 borderTop: '1px solid #dfe5eb',
             }}>
                 <Grid container spacing={gridSpacing} sx={{ p: 0, m: 0, width: '100%' }} ref={ref}>
-                    {!filter && (
-                    <Box sx={{ mx: '10px', p: '5px' }} textAlign="center" justifyContent="center">
-                        <img src={draganddrop} width="100%" height="auto" alt="Drag and drop into the canvas" />
-                        <Typography fontSize={16} color="black">Select a component 👈 and drag it to the canvas 👉</Typography>
-                    </Box>)}
                 </Grid>
             </Grid>
         </Grid>
     )
 }
 
-export default Blocks
+export default memo(Blocks)

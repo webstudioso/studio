@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import { Box, Grid, Paper, Button, Typography, CircularProgress, Chip } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { useDispatch, useSelector } from 'react-redux'
@@ -60,22 +60,17 @@ const Templates = ({ onLeave, fullScreen=false }) => {
                 }}
                 className="overlay"
                 >
-                    <Button elevation={0} 
+                    <Button 
                             onClick={() => onHandleSelectTemplate(template)}
-                            variant="contained"
                             disabled={isLoading}
                             sx={{
-                                boxShadow: 'none',
-                                '&:hover': {
-                                    boxShadow: 'none',
-                                },
                                 borderRadius: '50px',
                                 position: 'absolute',
                                 top: '35%',
                                 left: '25%',
                                 width: '50%'
                             }}
-                            className="primary-color"
+                            className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-full text-sm px-5 py-3 text-center mr-2 mb-2"
                     >
                         PICK
                         {spinner}
@@ -125,4 +120,4 @@ const Templates = ({ onLeave, fullScreen=false }) => {
     )
 }
 
-export default Templates
+export default memo(Templates)

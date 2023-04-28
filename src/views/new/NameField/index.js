@@ -97,7 +97,7 @@ const NameField = ({ principal }) => {
 		}
 	}
 
-	const urlTooltip = "Your project's globally unique subdomain, used as your URL. You cannot change your project subdomain after project creation"
+	const urlTooltip = "Your app's globally unique subdomain, used as your URL. You cannot change your app subdomain after creation"
 
 	return (
 		<Grid

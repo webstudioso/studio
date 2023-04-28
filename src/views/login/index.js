@@ -73,7 +73,12 @@ const Login = () => {
 			<Box textAlign="center" className="container fade-in bg-container">
 				<Typography variant="body" className="super-title-text">
 					Webstudio
-				<Chip size="small" variant="contained" label='BETA' color="secondary" sx={{ ml: 1 }}/>
+				<Chip 	size="small" 
+						variant="contained" 
+						label='BETA' 
+						className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-full text-sm py-3 text-center"
+						sx={{ ml: 1 }}
+				/>
 				</Typography>
 				<LinearProgress color="primary" className="progress" />
 			</Box>
