@@ -90,13 +90,13 @@ const Plugin = (editor) => {
   };
 
   const block = {
-    id: `section-${process.env.MODULE_ID}`,
+    id: `section-${id}`,
     media: `
         <a class="text-sm focus:outline-none border-r-8 font-medium bg-white drop-shadow-lg px-5 py-2 mr-2 border-green-600">This is an event notification!</a>
     `,
     category: "Toast",
     content: `
-      <div id="${process.env.MODULE_ID}" class="hidden fixed right-10 bottom-10 px-5 py-4 border-r-8 bg-white drop-shadow-lg">
+      <div id="${id}" class="hidden fixed right-10 bottom-10 px-5 py-4 border-r-8 bg-white drop-shadow-lg">
           <p class="text-sm">
               Content goes here
           </p>
@@ -105,7 +105,7 @@ const Plugin = (editor) => {
   };
 
   const properties = {
-    isComponent: (el) => el.id === process.env.MODULE_ID,
+    isComponent: (el) => el.id === id,
     model: {
       defaults: {
         script
