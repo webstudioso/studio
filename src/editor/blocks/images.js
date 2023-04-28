@@ -7,8 +7,7 @@ const Plugin = (editor) => {
         label: 'Original',
         media: `<img src="${src}"/>`, 
         content: { 
-            type: 'image', 
-            content: `<img src="${src}"/>`,
+            type: 'image',
             src
         }
     })
@@ -17,8 +16,7 @@ const Plugin = (editor) => {
         label: 'Grayscale',
         media: `<img class='grayscale' src="${src}"/>`, 
         content: { 
-            type: 'image', 
-            content: `<img src="${src}"/>`,
+            type: 'image',
             classes: ['grayscale'],
             src
         }
@@ -28,8 +26,7 @@ const Plugin = (editor) => {
         label: 'Inverted',
         media: `<img class='invert' src="${src}"/>`, 
         content: { 
-            type: 'image', 
-            content: `<img src="${src}"/>`,
+            type: 'image',
             classes: ['invert'],
             src
         }
@@ -39,8 +36,7 @@ const Plugin = (editor) => {
         label: 'Sepia',
         media: `<img class='sepia' src="${src}"/>`, 
         content: { 
-            type: 'image', 
-            content: `<img src="${src}"/>`,
+            type: 'image',
             classes: ['sepia'],
             src
         }
@@ -50,8 +46,7 @@ const Plugin = (editor) => {
         label: 'Blurred',
         media: `<img class='blur-sm' src="${src}"/>`, 
         content: { 
-            type: 'image', 
-            content: `<img src="${src}"/>`,
+            type: 'image',
             classes: ['blur-sm'],
             src
         }
