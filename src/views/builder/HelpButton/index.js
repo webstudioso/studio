@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { Button, Typography, IconButton } from '@mui/material'
-import { IconHelp, IconInfoCircle, IconMessageCircle } from '@tabler/icons'
+import { IconHelp, IconInfoCircle } from '@tabler/icons'
 import HtmlTooltip from '../HtmlTooltip'
 import constants from 'constant'
 
