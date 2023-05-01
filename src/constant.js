@@ -1,6 +1,5 @@
 const constants = {
 	SESSION_DURATION_SEC: '21600', // 6 hours
-	REPO_URL: 'https://github.com/webstudioso/studio',
 	ANALYTICS: {
 		CREATE_PROJECT: "project_create",
 		PUBLISH_PROJECT: "project_publish",

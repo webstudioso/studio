@@ -4,6 +4,7 @@ import { Paper, Grid, Typography, Box, Button, IconButton } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { LOADER, SET_PROJECT } from 'store/actions'
 import { truncate } from 'utils/format'
+import { forgetMemoProject, memoProject } from 'utils/project'
 import { deleteProject } from 'api/project'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 
@@ -15,6 +16,7 @@ const Card = ({ project, principal }) => {
 
 	const selectProject = () => {
 		dispatch({ type: SET_PROJECT, project })
+		memoProject(project)
 		navigate(`/e/${project?.id}`)
 	}
 
@@ -27,6 +29,7 @@ const Card = ({ project, principal }) => {
 	const handleDelete = async () => {
 		dispatch({ type: LOADER, show: true })
 		await deleteProject({ projectId: project.id, principal})
+		forgetMemoProject()
 		dispatch({ type: LOADER, show: false })
 		navigate(`/`)
 	}

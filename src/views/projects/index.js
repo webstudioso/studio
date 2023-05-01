@@ -1,29 +1,48 @@
 import { useState } from 'react'
-import { Typography, Grid, Box, Paper, Stack, IconButton } from '@mui/material'
+import { Typography, Grid, Box, Paper, Stack, IconButton, Dialog, TextField, Button, DialogContent, DialogActions } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Magic } from 'magic-sdk'
+import { AddCircle as AddCircleIcon, People as PeopleIcon, Logout as LogoutIcon} from '@mui/icons-material'
+import { forgetMemoProject, memoProject } from 'utils/project'
+import { getProjectById } from 'api/project'
+import { SET_PROJECT } from 'store/actions'
 import InfoButton from 'views/builder/InfoButton'
-import AddCircleIcon from '@mui/icons-material/AddCircle'
-import LogoutIcon from '@mui/icons-material/Logout';
 import Card from 'views/projects/Card'
 import constants from 'constant'
 import Logo from 'common/Logo'
+import { showError } from 'utils/snackbar'
 
 const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY)
 
 const { SECTION } = constants
 
 const Projects = () => {
-	const [selected, setSelected] = useState();
-	const navigate = useNavigate();
-	const theme = useTheme();
+	const [selected, setSelected] = useState()
+	const [invitedProject, setInvitedProject] = useState()
+	const [openGuest, setOpenGuest] = useState(false)
+	const navigate = useNavigate()
+	const dispatch = useDispatch()
+	const theme = useTheme()
 	const account = useSelector((state) => state.account)
 	
 	const logout = async () => {
 		await m.user.logout()
+		forgetMemoProject()
 		navigate('/')
+	}
+
+	const addExistingProject = async () => {
+		const guestProject = await getProjectById({ principal: account.principal, projectId: invitedProject })
+		if (guestProject?.id) {
+			dispatch({ type: SET_PROJECT, project: guestProject })
+			memoProject(guestProject)
+			navigate(`/e/${guestProject?.id}`)
+		} else {
+			const error = 'You do not have access to this project'
+			showError({ dispatch, error})
+		}
 	}
 
 	const newCard = (
@@ -65,7 +84,7 @@ const Projects = () => {
 				</Paper>
 			</Box>
 		</Grid>
-	);
+	)
 
 
 	return (
@@ -90,6 +109,11 @@ const Projects = () => {
 						</Box>
 						<Box flexGrow={1}></Box>
 						<Box display="flex" alignItems="center">
+							<IconButton color="primary" onClick={() => setOpenGuest(true)}>
+								<PeopleIcon />
+							</IconButton>
+						</Box>
+						<Box display="flex" alignItems="center">
 							<IconButton color="primary" onClick={logout}>
 								<LogoutIcon />
 							</IconButton>
@@ -106,6 +130,23 @@ const Projects = () => {
 				))}
 			</Grid>
 			</Box>
+			<Dialog open={openGuest} onClose={() => setOpenGuest(false)}>
+				<DialogContent>
+					<TextField autoFocus margin="dense" id="name" label="Type project id" type="text"
+						fullWidth
+						sx={{ minWidth: 300 }}
+						size="large"
+						variant="standard"
+						defaultValue={invitedProject}
+						onChange={(e) => {
+							setInvitedProject(e.target.value)
+						}}
+					/>
+				</DialogContent>
+				<DialogActions sx={{ px: 3 }}>
+					<Button variant="outlined" color="primary" onClick={addExistingProject}>Add</Button>
+				</DialogActions>
+			</Dialog>
 		</Box>
 	);
 };

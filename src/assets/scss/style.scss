@@ -152,6 +152,42 @@ html, body {
     font-size: 28px;
 }
 
+.MuiFab-root {
+    background: black;
+    color: white;
+}
+
+.online-signal {
+    background: #07AD14;
+    border-radius: 50%;
+    height: 10px;
+    width:10px;
+    margin: 0px 8px;
+}
+
+.offline-signal {
+    background: #d83c3c;
+    border-radius: 50%;
+    height: 10px;
+    width:10px;
+    margin: 0px 8px;
+}
+
+.MuiFab-root:hover {
+    background: white;
+    color: black;
+}
+
+.fab {
+    margin: 0px;
+    top: auto;
+    right: 20px;
+    bottom: 20px;
+    left: auto;
+    position: fixed;
+    background: red;
+};
+
 .bg-container { 
     background: url(../images/bg.jpg);
     background-size: cover;

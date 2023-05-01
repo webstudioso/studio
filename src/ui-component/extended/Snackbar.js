@@ -86,15 +86,13 @@ const Snackbar = () => {
                     anchorOrigin={snackbarInitial.anchorOrigin}
                     open={open}
                     autoHideDuration={6000}
+                    sx={{
+                        top: '5px !important'
+                    }}
                     onClose={(e, v) => handleClose(v)}
                 >
                     <Alert
-                        variant="filled"
                         severity={snackbarInitial.alertSeverity}
-                        sx={{
-                            bgcolor: `${snackbarInitial.alertSeverity}.dark`,
-                            color: snackbarInitial.alertSeverity === 'warning' ? 'grey.800' : ''
-                        }}
                         action={
                             <>
                                 {snackbarInitial.actionButton !== false && (
@@ -102,7 +100,7 @@ const Snackbar = () => {
                                         UNDO
                                     </Button>
                                 )}
-                                {snackbarInitial.close !== false && (
+                                {snackbarInitial.close !== false && snackbarInitial.alertSeverity !== 'success' && (
                                     <IconButton size="small" aria-label="close" color="inherit" onClick={() => handleClose()}>
                                         <CloseIcon fontSize="small" />
                                     </IconButton>
