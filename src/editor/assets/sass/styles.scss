@@ -13,6 +13,10 @@ $quaternaryColor: #605ed8;
 @import 'material-icons/iconfont/material-icons.scss';
 @import 'grapesjs/src/styles/scss/main.scss';
 
+#gjs {
+    height: calc(100vh - 70px) !important;
+}
+
 .gjs-clm-tag-status svg, .gjs-clm-tag-close svg {
     vertical-align: unset;
 }
