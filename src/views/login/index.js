@@ -1,12 +1,13 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Box, Typography, LinearProgress, Chip } from '@mui/material'
 import { Magic } from 'magic-sdk'
 import { getUrl } from 'utils/url'
 import { showError } from 'utils/snackbar'
-import { LOGIN } from 'store/actions'
+import { LOGIN, SET_PROJECT } from 'store/actions'
 import { getAllProjects } from 'api/project'
+import { getMemoedProject } from 'utils/project'
 import { trackEvent } from 'utils/analytics'
 import constants from 'constant'
 const { SESSION_DURATION_SEC } = constants
@@ -15,6 +16,7 @@ const { PATH, ANALYTICS } = constants
 const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY)
 
 const Login = () => {
+	const [existingProject] = useState(getMemoedProject())
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 
@@ -36,7 +38,12 @@ const Login = () => {
 			dispatch({ type: LOGIN, payload: { user , principal, projects }})
 			if (projects && projects.length > 0) {
 				// Has some projects created
-				navigate(PATH.ADMIN)
+				if (existingProject) {
+					dispatch({ type: SET_PROJECT, project: existingProject })
+					navigate(`/e/${existingProject?.id}`)
+				} else {
+					navigate(PATH.ADMIN)
+				}
 			} else {
 				// No projects yet created
 				navigate(PATH.CREATE)
