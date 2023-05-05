@@ -80,7 +80,7 @@ const Chat = ({ editor }) => {
             data: message
         }
         setLastMessage(thisMessage)
-        ws.send(message)
+        ws.send({ action: "message", data: message })
         trackEvent({ name: ANALYTICS.AI_PROMPT, params: { message } })
     }
 
