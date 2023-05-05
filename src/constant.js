@@ -3,7 +3,8 @@ const constants = {
 	ANALYTICS: {
 		CREATE_PROJECT: "project_create",
 		PUBLISH_PROJECT: "project_publish",
-		VIEW_PAGE: "page_view"
+		VIEW_PAGE: "page_view",
+		AI_PROMPT: "prompt_ai"
 	},
 	AUTH: {
 		MAGIC_LINK: "magicLink",

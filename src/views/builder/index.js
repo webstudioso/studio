@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
-// import { useTheme } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 import { useNavigate, Link as RouterLink } from 'react-router-dom'
 import { Grid, Box, AppBar, Toolbar, Typography, IconButton, Button } from '@mui/material'
 import { IconSettings, IconPlus, IconFiles, IconTemplate, IconPhoto } from '@tabler/icons'
@@ -16,11 +16,12 @@ import constants from 'constant'
 import Modal from 'views/templates'
 import TooltipFragment from 'views/builder/TooltipFragment'
 import HelpButton from './HelpButton'
-// import Chat from './Chat'
+import Chat from './Chat'
+
 const { SECTION, PATH, EVENTS } = constants
 
 const EditorView = () => {
-	// const theme = useTheme()
+	const theme = useTheme()
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const [openDialog, setOpenDialog] = useState(false)
@@ -158,7 +159,7 @@ const EditorView = () => {
 					editor={editor} 
 					principal={account.principal}
 			/>
-			{/* {editor && <Chat theme={theme} editor={editor}/> } */}
+			{editor && <Chat theme={theme} editor={editor}/> }
 			<DraggableDialog open={openDialog} editor={editor} handleClose={() => setOpenDialog(false)}></DraggableDialog>
 		</>
 	)

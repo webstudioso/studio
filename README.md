@@ -33,7 +33,7 @@ REACT_APP_MORALIS_API_KEY=<Create a Morali app and use the api key>
 REACT_APP_WEBSTUDIO_API_URL=<Request us access through discord for this one>
 REACT_APP_INFURA_KEY=<Create an infura project and use the key>
 REACT_APP_MAGIC_API_KEY=<Create a magic link project and use the sk key>
-REACT_APP_AI_URL=<websocker url of AI assistant>
+REACT_APP_WEBSTUDIO_WS_API=<websocker url of AI assistant>
 ```
 
 ### 3. Install dependencies
