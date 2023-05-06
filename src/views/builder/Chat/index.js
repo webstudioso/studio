@@ -35,7 +35,7 @@ const Chat = ({ editor }) => {
     const initializeSocket = () => {
         if (!ws || ws?.readyState === WebSocket.CLOSED) {
             ws = new WebSocket(process.env.REACT_APP_WEBSTUDIO_WS_API);
-
+            console.log("connected to ",process.env.REACT_APP_WEBSTUDIO_WS_API)
             ws.onopen = () => setConnected(true)
             ws.onclose = () => setConnected(false)
             ws.onmessage = (event) => {
@@ -80,7 +80,8 @@ const Chat = ({ editor }) => {
             data: message
         }
         setLastMessage(thisMessage)
-        ws.send({ action: "message", data: message })
+        const payload = { action: "message", data: message }
+        ws.send(JSON.stringify(payload))
         trackEvent({ name: ANALYTICS.AI_PROMPT, params: { message } })
     }
 
