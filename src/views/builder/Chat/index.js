@@ -7,6 +7,10 @@ import ReactMarkdown from "react-markdown"
 import rehypeRaw from 'rehype-raw'
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 import {dark} from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { trackEvent } from 'utils/analytics'
+import constants from 'constant'
+
+const { ANALYTICS } = constants
 
 let ws
 
@@ -30,8 +34,8 @@ const Chat = ({ editor }) => {
 
     const initializeSocket = () => {
         if (!ws || ws?.readyState === WebSocket.CLOSED) {
-            ws = new WebSocket(process.env.REACT_APP_AI_URL);
-
+            ws = new WebSocket(process.env.REACT_APP_WEBSTUDIO_WS_API);
+            console.log("connected to ",process.env.REACT_APP_WEBSTUDIO_WS_API)
             ws.onopen = () => setConnected(true)
             ws.onclose = () => setConnected(false)
             ws.onmessage = (event) => {
@@ -76,7 +80,9 @@ const Chat = ({ editor }) => {
             data: message
         }
         setLastMessage(thisMessage)
-        ws.send(message)
+        const payload = { action: "message", data: message }
+        ws.send(JSON.stringify(payload))
+        trackEvent({ name: ANALYTICS.AI_PROMPT, params: { message } })
     }
 
     const keyPress = (e) => {
