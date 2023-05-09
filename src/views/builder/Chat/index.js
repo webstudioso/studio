@@ -40,6 +40,7 @@ const Chat = ({ editor }) => {
             ws.onclose = () => setConnected(false)
             ws.onmessage = (event) => {
                 const received = JSON.parse(event.data)
+                console.log(`Received ${received}`)
                 if (received.text)
                     setLastMessage({
                         self: false,
