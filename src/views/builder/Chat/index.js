@@ -76,6 +76,9 @@ const Chat = ({ editor }) => {
         scrollBottom()
     }, [messageList])
 
+    useEffect(() => {
+        console.log(`New target selected ${target}`)
+    }, [target])
 
     const sendMessage = () => {
         setMessage('')
