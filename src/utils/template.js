@@ -18,12 +18,12 @@ export const isHTMLTemplate = (inputs) => {
 
 // This is a layout, or multiple html components within body, to append.
 export const isHTMLSegment = (inputs) => {
-    const closures = (inputs[0].match(/\<\//g) || []).length
+    const closures = (inputs[0].match(/<\//g) || []).length
     return closures > 1 && !isHTMLTemplate(inputs)
 }
 
 // This is single component, could be to add or to apply classes to selected component.
 export const isHTMLComponent = (inputs) => {
-    const closures = (inputs[0].match(/\<\//g) || []).length
+    const closures = (inputs[0].match(/<\//g) || []).length
     return closures <= 1 && !isHTMLTemplate(inputs)
 }

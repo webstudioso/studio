@@ -12,7 +12,7 @@ import { getTemplateBodyContentFromString, getClassesFromSnippet, isHTMLComponen
 const { ANALYTICS } = constants
 
 let ws
-const actionStyle = "text-white bg-gray-800 hover:bg-gray-900 focus:outline-none my-2 focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-xs px-2 py-1 mr-1 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+const actionStyle = "text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 rounded-full text-xs px-2 py-1 mr-1"
 
 const Chat = ({ editor }) => {
     const ref = useRef()
@@ -39,13 +39,12 @@ const Chat = ({ editor }) => {
             ws.onopen = () => setConnected(true)
             ws.onclose = () => setConnected(false)
             ws.onmessage = (event) => {
-                console.log(event)
                 const received = JSON.parse(event.data)
-                console.log(received)
-                setLastMessage({
-                    self: false,
-                    ...received
-                })
+                if (received.text)
+                    setLastMessage({
+                        self: false,
+                        ...received
+                    })
             }
 
         }
@@ -133,7 +132,10 @@ const Chat = ({ editor }) => {
         </Paper>
     )
 
-    const addTooltip = 'Select a component in the canvas and click on this code to apply it'
+    const addTooltip = 'Adds this element before the currently selected element in the canvas'
+    const styleTooltip = 'Paste only styles to the currently selected element in the canvas'
+    const templateTooltip = 'Completely replace existing page with this new template'
+
     return (
         <><Box>
     <Paper
@@ -179,42 +181,50 @@ const Chat = ({ editor }) => {
                                             
                                             return isHTMLTemplate(children) ?
                                                 (
-                                                    <Button color="secondary" 
-                                                            variant="contained" 
-                                                            onClick={() => replaceTemplate(children)}
-                                                            size="small"
-                                                            className={actionStyle}>
-                                                        Replace Template
-                                                    </Button>
+                                                    <Tooltip title={replaceTemplate}>
+                                                        <Button color="secondary" 
+                                                                variant="contained" 
+                                                                onClick={() => replaceTemplate(children)}
+                                                                size="small"
+                                                                className={actionStyle}>
+                                                            Replace Template
+                                                        </Button>
+                                                    </Tooltip>
                                                 ) :
                                                     isHTMLSegment(children) ?
                                                 (
-                                                    <Button color="secondary" 
-                                                            variant="contained" 
-                                                            onClick={() => appendToCanvas(children[0])}
-                                                            size="small"
-                                                            className={actionStyle}>
-                                                        Add to Canvas
-                                                    </Button>
+                                                    <Tooltip title={addTooltip}>
+                                                        <Button color="secondary" 
+                                                                variant="contained" 
+                                                                onClick={() => appendToCanvas(children[0])}
+                                                                size="small"
+                                                                className={actionStyle}>
+                                                            Add to Canvas
+                                                        </Button>
+                                                    </Tooltip>
                                                 ) :
                                                     isHTMLComponent(children) ?
                                                 (
                                                     <div>
-                                                    <Button color="secondary" 
-                                                            variant="contained" 
-                                                            onClick={() => appendToCanvas(children[0])}
-                                                            size="small"
-                                                            className={actionStyle}>
-                                                        Add to Canvas
-                                                    </Button>
-                                                    <Button color="secondary" 
-                                                            variant="contained" 
-                                                            disabled={!target}
-                                                            onClick={() => replaceStyles(children)}
-                                                            size="small"
-                                                            className={actionStyle}>
-                                                        Paste Styles
-                                                    </Button>
+                                                        <Tooltip title={addTooltip}>
+                                                            <Button color="secondary" 
+                                                                    variant="contained" 
+                                                                    onClick={() => appendToCanvas(children[0])}
+                                                                    size="small"
+                                                                    className={actionStyle}>
+                                                                Add to Canvas
+                                                            </Button>
+                                                        </Tooltip>
+                                                        <Tooltip title={styleTooltip}>
+                                                            <Button color="secondary" 
+                                                                    variant="contained" 
+                                                                    disabled={!target}
+                                                                    onClick={() => replaceStyles(children)}
+                                                                    size="small"
+                                                                    className={actionStyle}>
+                                                                Paste Styles
+                                                            </Button>
+                                                        </Tooltip>
                                                     </div>
                                                 ) : 
                                                 "Not supported"
