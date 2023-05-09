@@ -1,18 +1,18 @@
 import { useState, useEffect, useRef } from 'react'
-import { Paper, Box, TextField, Fab, InputAdornment, Typography, IconButton, Stack, Tooltip } from '@mui/material'
+import { Paper, Box, TextField, Fab, InputAdornment, Typography, IconButton, Stack, Tooltip, Button } from '@mui/material'
 import RateReviewIcon from '@mui/icons-material/RateReview'
 import CloseIcon from '@mui/icons-material/Close'
 import SendIcon from '@mui/icons-material/Send'
 import ReactMarkdown from "react-markdown"
 import rehypeRaw from 'rehype-raw'
-import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
-import {dark} from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { trackEvent } from 'utils/analytics'
 import constants from 'constant'
+import { getTemplateBodyContentFromString, getClassesFromSnippet, isHTMLComponent, isHTMLSegment, isHTMLTemplate } from 'utils/template'
 
 const { ANALYTICS } = constants
 
 let ws
+const actionStyle = "text-white bg-gray-800 hover:bg-gray-900 focus:outline-none my-2 focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-xs px-2 py-1 mr-1 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
 
 const Chat = ({ editor }) => {
     const ref = useRef()
@@ -39,10 +39,12 @@ const Chat = ({ editor }) => {
             ws.onopen = () => setConnected(true)
             ws.onclose = () => setConnected(false)
             ws.onmessage = (event) => {
-                const json = event.data
+                console.log(event)
+                const received = JSON.parse(event.data)
+                console.log(received)
                 setLastMessage({
                     self: false,
-                    data: json
+                    ...received
                 })
             }
 
@@ -75,13 +77,17 @@ const Chat = ({ editor }) => {
 
     const sendMessage = () => {
         setMessage('')
+        const payload = { 
+            action: "message", 
+            text: message, 
+            parentMessageId: lastMessage?.parentMessageId
+        }
+        ws.send(JSON.stringify(payload))
         const thisMessage = {
             self: true,
-            data: message
+            text: message
         }
         setLastMessage(thisMessage)
-        const payload = { action: "message", data: message }
-        ws.send(JSON.stringify(payload))
         trackEvent({ name: ANALYTICS.AI_PROMPT, params: { message } })
     }
 
@@ -91,11 +97,41 @@ const Chat = ({ editor }) => {
         }
     }
 
-    const applyStyles = (classNames) => {
-        classNames.forEach((c) => {
+    const appendToCanvas = (element) => {
+        if (target) {
+            // Add before selected item
+            const collection = target?.collection
+            const index = target?.index()
+            const destination = index === 0 ? index : index-1
+            collection.add(element, {at: destination  })
+        } else {
+            // Add top of page
+            editor.getComponents().add(element, {at: 0  })
+        }
+    }
+
+    const replaceTemplate = (template) => {                                                   
+        const body = getTemplateBodyContentFromString(template)
+        editor.setComponents(body)  
+    }
+
+    const replaceStyles = (styles) => {
+        const classNames = getClassesFromSnippet(styles)
+        const cs = classNames.split(" ");
+        cs.forEach((c) => {
             target.addClass(`.${c}`)
         })
     }
+
+    const placeholderBubble = lastMessage?.self && (
+        <Paper  key={9001} elevation={0} className="studio-ai-bubble">
+            <div class="typing">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            </div>
+        </Paper>
+    )
 
     const addTooltip = 'Select a component in the canvas and click on this code to apply it'
     return (
@@ -135,42 +171,53 @@ const Chat = ({ editor }) => {
                     {connected && messageList && messageList?.map((m, index) => {
                         return (
                             <Paper  key={index} 
-                                    elevation={0} 
-                                    sx={{ 
-                                        p:2,  
-                                        my:1, 
-                                        borderRadius: m.self ? '24px 24px 24px 0px' : '24px 24px 0px 24px', 
-                                        background: m.self ? '#E6E7EC' : '#0085FF' , 
-                                        color: m.self ? '#555' : 'white', 
-                                        fontWeight:'bold',
-                                        fontSize:12,
-                                        mr: m.self ? 2 : 0,
-                                        ml: m.self ? 0 : 2
-                            }}>
-                                <ReactMarkdown  rehypePlugins={[rehypeRaw]} children={m.data}
+                                    elevation={0}
+                                    className={ m.self ? 'studio-ai-my-bubble' : 'studio-ai-bubble'}>
+                                <ReactMarkdown  rehypePlugins={[rehypeRaw]} children={m.text}
                                     components={{
                                         code({node, inline, className, children, ...props}) {
-                                        const match = /language-(\w+)/.exec(className || '')
-                                        return !inline && match ? (
-                                            <SyntaxHighlighter
-                                            {...props}
-                                            children={String(children).replace(/\n$/, '')}
-                                            style={dark}
-                                            language={match[1]}
-                                            PreTag="div"
-                                            />
-                                        ) : (
-                                            <Tooltip title={addTooltip}>
-                                                <code {...props} className={className} 
-                                                    style={{ 
-                                                        color: 'yellow', 
-                                                        cursor: 'pointer',
-                                                    }} 
-                                                    onClick={() => applyStyles(children)}>
-                                                {children}
-                                                </code>
-                                            </Tooltip>
-                                        )
+                                            
+                                            return isHTMLTemplate(children) ?
+                                                (
+                                                    <Button color="secondary" 
+                                                            variant="contained" 
+                                                            onClick={() => replaceTemplate(children)}
+                                                            size="small"
+                                                            className={actionStyle}>
+                                                        Replace Template
+                                                    </Button>
+                                                ) :
+                                                    isHTMLSegment(children) ?
+                                                (
+                                                    <Button color="secondary" 
+                                                            variant="contained" 
+                                                            onClick={() => appendToCanvas(children[0])}
+                                                            size="small"
+                                                            className={actionStyle}>
+                                                        Add to Canvas
+                                                    </Button>
+                                                ) :
+                                                    isHTMLComponent(children) ?
+                                                (
+                                                    <div>
+                                                    <Button color="secondary" 
+                                                            variant="contained" 
+                                                            onClick={() => appendToCanvas(children[0])}
+                                                            size="small"
+                                                            className={actionStyle}>
+                                                        Add to Canvas
+                                                    </Button>
+                                                    <Button color="secondary" 
+                                                            variant="contained" 
+                                                            disabled={!target}
+                                                            onClick={() => replaceStyles(children)}
+                                                            size="small"
+                                                            className={actionStyle}>
+                                                        Paste Styles
+                                                    </Button>
+                                                    </div>
+                                                ) : 
+                                                "Not supported"
                                         }
                                     }}
                                 ></ReactMarkdown>
@@ -187,6 +234,7 @@ const Chat = ({ editor }) => {
                             </Box>
                         )
                     }
+                    { placeholderBubble}
             </Box>
             <Box sx={{ px: 1 }}>
                 <TextField  fullWidth 
