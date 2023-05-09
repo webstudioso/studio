@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import { useTheme } from '@mui/material/styles'
-import { useNavigate, Link as RouterLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Grid, Box, AppBar, Toolbar, Typography, IconButton, Button } from '@mui/material'
 import { IconSettings, IconPlus, IconFiles, IconTemplate, IconPhoto } from '@tabler/icons'
 import { Editor } from 'editor'
 import { useDispatch, useSelector } from 'react-redux'
 import { UPDATE_APP } from 'store/actions'
+import { forgetMemoProject } from 'utils/project'
 import SidePanel from 'views/builder/SidePanel'
 import Logo from 'common/Logo'
 import PublishButton from './PublishButton'
@@ -71,8 +72,10 @@ const EditorView = () => {
 									<HtmlTooltip title={<TooltipFragment section={SECTION.DASHBOARD} />} placement="right-start">
 										<Button
 											color="inherit"
-											component={RouterLink}
-											to={PATH.ADMIN}
+											onClick={() => {
+												forgetMemoProject()
+												navigate(PATH.LOGIN)
+											}}
 										>
 											<Logo />
 										</Button>
