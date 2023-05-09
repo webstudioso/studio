@@ -12,7 +12,7 @@ import { getTemplateBodyContentFromString, getClassesFromSnippet, isHTMLComponen
 const { ANALYTICS } = constants
 
 let ws
-const actionStyle = "text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 rounded-full text-xs px-2 py-1 mr-1"
+const actionStyle = "text-black bg-white rounded-full text-xs px-2 py-1 mr-1 my-2"
 
 const Chat = ({ editor }) => {
     const ref = useRef()
@@ -135,6 +135,15 @@ const Chat = ({ editor }) => {
     const addTooltip = 'Adds this element before the currently selected element in the canvas'
     const styleTooltip = 'Paste only styles to the currently selected element in the canvas'
     const templateTooltip = 'Completely replace existing page with this new template'
+    const intro = (
+        <div>
+            <h3><strong>Hi, I'm Studio AI, your project assistant! Ask me anything:</strong></h3>
+            <br/><br/>
+            <i>"Create a template inspired in twitter with multiple sections"</i><br/><br/>
+            <i>"Create a new section to display 6 features with images, text and description"</i><br/><br/>
+            <i>"Make a gradient of 4 purple colors that look bright"</i><br/><br/><br/>
+        </div>
+    )
 
     return (
         <><Box>
@@ -168,8 +177,11 @@ const Chat = ({ editor }) => {
                 </Stack>
             </Box>
             <Box sx={{ height: 320, mb:1, p: 2, overflowY:'scroll' }} ref={ref} >
-                
-
+                    <Paper  key={10000} 
+                            elevation={0}
+                            className="studio-ai-bubble">
+                                {intro}
+                    </Paper>
                     {connected && messageList && messageList?.map((m, index) => {
                         return (
                             <Paper  key={index} 
@@ -181,7 +193,7 @@ const Chat = ({ editor }) => {
                                             
                                             return isHTMLTemplate(children) ?
                                                 (
-                                                    <Tooltip title={replaceTemplate}>
+                                                    <Tooltip title={templateTooltip}>
                                                         <Button color="secondary" 
                                                                 variant="contained" 
                                                                 onClick={() => replaceTemplate(children)}
