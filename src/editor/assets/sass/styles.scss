@@ -13,8 +13,27 @@ $quaternaryColor: #605ed8;
 @import 'material-icons/iconfont/material-icons.scss';
 @import 'grapesjs/src/styles/scss/main.scss';
 
-#gjs {
-    height: calc(100vh - 70px) !important;
+.ai-preview {
+    zoom: 0.12;
+    -moz-transform: scale(3);
+    -moz-transform-origin: 0 0;
+    border: 1px solid white;
+    margin: 150px 0px;
+    box-shadow: -10px -13px 50px rgb(255 255 255 / 0.5);
+}
+
+.gjs-preview {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 1203;
+    height: 100vh;
+}
+
+.gjs-no-preview {
+    position: relative;
+    z-index: 1200;
+    height: calc(100vh - 70px);
 }
 
 .gjs-clm-tag-status svg, .gjs-clm-tag-close svg {

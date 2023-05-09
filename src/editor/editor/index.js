@@ -147,16 +147,14 @@ const Editor = ({ project, principal }) => {
 
     editor.on("run:preview",() => {
       const ed = document.getElementById('gjs')
-      ed.style.position='fixed'
-      ed.style.left='0'
-      ed.style.top='0'
-      ed.style.zIndex='1203'
+      ed.classList.remove('gjs-no-preview')
+      ed.classList.add('gjs-preview')
     })
 
     editor.on("stop:preview", () => {
       const ed = document.getElementById('gjs')
-      ed.style.position='relative'
-      ed.style.zIndex='1200'
+      ed.classList.remove('gjs-preview')
+      ed.classList.add('gjs-no-preview')
     })
 
     dispatch({ type: SET_EDITOR, editor })
@@ -166,7 +164,7 @@ const Editor = ({ project, principal }) => {
     loadEditor()
   }, [])
 
-  return (<div id="gjs" />)
+  return (<div id="gjs" className="gjs-no-preview" />)
 }
 
 export default Editor

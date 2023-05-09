@@ -3,7 +3,7 @@
 ![Production Build](https://github.com/webstudioso/studio/actions/workflows/production_deploy.yml/badge.svg)
 ![Development Build](https://github.com/webstudioso/studio/actions/workflows/development_deploy.yml/badge.svg)
 
-# [Webstudio Studio](https://webstudio.so)
+# [Webstudio](https://webstudio.so)
 
 welcome to a new era of no-code for creatives, innovators and visionaries building on the New Internet. What required a team of developers, can now be done by you, through a visual drag and drop editor and carefully curated components to help you build and launch full stack web3 applications in minutes and without code.
 

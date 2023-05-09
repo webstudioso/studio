@@ -1,6 +1,6 @@
 {
     "name": "webstudio-app",
-    "version": "0.1.16",
+    "version": "0.1.17",
     "private": false,
     "dependencies": {
         "@auth0/auth0-spa-js": "^1.14.0",
@@ -17,7 +17,6 @@
         "axios-mock-adapter": "^1.19.0",
         "chance": "^1.1.7",
         "date-fns": "^2.21.1",
-        "firebase": "^8.10.1",
         "framer-motion": "^4.1.13",
         "grapesjs": "^0.19.5",
         "grapesjs-script-editor": "^1.0.3",
@@ -41,7 +40,6 @@
         "react-router-dom": "^6.0.0-beta.5",
         "react-scripts": "^5.0.1",
         "react-share": "^4.4.0",
-        "react-syntax-highlighter": "^15.5.0",
         "redux": "^4.0.5",
         "redux-persist": "^6.0.0",
         "rehype-raw": "^6.1.1",

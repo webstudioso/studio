@@ -30,6 +30,80 @@ html, body {
     }
 }
 
+
+// Studio AI Chat bubble waiting for response animation
+.typing {
+    align-items: center;
+    display: flex;
+    height: 17px;
+  }
+  .typing .dot {
+    animation: mercuryTypingAnimation 1.8s infinite ease-in-out;
+    background-color: #ffffff ; //rgba(20,105,69,.7);
+    border-radius: 50%;
+    height: 7px;
+    margin-right: 4px;
+    vertical-align: middle;
+    width: 7px;
+    display: inline-block;
+  }
+  .typing .dot:nth-child(1) {
+    animation-delay: 200ms;
+  }
+  .typing .dot:nth-child(2) {
+    animation-delay: 300ms;
+  }
+  .typing .dot:nth-child(3) {
+    animation-delay: 400ms;
+  }
+  .typing .dot:last-child {
+    margin-right: 0;
+  }
+  
+  @keyframes mercuryTypingAnimation {
+    0% {
+      transform: translateY(0px);
+      background-color:#ffffff; // rgba(20,105,69,.7);
+    }
+    28% {
+      transform: translateY(-7px);
+      background-color:#d3ebff; //rgba(20,105,69,.4);
+    }
+    44% {
+      transform: translateY(0px);
+      background-color: #93bcff; //rgba(20,105,69,.2);
+    }
+  }
+
+// ----------------------- END -----------------------------
+
+
+// Studio AI
+
+.studio-ai-my-bubble {
+    padding: 16px;
+    margin: 8px 8px 8px 0px;
+    border-radius: 24px 24px 24px 0px;
+    background: #E6E7EC; 
+    color: #555;
+    font-weight: bold;
+    font-size: 12px,
+}
+
+.studio-ai-bubble {
+    padding: 16px;
+    margin: 8px 0px 8px 8px;
+    border-radius: 24px 24px 0px 24px;
+    background: #0085FF;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+ 
+// ----------------------- END -----------------------------
+
+
+
 .primary-color {
     background-color: #7572F9 !important;
     color: white;
