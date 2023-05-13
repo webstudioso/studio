@@ -11,6 +11,15 @@ export const getUrl = (subdomain, templateId) => {
 	return `https://${subdomainPrefix}${environmentPrefix}webstudio.so${templatePrefix}`;
 };
 
+export const getUrlWithoutProtocol = (subdomain) => {
+	const environmentPrefix =
+		process.env.REACT_APP_HOST_ENV === "production"
+			? ""
+			: `${process.env.REACT_APP_HOST_ENV}.`;
+	const subdomainPrefix = subdomain ? `${subdomain}.` : "";
+	return `${subdomainPrefix}${environmentPrefix}webstudio.so`;
+};
+
 export const getEditorUrl = (appState) => {
 	// Studio or builder?
 	let url = "/studio/templates";
@@ -37,13 +46,3 @@ export const queryParams = () => {
 	const t = Math.floor(Math.random() * 100000);
 	return `?t=${t}`;
 };
-
-export const getPrimaryUrl = (project) => {
-	let primaryUrl
-	if (project.domain) {
-		primaryUrl = `https://${project.domain}`
-	} else {
-		primaryUrl = getUrl(project.subdomain)
-	}
-	return primaryUrl
-}

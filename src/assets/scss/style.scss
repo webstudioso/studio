@@ -78,6 +78,26 @@ html, body {
 // ----------------------- END -----------------------------
 
 
+// Dialog
+.MuiDialog-root {
+    z-index: 13000;
+}
+
+.MuiDialog-paper {
+    border-radius: 6px;
+}
+
+.MuiDialogTitle-root {
+    color: #0a0a0a;
+    font-weight: bolder;
+    font-size: 24px;
+}
+
+.MuiDialogContentText-root {
+    color: #2a2a2a;
+    font-size: 16px;
+}
+
 // Studio AI
 
 .studio-ai-my-bubble {
@@ -102,11 +122,14 @@ html, body {
  
 // ----------------------- END -----------------------------
 
-
-
 .primary-color {
     background-color: #7572F9 !important;
+    border: 1px solid #6e6ceb;
     color: white;
+}
+
+.primary-color:hover {
+    background-color: #4240d3 !important;
 }
 
 .selected-font {

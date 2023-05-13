@@ -41,3 +41,16 @@ export const publishMetadata = async({ id, principal, metadata }) => {
     )
     return meta?.data
 }
+
+export const getRoute = async ({ id, principal }) => {
+  const routing = await axios.get(`${process.env.REACT_APP_WEBSTUDIO_API_URL}/route/${id}`,
+    {
+      headers: {
+        "AuthorizeToken": `Bearer ${principal}`,
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      }
+    }
+  )
+  return routing?.data
+}
