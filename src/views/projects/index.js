@@ -13,6 +13,8 @@ import Card from 'views/projects/Card'
 import constants from 'constant'
 import Logo from 'common/Logo'
 import { showError } from 'utils/snackbar'
+import Membership from 'views/Membership'
+import { isUnlimited } from 'utils/subscription'
 
 const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY)
 
@@ -45,7 +47,7 @@ const Projects = () => {
 		}
 	}
 
-	const newCard = (
+	const newCard = isUnlimited() && (
 		<Grid item xs={12} sm={6} md={4} key={0}>
 			<Box>
 				<Paper
@@ -62,7 +64,9 @@ const Projects = () => {
 						border: '1px solid #eee !important'
 					}}
 					id="add-project-btn"
-					onClick={() => navigate("/n")}
+					onClick={() => {
+						navigate("/n")
+					}}
 					onMouseOver={() => setSelected("create")}
 					onMouseOut={() => setSelected()}
 					elevation={selected === "create" ? 5 : 1}
@@ -105,6 +109,7 @@ const Projects = () => {
 							<Typography variant="h2" className="title-text">
 								My Projects
 								<InfoButton section={SECTION.DASHBOARD_TITLE} />
+								<Membership />
 							</Typography>
 						</Box>
 						<Box flexGrow={1}></Box>
