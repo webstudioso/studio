@@ -1,4 +1,5 @@
 const constants = {
+	SUBSCRIPTION_PLAN: 'SUBSCRIPTION_PLAN',
 	SESSION_DURATION_SEC: '21600', // 6 hours
 	ANALYTICS: {
 		CREATE_PROJECT: "project_create",

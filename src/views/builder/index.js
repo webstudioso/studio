@@ -19,6 +19,7 @@ import TooltipFragment from 'views/builder/TooltipFragment'
 import HelpButton from './HelpButton'
 import Chat from './Chat'
 import PublishConfirmationDialog from './PublishConfirmationDialog'
+import Membership from 'views/Membership'
 
 const { SECTION, PATH, EVENTS } = constants
 
@@ -85,6 +86,7 @@ const EditorView = () => {
 										</Button>
 									</HtmlTooltip>
 									<strong>{project?.name}</strong>
+									<Membership />
 									{/* <strong>Webstudio</strong> */}
 								</Typography>
 								<Box flexGrow={1} display />
