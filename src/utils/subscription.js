@@ -6,7 +6,7 @@ export const getSubscriptionPlan = () => {
 }
 
 export const setSubscriptionPlan = (plan) => {
-    if (plan) {
+    if (plan && plan !== "undefined" && plan !== "null") {
         localStorage.setItem(SUBSCRIPTION_PLAN, plan)
     }
 }
