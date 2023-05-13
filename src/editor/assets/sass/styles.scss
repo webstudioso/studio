@@ -33,7 +33,7 @@ $quaternaryColor: #605ed8;
 .gjs-no-preview {
     position: relative;
     z-index: 1200;
-    height: calc(100vh - 70px);
+    height: calc(100vh - 70px) !important;
 }
 
 .gjs-clm-tag-status svg, .gjs-clm-tag-close svg {

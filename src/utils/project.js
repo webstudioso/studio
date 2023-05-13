@@ -1,4 +1,4 @@
-import { getPrimaryUrl, getUrl } from 'utils/url'
+import { getUrl } from 'utils/url'
 
 export const saveProject = async ({ project, provider, user }) => {
 	const Model = provider.Object.extend("Project")
@@ -13,7 +13,7 @@ export const saveProject = async ({ project, provider, user }) => {
 export const getProjectUrl = ({ project }) => {
 	const target = project || window.project
 	if (!target) return
-	const domain = target.custom ? `https://${target.custom}` : getUrl(target.subdomain)
+	const domain = target.domain ? `https://${target.domain}` : getUrl(target.subdomain)
 	return domain
 }
 
@@ -21,7 +21,7 @@ export const getDefaultMetadataForProject = ({ project }) => {
 	const icon = 'https://i.ibb.co/t88r0BM/logo.png'
 	const banner = 'https://i.ibb.co/Jn4xKgR/Banner-New-Regular-White.png'
 	const name = project.name
-	const url = getPrimaryUrl(project)
+	const url = getProjectUrl({ project })
 	const metadata = {
 		"icon": icon,							// link rel
 		"title": name, 							// name, content

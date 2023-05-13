@@ -18,6 +18,7 @@ import Modal from 'views/templates'
 import TooltipFragment from 'views/builder/TooltipFragment'
 import HelpButton from './HelpButton'
 import Chat from './Chat'
+import PublishConfirmationDialog from './PublishConfirmationDialog'
 
 const { SECTION, PATH, EVENTS } = constants
 
@@ -26,6 +27,7 @@ const EditorView = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const [openDialog, setOpenDialog] = useState(false)
+	const [openPublishDialog, setOpenPublishDialog] = useState(false)
 	const [openCategory, setOpenCategory] = useState()
 	const [open, setOpen] = useState(false)
 
@@ -35,9 +37,11 @@ const EditorView = () => {
 	const editor = useSelector((state) => state.editor.editor)
 
 	useEffect(() => {
+		document.addEventListener(EVENTS.TOGGLE_PUBLISH_MODAL, () => setOpenPublishDialog(true));
 		document.addEventListener(EVENTS.TOGGLE_SETTINGS_MODAL, () => setOpenDialog(true));
 		document.addEventListener(EVENTS.TOGGLE_ASSETS_MODAL, () => handleOpenSidePanel(SECTION.MEDIA));
 		return () => {
+			document.removeEventListener(EVENTS.TOGGLE_PUBLISH_MODAL, () => {});
 			document.removeEventListener(EVENTS.TOGGLE_SETTINGS_MODAL, () => {});
 			document.removeEventListener(EVENTS.TOGGLE_ASSETS_MODAL, () => {});
 		}
@@ -162,6 +166,7 @@ const EditorView = () => {
 					editor={editor} 
 					principal={account.principal}
 			/>
+			<PublishConfirmationDialog principal={account.principal} open={openPublishDialog} project={project} onClose={() => setOpenPublishDialog(false)} />
 			{editor && <Chat theme={theme} editor={editor}/> }
 			<DraggableDialog open={openDialog} editor={editor} handleClose={() => setOpenDialog(false)}></DraggableDialog>
 		</>

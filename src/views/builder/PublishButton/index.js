@@ -4,14 +4,14 @@ import { uploadPagesToIPFS, publishRouting } from 'api/publish'
 import { useDispatch, useSelector } from 'react-redux'
 import { showLoader } from 'utils/loader'
 import { getCidFromDeployment, getCustomFontsMetadatTags, getPages, getUserConfiguredMetadataTags, getWebstudioUrl } from 'utils/publish'
-import { showSuccess, showError } from 'utils/snackbar'
+import { showError } from 'utils/snackbar'
 import { getProjectUrl } from 'utils/project'
 import { queryParams } from 'utils/url'
 import { trackEvent } from 'utils/analytics'
 import { IconInfoCircle } from '@tabler/icons'
 import HtmlTooltip from '../HtmlTooltip'
 import constants from 'constant'
-const { ANALYTICS } = constants
+const { ANALYTICS, EVENTS } = constants
 
 const PublishButton = ({ principal, project, editor }) => {
     const isLoading = useSelector((state) => state.loader.show)
@@ -28,7 +28,7 @@ const PublishButton = ({ principal, project, editor }) => {
             await editor.load()
             const tags = getUserConfiguredMetadataTags({ project })
             const fonts = getCustomFontsMetadatTags()
-            const pages = getPages({ tags, fonts, editor })
+            const pages = getPages({ tags, fonts, editor, project })
             const upload = await uploadPagesToIPFS({ pages })
             const cid = getCidFromDeployment({ upload })
             setRelease(cid)
@@ -42,9 +42,8 @@ const PublishButton = ({ principal, project, editor }) => {
             if (defaultDomain) {
                 await publishRouting({id: defaultDomain, cid, principal })
             }
-            window.open(`${getProjectUrl({ project })}${queryParams()}`, '__blank')
+            document.dispatchEvent(new CustomEvent(EVENTS.TOGGLE_PUBLISH_MODAL)); 
             trackEvent({ name: ANALYTICS.PUBLISH_PROJECT, params: account.user })
-            showSuccess({ dispatch, message: 'Published' })
           } catch (error) {
             showError({ dispatch, error })
         } finally {

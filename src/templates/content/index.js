@@ -9,6 +9,7 @@ import * as LandingPage from 'templates/content/LandingPage'
 import * as TailBlog from 'templates/content/TailBlog'
 import * as Dockerz from 'templates/content/Dockerz'
 import * as Atlas from 'templates/content/Atlas'
+import * as Agenda from 'templates/content/Agenda'
 
 const templates = [
     Porto,
@@ -21,7 +22,8 @@ const templates = [
     LandingPage,
     TailBlog,
     Dockerz,
-    Atlas
+    Atlas,
+    Agenda
 ]
 
 export default templates

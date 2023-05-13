@@ -89,7 +89,7 @@ const Editor = ({ project, principal }) => {
         WSMForm,
         WSMWalletConnect,
         // WSMToast,
-        ToastBlocks
+        ToastBlocks,
       ],
       pluginsOpts: {},
       canvas: {
@@ -146,12 +146,14 @@ const Editor = ({ project, principal }) => {
     })
 
     editor.on("run:preview",() => {
+      console.log('Preview')
       const ed = document.getElementById('gjs')
       ed.classList.remove('gjs-no-preview')
       ed.classList.add('gjs-preview')
     })
 
     editor.on("stop:preview", () => {
+      console.log('Preview Dismiss')
       const ed = document.getElementById('gjs')
       ed.classList.remove('gjs-preview')
       ed.classList.add('gjs-no-preview')
