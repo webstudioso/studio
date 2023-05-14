@@ -56,17 +56,18 @@ const Blocks = ({ onLeave, editor }) => {
     return (
         <Grid container>
             <Grid item xs={4} sx={{ 
-                height: 'calc(100vh - 110px)', 
+                height: 'calc(100vh - 125px)', 
                 overflow: 'auto', 
                 background: '#f7f8f8', 
                 border: '1px solid #dfe5eb',
                 borderLeft: '0px',
-                paddingTop: '10px'
+                paddingTop: '10px',
+                paddingBottom: '40px'
             }}>
                 {categoryList}
             </Grid>
             <Grid item xs={8} sx={{ 
-                height: 'calc(100vh - 110px)', 
+                height: 'calc(100vh - 120px)', 
                 overflow: 'auto',
                 borderTop: '1px solid #dfe5eb',
             }}>
