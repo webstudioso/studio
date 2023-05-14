@@ -11,6 +11,7 @@ import { getMemoedProject } from 'utils/project'
 import { trackEvent } from 'utils/analytics'
 import constants from 'constant'
 import { setSubscriptionPlan } from 'utils/subscription'
+import { getSubscription } from 'api/subscription'
 const { SESSION_DURATION_SEC } = constants
 
 const { PATH, ANALYTICS } = constants
@@ -38,8 +39,9 @@ const Login = () => {
 			const principal = await m.user.getIdToken({ lifespan: SESSION_DURATION_SEC })
 			const user = await m.user.getMetadata(principal)
 			const projects = await getAllProjects({ principal })
+			const subscription = await getSubscription({ email: user.email })
 			trackEvent({ name: ANALYTICS.VIEW_PAGE , params: user })
-			dispatch({ type: LOGIN, payload: { user , principal, projects }})
+			dispatch({ type: LOGIN, payload: { user , principal, projects, subscription }})
 			if (projects && projects.length > 0) {
 				// Has some projects created
 				if (existingProject) {
