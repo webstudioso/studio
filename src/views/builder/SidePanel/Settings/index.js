@@ -8,14 +8,18 @@ import { getDefaultMetadataForProject } from 'utils/project'
 import { showError, showSuccess } from 'utils/snackbar'
 import tabFrame from 'assets/images/browserTabSkeleton.png'
 import constants from 'constant'
+import { requestNewDomain } from 'api/discord';
 const { EVENTS } = constants
 
 
 const Settings = ({ principal, project }) => {
     const defaultMetadata = getDefaultMetadataForProject({ project })
     const isLoading = useSelector((state) => state.loader.show)
+    const account = useSelector((state) => state.account)
     const dispatch = useDispatch()
     const [metadata, setMetadata] = useState(project.metadata || defaultMetadata)
+    const [customDomain, setCustomDomain] = useState()
+    
 
     const save = async (data) =>{
         try {
@@ -111,7 +115,6 @@ const Settings = ({ principal, project }) => {
                                 placeholder="e.g The best way to build websites | Webstudio"
                                 defaultValue={metadata?.description}
                                 disabled={isLoading}
-                                onMouseLeave={handleSaveMetadata}
                                 onChange={(e) => {
                                     const text = e.target.value;
                                     const currMeta = {...metadata};
@@ -121,6 +124,34 @@ const Settings = ({ principal, project }) => {
                                     setMetadata(currMeta);
                                 }}
                     ></TextField>
+                    <Button fullWidth onClick={handleSaveMetadata}>Save Title</Button>
+            </Grid>
+        </Grid>
+    );
+
+    const handleSubmitCustomDomain = () => {
+        requestNewDomain(dispatch, account.user, customDomain, project)
+    }
+
+    const customDomainBlock = (
+        <Grid container spacing={1} sx={{ mb:3, pb: 1, background: '#fdfdfd', border:'1px solid #f3f3f3' }}>
+            <Grid item xs={12}>
+                <Typography fontWeight="bold" color="#222" fontSize={14}>Custom Domain</Typography>
+            </Grid>
+            <Grid item xs={12}>
+                <Typography color="#555" fontSize={12}>
+                    You can have your webstudio app under a custom domain if you own one already. If so,
+                    let us know below and we will contact you within 48h via email to help you set it up or change it.
+                </Typography>
+            </Grid>
+            <Grid item xs={12} sx={{ mt: 1, pr: 2, pl: 1, pb: 2 }}>
+                    <TextField  fullWidth
+                                variant="standard"
+                                placeholder="e.g mydomain.com"
+                                disabled={isLoading}
+                                onChange={(e) => setCustomDomain(e.target.value)}
+                    ></TextField>
+                    <Button fullWidth onClick={handleSubmitCustomDomain}>Submit Request</Button>
             </Grid>
         </Grid>
     );
@@ -225,6 +256,7 @@ const Settings = ({ principal, project }) => {
                 {title}
                 {favIcon}
                 {social}
+                {customDomainBlock}
             </Grid>
         </Grid>
     )
