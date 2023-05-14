@@ -28,7 +28,7 @@ const Card = ({ project, principal }) => {
 
 	const handleDelete = async () => {
 		dispatch({ type: LOADER, show: true })
-		await deleteProject({ projectId: project.id, principal})
+		await deleteProject({ project, principal})
 		forgetMemoProject()
 		dispatch({ type: LOADER, show: false })
 		navigate(`/`)
