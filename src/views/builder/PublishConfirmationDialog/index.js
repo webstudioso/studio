@@ -34,7 +34,7 @@ const PublishConfirmationDialog = ({ open, project, onClose, principal }) => {
 	return (
         <Dialog
             open={open}
-            keepMounted
+            keepmounted="true"
             onClose={() => console.log("Close")}
             aria-describedby="alert-dialog-slide-description"
         >

@@ -1,10 +1,11 @@
 import { Chip } from '@mui/material'
-import { getSubscriptionPlan } from 'utils/subscription'
+import { useSelector } from 'react-redux'
 
 const Membership = () => {
+	const account = useSelector((state) => state.account)
 
     const getName = () => {
-        const plan = getSubscriptionPlan()
+        const plan = account?.subscription?.subscriptionId
         return plan ? 'Unlimited Plan 👑' : 'Get Unlimited Access'
     }
 

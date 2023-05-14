@@ -9,8 +9,8 @@ import { LOGIN, SET_PROJECT } from 'store/actions'
 import { getAllProjects } from 'api/project'
 import { getMemoedProject } from 'utils/project'
 import { trackEvent } from 'utils/analytics'
+import { getSubscription } from 'api/subscription'
 import constants from 'constant'
-import { setSubscriptionPlan } from 'utils/subscription'
 const { SESSION_DURATION_SEC } = constants
 
 const { PATH, ANALYTICS } = constants
@@ -30,16 +30,14 @@ const Login = () => {
 	 * Only users redirected from main website are allowed, providing (uid, name, email and photo)
 	 */
 	const authenticate = async () => {
-		const params = new URLSearchParams(document.location.search)
-		setSubscriptionPlan(params.get('plan'))
-
 		const isAuthenticated = await m?.user?.isLoggedIn()
 		if (isAuthenticated) {
 			const principal = await m.user.getIdToken({ lifespan: SESSION_DURATION_SEC })
 			const user = await m.user.getMetadata(principal)
 			const projects = await getAllProjects({ principal })
+			const subscription = await getSubscription({ email: user.email })
 			trackEvent({ name: ANALYTICS.VIEW_PAGE , params: user })
-			dispatch({ type: LOGIN, payload: { user , principal, projects }})
+			dispatch({ type: LOGIN, payload: { user , principal, projects, subscription }})
 			if (projects && projects.length > 0) {
 				// Has some projects created
 				if (existingProject) {
@@ -53,12 +51,13 @@ const Login = () => {
 				navigate(PATH.CREATE)
 			}
 		} else {
-			authenticateFromQueryParams(params)
+			authenticateFromQueryParams()
 		}
 	}
 
-	const authenticateFromQueryParams = (params) => {
+	const authenticateFromQueryParams = () => {
 		// From query params we should receive email
+		const params = new URLSearchParams(document.location.search)
 		const email = params.get('email')
 		if (email) {
 			// Authenticate with Magic

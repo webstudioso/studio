@@ -46,7 +46,7 @@ const AnalyticsChartCard = ({ title, chartData, dropData, listData }) => {
                     }}
                     id="simple-menu"
                     anchorEl={anchorEl}
-                    keepMounted
+                    keepmounted
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                 >

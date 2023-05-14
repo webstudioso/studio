@@ -62,7 +62,7 @@ const UserDetailsCard = ({ about, avatar, contact, email, location, name, role }
                             <Menu
                                 id="menu-user-details-card"
                                 anchorEl={anchorEl}
-                                keepMounted
+                                keepmounted
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}
                                 variant="selectedMenu"

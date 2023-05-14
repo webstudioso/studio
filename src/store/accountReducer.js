@@ -6,12 +6,13 @@ import { LOGIN, LOGOUT } from './actions';
 const accountReducer = (state, action) => {
     switch (action.type) {
         case LOGIN: {
-            const { user, principal, projects } = action.payload;
+            const { user, principal, projects, subscription } = action.payload;
             return {
                 ...state,
                 user,
                 principal,
-                projects
+                projects,
+                subscription
             };
         }
         case LOGOUT: {
@@ -19,7 +20,8 @@ const accountReducer = (state, action) => {
                 ...state,
                 principal: null,
                 user: null,
-                projects: null
+                projects: null,
+                subscription: null
             };
         }
         default: {

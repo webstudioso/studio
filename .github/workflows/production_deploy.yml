@@ -37,6 +37,7 @@ jobs:
           REACT_APP_WEBSTUDIO_API_URL: "https://api.webstudio.so"
           REACT_APP_DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           REACT_APP_WEBSTUDIO_WS_API: ${{ secrets.WEBSTUDIO_WS_API }}
+          REACT_APP_WIX_SUBSCRIPTION_ENDPOINT: ${{ secrets.WIX_SUBSCRIPTION_ENDPOINT }}
           CI: false
         run: npm run build:release
       - name: Set AWS credentials

@@ -222,7 +222,7 @@ const Comment = ({ comment, handleCommentLikes, handleReplayLikes, postId, reply
                                         <Menu
                                             id="menu-comment"
                                             anchorEl={anchorEl}
-                                            keepMounted
+                                            keepmounted
                                             open={Boolean(anchorEl)}
                                             onClose={handleClose}
                                             variant="selectedMenu"
