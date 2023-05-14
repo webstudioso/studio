@@ -80,7 +80,7 @@ const FollowerCard = ({ avatar, follow, location, name }) => {
                             <Menu
                                 id="menu-followers-card"
                                 anchorEl={anchorEl}
-                                keepMounted
+                                keepmounted
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}
                                 variant="selectedMenu"

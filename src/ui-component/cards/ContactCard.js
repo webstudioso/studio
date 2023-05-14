@@ -66,7 +66,7 @@ const ContactCard = ({ avatar, contact, email, name, location, onActive, role })
                             <Menu
                                 id="menu-user-details-card"
                                 anchorEl={anchorEl}
-                                keepMounted
+                                keepmounted
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}
                                 variant="selectedMenu"

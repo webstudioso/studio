@@ -155,8 +155,7 @@ const Chat = ({ editor }) => {
     return (
         <><Box>
     <Paper
-            open={toggleChat}
-            keepMounted
+            keepmounted="true"
             elevation={5}
             onClose={() => {}}
             aria-describedby="alert-dialog-slide-description"
@@ -173,7 +172,7 @@ const Chat = ({ editor }) => {
             }}
         >
             <Box sx={{ background: '#0a0a0a', color: 'white', width: '100%', px: 2, py:1 }}>
-                <Stack direction="horizontal" alignItems="center">
+                <Stack direction="row" alignItems="center">
                     <RateReviewIcon sx={{ mr: 1 }} />
                     <Typography fontWeight="bold" fontSize={14} lineHeight={3}>Studio AI</Typography>
                     <Box flexGrow={1} display />
@@ -184,11 +183,13 @@ const Chat = ({ editor }) => {
                 </Stack>
             </Box>
             <Box sx={{ height: 320, mb:1, p: 2, overflowY:'scroll' }} ref={ref} >
-                    <Paper  key={10000} 
-                            elevation={0}
-                            className="studio-ai-bubble">
-                                {intro}
-                    </Paper>
+                    {connected && (
+                        <Paper  key={10000} 
+                                elevation={0}
+                                className="studio-ai-bubble">
+                                    {intro}
+                        </Paper>
+                    )}
                     {connected && messageList && messageList?.map((m, index) => {
                         return (
                             <Paper  key={index} 

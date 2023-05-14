@@ -9,8 +9,8 @@ import { LOGIN, SET_PROJECT } from 'store/actions'
 import { getAllProjects } from 'api/project'
 import { getMemoedProject } from 'utils/project'
 import { trackEvent } from 'utils/analytics'
-import constants from 'constant'
 import { getSubscription } from 'api/subscription'
+import constants from 'constant'
 const { SESSION_DURATION_SEC } = constants
 
 const { PATH, ANALYTICS } = constants

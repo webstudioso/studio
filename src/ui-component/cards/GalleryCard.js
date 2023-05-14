@@ -84,7 +84,7 @@ const GalleryCard = ({ dateTime, image, title }) => {
                         <Menu
                             id="menu-gallery-card"
                             anchorEl={anchorEl}
-                            keepMounted
+                            keepmounted
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                             variant="selectedMenu"

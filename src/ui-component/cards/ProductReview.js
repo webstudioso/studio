@@ -87,7 +87,7 @@ const ProductReview = ({ avatar, date, name, status, rating, review }) => {
                             <Menu
                                 id="menu-popular-card"
                                 anchorEl={anchorEl}
-                                keepMounted
+                                keepmounted
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}
                                 variant="selectedMenu"

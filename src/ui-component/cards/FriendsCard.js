@@ -88,7 +88,7 @@ const FriendsCard = ({ avatar, location, name }) => {
                             <Menu
                                 id="menu-friend-card"
                                 anchorEl={anchorEl}
-                                keepMounted
+                                keepmounted
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}
                                 variant="selectedMenu"

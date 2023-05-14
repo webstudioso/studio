@@ -108,7 +108,7 @@ const Reply = ({ commentId, handleReplayLikes, onReply, postId, reply }) => {
                                             <Menu
                                                 id="menu-comment-reply"
                                                 anchorEl={anchorEl}
-                                                keepMounted
+                                                keepmounted
                                                 open={Boolean(anchorEl)}
                                                 onClose={handleClose}
                                                 variant="selectedMenu"

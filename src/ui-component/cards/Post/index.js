@@ -215,7 +215,7 @@ const Post = ({ commentAdd, handleCommentLikes, handlePostLikes, handleReplayLik
                             <Menu
                                 id="menu-post"
                                 anchorEl={anchorEl}
-                                keepMounted
+                                keepmounted
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}
                                 variant="selectedMenu"
@@ -316,7 +316,7 @@ const Post = ({ commentAdd, handleCommentLikes, handlePostLikes, handleReplayLik
                             <Menu
                                 id="menu-post"
                                 anchorEl={anchorSharedEl}
-                                keepMounted
+                                keepmounted
                                 open={Boolean(anchorSharedEl)}
                                 onClose={handleSharedClose}
                                 variant="selectedMenu"

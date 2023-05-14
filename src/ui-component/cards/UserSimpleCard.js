@@ -106,7 +106,7 @@ const UserSimpleCard = ({ avatar, name, status }) => {
                             <Menu
                                 id="menu-simple-card"
                                 anchorEl={anchorEl}
-                                keepMounted
+                                keepmounted
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}
                                 variant="selectedMenu"
