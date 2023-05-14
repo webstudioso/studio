@@ -14,7 +14,6 @@ import constants from 'constant'
 import Logo from 'common/Logo'
 import { showError } from 'utils/snackbar'
 import Membership from 'views/Membership'
-import { isUnlimited } from 'utils/subscription'
 
 const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY)
 
@@ -47,7 +46,7 @@ const Projects = () => {
 		}
 	}
 
-	const newCard = isUnlimited() && (
+	const newCard = account?.subscription?.subscriptionId && (
 		<Grid item xs={12} sm={6} md={4} key={0}>
 			<Box>
 				<Paper

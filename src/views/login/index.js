@@ -10,7 +10,6 @@ import { getAllProjects } from 'api/project'
 import { getMemoedProject } from 'utils/project'
 import { trackEvent } from 'utils/analytics'
 import constants from 'constant'
-import { setSubscriptionPlan } from 'utils/subscription'
 import { getSubscription } from 'api/subscription'
 const { SESSION_DURATION_SEC } = constants
 
@@ -31,9 +30,6 @@ const Login = () => {
 	 * Only users redirected from main website are allowed, providing (uid, name, email and photo)
 	 */
 	const authenticate = async () => {
-		const params = new URLSearchParams(document.location.search)
-		setSubscriptionPlan(params.get('plan'))
-
 		const isAuthenticated = await m?.user?.isLoggedIn()
 		if (isAuthenticated) {
 			const principal = await m.user.getIdToken({ lifespan: SESSION_DURATION_SEC })
@@ -55,12 +51,13 @@ const Login = () => {
 				navigate(PATH.CREATE)
 			}
 		} else {
-			authenticateFromQueryParams(params)
+			authenticateFromQueryParams()
 		}
 	}
 
-	const authenticateFromQueryParams = (params) => {
+	const authenticateFromQueryParams = () => {
 		// From query params we should receive email
+		const params = new URLSearchParams(document.location.search)
 		const email = params.get('email')
 		if (email) {
 			// Authenticate with Magic
