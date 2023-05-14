@@ -4,9 +4,7 @@ import { useDispatch } from 'react-redux'
 import { LOADER, SET_EDITOR } from 'store/actions'
 import { showError, showSuccess } from 'utils/snackbar'
 import grapesjs from 'grapesjs'
-// import PluginTokenGate from '../primitives/token-gated-container'
-// import PluginNFT from '../primitives/nft-card'
-// import PluginActionButton from '../primitives/action-button'
+import PluginTailwind from 'grapesjs-tailwind'
 import PluginScriptEditor from '@auth0/auth0-spa-js'
 import PageManager from './Plugins/PageManager'
 import PluginEditorPanelButtons from './Panel/Buttons'
@@ -18,8 +16,6 @@ import ButtonBlocks from '../blocks/buttons'
 import ToastBlocks from '../blocks/toast'
 
 // Primitives
-// import WSMBasic from 'wsm-basic'
-// import WSMToast from 'wsm-toast'
 import WSMForm from 'wsm-form'
 import WSMWalletConnect from 'wsm-wallet-connect'
 import WSMAnimations from 'wsm-animations'
@@ -72,14 +68,9 @@ const Editor = ({ project, principal }) => {
       },
       panels: { defaults: [] },
       plugins: [
-        // WSMBasic,
         PluginEditorPanelButtons,
         PluginScriptEditor,
-        // PluginTokenGate,
-        // PluginNFT,
-        // PluginActionButton,
         PageManager,
-        // WSMForm,
         WSMAnimations,
         WSMFonts,
         TextBlocks,
@@ -88,8 +79,8 @@ const Editor = ({ project, principal }) => {
         VideoBlocks,
         WSMForm,
         WSMWalletConnect,
-        // WSMToast,
         ToastBlocks,
+        PluginTailwind
       ],
       pluginsOpts: {},
       canvas: {
