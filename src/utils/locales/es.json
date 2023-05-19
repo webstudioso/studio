@@ -97,6 +97,14 @@
     "copilot.unavailable": "El Studio IA no se encuentra disponible, cuando este en linea nos reconectaremos automaticamente",
     "copilot.type_message": "Escribe tu mensaje...",
 
+    "help.title": "Necesitas Ayuda?",
+    "help.resources": "Aprende sobre Webstudio",
+    "help.book_call": "Llamanos",
+    "help.chat_with_us": "Escribenos",
+    "help.twitter": "Siguenos en Twitter",
+    "help.suggest_improvement": "Sugiere una Mejora",
+    "help.report_issue": "Reporta un Incidente",
+
     "blocks.triggers": "Integraciones",
     "blocks.text": "Texto",
     "blocks.button": "Botones",

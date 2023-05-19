@@ -97,6 +97,14 @@
     "copilot.unavailable": "The Studio AI is currenly unavailable, when it comes back we will automatically reconnect",
     "copilot.type_message": "Type your message...",
 
+    "help.title": "Need some help?",
+    "help.resources": "Learning resources",
+    "help.book_call": "Book a call",
+    "help.chat_with_us": "Chat with us",
+    "help.twitter": "Reach us at Twitter",
+    "help.suggest_improvement": "Suggest an improvement",
+    "help.report_issue": "Report an issue",
+
     "blocks.triggers": "Integrations",
     "blocks.text": "Text",
     "blocks.button": "Buttons",
