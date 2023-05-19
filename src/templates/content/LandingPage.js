@@ -559,7 +559,7 @@ const metadata = {
    image: 'https://bafybeiggzgy6aadordrmuutjhbay3e5cfuresmr72dldxq2srni64eqfxi.ipfs.w3s.link/LandingPage.png',
    preview: 'https://bafybeieqwsnpghzywvisz2gl5nlmbnxjmag3xjf7mbzwcuy7iamfyiuque.ipfs.w3s.link/LandingPagePreview.png',
    name: 'Landing Page',
-   description: 'A free and stylish landing page',
+   description: 'template.landing_page',
    tags: ['Landing Page'],
    premium: false
 }

@@ -1,10 +1,8 @@
 import { forwardRef } from 'react'
 import { Dialog, Toolbar, AppBar, Typography, Slide, Button } from '@mui/material'
 import InfoButton from 'views/builder/InfoButton'
-import constants from 'constant'
 import Templates from 'views/templates/List'
-
-const { SECTION } = constants;
+import { FormattedMessage } from 'react-intl'
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />
@@ -26,11 +24,11 @@ const ModalManager = ({ open=false, onLeave }) => {
         <AppBar sx={{ position: 'relative', background: "#fff", borderTop: '5px solid #6366F1' }}>
             <Toolbar>
                 <Typography variant="h4" color="black" fontWeight="bolder">
-                    Choose Template
-                    <InfoButton section={SECTION.TEMPLATE} />
+                    <FormattedMessage id="template_page.title" />
+                    <InfoButton tooltip="template_page.title_tooltip" />
                 </Typography>
                 <Button variant="outlined" elevation={0} sx={{ marginLeft: "auto" }} onClick={onLeave}>
-                    Pick Later
+                    <FormattedMessage id="template_page.pick_later" />
                 </Button>
             </Toolbar>
         </AppBar>

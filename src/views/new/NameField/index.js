@@ -18,14 +18,16 @@ import { getProjectById, createProject } from 'api/project'
 import { UPDATE_APP, LOADER, SET_PROJECT } from 'store/actions'
 import { useNavigate } from 'react-router-dom'
 import { trackEvent } from 'utils/analytics'
-import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight'
+import { useIntl } from 'react-intl'
 import { getDefaultMetadataForProject } from 'utils/project'
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight'
 import EditIcon from '@mui/icons-material/Edit'
 import HtmlTooltip from 'views/builder/HtmlTooltip'
 import constants from 'constant'
 const { ANALYTICS } = constants
 
 const NameField = ({ principal }) => {
+	const intl = useIntl()
 	const theme = useTheme()
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
@@ -40,16 +42,16 @@ const NameField = ({ principal }) => {
 	const generateSubdomain = async (name) => {
 		setError();
 		if (!name || name.length < 4) {
-			setError('Project name and subdomain must be at least 4 characters long')
+			setError(intl.formatMessage({ id: "new_page.error_min_length" }))
 			return
 		}
 		if (name.length > 30) {
-			setError('Project name cannot be longer than 30 characters')
+			setError(intl.formatMessage({ id: "new_page.error_max_length" }))
 			return
 		}
 		const regexp = /^[a-zA-Z0-9- ]+$/;
 		if (name.search(regexp) === -1) {
-			setError('Can only contain letters, numbers, spaces and hyphens')
+			setError(intl.formatMessage({ id: 'new_page.error_invalid_character' }))
 			return
 		}
 		const prefix = name.replace(/\s/g, "").toLowerCase()
@@ -62,7 +64,7 @@ const NameField = ({ principal }) => {
 			dispatch({ type: LOADER, show: false })
 			setError(
 				found?.id
-					? "Project subdomain taken, please select a different subdomain"
+					? intl.formatMessage({ id: 'new_page.error_subdomain_taken' }) 
 					: null
 			);
 			return
@@ -97,7 +99,7 @@ const NameField = ({ principal }) => {
 		}
 	}
 
-	const urlTooltip = "Your app's globally unique subdomain, used as your URL. You cannot change your app subdomain after creation"
+	const urlTooltip = intl.formatMessage({ id: "new_page.subdomain_tooltip" })
 
 	return (
 		<Grid
@@ -110,7 +112,7 @@ const NameField = ({ principal }) => {
 			<Grid item xs={12}>
 				<TextField
 					fontSize="3em"
-					placeholder="Enter your project name"
+					placeholder={intl.formatMessage({ id: "new_page.input_placeholder" })}
 					variant="standard"
 					defaultValue={appName}
 					fullWidth
@@ -196,7 +198,7 @@ const NameField = ({ principal }) => {
 					/>
 				</DialogContent>
 				<DialogActions sx={{ px: 3 }}>
-					<Button variant="outlined" color="primary" onClick={() => setShowEditor(false)}>Close</Button>
+					<Button variant="outlined" color="primary" onClick={() => setShowEditor(false)}>{intl.formatMessage({ id:'close' })}</Button>
 				</DialogActions>
 			</Dialog>
 		</Grid>

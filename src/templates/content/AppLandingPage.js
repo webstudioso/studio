@@ -61,7 +61,7 @@ const metadata = {
    image: 'https://bafybeih6o4hfz6fdsrzsp52n6fnkpnqat7qgvudbtqtnehroc5ca47jpfe.ipfs.w3s.link/AppLandingPagePreview.png',
    preview: 'https://bafybeiaagrtcdtbl2uoedjqxbaqcufefryjr3aksud2nkvzpqrhaau6fxa.ipfs.w3s.link/AppLandingPage.png',
    name: 'App Landing Page',
-   description: 'A beautiful landing page for your next mobile app',
+   description: 'template.app_landing_page',
    tags: ['Landing Page'],
    premium: false
 }

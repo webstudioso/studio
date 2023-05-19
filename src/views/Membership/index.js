@@ -1,12 +1,14 @@
 import { Chip } from '@mui/material'
+import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux'
 
 const Membership = () => {
+    const intl = useIntl()
 	const account = useSelector((state) => state.account)
 
     const getName = () => {
         const plan = account?.subscription?.subscriptionId
-        return plan ? 'Unlimited Plan 👑' : 'Get Unlimited Access'
+        return plan ?  intl.formatMessage({ id: 'membership.unlimited' }) : intl.formatMessage({ id: 'membership.free' })
     }
 
 	return (

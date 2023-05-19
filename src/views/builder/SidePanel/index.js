@@ -13,12 +13,13 @@ import Templates from '../../templates/List'
 import Settings from './Settings'
 import Media from "./Media"
 import constants from 'constant'
-const { SIDEPANEL, SECTION, EVENTS } = constants
-const { TITLE } = SIDEPANEL
+import { useIntl } from 'react-intl'
+const { SECTION, EVENTS } = constants
 
 // ==============================|| LIVE CUSTOMIZATION ||============================== //
 
 const SidePanel = ({ open, openCategory, onLeave, principal, project, editor}) => {
+    const intl = useIntl()
     const [delay, setDelay] = useState(false)
 
     useEffect(() => {
@@ -71,8 +72,8 @@ const SidePanel = ({ open, openCategory, onLeave, principal, project, editor}) =
                     >
                         <Box sx={{ minWidth: 120, m: '15px' }}>
                             <Typography variant="h4" color="black" fontWeight="bolder">
-                                {TITLE[openCategory]}
-                                <InfoButton section={openCategory} />
+                                { openCategory && intl.formatMessage({ id: `section.${openCategory}_tooltip_title` }) }
+                                { openCategory && (<InfoButton tooltip={`section.${openCategory}_tooltip_description`} />) }
                             </Typography>
                         </Box>
                     </Stack>

@@ -74,7 +74,7 @@ const EditorView = () => {
 									sx={{ flexGrow: 1, textAlign: "left" }}
 									className="title-text"
 								>
-									<HtmlTooltip title={<TooltipFragment section={SECTION.DASHBOARD} />} placement="right-start">
+									<HtmlTooltip title={<TooltipFragment description="builder.topbar_home_tooltip_description" title="builder.topbar_home_tooltip_title" />} placement="right-start">
 										<Button
 											color="inherit"
 											onClick={() => {
@@ -108,35 +108,35 @@ const EditorView = () => {
 						}}>
 							<Grid container sx={{ px: '5px', py: '35px' }}>
 								<Grid item xs={12}>
-									<HtmlTooltip title={<TooltipFragment section={SECTION.BLOCKS} />} placement="right-start">
+									<HtmlTooltip title={<TooltipFragment title="section.blocks_tooltip_title" description="section.blocks_tooltip_description"  />} placement="right-start">
 										<IconButton color="primary" size="large" onClick={() => handleOpenSidePanel(openCategory !== SECTION.BLOCKS ? SECTION.BLOCKS : null)}>
 											<IconPlus />
 										</IconButton>
 									</HtmlTooltip>
 								</Grid>
 								<Grid item xs={12}>
-									<HtmlTooltip title={<TooltipFragment section={SECTION.PAGES} />} placement="right-start">
+									<HtmlTooltip title={<TooltipFragment title="section.pages_tooltip_title" description="section.pages_tooltip_description"  />} placement="right-start">
 										<IconButton color="primary" size="large" onClick={() => handleOpenSidePanel(openCategory !== SECTION.PAGES ? SECTION.PAGES : null)}>
 											<IconFiles />
 										</IconButton>
 									</HtmlTooltip>
 								</Grid>
 								<Grid item xs={12}>
-									<HtmlTooltip title={<TooltipFragment section={SECTION.SETTINGS} />} placement="right-start">
+									<HtmlTooltip title={<TooltipFragment title="section.settings_tooltip_title" description="section.settings_tooltip_description"  />} placement="right-start">
 										<IconButton color="primary" size="large" onClick={() => handleOpenSidePanel(openCategory !== SECTION.SETTINGS ? SECTION.SETTINGS : null)}>
 											<IconSettings />
 										</IconButton>
 									</HtmlTooltip>
 								</Grid>
 								<Grid item xs={12}>
-									<HtmlTooltip title={<TooltipFragment section={SECTION.TEMPLATE} />} placement="right-start">
+									<HtmlTooltip title={<TooltipFragment title="section.templates_tooltip_title" description="section.templates_tooltip_description" />} placement="right-start">
 										<IconButton color="primary" size="large" onClick={() => handleOpenSidePanel(openCategory !== SECTION.TEMPLATE ? SECTION.TEMPLATE : null)}>
 											<IconTemplate />
 										</IconButton>
 									</HtmlTooltip>
 								</Grid>
 								<Grid item xs={12}>
-									<HtmlTooltip title={<TooltipFragment section={SECTION.MEDIA} />} placement="right-start">
+									<HtmlTooltip title={<TooltipFragment title="section.media_tooltip_title" description="section.media_tooltip_description" />} placement="right-start">
 										<IconButton color="primary" size="large" onClick={() => handleOpenSidePanel(openCategory !== SECTION.MEDIA ? SECTION.MEDIA : null)}>
 											<IconPhoto />
 										</IconButton>

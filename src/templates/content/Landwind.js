@@ -660,7 +660,7 @@ const metadata = {
    image: 'https://bafybeigisd6rv7jsml6xzrg3n3likes23xxxwdfjbnemsq7o4ugppfyfva.ipfs.w3s.link/Landwind.png',
    preview: 'https://bafybeiehr7arstj6vj44ki6ncih33ztswv6crkjdzdc3f7id35nql26ria.ipfs.w3s.link/LandwindPreview.png',
    name: 'Landwind',
-   description: 'Tailwind CSS landing page',
+   description: 'template.landwind',
    tags: ['Landing Page'],
    premium: false
 }

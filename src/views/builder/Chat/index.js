@@ -8,6 +8,7 @@ import rehypeRaw from 'rehype-raw'
 import { trackEvent } from 'utils/analytics'
 import constants from 'constant'
 import { getTemplateBodyContentFromString, getClassesFromSnippet, isHTMLComponent, isHTMLSegment, isHTMLTemplate } from 'utils/template'
+import { useIntl } from 'react-intl'
 
 const { ANALYTICS } = constants
 
@@ -15,6 +16,7 @@ let ws
 const actionStyle = "text-black bg-white rounded-full text-xs px-2 py-1 mr-1 my-2"
 
 const Chat = ({ editor }) => {
+    const intl = useIntl()
     const ref = useRef()
     const [lastMessage, setLastMessage] = useState()
     const [message, setMessage] = useState()
@@ -139,18 +141,10 @@ const Chat = ({ editor }) => {
         </Paper>
     )
 
-    const addTooltip = 'Adds this element before the currently selected element in the canvas'
-    const styleTooltip = 'Paste only styles to the currently selected element in the canvas'
-    const templateTooltip = 'Completely replace existing page with this new template'
-    const intro = (
-        <div>
-            <h3><strong>Hi, I'm Studio AI, your project assistant! Ask me anything:</strong></h3>
-            <br/><br/>
-            <i>"Create a template inspired in twitter with multiple sections"</i><br/><br/>
-            <i>"Create a new section to display 6 features with images, text and description"</i><br/><br/>
-            <i>"Make a gradient of 4 purple colors that look bright"</i><br/><br/><br/>
-        </div>
-    )
+    const addTooltip = intl.formatMessage({id:'copilot.block_add'})
+    const styleTooltip = intl.formatMessage({id:'copilot.style_replace'})
+    const templateTooltip = intl.formatMessage({id:'copilot.template_replace'})
+    const intro = intl.formatMessage({id:'copilot.welcome'})
 
     return (
         <><Box>
@@ -259,7 +253,7 @@ const Chat = ({ editor }) => {
                         !connected && (
                             <Box>
                                 <Typography fontWeight="bold" fontSize={16}>
-                                    The Studio AI is currenly unavailable, when it comes back we will automatically reconnect
+                                    {intl.formatMessage({id:'copilot.unavailable'})}
                                 </Typography>
                             </Box>
                         )
@@ -268,7 +262,7 @@ const Chat = ({ editor }) => {
             </Box>
             <Box sx={{ px: 1 }}>
                 <TextField  fullWidth 
-                            placeholder="Type your message..." 
+                            placeholder={intl.formatMessage({id:'copilot.type_message'})}
                             onChange={(e) => setMessage(e.target.value)}
                             value={message}
                             autoComplete='off'
@@ -310,7 +304,7 @@ const Chat = ({ editor }) => {
         </Box><Box sx={{ position: 'fixed', bottom: 15, right: 15, zIndex: 1201 }}>
                 <Fab variant="extended" color="primary" size="large" aria-label="assistant" onClick={toggleChat}>
                     <RateReviewIcon sx={{ mr: 1 }} />
-                    Studio AI
+                    {intl.formatMessage({id:'copilot'})}
                     <Box className={connected ? "online-signal" : "offline-signal"}/>
                 </Fab>
             </Box></>

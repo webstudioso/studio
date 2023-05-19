@@ -4,8 +4,10 @@ import {
     Typography
 } from '@mui/material'
 import { gridSpacing } from 'store/constant'
+import { useIntl } from 'react-intl'
 
 const Blocks = ({ onLeave, editor }) => {
+    const intl = useIntl()
     const ref = useRef(null)
     const [categories, setCategories] = useState([])
     const [filter, setFilter] = useState('Text')
@@ -49,7 +51,7 @@ const Blocks = ({ onLeave, editor }) => {
         >
             <Typography fontWeight="normal" color={
                 filter === cat.id ? '#3F41A4' : 'black'
-            } fontSize={14}>{cat.label}</Typography>
+            } fontSize={14}>{intl.formatMessage({id: `blocks.${cat.label.toLowerCase()}`})}</Typography>
         </Grid> 
     )
 

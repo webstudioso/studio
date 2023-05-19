@@ -7,6 +7,7 @@ import { truncate } from 'utils/format'
 import { forgetMemoProject, memoProject } from 'utils/project'
 import { deleteProject } from 'api/project'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
+import { FormattedMessage } from 'react-intl'
 
 const Card = ({ project, principal }) => {
 	const navigate = useNavigate()
@@ -62,7 +63,7 @@ const Card = ({ project, principal }) => {
 							disabled={isLoading}
 							className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-full text-sm px-5 py-3 text-center mr-2 mb-2"
 							onClick={() => selectProject(project)}>
-						Launch Editor
+						<FormattedMessage id="dashboard.open_project_card" />
 					</Button>
 				</Box>
 			)}

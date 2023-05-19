@@ -15,16 +15,19 @@ import VideoBlocks from '../blocks/video'
 import ButtonBlocks from '../blocks/buttons'
 import ToastBlocks from '../blocks/toast'
 
+import ActionButton from '../blocks/action-button'
+
 // Primitives
 import WSMForm from 'wsm-form'
 import WSMWalletConnect from 'wsm-wallet-connect'
 import WSMAnimations from 'wsm-animations'
 import WSMFonts, { WSMFontStyles } from 'wsm-fonts'
 import constants from 'constant'
+import { useIntl } from 'react-intl'
 const { EVENTS } = constants
 
 const Editor = ({ project, principal }) => {
-
+  const intl = useIntl()
   const dispatch = useDispatch()
   const projectEndpoint = `${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${project.id}/content`
 
@@ -68,6 +71,7 @@ const Editor = ({ project, principal }) => {
       },
       panels: { defaults: [] },
       plugins: [
+        ActionButton,
         PluginEditorPanelButtons,
         PluginScriptEditor,
         PageManager,
@@ -88,7 +92,7 @@ const Editor = ({ project, principal }) => {
           "https://cdn.jsdelivr.net/npm/webstudio-sdk@0.0.6/dist/main.min.js",
           "https://cdn.tailwindcss.com",
           "https://code.jquery.com/jquery-3.6.1.min.js",
-          "https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"
+          "https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js",
         ],
         // The same would be for external styles
         styles: [
@@ -101,13 +105,14 @@ const Editor = ({ project, principal }) => {
 
     // Storage events
     editor.on('storage:error', (e) => {
+      console.log(e)
       dispatch({ type: LOADER, show: false })
-      showError({ dispatch, message: e.message })
+      showError({ dispatch, message: intl.formatMessage({id:'action.auto_saved_error'})})
     });
 
     editor.on('storage:store', () => {
       dispatch({ type: LOADER, show: false })
-      showSuccess({ dispatch, message: 'Auto saved'})
+      showSuccess({ dispatch, message: intl.formatMessage({id:'action.auto_saved'})})
     })
 
     editor.on('component:selected', () => {

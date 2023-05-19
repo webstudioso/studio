@@ -11,9 +11,11 @@ import { trackEvent } from 'utils/analytics'
 import { IconInfoCircle } from '@tabler/icons'
 import HtmlTooltip from '../HtmlTooltip'
 import constants from 'constant'
+import { useIntl } from 'react-intl'
 const { ANALYTICS, EVENTS } = constants
 
 const PublishButton = ({ principal, project, editor }) => {
+    const intl = useIntl()
     const isLoading = useSelector((state) => state.loader.show)
     const account = useSelector((state) => state.account)
     const [release, setRelease] = useState()
@@ -53,17 +55,17 @@ const PublishButton = ({ principal, project, editor }) => {
 
     const publishTooltip = (
         <Fragment>
-            <Typography fontWeight="bold" color="inherit">Publish
+            <Typography fontWeight="bold" color="inherit">{intl.formatMessage({ id:'publish'})}
                 <IconButton color="primary" size="small" sx={{ pb:1 }} onClick={() => window.open(constants.INFO_URL['PUBLISH'], '__blank')}>
                     <IconInfoCircle />
                 </IconButton>
             </Typography>
             <Typography variant="body">
-                Click Publish to go live with your latest changes. Your website will be hosted in the<br/>
-                <a style={{ color: '#6366F1'}} href="https://docs.ipfs.tech/concepts/faq/#what-is-ipfs" target="__blank">Interplanetary File System</a>
+                {intl.formatMessage({ id:'publish.tooltip'})}<br/>
+                <a style={{ color: '#6366F1'}} href="https://docs.ipfs.tech/concepts/faq/#what-is-ipfs" target="__blank">{intl.formatMessage({id:"publish.ipfs"})}</a>
             </Typography>
-            <Button size="small" sx={{ my: 1 }} href={`${getProjectUrl({ project })}${queryParams()}`} target="__blank">View site 🌐</Button>
-            {release && (<Button size="small" sx={{ m: 1 }} href={getCidReleaseUrl()} target="__blank">View in IPFS ✨</Button>)}
+            <Button size="small" sx={{ my: 1 }} href={`${getProjectUrl({ project })}${queryParams()}`} target="__blank">{intl.formatMessage({id:"publish.view_site"})}</Button>
+            {release && (<Button size="small" sx={{ m: 1 }} href={getCidReleaseUrl()} target="__blank">{intl.formatMessage({id:"publish.view_ipfs"})}</Button>)}
         </Fragment>
     )
 
@@ -90,7 +92,7 @@ const PublishButton = ({ principal, project, editor }) => {
                     className="primary-color"
                 >
                     <Typography fontWeight="bold">
-                        Publish
+                        {intl.formatMessage({ id:'publish'})}
                     </Typography>
                     { spinner }
                 </Button>

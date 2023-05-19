@@ -61,3 +61,11 @@ Then, run the development server:
 ```bash
 npm run build
 ```
+
+### Language Settings
+
+In order to leverage localized settings you must include locale query param with any of the supported languages, `en` by default.
+
+```
+https://localhost:3000?locale=es
+```
