@@ -37,8 +37,7 @@ const Chat = ({ editor, principal }) => {
     const initializeSocket = () => {
         if (!ws || ws?.readyState === WebSocket.CLOSED) {
             const connectUrl = `${process.env.REACT_APP_WEBSTUDIO_WS_API}?token=${principal}`
-            ws = new WebSocket(connectUrl);
-            console.log("connected to ",connectUrl)
+            ws = new WebSocket(connectUrl)
             ws.onopen = () => setConnected(true)
             ws.onclose = () => setConnected(false)
             ws.onmessage = (event) => {
