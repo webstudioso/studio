@@ -15,7 +15,7 @@ const { ANALYTICS } = constants
 let ws
 const actionStyle = "text-black bg-white rounded-full text-xs px-2 py-1 mr-1 my-2"
 
-const Chat = ({ editor }) => {
+const Chat = ({ editor, principal }) => {
     const intl = useIntl()
     const ref = useRef()
     const [lastMessage, setLastMessage] = useState()
@@ -36,8 +36,9 @@ const Chat = ({ editor }) => {
 
     const initializeSocket = () => {
         if (!ws || ws?.readyState === WebSocket.CLOSED) {
-            ws = new WebSocket(process.env.REACT_APP_WEBSTUDIO_WS_API);
-            console.log("connected to ",process.env.REACT_APP_WEBSTUDIO_WS_API)
+            const connectUrl = `${process.env.REACT_APP_WEBSTUDIO_WS_API}?token=${principal}`
+            ws = new WebSocket(connectUrl);
+            console.log("connected to ",connectUrl)
             ws.onopen = () => setConnected(true)
             ws.onclose = () => setConnected(false)
             ws.onmessage = (event) => {
