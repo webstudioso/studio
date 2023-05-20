@@ -15,8 +15,6 @@ import VideoBlocks from '../blocks/video'
 import ButtonBlocks from '../blocks/buttons'
 import ToastBlocks from '../blocks/toast'
 
-import ActionButton from '../blocks/action-button'
-
 // Primitives
 import WSMForm from 'wsm-form'
 import WSMWalletConnect from 'wsm-wallet-connect'
@@ -71,7 +69,6 @@ const Editor = ({ project, principal }) => {
       },
       panels: { defaults: [] },
       plugins: [
-        ActionButton,
         PluginEditorPanelButtons,
         PluginScriptEditor,
         PageManager,
