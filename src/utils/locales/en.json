@@ -96,6 +96,9 @@
     "copilot.welcome": "Hi, I'm Studio AI, your project assistant! Ask me anything\nCreate a template inspired in twitter with multiple sections\nCreate a new section to display 6 features with images, text and description\nMake a gradient of 4 purple colors that look bright",
     "copilot.unavailable": "The Studio AI is currenly unavailable, when it comes back we will automatically reconnect",
     "copilot.type_message": "Type your message...",
+    "copilot.replace_template_button": "Replace Template",
+    "copilot.add_canvas_button": "Add to Canvas",
+    "copilot.paste_styles_button": "Paste Styles",
 
     "help.title": "Need some help?",
     "help.resources": "Learning resources",

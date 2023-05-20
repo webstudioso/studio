@@ -88,6 +88,7 @@ const Chat = ({ editor }) => {
         const payload = { 
             action: "message", 
             text: message, 
+            locale: intl.locale,
             parentMessageId: lastMessage?.parentMessageId
         }
         ws.send(JSON.stringify(payload))
@@ -201,7 +202,7 @@ const Chat = ({ editor }) => {
                                                                 onClick={() => replaceTemplate(children)}
                                                                 size="small"
                                                                 className={actionStyle}>
-                                                            Replace Template
+                                                            {intl.formatMessage({id:'copilot.replace_template_button'})}
                                                         </Button>
                                                     </Tooltip>
                                                 ) :
@@ -213,7 +214,7 @@ const Chat = ({ editor }) => {
                                                                 onClick={() => appendToCanvas(children[0])}
                                                                 size="small"
                                                                 className={actionStyle}>
-                                                            Add to Canvas
+                                                            {intl.formatMessage({id:'copilot.add_canvas_button'})}
                                                         </Button>
                                                     </Tooltip>
                                                 ) :
@@ -226,7 +227,7 @@ const Chat = ({ editor }) => {
                                                                     onClick={() => appendToCanvas(children[0])}
                                                                     size="small"
                                                                     className={actionStyle}>
-                                                                Add to Canvas
+                                                                {intl.formatMessage({id:'copilot.add_canvas_button'})}
                                                             </Button>
                                                         </Tooltip>
                                                         <Tooltip title={styleTooltip}>
@@ -236,7 +237,7 @@ const Chat = ({ editor }) => {
                                                                     onClick={() => replaceStyles(children)}
                                                                     size="small"
                                                                     className={actionStyle}>
-                                                                Paste Styles
+                                                                {intl.formatMessage({id:'copilot.paste_styles_button'})}
                                                             </Button>
                                                         </Tooltip>
                                                     </div>

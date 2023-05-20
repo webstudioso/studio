@@ -18,7 +18,7 @@ const HelpButton = () => {
             <Button size="small" href='https://calendly.com/webstudioso' target="__blank">{intl.formatMessage({id:'help.book_call'})}</Button><br />
             <Button size="small" href='https://discord.gg/CYYX8yUVgc' target="__blank">{intl.formatMessage({id:'help.chat_with_us'})}</Button><br />
             <Button size="small" href='https://twitter.com/webstudioso' target="__blank">{intl.formatMessage({id:'help.twitter'})}</Button><br />
-            <Button size="small" href='https://github.com/webstudioso/studio/issues/new' target="__blank">{intl.formatMessage({is:'help.suggest_improvement'})}</Button><br />
+            <Button size="small" href='https://github.com/webstudioso/studio/issues/new' target="__blank">{intl.formatMessage({id:'help.suggest_improvement'})}</Button><br />
             <Button color="error" size="small" href='https://github.com/webstudioso/studio/issues/new' target="__blank">{intl.formatMessage({id:'help.report_issue'})}</Button><br />
             
         </Fragment>
