@@ -294,7 +294,7 @@ const metadata = {
    image: 'https://bafybeib2cdsuh5wyzvkom6xfmflngizldo27ub4rifpvo36ufiyhotfb4i.ipfs.w3s.link/Porto.png',
    preview: 'https://bafybeib2whon3avnkqz2guoweupl6fif7vzqypv3zvlsixbnfwgjtha3ki.ipfs.w3s.link/PortoPreview.png',
    name: 'Porto',
-   description: 'A minimal, but elegant personal website template',
+   description: 'template.porto',
    tags: ['Landing Page'],
    premium: false
 }

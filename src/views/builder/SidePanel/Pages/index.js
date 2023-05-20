@@ -11,8 +11,10 @@ import {
 import { IconTrash } from '@tabler/icons'
 import { getProjectUrl } from 'utils/project'
 import { truncate } from 'utils/format'
+import { useIntl } from 'react-intl'
 
 const Pages = ({ editor, project }) => {
+    const intl = useIntl()
     const ref = useRef(null);
     const [pages, setPages] = useState([])
     const [selectedPage, setSelectedPage] = useState()
@@ -103,7 +105,7 @@ const Pages = ({ editor, project }) => {
                     onClick={() => {
                         setName('')
                         setSelectedPage(null)
-                }}>Add a new page</Button>
+                }}>{intl.formatMessage({ id: 'page_manager.new_page' })}</Button>
             </Grid>
             <Grid item xs={8} sx={{ 
                 height: 'calc(100vh - 110px)', 
@@ -113,7 +115,7 @@ const Pages = ({ editor, project }) => {
                 <Grid container sx={{ p: 3 }} id="myPages" ref={ref}>
                     <Grid item xs={12}>
                         <Grid item sx={{ height: 25 }}>
-                            <Typography fontWeight="bold" color="black" style={{ float: 'left' }}>Page Configuration</Typography>
+                            <Typography fontWeight="bold" color="black" style={{ float: 'left' }}>{intl.formatMessage({ id:'page_manager.page_details_title'})}</Typography>
                             { !isHome() && selectedPage &&
                             (<IconButton color="inherit" 
                                         size="small"
@@ -135,11 +137,11 @@ const Pages = ({ editor, project }) => {
                                     fullWidth
                                     size="small"
                                     variant="standard" 
-                                    label="Path"
+                                    label={intl.formatMessage({id:'page_manager.path_input_label'})}
                                     disabled={isHome()}
                                     InputLabelProps={{ shrink: true }}
                                     value={name}
-                                    placeholder='Page path alpha numeric lower case e.g pricing' 
+                                    placeholder={intl.formatMessage({id:'page_manager.path_input_placeholder'})} 
                                     onChange={(e) => {
                                         const name = e.target.value.replaceAll(' ', '').toLowerCase();
                                         setName(name)
@@ -182,7 +184,7 @@ const Pages = ({ editor, project }) => {
                                     }
 
 
-                        }}>{selectedPage ? 'Save' : 'Create Page'}</Button>
+                        }}>{selectedPage ? intl.formatMessage({ id: 'page_manager.save'}) : intl.formatMessage({ id: 'page_manager.create'})}</Button>
                     </Grid>
 
                     {/* <Templates /> */}

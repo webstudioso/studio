@@ -8,12 +8,8 @@ import { IntlProvider } from 'react-intl';
 // load locales files
 const loadLocaleData = (locale) => {
     switch (locale) {
-        case 'fr':
-            return import('utils/locales/fr.json');
-        case 'ro':
-            return import('utils/locales/ro.json');
-        case 'zh':
-            return import('utils/locales/zh.json');
+        case 'es':
+            return import('utils/locales/es.json');
         default:
             return import('utils/locales/en.json');
     }

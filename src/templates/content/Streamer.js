@@ -460,7 +460,7 @@ const metadata = {
    image: 'https://bafybeifby4a2dlftlfyxl6ymsipder44d5mswgd3sonbgyn2jctjddvb7e.ipfs.w3s.link/Streamer.png',
    preview: 'https://bafybeidwdpgeks3rlrhvv5yxtbc3xaxbkv2n35fphbdnaekfjumfllceme.ipfs.w3s.link/StreamerPreview.png',
    name: 'Streamer',
-   description: 'A dark-theme podcast template',
+   description: 'template.streamer',
    tags: ['Landing Page'],
    premium: false
 }

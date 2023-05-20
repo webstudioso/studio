@@ -46,3 +46,9 @@ export const queryParams = () => {
 	const t = Math.floor(Math.random() * 100000);
 	return `?t=${t}`;
 };
+
+export const getQueryParam = (key) => {
+	const params = new URLSearchParams(document.location.search)
+	const param = params.get(key)
+	return param
+}

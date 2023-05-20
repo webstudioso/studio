@@ -523,7 +523,7 @@ const metadata = {
    image: 'https://bafybeigay45qmfjqkremcaqqqpzoqrdzvyhc3m4rz5kpkzsepqo2g63zjy.ipfs.w3s.link/ScreenshotLandingPage.png',
    preview: 'https://bafybeial667pawqcxif3zkssb37pf3ggi5gtezgasp4tar7gs2vsn4ur7q.ipfs.w3s.link/ScreenshotLandingPagePreview.png',
    name: 'Screenshot Landing Page',
-   description: 'A versatile landing page template',
+   description: 'template.screenshot_landing_page',
    tags: ['Landing Page'],
    premium: false
 }

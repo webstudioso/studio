@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react'
-import { Dialog, DialogTitle, DialogContent, DialogContentText, Box, DialogActions, Button, Grid, Paper } from '@mui/material'
+import { Dialog, DialogTitle, DialogContent, Box, DialogActions, Button, Grid, Paper } from '@mui/material'
 import { getProjectUrl } from 'utils/project'
 import { IconExternalLink, IconShieldLock } from '@tabler/icons'
 import { getRoute } from 'api/publish'
 import { getUrlWithoutProtocol } from 'utils/url'
 import { useDispatch, useSelector } from 'react-redux'
 import { LOADER } from 'store/actions'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 const PublishConfirmationDialog = ({ open, project, onClose, principal }) => {
+    const intl = useIntl()
     const dispatch = useDispatch()
     const [cid, setCid] = useState()
     const isLoading = useSelector((state) => state.loader.show)
@@ -38,12 +40,13 @@ const PublishConfirmationDialog = ({ open, project, onClose, principal }) => {
             onClose={() => console.log("Close")}
             aria-describedby="alert-dialog-slide-description"
         >
-            <DialogTitle sx={{ px: 8, pt:5 }}>{"Your site is live! 🎉"}</DialogTitle>
+            <DialogTitle sx={{ px: 8, pt:5 }}>
+                <FormattedMessage id="publish.is_live" />
+            </DialogTitle>
             <DialogContent sx={{ px: 8 }}>
-                <DialogContentText id="alert-dialog-slide-description">
-                    Your changes should be visible for visitors in the next couple of minutes and has been
-                    issued it's own certificate.
-                </DialogContentText>
+                <Grid container id="alert-dialog-slide-description">
+                    <FormattedMessage id="publish.is_live_description" />
+                </Grid>
                 <Grid container spacing={2} sx={{ mt: 1 }}>
                     <Grid item xs={12} md={6}>
                         <Paper sx={{ 
@@ -64,7 +67,7 @@ const PublishConfirmationDialog = ({ open, project, onClose, principal }) => {
                             <Box display="flex" sx={{ textAlign: "center", width: '100%' }}>
                                 <IconExternalLink color="white" size={22} />
                                 <Box justifyItems="center" marginLeft={1} lineHeight="25px">
-                                    Visit Website
+                                    {intl.formatMessage({id:"publish.visit_website"})}
                                 </Box>
                             </Box>
                         </Paper>
@@ -88,7 +91,7 @@ const PublishConfirmationDialog = ({ open, project, onClose, principal }) => {
                             <Box display="flex" sx={{ textAlign: "center", width: '100%' }}>
                                 <IconShieldLock color="white" size={24} />
                                 <Box justifyItems="center" marginLeft={1} lineHeight="25px" marginRight={1}>
-                                    View Certificate
+                                    {intl.formatMessage({id:"publish.view_certificate"})}
                                 </Box>
                             </Box>
                         </Paper>
@@ -96,7 +99,7 @@ const PublishConfirmationDialog = ({ open, project, onClose, principal }) => {
                 </Grid>
             </DialogContent>
             <DialogActions sx={{ px: 8, pb: 5 }}>
-                <Button onClick={onClose} variant="outlined">Continue</Button>
+                <Button onClick={onClose} variant="outlined">{intl.formatMessage({id:'action.continue'})}</Button>
             </DialogActions>
         </Dialog>
 	)

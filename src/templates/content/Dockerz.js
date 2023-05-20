@@ -350,7 +350,7 @@ const metadata = {
    image: 'https://bafybeic4ojcfjgsjxgv24pyaf65pdz6ezmhsutrnqkuhjt3cnabxqzaxge.ipfs.w3s.link/Ditch.png',
    preview: 'https://bafybeiauc6xrnwiwhfir24p4quw3nxxqdh33cxwcsmx27k6bxchjg3aiba.ipfs.w3s.link/DitchPreview.png',
    name: 'Ditch',
-   description: 'Modern and clean personal website template',
+   description: 'template.dockerz',
    tags: ['Landing Page'],
    premium: false
 }

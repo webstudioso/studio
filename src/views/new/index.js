@@ -1,12 +1,13 @@
 import { useSelector } from 'react-redux'
 import { Box, Stack, Typography, IconButton, Container } from '@mui/material'
-import NameField from 'views/new/NameField'
 import { useNavigate } from 'react-router-dom'
+import { FormattedMessage } from 'react-intl'
+import NameField from 'views/new/NameField'
 import InfoButton from 'views/builder/InfoButton'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import constants from 'constant'
 
-const { PATH, SECTION } = constants
+const { PATH } = constants
 
 const NewPage = () => {
 	const navigate = useNavigate()
@@ -24,8 +25,8 @@ const NewPage = () => {
 					<IconButton sx={{ color: '#aaacb3' }} aria-label="Back" onClick={returnHome}>
 						<ArrowBackIcon />
 					</IconButton>
-						Create a new project
-						<InfoButton section={SECTION.NEW_TITLE} />
+						<FormattedMessage id="new_page.title" />
+						<InfoButton tooltip="new_page.title_tooltip" />
 					</Typography>
 				</Box>
 				<Box sx={{ mt: 12 }}>

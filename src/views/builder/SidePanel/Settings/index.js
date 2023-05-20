@@ -9,10 +9,12 @@ import { showError, showSuccess } from 'utils/snackbar'
 import tabFrame from 'assets/images/browserTabSkeleton.png'
 import constants from 'constant'
 import { requestNewDomain } from 'api/discord';
+import { useIntl } from 'react-intl';
 const { EVENTS } = constants
 
 
 const Settings = ({ principal, project }) => {
+    const intl = useIntl()
     const defaultMetadata = getDefaultMetadataForProject({ project })
     const isLoading = useSelector((state) => state.loader.show)
     const account = useSelector((state) => state.account)
@@ -24,12 +26,13 @@ const Settings = ({ principal, project }) => {
     const save = async (data) =>{
         try {
             await publishMetadata({ id: project.id, principal, metadata: data  })
-            showSuccess({ dispatch, message: 'Metadata saved'})
+            showSuccess({ dispatch, message: intl.formatMessage({ id : 'action.metadata_saved' }) })
             const updatedProject = await getProjectById({ projectId: project.id, principal })
             dispatch({ type: SET_PROJECT, project:updatedProject })
         } catch(e) {
             console.log(e)
-            showError({ dispatch, error: e.message})
+            const error = intl.formatMessage({ id : 'action.metadata_saved_error' })
+            showError({ dispatch, error })
         } finally {
             dispatch({ type: LOADER, show: false })
         }
@@ -102,17 +105,17 @@ const Settings = ({ principal, project }) => {
     const title = (
         <Grid container spacing={1} sx={{ mb:3, pb: 1, background: '#fdfdfd', border:'1px solid #f3f3f3' }}>
             <Grid item xs={12}>
-                <Typography fontWeight="bold" color="#222" fontSize={14}>Title</Typography>
+                <Typography fontWeight="bold" color="#222" fontSize={14}>{ intl.formatMessage({ id : 'settings.title' }) }</Typography>
             </Grid>
             <Grid item xs={12}>
                 <Typography color="#555" fontSize={12}>
-                    Text displayed on the browser tab and on the social sharing links. It helps the audience understand what the project is about.
+                    {intl.formatMessage({ id : 'settings.description' }) }
                 </Typography>
             </Grid>
             <Grid item xs={12} sx={{ mt: 1, pr: 2, pl: 1, pb: 2 }}>
                     <TextField  fullWidth
                                 variant="standard"
-                                placeholder="e.g The best way to build websites | Webstudio"
+                                placeholder={intl.formatMessage({ id: 'settings.placeholder' })}
                                 defaultValue={metadata?.description}
                                 disabled={isLoading}
                                 onChange={(e) => {
@@ -124,7 +127,7 @@ const Settings = ({ principal, project }) => {
                                     setMetadata(currMeta);
                                 }}
                     ></TextField>
-                    <Button fullWidth onClick={handleSaveMetadata}>Save Title</Button>
+                    <Button fullWidth onClick={handleSaveMetadata}>{intl.formatMessage({ id: 'settings.save_title' })}</Button>
             </Grid>
         </Grid>
     );
@@ -136,22 +139,21 @@ const Settings = ({ principal, project }) => {
     const customDomainBlock = (
         <Grid container spacing={1} sx={{ mb:3, pb: 1, background: '#fdfdfd', border:'1px solid #f3f3f3' }}>
             <Grid item xs={12}>
-                <Typography fontWeight="bold" color="#222" fontSize={14}>Custom Domain</Typography>
+                <Typography fontWeight="bold" color="#222" fontSize={14}>{intl.formatMessage({ id: 'settings.custom_domain' })}</Typography>
             </Grid>
             <Grid item xs={12}>
                 <Typography color="#555" fontSize={12}>
-                    You can have your webstudio app under a custom domain if you own one already. If so,
-                    let us know below and we will contact you within 48h via email to help you set it up or change it.
+                    {intl.formatMessage({ id: 'settings.custom_domain_description' })}
                 </Typography>
             </Grid>
             <Grid item xs={12} sx={{ mt: 1, pr: 2, pl: 1, pb: 2 }}>
                     <TextField  fullWidth
                                 variant="standard"
-                                placeholder="e.g mydomain.com"
+                                placeholder={intl.formatMessage({ id: 'settings.custom_domain_placeholder' })}
                                 disabled={isLoading}
                                 onChange={(e) => setCustomDomain(e.target.value)}
                     ></TextField>
-                    <Button fullWidth onClick={handleSubmitCustomDomain}>Submit Request</Button>
+                    <Button fullWidth onClick={handleSubmitCustomDomain}>{intl.formatMessage({ id: 'settings.custom_domain_submit_request' })}</Button>
             </Grid>
         </Grid>
     );
@@ -159,20 +161,20 @@ const Settings = ({ principal, project }) => {
     const favIcon = (
         <Grid container spacing={1} sx={{ mb:3, pb: 1, background: '#fdfdfd', border:'1px solid #f3f3f3' }}>
             <Grid item xs={12}>
-                <Typography fontWeight="bold" color="#222" fontSize={14}>Favicon</Typography>
+                <Typography fontWeight="bold" color="#222" fontSize={14}>{intl.formatMessage({ id:'settings.favicon' })}</Typography>
             </Grid>
             <Grid item xs={12}>
                 <Typography color="#555" fontSize={12}>
-                    A favicon is a small icon next to your site title. It help visitors recognize your brand and stand out in their browser tabs.
+                    {intl.formatMessage({ id: 'settings.favicon_description' })}
                 </Typography>
             </Grid>
             <Grid item xs={4} sx={{ mt: 1 }}>
-                    <Typography>Your Favicon</Typography>
+                    <Typography>{intl.formatMessage({ id: 'settings.favicon_preview_title' })}</Typography>
                     <Stack direction="row">
-                        <img src={metadata?.icon} height="44px" width="44px" alt="Upload favicon" />
+                        <img src={metadata?.icon} height="44px" width="44px" alt={intl.formatMessage({id:'settings.favicon_change'})} />
                         <Box sx={{ py:1, ml: 1 }}>
                             <Button color="primary" size="small" variant="outlined" component="label">
-                                Upload
+                                {intl.formatMessage({id:'settings.favicon_change'})}
                                 <input
                                     type="file"
                                     accept="image/*"
@@ -185,9 +187,9 @@ const Settings = ({ principal, project }) => {
                     </Stack>
             </Grid>
             <Grid item xs={8} sx={{ mt: 1 }}>
-                    <Typography>Preview in browser</Typography>
+                    <Typography>{intl.formatMessage({id:"settings.favicon_preview_in_browser"})}</Typography>
                     <Box sx={{ position:'relative' }}>
-                        <img src={tabFrame} height={41} alt="Preview" />
+                        <img src={tabFrame} height={41} alt={intl.formatMessage({id:"settings.favicon_preview_in_browser"})} />
                         <img src={metadata?.icon} 
                             alt="Icon" 
                             style={{
@@ -206,7 +208,7 @@ const Settings = ({ principal, project }) => {
                                 fontWeight:'bold',
                                 color: '#333'
                             }}>
-                                Your App Title
+                                {intl.formatMessage({id:"settings.app_title"})}
                         </span>
                     </Box>
             </Grid>
@@ -216,11 +218,11 @@ const Settings = ({ principal, project }) => {
     const social = (
         <Grid container spacing={1} sx={{mb:3, background: '#fdfdfd', border:'1px solid #f3f3f3' }}>
             <Grid item xs={12}>
-                <Typography fontWeight="bold" color="#222" fontSize={14}>Social Image</Typography>
+                <Typography fontWeight="bold" color="#222" fontSize={14}>{intl.formatMessage({id:"settings.social_image"})}</Typography>
             </Grid>
             <Grid item xs={12}>
                 <Typography color="#555" fontSize={12}>
-                This image will be shared on social networks including Facebook and Twitter. It's a great way to help visitors recognize your brand.
+                {intl.formatMessage({id:"settings.social_image_description"})}
                 </Typography>
             </Grid>
             <Grid item xs={12} sx={{ mt: 1, pr: 1, pb: 1 }}>
@@ -229,7 +231,7 @@ const Settings = ({ principal, project }) => {
             <Grid item xs={12}>
                 <Box sx={{ pb:1, ml: 1 }}>
                     <Button color="primary" size="small" variant="outlined" component="label">
-                        Upload
+                        {intl.formatMessage({id:'settings.social_image_upload'})}
                         <input
                             type="file"
                             accept="image/*"

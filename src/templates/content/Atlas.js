@@ -295,7 +295,7 @@ const metadata = {
    image: 'https://bafybeidpgt3zd5z4legabpuj2hp2xevyqyp4srr5jd55vbvy5kolna7l4u.ipfs.w3s.link/Atlas.png',
    preview: 'https://bafybeib2oakvgcv7hajmkefg2sdtnlnfd3ffqhm2h2rjksrk7txjyg2gai.ipfs.w3s.link/AtlasPreview.png',
    name: 'Atlas',
-   description: 'A personal blog HTML template',
+   description: 'template.atlas',
    tags: ['Landing Page'],
    premium: false
 }

@@ -34,7 +34,7 @@
         "react-device-detect": "^2.2.2",
         "react-dom": "^18.2.0",
         "react-draggable": "^4.4.5",
-        "react-intl": "^5.14.0",
+        "react-intl": "^6.4.2",
         "react-markdown": "^6.0.3",
         "react-perfect-scrollbar": "^1.5.8",
         "react-redux": "^7.1.0-rc.1",
@@ -50,10 +50,10 @@
         "uuid": "^8.3.2",
         "wsm-animations": "^0.0.2",
         "wsm-basic": "^0.0.1",
-        "wsm-fonts": "^0.0.5",
         "wsm-form": "^0.0.39",
         "wsm-toast": "^1.0.14",
         "wsm-wallet-connect": "^0.0.49",
+        "wsm-fonts": "^1.0.1",
         "yup": "^0.32.9"
     },
     "devDependencies": {

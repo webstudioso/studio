@@ -3,17 +3,23 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Box, Typography, LinearProgress, Chip } from '@mui/material'
 import { Magic } from 'magic-sdk'
-import { getUrl } from 'utils/url'
+import { getQueryParam, getUrl } from 'utils/url'
 import { showError } from 'utils/snackbar'
-import { LOGIN, SET_PROJECT } from 'store/actions'
+import { LOGIN, SET_PROJECT, THEME_LOCALE } from 'store/actions'
 import { getAllProjects } from 'api/project'
 import { getMemoedProject } from 'utils/project'
 import { trackEvent } from 'utils/analytics'
 import { getSubscription } from 'api/subscription'
+import { FormattedMessage } from 'react-intl'
 import constants from 'constant'
-const { SESSION_DURATION_SEC } = constants
+const { 
+	SESSION_DURATION_SEC, 
+	QUERY_PARAMS,  
+	PATH, 
+	ANALYTICS, 
+	DEFAULT_LOCALE 
+} = constants
 
-const { PATH, ANALYTICS } = constants
 const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY)
 
 const Login = () => {
@@ -21,8 +27,17 @@ const Login = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 
+	const setLanguage = () => {
+		const queryLocale = getQueryParam(QUERY_PARAMS.LOCALE)
+		if (queryLocale)
+			localStorage.setItem(QUERY_PARAMS.LOCALE, queryLocale)
+		const locale = localStorage.getItem(QUERY_PARAMS.LOCALE, DEFAULT_LOCALE)
+		dispatch({ type: THEME_LOCALE, locale });
+	}
+
 	useEffect(() => {
 		authenticate()
+		setLanguage()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
@@ -57,8 +72,7 @@ const Login = () => {
 
 	const authenticateFromQueryParams = () => {
 		// From query params we should receive email
-		const params = new URLSearchParams(document.location.search)
-		const email = params.get('email')
+		const email = getQueryParam(QUERY_PARAMS.EMAIL)
 		if (email) {
 			// Authenticate with Magic
 			signInWithMagic(email)
@@ -81,10 +95,10 @@ const Login = () => {
 		<Box className="signin">
 			<Box textAlign="center" className="container fade-in bg-container">
 				<Typography variant="body" className="super-title-text">
-					Webstudio
+					<FormattedMessage id='login_page.app_name' />
 				<Chip 	size="small" 
 						variant="contained" 
-						label='BETA' 
+						label={<FormattedMessage id='login_page.app_version' />} 
 						className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-full text-sm py-3 text-center"
 						sx={{ ml: 1 }}
 				/>

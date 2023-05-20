@@ -10,16 +10,15 @@ import { getProjectById } from 'api/project'
 import { SET_PROJECT } from 'store/actions'
 import InfoButton from 'views/builder/InfoButton'
 import Card from 'views/projects/Card'
-import constants from 'constant'
 import Logo from 'common/Logo'
 import { showError } from 'utils/snackbar'
 import Membership from 'views/Membership'
+import { useIntl } from 'react-intl'
 
 const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY)
 
-const { SECTION } = constants
-
 const Projects = () => {
+	const intl = useIntl()
 	const [selected, setSelected] = useState()
 	const [invitedProject, setInvitedProject] = useState()
 	const [openGuest, setOpenGuest] = useState(false)
@@ -41,7 +40,7 @@ const Projects = () => {
 			memoProject(guestProject)
 			navigate(`/e/${guestProject?.id}`)
 		} else {
-			const error = 'You do not have access to this project'
+			const error = intl.formatMessage({ id: "dashboard.error_no_permission" })
 			showError({ dispatch, error})
 		}
 	}
@@ -80,7 +79,7 @@ const Projects = () => {
 								fontWeight="600"
 								sx={{ color: theme.palette.primary.dark }}
 							>
-								Create a new dapp
+								{intl.formatMessage({ id: 'dashboard.create_new_dapp' })}
 							</Typography>
 						</Grid>
 					</Grid>
@@ -106,8 +105,8 @@ const Projects = () => {
 						</Box>
 						<Box sx={{ minWidth: 120 }} display="flex" alignItems="center">
 							<Typography variant="h2" className="title-text">
-								My Projects
-								<InfoButton section={SECTION.DASHBOARD_TITLE} />
+								{intl.formatMessage({ id: "dashboard.title" })}
+								<InfoButton tooltip="dashboard.title_tooltip" />
 								<Membership />
 							</Typography>
 						</Box>
@@ -136,7 +135,7 @@ const Projects = () => {
 			</Box>
 			<Dialog open={openGuest} onClose={() => setOpenGuest(false)}>
 				<DialogContent>
-					<TextField autoFocus margin="dense" id="name" label="Type project id" type="text"
+					<TextField autoFocus margin="dense" id="name" label={intl.formatMessage({ id: 'dashboard.collaborate_placeholder' })} type="text"
 						fullWidth
 						sx={{ minWidth: 300 }}
 						size="large"
@@ -148,7 +147,7 @@ const Projects = () => {
 					/>
 				</DialogContent>
 				<DialogActions sx={{ px: 3 }}>
-					<Button variant="outlined" color="primary" onClick={addExistingProject}>Add</Button>
+					<Button variant="outlined" color="primary" onClick={addExistingProject}>{intl.formatMessage({ id: 'dashboard.collaborate_add' })}</Button>
 				</DialogActions>
 			</Dialog>
 		</Box>

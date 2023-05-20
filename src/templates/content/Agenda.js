@@ -461,7 +461,7 @@ const metadata = {
    image: 'https://bafybeieedac5qdk4apdj6objfftafc2nojek66rr37ghz2uca2tiwtvm4i.ipfs.w3s.link/AgendaPreview.png',
    preview: 'https://bafybeiea2zleajdciksw7oopput6wsxaxp3smun53cgx23b7aceh2aupme.ipfs.w3s.link/Agenda.png',
    name: 'Agenda',
-   description: 'Tailwind Event Calendar',
+   description: 'template.agenda',
    tags: ['Landing Page'],
    premium: false
 }

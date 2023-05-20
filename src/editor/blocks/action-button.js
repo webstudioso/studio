@@ -1,5 +1,4 @@
 /*eslint no-undef: "off"*/
-
 const Plugin = (editor) => {
   const componentId = "action-button";
 
@@ -24,9 +23,9 @@ const Plugin = (editor) => {
     `,
     category: "Triggers",
     content: `
-      <button type="button" class="btn" id="${componentId}">
-        <span>Action</spa>
-      </button>
+      <span type="button" class="btn" id="${componentId}">
+        Action
+      </span>
       <style>
         #${componentId} {
           width: 100%;
@@ -40,79 +39,115 @@ const Plugin = (editor) => {
   const script = function (props) {
     const componentId = "action-button";
     console.log(`Running script ${componentId}`);
-    let payload;
-    const evalCondition = (evt, data) => {
-      if (!evt || !evt.detail) return;
-      console.log(evt);
-      console.log(data);
-      const nft = evt.detail;
-      const meta = JSON.parse(nft.metadata);
-      console.log(meta);
-      const img = meta.image.startsWith('ipfs://') ? `https://ipfs.moralis.io:2053/ipfs/${meta.image.split('ipfs://')[1]}` : meta.image;
-      payload = {
-        username: "Webstudio Webhook",
-        avatar_url: "https://i.ibb.co/ZHC5n6b/S3-SNU-jpg-2.png",
-        content: `You have just received a new nudge from a user!`,
-        embeds: [
-          {
-            author: {
-              name: nft.owner_of,
-              url: "https://i.ibb.co/gtqZpcR/webstudiologo512-copy.png",
-              icon_url: "https://i.ibb.co/gtqZpcR/webstudiologo512-copy.png",
-            },
-            title: `${nft.symbol} #${nft.token_id}`,
-            url: `https://i.ibb.co/gtqZpcR/webstudiologo512-copy.png`,
-            description: meta.description,
-            color: 15258703,
-            fields: [
-              {
-                name: "Owner",
-                value: nft.owner_of,
-                inline: true,
-              },
-              {
-                name: "Token Address",
-                value: nft.token_address,
-                inline: true,
-              },
-              {
-                name: "Token Id",
-                value: nft.token_id,
-                inline: true,
-              },
-            ],
-            image: {
-              url: img,
-            },
-            footer: {
-              text: "Powered by Webstudio",
-              icon_url: "https://i.ibb.co/gtqZpcR/webstudiologo512-copy.png",
-            },
-          },
-        ],
-      };
-      //
-    };
+    // const { ThirdwebSDK } = require("@thirdweb-dev/sdk");
+    // window.GGSANCHETA ='LOL'
 
-    document.addEventListener("onNFTSelect", evalCondition);
+    // console.log(thirdwebDevsdk)
+    console.log("WTF")
+    console.log(window)
+    // console.log(document)
+    // console.log(thirdwebDevsdk);
 
-    $(`#${componentId}`).click((el) => {
-      console.log("Triggering event call");
-      const options = {
-        method: "POST",
-        body: JSON.stringify(payload),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      fetch(props.value, options)
-        .then((response) => response.json())
-        .then((response) => {
-          // Do something with response.
-        });
-    });
+    // let gg
+    // let dyn = document.createElement("script")
+    // dyn.type = "module"
+    // // dyn.onload = () => { console.log(gg) }
+    // // dyn.src="https://cdn.jsdelivr.net/npm/@thirdweb-dev/sdk@3.10.14/+esm"
+    // dyn.innerText = `
+    //   console.log("YAAAAAAAAAA")
+    //   import sdk from 'https://cdn.jsdelivr.net/npm/@thirdweb-dev/sdk@3.10.14/+esm'
+    //   console.log("YOOOO")
+    // `
+    // document.head.appendChild(dyn)
 
-    evalCondition();
+
+    // console.log(gg)
+    // const script = document.createElement('script');
+    // script.onload = initLib;
+    // script.src = 'https://.../somelib.min.js';
+    // document.body.appendChild(script);
+
+    // console.log(dyn)
+    // console.log(document)
+    // console.log(gg)
+    // setTimeout(() => {
+    //   console.log(thirdwebDevsdk)
+    // },1000)
+    // console.log(ThirdwebSDK)
+    // import thirdwebDevsdk from 'https://cdn.jsdelivr.net/npm/@thirdweb-dev/sdk@3.10.14/+esm'
+    // let payload;
+    // const evalCondition = (evt, data) => {
+    //   if (!evt || !evt.detail) return;
+    //   console.log(evt);
+    //   console.log(data);
+    //   const nft = evt.detail;
+    //   const meta = JSON.parse(nft.metadata);
+    //   console.log(meta);
+    //   const img = meta.image.startsWith('ipfs://') ? `https://ipfs.moralis.io:2053/ipfs/${meta.image.split('ipfs://')[1]}` : meta.image;
+    //   payload = {
+    //     username: "Webstudio Webhook",
+    //     avatar_url: "https://i.ibb.co/ZHC5n6b/S3-SNU-jpg-2.png",
+    //     content: `You have just received a new nudge from a user!`,
+    //     embeds: [
+    //       {
+    //         author: {
+    //           name: nft.owner_of,
+    //           url: "https://i.ibb.co/gtqZpcR/webstudiologo512-copy.png",
+    //           icon_url: "https://i.ibb.co/gtqZpcR/webstudiologo512-copy.png",
+    //         },
+    //         title: `${nft.symbol} #${nft.token_id}`,
+    //         url: `https://i.ibb.co/gtqZpcR/webstudiologo512-copy.png`,
+    //         description: meta.description,
+    //         color: 15258703,
+    //         fields: [
+    //           {
+    //             name: "Owner",
+    //             value: nft.owner_of,
+    //             inline: true,
+    //           },
+    //           {
+    //             name: "Token Address",
+    //             value: nft.token_address,
+    //             inline: true,
+    //           },
+    //           {
+    //             name: "Token Id",
+    //             value: nft.token_id,
+    //             inline: true,
+    //           },
+    //         ],
+    //         image: {
+    //           url: img,
+    //         },
+    //         footer: {
+    //           text: "Powered by Webstudio",
+    //           icon_url: "https://i.ibb.co/gtqZpcR/webstudiologo512-copy.png",
+    //         },
+    //       },
+    //     ],
+    //   };
+    //   //
+    // };
+
+    // document.addEventListener("onNFTSelect", evalCondition);
+
+    // $(`#${componentId}`).click((el) => {
+    //   console.log("Triggering event call");
+    //   const options = {
+    //     method: "POST",
+    //     body: JSON.stringify(payload),
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   };
+    //   fetch(props.value, options)
+    //     .then((response) => response.json())
+    //     .then((response) => {
+    //       // Do something with response.
+    //     });
+    // });
+
+    // evalCondition();
   };
 
   const properties = {

@@ -8,13 +8,15 @@ import rehypeRaw from 'rehype-raw'
 import { trackEvent } from 'utils/analytics'
 import constants from 'constant'
 import { getTemplateBodyContentFromString, getClassesFromSnippet, isHTMLComponent, isHTMLSegment, isHTMLTemplate } from 'utils/template'
+import { useIntl } from 'react-intl'
 
 const { ANALYTICS } = constants
 
 let ws
 const actionStyle = "text-black bg-white rounded-full text-xs px-2 py-1 mr-1 my-2"
 
-const Chat = ({ editor }) => {
+const Chat = ({ editor, principal }) => {
+    const intl = useIntl()
     const ref = useRef()
     const [lastMessage, setLastMessage] = useState()
     const [message, setMessage] = useState()
@@ -34,8 +36,8 @@ const Chat = ({ editor }) => {
 
     const initializeSocket = () => {
         if (!ws || ws?.readyState === WebSocket.CLOSED) {
-            ws = new WebSocket(process.env.REACT_APP_WEBSTUDIO_WS_API);
-            console.log("connected to ",process.env.REACT_APP_WEBSTUDIO_WS_API)
+            const connectUrl = `${process.env.REACT_APP_WEBSTUDIO_WS_API}?token=${principal}`
+            ws = new WebSocket(connectUrl)
             ws.onopen = () => setConnected(true)
             ws.onclose = () => setConnected(false)
             ws.onmessage = (event) => {
@@ -86,6 +88,7 @@ const Chat = ({ editor }) => {
         const payload = { 
             action: "message", 
             text: message, 
+            locale: intl.locale,
             parentMessageId: lastMessage?.parentMessageId
         }
         ws.send(JSON.stringify(payload))
@@ -139,18 +142,10 @@ const Chat = ({ editor }) => {
         </Paper>
     )
 
-    const addTooltip = 'Adds this element before the currently selected element in the canvas'
-    const styleTooltip = 'Paste only styles to the currently selected element in the canvas'
-    const templateTooltip = 'Completely replace existing page with this new template'
-    const intro = (
-        <div>
-            <h3><strong>Hi, I'm Studio AI, your project assistant! Ask me anything:</strong></h3>
-            <br/><br/>
-            <i>"Create a template inspired in twitter with multiple sections"</i><br/><br/>
-            <i>"Create a new section to display 6 features with images, text and description"</i><br/><br/>
-            <i>"Make a gradient of 4 purple colors that look bright"</i><br/><br/><br/>
-        </div>
-    )
+    const addTooltip = intl.formatMessage({id:'copilot.block_add'})
+    const styleTooltip = intl.formatMessage({id:'copilot.style_replace'})
+    const templateTooltip = intl.formatMessage({id:'copilot.template_replace'})
+    const intro = intl.formatMessage({id:'copilot.welcome'})
 
     return (
         <><Box>
@@ -207,7 +202,7 @@ const Chat = ({ editor }) => {
                                                                 onClick={() => replaceTemplate(children)}
                                                                 size="small"
                                                                 className={actionStyle}>
-                                                            Replace Template
+                                                            {intl.formatMessage({id:'copilot.replace_template_button'})}
                                                         </Button>
                                                     </Tooltip>
                                                 ) :
@@ -219,7 +214,7 @@ const Chat = ({ editor }) => {
                                                                 onClick={() => appendToCanvas(children[0])}
                                                                 size="small"
                                                                 className={actionStyle}>
-                                                            Add to Canvas
+                                                            {intl.formatMessage({id:'copilot.add_canvas_button'})}
                                                         </Button>
                                                     </Tooltip>
                                                 ) :
@@ -232,7 +227,7 @@ const Chat = ({ editor }) => {
                                                                     onClick={() => appendToCanvas(children[0])}
                                                                     size="small"
                                                                     className={actionStyle}>
-                                                                Add to Canvas
+                                                                {intl.formatMessage({id:'copilot.add_canvas_button'})}
                                                             </Button>
                                                         </Tooltip>
                                                         <Tooltip title={styleTooltip}>
@@ -242,7 +237,7 @@ const Chat = ({ editor }) => {
                                                                     onClick={() => replaceStyles(children)}
                                                                     size="small"
                                                                     className={actionStyle}>
-                                                                Paste Styles
+                                                                {intl.formatMessage({id:'copilot.paste_styles_button'})}
                                                             </Button>
                                                         </Tooltip>
                                                     </div>
@@ -259,7 +254,7 @@ const Chat = ({ editor }) => {
                         !connected && (
                             <Box>
                                 <Typography fontWeight="bold" fontSize={16}>
-                                    The Studio AI is currenly unavailable, when it comes back we will automatically reconnect
+                                    {intl.formatMessage({id:'copilot.unavailable'})}
                                 </Typography>
                             </Box>
                         )
@@ -268,7 +263,7 @@ const Chat = ({ editor }) => {
             </Box>
             <Box sx={{ px: 1 }}>
                 <TextField  fullWidth 
-                            placeholder="Type your message..." 
+                            placeholder={intl.formatMessage({id:'copilot.type_message'})}
                             onChange={(e) => setMessage(e.target.value)}
                             value={message}
                             autoComplete='off'
@@ -310,7 +305,7 @@ const Chat = ({ editor }) => {
         </Box><Box sx={{ position: 'fixed', bottom: 15, right: 15, zIndex: 1201 }}>
                 <Fab variant="extended" color="primary" size="large" aria-label="assistant" onClick={toggleChat}>
                     <RateReviewIcon sx={{ mr: 1 }} />
-                    Studio AI
+                    {intl.formatMessage({id:'copilot'})}
                     <Box className={connected ? "online-signal" : "offline-signal"}/>
                 </Fab>
             </Box></>

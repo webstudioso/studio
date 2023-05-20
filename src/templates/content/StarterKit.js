@@ -445,7 +445,7 @@ const metadata = {
    image: 'https://bafybeia5gky3gcqxce42nv5qhzprb2s43quzlcsiausfrf7dyefgm32u6m.ipfs.w3s.link/StarterKit.png',
    preview: 'https://bafybeidirrqjstjjdkooch5t2gi477bxwh6izmpicwme6qdyvtgnrnacfi.ipfs.w3s.link/StarterKitPreview.png',
    name: 'Tailwind Starter Kit',
-   description: 'Beautiful Tailwind + FontAwesome landing page',
+   description: 'template.starter_kit',
    tags: ['Landing Page'],
    premium: false
 }

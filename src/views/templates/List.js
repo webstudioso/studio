@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { LOADER } from 'store/actions'
 import availableTemplates from 'templates/content'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -14,6 +15,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }))
 
 const Templates = ({ onLeave, fullScreen=false }) => {
+    const intl = useIntl()
     const dispatch = useDispatch()
     const [selected, setSelected] = useState()
     const isLoading = useSelector((state) => state.loader.show)
@@ -72,7 +74,7 @@ const Templates = ({ onLeave, fullScreen=false }) => {
                             }}
                             className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-full text-sm px-5 py-3 text-center mr-2 mb-2"
                     >
-                        PICK
+                        <FormattedMessage id="template_page.pick" />
                         {spinner}
                     </Button>
                     <Box sx={{
@@ -83,7 +85,7 @@ const Templates = ({ onLeave, fullScreen=false }) => {
                         color: 'black',
                         textAlign: 'center'
                     }}>
-                        <Typography variant="body" fontWeight="bold" color="#555" fontSize={16}>{template.metadata.description}</Typography>
+                        <Typography variant="body" fontWeight="bold" color="#555" fontSize={16}>{intl.formatMessage({ id: template.metadata.description })}</Typography>
                     </Box>
                 </Box>)}
                 <Box sx={{py:2, px: 1 }}>
@@ -93,7 +95,7 @@ const Templates = ({ onLeave, fullScreen=false }) => {
                         </Grid>
                         <Box flexGrow={1}></Box>
                         <Grid item>
-                            <Chip label="Free" color="primary" size="small" />
+                            <Chip label={<FormattedMessage id="template_page.free" />} color="primary" size="small" />
                         </Grid>
                       
                     </Grid>

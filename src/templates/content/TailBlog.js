@@ -231,7 +231,7 @@ const metadata = {
    image: 'https://bafybeib2nsofrjkcrhcrrbxrqiw4wxypaxx2wuxu5mlikhx6yvr3wdgs2q.ipfs.w3s.link/TailBlog.png',
    preview: 'https://bafybeib3xhsfhk7djlhfzrxodibe5hgtkojx34qncprqj3e2rvpy453m4q.ipfs.w3s.link/TailBlogPreview.png',
    name: 'TailBlog',
-   description: 'A beautiful minimalistic blog template',
+   description: 'template.tailblog',
    tags: ['Landing Page'],
    premium: false
 }

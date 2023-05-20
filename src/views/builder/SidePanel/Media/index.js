@@ -5,9 +5,11 @@ import { LOADER } from 'store/actions'
 import { useDispatch } from 'react-redux'
 import constants from 'constant'
 import { showError, showSuccess } from 'utils/snackbar'
+import { useIntl } from 'react-intl'
 const { EVENTS } = constants
 
 const Media = ({ onLeave, editor }) => {
+    const intl = useIntl()
     const dispatch = useDispatch()
     const ref = useRef(null)
     const [selected, setSelected] = useState()
@@ -63,7 +65,7 @@ const Media = ({ onLeave, editor }) => {
         >
             <Box sx={{ position:'absolute', right:20, top: 18}}>
                 <Button color="primary" variant="outlined" component="label">
-                Upload New Media
+                    { intl.formatMessage({id: 'image_manager.upload_media'})}
                     <input
                         type="file"
                         accept="image/*"
@@ -111,7 +113,7 @@ const Media = ({ onLeave, editor }) => {
                                     }}
                                     className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-full text-sm px-5 py-3 text-center mr-2 mb-2"
                             >
-                                PICK
+                                { intl.formatMessage({ id: 'image_manager.pick' })}
                             </Button>
                     </Box>)}
 
