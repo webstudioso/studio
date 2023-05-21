@@ -143,5 +143,7 @@
     "template.screenshot_landing_page": "A versatile landing page template",
     "template.starter_kit": "Beautiful Tailwind + FontAwesome landing page",
     "template.streamer": "A dark-theme podcast template",
-    "template.tailblog": "A beautiful minimalistic blog template"
+    "template.tailblog": "A beautiful minimalistic blog template",
+
+    "audited": "Audited"
 }

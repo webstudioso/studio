@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { LOADER, SET_EDITOR } from 'store/actions'
 import { showError, showSuccess } from 'utils/snackbar'
+import { useIntl } from 'react-intl'
 import grapesjs from 'grapesjs'
 import PluginTailwind from 'grapesjs-tailwind'
 import PluginScriptEditor from '@auth0/auth0-spa-js'
@@ -21,7 +22,6 @@ import WSMWalletConnect from 'wsm-wallet-connect'
 import WSMAnimations from 'wsm-animations'
 import WSMFonts, { WSMFontStyles } from 'wsm-fonts'
 import constants from 'constant'
-import { useIntl } from 'react-intl'
 const { EVENTS } = constants
 
 const Editor = ({ project, principal }) => {

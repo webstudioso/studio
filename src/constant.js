@@ -87,7 +87,11 @@ const constants = {
 		CLOSE_DELAY: 'addCloseDelay',
 		TOGGLE_SETTINGS_MODAL: 'toggleSettingsModal',
 		TOGGLE_ASSETS_MODAL: 'toggleAssetsModal',
-		TOGGLE_PUBLISH_MODAL: 'togglePublishModal'
+		TOGGLE_PUBLISH_MODAL: 'togglePublishModal',
+		WIZARD_OPEN: 'wizardOpen'
+	},
+	WIZARD: {
+		SMART_CONTRACT: 'SMART_CONTRACT'
 	},
 	IMAGE_PLACEHOLDER:
 		"https://media.istockphoto.com/vectors/image-preview-icon-picture-placeholder-for-website-or-uiux-design-vector-id1222357475?k=20&m=1222357475&s=170667a&w=0&h=YGycIDbBRAWkZaSvdyUFvotdGfnKhkutJhMOZtIoUKY="

@@ -4,6 +4,10 @@ export const LOGOUT = 'LOGOUT';
 export const REGISTER = 'REGISTER';
 export const FIREBASE_STATE_CHANGED = 'FIREBASE_STATE_CHANGED';
 
+// action - drag and drop wizard
+export const UPDATE_WIZARD = '@wizard/UPDATE_WIZARD';
+export const CLEAR_WIZARD = '@wizard/CLEAR_WIZARD';
+
 // action - customization reducer
 export const SET_MENU = '@customization/SET_MENU';
 export const MENU_TOGGLE = '@customization/MENU_TOGGLE';
