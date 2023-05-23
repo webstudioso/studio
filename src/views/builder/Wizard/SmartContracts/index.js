@@ -103,9 +103,9 @@ const SmartContracts = ({ element, editor, activeStep, changeStep, intl }) => {
                                 setPayload(newPayload)
                             }}
                         >
-                            <MenuItem value={'dynamic'}>User will manually input</MenuItem>
-                            <MenuItem value={'static'}>Static text hidden from user</MenuItem>
-                            <MenuItem value={'userAddress'}>Mapped to user wallet address</MenuItem>
+                            {/* <MenuItem value={'dynamic'}>User will manually input</MenuItem> */}
+                            <MenuItem value={'static'}>Static Value</MenuItem>
+                            <MenuItem value={'userAddress'}>User Address</MenuItem>
                         </Select>
                         </FormControl>
                         
@@ -127,7 +127,7 @@ const SmartContracts = ({ element, editor, activeStep, changeStep, intl }) => {
                                 }} 
                             />
                     </Box>)}
-                    <Box sx={{ mt: 2 }}>
+                    {/* <Box sx={{ mt: 2 }}>
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">How is this value formatted</InputLabel>
                         <Select
@@ -156,7 +156,7 @@ const SmartContracts = ({ element, editor, activeStep, changeStep, intl }) => {
                             <MenuItem value={'toBytes32'}>ToBytes32</MenuItem>
                         </Select>
                         </FormControl>
-                    </Box>
+                    </Box> */}
             </Box>
         )
         // return (
@@ -232,6 +232,37 @@ const SmartContracts = ({ element, editor, activeStep, changeStep, intl }) => {
     return (
         <Grid container spacing={3}>
             
+
+            <Grid item xs={12}>
+                <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Network</InputLabel>
+                    <Select
+                        // labelId="demo-simple-select-label"
+                        // id="demo-simple-select"
+                        value={payload?.network?.chainId}
+                        label="Network"
+                    >
+                        {networks.map((network) => {
+                            // console.log(network)
+                            return (
+                                <MenuItem value={network.chainId}  onClick={() => {
+                
+                                    const newPayload = {...payload}
+                                    newPayload.network = network
+                                    console.log(newPayload)
+                                    setPayload(newPayload)
+                                }}>
+                                    <Box display="flex" alignItems="center">
+                                        {network.name}
+                                    </Box>
+                                </MenuItem>
+                            )
+                        })}
+                    </Select>
+                </FormControl>
+            </Grid>
+
+        
             <Grid item xs={12}>
                 <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Contract Type</InputLabel>
@@ -286,36 +317,6 @@ const SmartContracts = ({ element, editor, activeStep, changeStep, intl }) => {
                 }}/>
             </Grid>
 
-            <Grid item xs={12}>
-                <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Network</InputLabel>
-                    <Select
-                        // labelId="demo-simple-select-label"
-                        // id="demo-simple-select"
-                        value={payload?.network?.chainId}
-                        label="Network"
-                    >
-                        {networks.map((network) => {
-                            // console.log(network)
-                            return (
-                                <MenuItem value={network.chainId}  onClick={() => {
-                
-                                    const newPayload = {...payload}
-                                    newPayload.network = network
-                                    console.log(newPayload)
-                                    setPayload(newPayload)
-                                }}>
-                                    <Box display="flex" alignItems="center">
-                                        {network.name}
-                                    </Box>
-                                </MenuItem>
-                            )
-                        })}
-                    </Select>
-                </FormControl>
-            </Grid>
-
-            
             <Grid item xs={12}>
                 <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Function Name</InputLabel>

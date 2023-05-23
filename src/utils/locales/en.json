@@ -145,5 +145,8 @@
     "template.streamer": "A dark-theme podcast template",
     "template.tailblog": "A beautiful minimalistic blog template",
 
-    "audited": "Audited"
+    "audited": "Audited",
+
+    "contract.nftdrop_title": "NFT Drop",
+    "contract.nftdrop_description": "Release collection of unique NFTs for a set price"
 }

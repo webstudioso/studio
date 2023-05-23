@@ -145,5 +145,8 @@
     "template.streamer": "Plantilla Oscura Para Podcasts",
     "template.tailblog": "Plantilla Minimalista Para Blog",
 
-    "audited": "Auditado"
+    "audited": "Auditado",
+
+    "contract.nftdrop_title": "Colleccion NFT",
+    "contract.nftdrop_description": "Lanza una collection de NFT unicos a un precio fijo"
 }

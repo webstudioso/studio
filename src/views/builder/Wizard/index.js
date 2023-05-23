@@ -32,7 +32,7 @@ const Wizard = ({ editor }) => {
 
     const handleDrop = (event, element) => {
         const isSmartContract = element.attributes.contract && element.attributes.abi
-        const hasWizard = element.attributes.hasOwnProperty('payload')
+        const hasWizard = element.getTrait('payload')
         if (isSmartContract) {
             
             console.log(element)

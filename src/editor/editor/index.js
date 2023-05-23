@@ -83,7 +83,7 @@ const Editor = ({ project, principal }) => {
         // WSMForm,
         WSMWalletConnect,
         ToastBlocks,
-        PluginTailwind
+        // PluginTailwind
       ],
       pluginsOpts: {},
       canvas: {
