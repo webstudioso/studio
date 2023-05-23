@@ -15,6 +15,7 @@ import ImageBlocks from '../blocks/images'
 import VideoBlocks from '../blocks/video'
 import ButtonBlocks from '../blocks/buttons'
 import ToastBlocks from '../blocks/toast'
+import Web3Button from '../blocks/web3-button'
 
 // Primitives
 import WSMForm from 'wsm-form'
@@ -69,6 +70,7 @@ const Editor = ({ project, principal }) => {
       },
       panels: { defaults: [] },
       plugins: [
+        Web3Button,
         PluginEditorPanelButtons,
         PluginScriptEditor,
         PageManager,
@@ -78,7 +80,7 @@ const Editor = ({ project, principal }) => {
         ButtonBlocks,
         ImageBlocks,
         VideoBlocks,
-        WSMForm,
+        // WSMForm,
         WSMWalletConnect,
         ToastBlocks,
         PluginTailwind

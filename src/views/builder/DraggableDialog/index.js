@@ -5,7 +5,7 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import Paper from '@mui/material/Paper'
 import Draggable from 'react-draggable'
-import ConfigTabs from "../ConfigTabs"
+import ConfigTabs from "./ConfigTabs"
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 

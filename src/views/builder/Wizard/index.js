@@ -32,10 +32,15 @@ const Wizard = ({ editor }) => {
 
     const handleDrop = (event, element) => {
         const isSmartContract = element.attributes.contract && element.attributes.abi
+        const hasWizard = element.attributes.hasOwnProperty('payload')
         if (isSmartContract) {
+            
             console.log(element)
             setOpen(true)
             setItem(element)
+        } else if (hasWizard){ 
+            editor.select(element)
+            editor.runCommand('tlb-settings', { element })
         }
     }
 
