@@ -158,6 +158,7 @@
     "wizard.function_pick_label": "Selecciona Funcion",
     "wizard.function_attribute_mapping_label": "Origen de la Data",
     "wizard.function_attribute_mapping_static_value": "Valor Estatico",
+    "wizard.function_attribute_mapping_static_value_description":"Este valor no sera visible para el usuario",
     "wizard.function_attribute_mapping_user_address": "Direccion del Usuario",
 
     "configuration.title": "Configuracion"

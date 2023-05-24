@@ -5,7 +5,6 @@ import { LOADER, SET_EDITOR } from 'store/actions'
 import { showError, showSuccess } from 'utils/snackbar'
 import { useIntl } from 'react-intl'
 import grapesjs from 'grapesjs'
-import PluginTailwind from 'grapesjs-tailwind'
 import PluginScriptEditor from '@auth0/auth0-spa-js'
 import PageManager from './Plugins/PageManager'
 import PluginEditorPanelButtons from './Panel/Buttons'
@@ -19,6 +18,7 @@ import Web3Button from '../blocks/web3-button'
 
 // Primitives
 import WSMForm from 'wsm-form'
+import WSMTailwind from 'wsm-tailwind'
 import WSMWalletConnect from 'wsm-wallet-connect'
 import WSMAnimations from 'wsm-animations'
 import WSMFonts, { WSMFontStyles } from 'wsm-fonts'
@@ -82,7 +82,7 @@ const Editor = ({ project, principal }) => {
         WSMForm,
         WSMWalletConnect,
         ToastBlocks,
-        PluginTailwind,
+        WSMTailwind,
         Web3Button
       ],
       pluginsOpts: {},

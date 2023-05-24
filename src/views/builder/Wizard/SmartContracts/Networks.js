@@ -26,7 +26,7 @@ const Networks = ({ value, onChange, intl }) => {
                 >
                     {networks.map((network) => {
                         return (
-                            <MenuItem value={network.chainId} onClick={() => onChange(network)}>
+                            <MenuItem value={network.chainId} onClick={() => onChange(network)} key={network.chainId}>
                                 <Box display="flex" alignItems="center">
                                     {network.name}
                                 </Box>

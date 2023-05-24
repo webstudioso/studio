@@ -158,6 +158,7 @@
     "wizard.function_pick_label": "Select Function",
     "wizard.function_attribute_mapping_label": "How is this value input",
     "wizard.function_attribute_mapping_static_value": "Static Value",
+    "wizard.function_attribute_mapping_static_value_description":"This field will be hidden from the user",
     "wizard.function_attribute_mapping_user_address": "User Address",
 
     "configuration.title": "Configuration"

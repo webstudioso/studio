@@ -28,8 +28,8 @@ const ParameterMapping = ({ value, onChangeMapping, onChangeValue, intl, inputs,
                             label={intl.formatMessage({id:'wizard.function_attribute_mapping_label'})}
                             onChange={(e) => onChangeMapping(input, e.target)}
                         >
-                            <MenuItem value={'static'}>{intl.formatMessage({id:'wizard.function_attribute_static_value'})}</MenuItem>
-                            <MenuItem value={'userAddress'}>{intl.formatMessage({id:'wizard.function_attribute_user_address'})}</MenuItem>
+                            <MenuItem value={'static'}>{intl.formatMessage({id:'wizard.function_attribute_mapping_static_value'})}</MenuItem>
+                            <MenuItem value={'userAddress'}>{intl.formatMessage({id:'wizard.function_attribute_mapping_user_address'})}</MenuItem>
                         </Select>
                         </FormControl>
                         
@@ -39,7 +39,7 @@ const ParameterMapping = ({ value, onChangeMapping, onChangeValue, intl, inputs,
                         (<Box sx={{ mt: 2 }}>
                             <TextField  fullWidth size="small" 
                                         value={defaultValue && defaultValue[input.name] }
-                                        placeholder="This value will be used and hidden from the user"
+                                        placeholder={intl.formatMessage({id:'wizard.function_attribute_mapping_static_value_description'})}
                                 onChange={(e) => onChangeValue(input, e.target.value)} 
                             />
                     </Box>)}
