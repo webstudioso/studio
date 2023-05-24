@@ -20,7 +20,6 @@ import HelpButton from './HelpButton'
 import Chat from './Chat'
 import PublishConfirmationDialog from './PublishConfirmationDialog'
 import Membership from 'views/Membership'
-import Wizard from './Wizard'
 
 const { SECTION, PATH, EVENTS } = constants
 
@@ -172,7 +171,6 @@ const EditorView = () => {
 			<PublishConfirmationDialog principal={account.principal} open={openPublishDialog} project={project} onClose={() => setOpenPublishDialog(false)} />
 			{editor && <Chat theme={theme} editor={editor} principal={account.principal} /> }
 			<DraggableDialog open={openDialog} editor={editor} handleClose={() => setOpenDialog(false)}></DraggableDialog>
-			{editor && <Wizard editor={editor} /> }
 		</>
 	)
 }

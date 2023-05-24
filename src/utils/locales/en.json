@@ -108,6 +108,7 @@
     "help.suggest_improvement": "Suggest an improvement",
     "help.report_issue": "Report an issue",
 
+    "blocks.web3": "Web3",
     "blocks.triggers": "Integrations",
     "blocks.text": "Text",
     "blocks.button": "Buttons",
@@ -148,5 +149,16 @@
     "audited": "Audited",
 
     "contract.nftdrop_title": "NFT Drop",
-    "contract.nftdrop_description": "Release collection of unique NFTs for a set price"
+    "contract.nftdrop_description": "Release collection of unique NFTs for a set price",
+
+    "wizard.network_label": "Network",
+    "wizard.contract_type_label": "Contract Type",
+    "wizard.contract_address_placeholder": "0x...",
+    "wizard.contract_address_label": "Contract Address",
+    "wizard.function_pick_label": "Select Function",
+    "wizard.function_attribute_mapping_label": "How is this value input",
+    "wizard.function_attribute_mapping_static_value": "Static Value",
+    "wizard.function_attribute_mapping_user_address": "User Address",
+
+    "configuration.title": "Configuration"
 }

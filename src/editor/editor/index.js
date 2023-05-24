@@ -70,7 +70,6 @@ const Editor = ({ project, principal }) => {
       },
       panels: { defaults: [] },
       plugins: [
-        Web3Button,
         PluginEditorPanelButtons,
         PluginScriptEditor,
         PageManager,
@@ -80,10 +79,11 @@ const Editor = ({ project, principal }) => {
         ButtonBlocks,
         ImageBlocks,
         VideoBlocks,
-        // WSMForm,
+        WSMForm,
         WSMWalletConnect,
         ToastBlocks,
-        // PluginTailwind
+        PluginTailwind,
+        Web3Button
       ],
       pluginsOpts: {},
       canvas: {
@@ -152,6 +152,14 @@ const Editor = ({ project, principal }) => {
       const ed = document.getElementById('gjs')
       ed.classList.remove('gjs-preview')
       ed.classList.add('gjs-no-preview')
+    })
+
+    editor.on("canvas:drop", (event, element) => {
+      const hasWizard = element.getTrait('payload')
+      if (hasWizard) {
+        editor.select(element)
+        editor.runCommand('tlb-settings', { element })
+      }
     })
 
     dispatch({ type: SET_EDITOR, editor })
