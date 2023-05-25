@@ -108,6 +108,7 @@
     "help.suggest_improvement": "Sugiere una Mejora",
     "help.report_issue": "Reporta un Incidente",
 
+    "blocks.web3": "Web3",
     "blocks.triggers": "Integraciones",
     "blocks.text": "Texto",
     "blocks.button": "Botones",
@@ -143,5 +144,28 @@
     "template.screenshot_landing_page": "Plantilla Versatil Para Sitio Personal",
     "template.starter_kit": "Preciosa Plantilla Tailwind + FontAwesome",
     "template.streamer": "Plantilla Oscura Para Podcasts",
-    "template.tailblog": "Plantilla Minimalista Para Blog"
+    "template.tailblog": "Plantilla Minimalista Para Blog",
+
+    "audited": "Auditado",
+
+    "contract.nftdrop_title": "NFT Drop",
+    "contract.nftdrop_description": "Lanza una collection de NFT unicos a un precio fijo",
+    "contract.custom_title": "Contrato Personalizado",
+    "contract.custom_description": "Selecciona un archivo ABI con formato .json",
+    "contract.upload_abi_json": "Selecciona un ABI con formato .json",
+    "contract.explore_url": "Explora y lanza contrato",
+
+    "wizard.network_label": "Red",
+    "wizard.contract_type_label": "Tipo de Contrato",
+    "wizard.contract_address_placeholder": "0x...",
+    "wizard.contract_address_label": "Identificador de Contrato",
+    "wizard.function_pick_label": "Selecciona Funcion",
+    "wizard.function_attribute_mapping_label": "Origen de la Data",
+    "wizard.function_attribute_mapping_static_value": "Valor Estatico",
+    "wizard.function_attribute_mapping_static_value_description":"Este valor no sera visible para el usuario",
+    "wizard.function_attribute_mapping_user_address": "Direccion del Usuario",
+
+    "configuration.title": "Configuracion",
+    "social.text": "Comparte en",
+    "social.share": "Mira mi nueva pagina web 3.0 creada con @Webstudioso 🤩. Crea la tuya hoy, es gratis!"
 }

@@ -51,7 +51,7 @@ const Login = () => {
 			const user = await m.user.getMetadata(principal)
 			const projects = await getAllProjects({ principal })
 			const subscription = await getSubscription({ email: user.email })
-			trackEvent({ name: ANALYTICS.VIEW_PAGE , params: user })
+			trackEvent({ name: ANALYTICS.APP_OPEN , params: user })
 			dispatch({ type: LOGIN, payload: { user , principal, projects, subscription }})
 			if (projects && projects.length > 0) {
 				// Has some projects created

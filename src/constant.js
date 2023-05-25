@@ -10,8 +10,9 @@ const constants = {
 	ANALYTICS: {
 		CREATE_PROJECT: "project_create",
 		PUBLISH_PROJECT: "project_publish",
-		VIEW_PAGE: "page_view",
-		AI_PROMPT: "prompt_ai"
+		APP_OPEN: "app_open",
+		AI_PROMPT: "prompt_ai",
+		EDITOR_OPEN: "editor_open"
 	},
 	AUTH: {
 		MAGIC_LINK: "magicLink",
@@ -87,7 +88,11 @@ const constants = {
 		CLOSE_DELAY: 'addCloseDelay',
 		TOGGLE_SETTINGS_MODAL: 'toggleSettingsModal',
 		TOGGLE_ASSETS_MODAL: 'toggleAssetsModal',
-		TOGGLE_PUBLISH_MODAL: 'togglePublishModal'
+		TOGGLE_PUBLISH_MODAL: 'togglePublishModal',
+		WIZARD_OPEN: 'wizardOpen'
+	},
+	WIZARD: {
+		SMART_CONTRACT: 'SMART_CONTRACT'
 	},
 	IMAGE_PLACEHOLDER:
 		"https://media.istockphoto.com/vectors/image-preview-icon-picture-placeholder-for-website-or-uiux-design-vector-id1222357475?k=20&m=1222357475&s=170667a&w=0&h=YGycIDbBRAWkZaSvdyUFvotdGfnKhkutJhMOZtIoUKY="

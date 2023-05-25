@@ -5,9 +5,10 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import Paper from '@mui/material/Paper'
 import Draggable from 'react-draggable'
-import ConfigTabs from "../ConfigTabs"
+import ConfigTabs from "./ConfigTabs"
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
+import { useIntl } from 'react-intl'
 
 function PaperComponent(props) {
   return (
@@ -21,6 +22,7 @@ function PaperComponent(props) {
 }
 
 const DraggableDialog = ({ open, handleClose, editor }) => {
+  const intl = useIntl()
   const ref = useRef(null);
 
   return (
@@ -40,7 +42,7 @@ const DraggableDialog = ({ open, handleClose, editor }) => {
                     color: 'white',
                     marginRight: '8px'
                 }}>{editor?.getSelected()?.attributes?.tagName}</span>
-                Configuration
+                {intl.formatMessage({id:'configuration.title'})}
             </Typography>
           <IconButton
             aria-label="close"

@@ -35,6 +35,7 @@ REACT_APP_INFURA_KEY=<Create an infura project and use the key>
 REACT_APP_MAGIC_API_KEY=<Create a magic link project and use the sk key>
 REACT_APP_WEBSTUDIO_WS_API=<websocker url of AI assistant>
 REACT_APP_WIX_SUBSCRIPTION_ENDPOINT=<endpoint that verifies subcription details for current user>
+REACT_APP_INFURA_API_KEY=<default infura key>
 ```
 
 ### 3. Install dependencies
