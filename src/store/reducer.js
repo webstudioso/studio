@@ -3,21 +3,19 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 // reducer import
-import customizationReducer from './customizationReducer';
-import snackbarReducer from './snackbarReducer';
+import customization from './customizationReducer';
+import snackbar from './snackbarReducer';
 import cartReducer from './cartReducer';
-import kanbanReducer from './kanbanReducer';
-import appReducer from 'store/appReducer';
-import loaderReducer from './loaderReducer';
+import kanban from './kanbanReducer';
+import app from 'store/appReducer';
+import loader from './loaderReducer';
 import account from './accountReducer';
 import editor from './editorReducer';
+import wizard from './wizardReducer';
 
 // ==============================|| COMBINE REDUCER ||============================== //
 
 const reducer = combineReducers({
-    customization: customizationReducer,
-    snackbar: snackbarReducer,
-    loader: loaderReducer,
     cart: persistReducer(
         {
             key: 'cart',
@@ -26,10 +24,14 @@ const reducer = combineReducers({
         },
         cartReducer
     ),
-    kanban: kanbanReducer,
-    app: appReducer,
+    kanban,
+    app,
     account,
-    editor
+    editor,
+    wizard,
+    customization,
+    snackbar,
+    loader,
 });
 
 export default reducer;

@@ -3,6 +3,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import SmartContracts from 'views/builder/Wizard/SmartContracts';
+import { useIntl } from 'react-intl';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -32,7 +34,13 @@ function a11yProps(index) {
 }
 
 export default function BasicTabs({ editor }) {
+  const intl = useIntl()
+  const [element, setElement] = useState();
+  const hasWizard = element && element.attributes.hasOwnProperty('payload')
+
+
   const [value, setValue] = useState(0);
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -42,6 +50,8 @@ export default function BasicTabs({ editor }) {
     // if (!filter) return;
     if (!editor) return;
 
+    const elem = editor.getSelected()
+    setElement(elem)
     // Styles
     const styleManager = editor.StyleManager;
     const selectorMnager = editor.SelectorManager;
@@ -61,6 +71,9 @@ export default function BasicTabs({ editor }) {
     const traitTab = document.getElementById('propertyTab');
     // traitTab.firstElementChild?.remove();
     traitTab.prepend(traitBlock);
+
+    if (elem && elem.attributes.hasOwnProperty('payload'))
+    setValue(2)
     // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [])
 
@@ -68,14 +81,22 @@ export default function BasicTabs({ editor }) {
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" fullWidth>
-          <Tab label="Design 🖌️" {...a11yProps(0)} />
-          <Tab label="Properties ⚙️" {...a11yProps(1)} />
+            <Tab label="Design 🎨" {...a11yProps(0)} />
+            <Tab label="Properties 🔧" {...a11yProps(1)} />
+            {hasWizard && (
+              <Tab label="Wizard 🪄" {...a11yProps(2)} />
+            )}
         </Tabs>
       </Box>
       <TabPanel value={value} index={0} id="designTab">
       </TabPanel>
       <TabPanel value={value} index={1} id="propertyTab">
       </TabPanel>
+      {hasWizard && (
+        <TabPanel value={value} index={2} id="wizardTab">
+            <SmartContracts element={element} activeStep={0} editor={editor} changeStep={(step) => console.log(step)} intl={intl} />
+        </TabPanel>
+      )}
     </Box>
   );
 }

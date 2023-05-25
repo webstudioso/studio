@@ -21,7 +21,6 @@
         "grapesjs": "^0.19.5",
         "grapesjs-plugin-forms": "^2.0.5",
         "grapesjs-script-editor": "^1.0.3",
-        "grapesjs-tailwind": "^1.0.10",
         "jss": "^10.7.1",
         "jss-rtl": "^0.3.0",
         "jwt-decode": "^3.1.2",
@@ -50,10 +49,11 @@
         "uuid": "^8.3.2",
         "wsm-animations": "^0.0.2",
         "wsm-basic": "^0.0.1",
+        "wsm-fonts": "^1.0.1",
         "wsm-form": "^0.0.39",
+        "wsm-tailwind": "^1.0.5",
         "wsm-toast": "^1.0.14",
         "wsm-wallet-connect": "^0.0.49",
-        "wsm-fonts": "^1.0.1",
         "yup": "^0.32.9"
     },
     "devDependencies": {

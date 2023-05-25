@@ -20,8 +20,9 @@ import HelpButton from './HelpButton'
 import Chat from './Chat'
 import PublishConfirmationDialog from './PublishConfirmationDialog'
 import Membership from 'views/Membership'
+import { trackEvent } from 'utils/analytics'
 
-const { SECTION, PATH, EVENTS } = constants
+const { SECTION, PATH, EVENTS, ANALYTICS } = constants
 
 const EditorView = () => {
 	const theme = useTheme()
@@ -38,6 +39,7 @@ const EditorView = () => {
 	const editor = useSelector((state) => state.editor.editor)
 
 	useEffect(() => {
+		trackEvent({ name: ANALYTICS.EDITOR_OPEN , params: account.user })
 		document.addEventListener(EVENTS.TOGGLE_PUBLISH_MODAL, () => setOpenPublishDialog(true));
 		document.addEventListener(EVENTS.TOGGLE_SETTINGS_MODAL, () => setOpenDialog(true));
 		document.addEventListener(EVENTS.TOGGLE_ASSETS_MODAL, () => handleOpenSidePanel(SECTION.MEDIA));

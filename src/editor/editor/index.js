@@ -3,8 +3,8 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { LOADER, SET_EDITOR } from 'store/actions'
 import { showError, showSuccess } from 'utils/snackbar'
+import { useIntl } from 'react-intl'
 import grapesjs from 'grapesjs'
-import PluginTailwind from 'grapesjs-tailwind'
 import PluginScriptEditor from '@auth0/auth0-spa-js'
 import PageManager from './Plugins/PageManager'
 import PluginEditorPanelButtons from './Panel/Buttons'
@@ -14,14 +14,15 @@ import ImageBlocks from '../blocks/images'
 import VideoBlocks from '../blocks/video'
 import ButtonBlocks from '../blocks/buttons'
 import ToastBlocks from '../blocks/toast'
+import Web3Button from '../blocks/web3-button'
 
 // Primitives
 import WSMForm from 'wsm-form'
+import WSMTailwind from 'wsm-tailwind'
 import WSMWalletConnect from 'wsm-wallet-connect'
 import WSMAnimations from 'wsm-animations'
 import WSMFonts, { WSMFontStyles } from 'wsm-fonts'
 import constants from 'constant'
-import { useIntl } from 'react-intl'
 const { EVENTS } = constants
 
 const Editor = ({ project, principal }) => {
@@ -81,7 +82,8 @@ const Editor = ({ project, principal }) => {
         WSMForm,
         WSMWalletConnect,
         ToastBlocks,
-        PluginTailwind
+        WSMTailwind,
+        Web3Button
       ],
       pluginsOpts: {},
       canvas: {
@@ -101,6 +103,14 @@ const Editor = ({ project, principal }) => {
     })
 
     // Storage events
+    editor.on('storage:start:load', () => {
+      dispatch({ type: LOADER, show: true })
+    });
+
+    editor.on('storage:end:load', () => {
+      dispatch({ type: LOADER, show: false })
+    });
+
     editor.on('storage:error', (e) => {
       console.log(e)
       dispatch({ type: LOADER, show: false })
@@ -150,6 +160,14 @@ const Editor = ({ project, principal }) => {
       const ed = document.getElementById('gjs')
       ed.classList.remove('gjs-preview')
       ed.classList.add('gjs-no-preview')
+    })
+
+    editor.on("canvas:drop", (event, element) => {
+      const hasWizard = element.getTrait('payload')
+      if (hasWizard) {
+        editor.select(element)
+        editor.runCommand('tlb-settings', { element })
+      }
     })
 
     dispatch({ type: SET_EDITOR, editor })
