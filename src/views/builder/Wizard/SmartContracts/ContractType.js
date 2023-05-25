@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { FormControl, InputLabel, MenuItem, Select,Box, Grid, Typography, IconButton } from '@mui/material'
+import { FormControl, InputLabel, MenuItem, Select,Box, Grid, Typography, IconButton, Button, Tooltip } from '@mui/material'
 import { IconShieldCheck } from '@tabler/icons'
 import availableContracts from './SupportedContracts'
 
@@ -27,8 +27,12 @@ const ContractType = ({ value, onChange, intl }) => {
                                         </Typography>
                                     </Box>
                                     <Box display="flex" alignItems="center">
-                                        {contract.logo && (<img src={contract.logo} width={32} alt={contract.name}/> )}
-                                        {contract.source && (<Typography fontWeight="bold" fontSize={10} color="#212121">{contract.source}</Typography> )}
+                                        <Tooltip title={intl.formatMessage({id: 'contract.explore_url'})}>
+                                            <Button href={contract.url} target="__blank">
+                                                {contract.logo && (<img src={contract.logo} width={32} alt={contract.name} style={{borderRadius: '50%'}}/> )}
+                                                {contract.source && (<Typography fontWeight="bold" fontSize={10} color="#212121">{contract.source}</Typography> )}
+                                            </Button>
+                                        </Tooltip>
                                         <Box flex={1} />
                                         {contract.audited && (
                                             <IconButton color="primary" size="small">

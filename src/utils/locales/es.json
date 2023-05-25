@@ -148,11 +148,12 @@
 
     "audited": "Auditado",
 
-    "contract.nftdrop_title": "Colleccion NFT",
+    "contract.nftdrop_title": "NFT Drop",
     "contract.nftdrop_description": "Lanza una collection de NFT unicos a un precio fijo",
     "contract.custom_title": "Contrato Personalizado",
     "contract.custom_description": "Selecciona un archivo ABI con formato .json",
     "contract.upload_abi_json": "Selecciona un ABI con formato .json",
+    "contract.explore_url": "Explora y lanza contrato",
 
     "wizard.network_label": "Red",
     "wizard.contract_type_label": "Tipo de Contrato",

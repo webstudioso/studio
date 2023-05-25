@@ -5,7 +5,8 @@ const contracts = [
         name: 'contract.nftdrop_title',
         description: 'contract.nftdrop_description',
         logo: 'https://ipfs-2.thirdwebcdn.com/ipfs/QmeNn6emc8Z3VMTFBKSSozSHiG3qt36bFi7EuPCiGGpo17/0.png',
-        source: 'thirdweb.eth',
+        source: 'Thirdweb',
+        url: 'https://thirdweb.com/thirdweb.eth/DropERC721',
         mapping: {
             claim: {
                 _receiver: { type: 'userAddress' },
@@ -22,7 +23,10 @@ const contracts = [
         id: 'custom',
         audited: false,
         name: 'contract.custom_title',
-        description: 'contract.custom_description'
+        description: 'contract.custom_description',
+        logo: 'https://t3.ftcdn.net/jpg/01/33/87/04/240_F_133870459_knsfUgtjfRM37OV9sLnEncMxZVowTjh4.jpg',
+        source: 'Cookbook',
+        url: 'https://www.cookbook.dev/',
     }
 ]
 

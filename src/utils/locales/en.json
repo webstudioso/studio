@@ -153,6 +153,7 @@
     "contract.custom_title": "Custom Contract",
     "contract.custom_description": "Upload an EVM compatible ABI with .json format",
     "contract.upload_abi_json": "Upload abi file in .json format",
+    "contract.explore_url": "Explore and launch contract",
 
     "wizard.network_label": "Network",
     "wizard.contract_type_label": "Contract Type",
