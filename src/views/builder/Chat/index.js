@@ -55,13 +55,13 @@ const Chat = ({ editor, principal }) => {
     }
 
     useEffect(() => {
-        // initializeSocket()
-        // editor.on('component:toggled', () => setTarget(editor?.getSelected()))
-        // const reconnect = setInterval(() => initializeSocket(), 10000)
-        // return () => {
-        //     clearInterval(reconnect)
-        //     ws?.close()
-        // }
+        initializeSocket()
+        editor.on('component:toggled', () => setTarget(editor?.getSelected()))
+        const reconnect = setInterval(() => initializeSocket(), 10000)
+        return () => {
+            clearInterval(reconnect)
+            ws?.close()
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

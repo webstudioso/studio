@@ -38,6 +38,7 @@ jobs:
           REACT_APP_DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           REACT_APP_WEBSTUDIO_WS_API: ${{ secrets.WEBSTUDIO_WS_API }}
           REACT_APP_WIX_SUBSCRIPTION_ENDPOINT: ${{ secrets.WIX_SUBSCRIPTION_ENDPOINT }}
+          REACT_APP_INFURA_API_KEY: ${{ secrets.INFURA_API_KEY }}
           CI: false
         run: npm run build:release
       - name: Set AWS credentials

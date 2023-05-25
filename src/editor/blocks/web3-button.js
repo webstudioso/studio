@@ -70,13 +70,14 @@ const Plugin = (editor) => {
       }
 
       this.originalText = this.getComponent()?.textContent || CONNECT_WALLET;
-    
+      const infuraKey = props.infuraKey || process.env.REACT_APP_INFURA_KEY
+      console.log(`Infura ${infuraKey}`)
       this.getProviderOptions = () => {
         const providerOptions = {
             walletconnect: {
                 package: WalletConnectProvider,
                 options: {
-                    infuraId: 'af44aafb86bd4af08ccc104a0423c014'
+                    infuraId: infuraKey
                 }
             }
         }
@@ -349,12 +350,17 @@ const Plugin = (editor) => {
                   name: "activeLabel"
                 },
                 {
-                changeProp: 3,
-                type: "Text",
-                name: "payload"
+                  changeProp: 3,
+                  type: "Text",
+                  name: "payload"
+                },
+                {
+                  changeProp: 4,
+                  type: "Text",
+                  name: "infuraKey"
                 },
             ],
-            "script-props": ["payload", "label", "activeLabel"],
+            "script-props": ["payload", "label", "activeLabel", "infuraKey"],
         },
       },
     };
