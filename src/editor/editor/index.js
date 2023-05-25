@@ -103,6 +103,14 @@ const Editor = ({ project, principal }) => {
     })
 
     // Storage events
+    editor.on('storage:start:load', () => {
+      dispatch({ type: LOADER, show: true })
+    });
+
+    editor.on('storage:end:load', () => {
+      dispatch({ type: LOADER, show: false })
+    });
+
     editor.on('storage:error', (e) => {
       console.log(e)
       dispatch({ type: LOADER, show: false })

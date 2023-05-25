@@ -10,8 +10,9 @@ const constants = {
 	ANALYTICS: {
 		CREATE_PROJECT: "project_create",
 		PUBLISH_PROJECT: "project_publish",
-		VIEW_PAGE: "page_view",
-		AI_PROMPT: "prompt_ai"
+		APP_OPEN: "app_open",
+		AI_PROMPT: "prompt_ai",
+		EDITOR_OPEN: "editor_open"
 	},
 	AUTH: {
 		MAGIC_LINK: "magicLink",

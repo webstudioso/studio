@@ -55,6 +55,8 @@ const Snackbar = () => {
         setOpen(snackbarInitial.open);
     }, [snackbarInitial.action, snackbarInitial.open]);
 
+    const duration = snackbarInitial?.alertSeverity !== 'success' ? 1500 : 6000;
+
     return (
         <>
             {/* default snackbar */}
@@ -62,7 +64,7 @@ const Snackbar = () => {
                 <MuiSnackbar
                     anchorOrigin={snackbarInitial.anchorOrigin}
                     open={open}
-                    autoHideDuration={6000}
+                    autoHideDuration={duration}
                     onClose={(e, v) => handleClose(v)}
                     message={snackbarInitial.message}
                     TransitionComponent={transition[snackbarInitial.transition]}
@@ -85,7 +87,7 @@ const Snackbar = () => {
                     TransitionComponent={transition[snackbarInitial.transition]}
                     anchorOrigin={snackbarInitial.anchorOrigin}
                     open={open}
-                    autoHideDuration={6000}
+                    autoHideDuration={duration}
                     sx={{
                         top: '5px !important'
                     }}

@@ -1,10 +1,10 @@
 import { FormControl, InputLabel, MenuItem, Select,Box, Grid, Chip, Typography, TextField } from '@mui/material'
 
-const ParameterMapping = ({ value, onChangeMapping, onChangeValue, intl, inputs, mapping, defaultValue }) => {
+const ParameterMapping = ({ value, onChangeMapping, onChangeValue, intl, inputs, mapping }) => {
 
     const configurableField = (input) => {
         return (
-            <Box sx={{ p: 2, mt:1, border: '1px solid rgba(0,0,0,0.05)'}}>
+            <Box sx={{ p: 2, mt:1, border: '1px solid rgba(0,0,0,0.05)'}} key={input.name}>
                    <Box display="flex" alignItems="center">
                         <Typography variant="body" fontWeight="bold">{input.name}</Typography>
                         <Box flex={1} />
@@ -22,11 +22,11 @@ const ParameterMapping = ({ value, onChangeMapping, onChangeValue, intl, inputs,
                         <Select
                             labelId="fn_attr_mapping_label"
                             id="fn_attr_mapping"
-                            value={mapping && mapping[input.name] && mapping[input.name].value }
+                            value={mapping && mapping[input.name] && mapping[input.name].type }
                             size="small"
                             name="valueType"
                             label={intl.formatMessage({id:'wizard.function_attribute_mapping_label'})}
-                            onChange={(e) => onChangeMapping(input, e.target)}
+                            onChange={(e) => onChangeMapping(input, e.target.value)}
                         >
                             <MenuItem value={'static'}>{intl.formatMessage({id:'wizard.function_attribute_mapping_static_value'})}</MenuItem>
                             <MenuItem value={'userAddress'}>{intl.formatMessage({id:'wizard.function_attribute_mapping_user_address'})}</MenuItem>
@@ -35,10 +35,10 @@ const ParameterMapping = ({ value, onChangeMapping, onChangeValue, intl, inputs,
                         
 
                     </Box>
-                    { mapping && mapping[input.name] && mapping[input.name].value === 'static'  &&
+                    { mapping && mapping[input.name] && mapping[input.name].type === 'static'  &&
                         (<Box sx={{ mt: 2 }}>
                             <TextField  fullWidth size="small" 
-                                        value={defaultValue && defaultValue[input.name] }
+                                        value={mapping[input.name] && mapping[input.name].value }
                                         placeholder={intl.formatMessage({id:'wizard.function_attribute_mapping_static_value_description'})}
                                 onChange={(e) => onChangeValue(input, e.target.value)} 
                             />

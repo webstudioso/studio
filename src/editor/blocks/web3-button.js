@@ -19,7 +19,7 @@ const Plugin = (editor) => {
       `,
     };
   
-    const script = function (props) {
+    const script = function (props, val) {
 
       this.constants = {
         CACHE: 'WEB3_CONNECT_CACHED_PROVIDER',
@@ -35,7 +35,6 @@ const Plugin = (editor) => {
         SEVERITY: {
           ERROR: 'error'
         },
-        SCOPE: 'openid wallet',
         CONNECT_WALLET: 'Connect'
       }
     
@@ -44,14 +43,11 @@ const Plugin = (editor) => {
         CACHE,
         SEVERITY,
         CONNECT_WALLET,
-        SCOPE
       } = this.constants
     
       const { 
           Web3Modal, 
-          WalletConnectProvider,
-          UAuthWeb3Modal,
-          UAuthSPA
+          WalletConnectProvider
       } = window.webstudio
     
       const {
@@ -76,7 +72,6 @@ const Plugin = (editor) => {
           document.dispatchEvent(cEvent);
       }
 
-    
       this.originalText = this.getComponent()?.textContent || CONNECT_WALLET;
     
       this.getProviderOptions = () => {
@@ -84,32 +79,12 @@ const Plugin = (editor) => {
             walletconnect: {
                 package: WalletConnectProvider,
                 options: {
-                    infuraId: 'af44aafb86bd4af08ccc104a0423c014',
-                    // rpc: {
-                        // 1: `https://mainnet.infura.io/v3/af44aafb86bd4af08ccc104a0423c014`,
-                        // 42: `https://kovan.infura.io/v3/af44aafb86bd4af08ccc104a0423c014`,
-                        // 137: `https://polygon-mainnet.infura.io/v3/af44aafb86bd4af08ccc104a0423c014`,
-                        // 80001: "https://matic-mumbai.chainstacklabs.com",
-                    // }
+                    infuraId: 'af44aafb86bd4af08ccc104a0423c014'
                 }
             }
         }
-        // Unstoppable Domains support?
-        // if (props.udAppId) {
-        //     providerOptions["custom-uauth"] = {
-        //         display: UAuthWeb3Modal.display,
-        //         connector: UAuthWeb3Modal.connector,
-        //         package: UAuthSPA,
-        //         options: {
-        //           clientID: props.udAppId,
-        //           scope: SCOPE,
-        //           redirectUri: props.udCallback
-        //         },
-        //     }
-        // }
         return providerOptions
       }
-
     
       this.onConnect = (provider) => {
           window.walletProvider = provider;
@@ -140,14 +115,11 @@ const Plugin = (editor) => {
       }
     
       this.setButtonText = (text) => {
-        console.log(`Setting text ${text}`)
           const button = this.getComponent()
           button.textContent = text
       }
     
       this.handleGetAddress = (address) => {
-          // const parsedAddress = this.formatAddress(address)
-          // this.setButtonText(parsedAddress)
           this.setButtonText(props.activeLabel)
       }
     
@@ -156,8 +128,6 @@ const Plugin = (editor) => {
           const signer = wallet.getSigner()
           signer.getAddress().then(this.handleGetAddress);
       }
-    
-
     
       this.sendNotification = (alertSeverity, message, link, timeout) => {
         const detail = { 
@@ -173,7 +143,6 @@ const Plugin = (editor) => {
       }
     
       this.disconnect = () => {
-        console.log("Disconnecting wallet", window.walletProvider)
         document.dispatchEvent(new Event(EVENT.DISCONNECTED, window.walletProvider))
         try {
             localStorage.removeItem(CACHE);
@@ -189,112 +158,84 @@ const Plugin = (editor) => {
       }
 
       this.getAccount = () => {
-        const provider = window.walletProvider;
-        if (!provider) return;
-  
-        if (provider.accounts && provider.accounts.length > 0)
-          return provider.accounts[0];
-  
-        return provider.selectedAddress;
-    };
-  
-     this.isJson = (str) =>{
-          try {
-              const val = JSON.parse(str);
-              if (val && typeof val === 'object')
-                return true
-          } catch (e) {
-              console.log(e)
-          }
-          return false
-      }
-  
-      this.getValue = (field) => {
-        console.log(`Getting value....`)
-        console.log(field)
-        console.log(props.payload.mapping)
-        const type = props.payload.mapping[field].value
-        let value;
-        console.log(props.payload.defaultValue)
-        console.log(field)
-        if (type === 'static') {
-          value = props.payload.defaultValue[field]
-          console.log(`Returning static ${value}`)
-          // return value
-        } 
-
-        if (type === 'userAddress') {
-          value = this.getAccount()
-          console.log(`Returning mapped ${value}`)
-          // return account
-        }
-
-        // console.log(value)
-        // console.log(typeof value)
-        // If value is json we return a tuple
-        if (this.isJson(value)) {
-        //   console.log("Value is an object, turn to tuple")
-        //   console.log(value)
-          const data = JSON.parse(value)
-          return data
-          const keys = Object.keys(data)
-          console.log(keys)
-          value = keys.map((key) => data[key])
-          value = ("${value.join('","')}");
-          console.log(`Is the final parsed value ${value}`)
-        }
-
-        return value
-      }
+          const provider = window.walletProvider;
+          if (!provider) return;
     
-      this.getAttributes = () => {
-        const method = props.payload.method;
-        const requiredAttributes = method.inputs.map((input) => input.name);
-        const args = [];
-        const component = this.getComponent();
-        // Function args
-        requiredAttributes.forEach((required) => args.push(this.getValue(required)));
+          if (provider.accounts && provider.accounts.length > 0)
+            return provider.accounts[0];
+    
+          return provider.selectedAddress;
+      };
+      
+      this.isJson = (str) =>{
+            try {
+                const val = JSON.parse(str);
+                if (val && typeof val === 'object')
+                  return true
+            } catch (e) {
+                console.log(e)
+            }
+            return false
+        }
+  
+        this.getValue = (field) => {
+          const fieldMapping = props.payload.mapping[field]
+          let value;
+          if (fieldMapping.type === 'static') {
+            value = fieldMapping.value
+            console.log(`Returning static ${value}`)
+          } 
 
-        console.log(`Attributes to pass ${JSON.stringify(args)}`)
-        return args;
-    }
+          if (fieldMapping.type === 'userAddress') {
+            value = this.getAccount()
+            console.log(`Returning mapped ${value}`)
+          }
 
-    this.getProvider = () => {
-      const provider = new ethers.providers.Web3Provider(window?.walletProvider);
-      return provider;
-    }
+          // If value is json we return a tuple
+          if (this.isJson(value)) {
+            value = JSON.parse(value)
+          }
 
-    this.getSigner = () => {
-      const provider = this.getProvider();
-      const signer = provider.getSigner();
-      return signer;
-    }
+          return value
+        }
+      
+        this.getAttributes = () => {
+            const method = props.payload.method;
+            const requiredAttributes = method.inputs.map((input) => input.name);
+            const args = [];
+            // Function args
+            requiredAttributes.forEach((required) => args.push(this.getValue(required)));
+            console.log(`Attributes to pass ${JSON.stringify(args)}`)
+            return args;
+        }
 
-    this.getAbi = () => {
-      return [props.payload.method];
-    }
+        this.getProvider = () => {
+          const provider = new ethers.providers.Web3Provider(window?.walletProvider);
+          return provider;
+        }
 
-    this.getFunction = () => {
-      console.log(`Getting function`)
-      const signer = this.getSigner();
-      const abi = this.getAbi();
+        this.getSigner = () => {
+          const provider = this.getProvider();
+          const signer = provider.getSigner();
+          return signer;
+        }
 
-      console.log(signer)
-      console.log(abi)
-      const method = props.payload.method;
-      const contract = new ethers.Contract(props.payload.contractAddress, abi, signer);
-      const targetFunction = contract[method.name];
-      console.log(`getFunction ${targetFunction}`);
-      return targetFunction;
-  }
+        this.getAbi = () => {
+          return [props.payload.method];
+        }
+
+        this.getFunction = () => {
+          const signer = this.getSigner();
+          const abi = this.getAbi();
+          const method = props.payload.method;
+          const contract = new ethers.Contract(props.payload.contractAddress, abi, signer);
+          const targetFunction = contract[method.name];
+          return targetFunction;
+      }
 
       this.invokeMethod = () => {
         if (!props.payload.method) return;
-
         const targetFunction = this.getFunction()
-        console.log(`Invoking this/?`)
-        console.log(targetFunction)
-        // const targetFunction = props.payload.method.name
         const scope = this
         const tagetAttributes = this.getAttributes()
         targetFunction.apply(null, tagetAttributes)
@@ -322,7 +263,6 @@ const Plugin = (editor) => {
 
       this.connect = () => {
         try {
-          console.log(`Connecting wallet`)
           const modal = this.getModal()
           modal.connect().then(this.onConnect)
         } catch (e) {
@@ -331,21 +271,10 @@ const Plugin = (editor) => {
         }
       }
 
-      this.handleToggleConnect = () => {
-        console.log(window.walletProvider)
-        if (window.walletProvider) {
-          // this.disconnect()
-          this.invokeMethod()
-        } else {
-          this.connect()
-        }
-      }
-    
       this.getCachedProvider = () => {
         return localStorage.getItem(CACHE)
       }
     
-          
       this.getModal = () => {
         const providerOptions = this.getProviderOptions()
         const modal = new Web3Modal({
@@ -357,10 +286,35 @@ const Plugin = (editor) => {
     }
 
       this.handleToggleConnect = () => {
-        console.log(window.walletProvider)
         if (window.walletProvider) {
-          // this.disconnect()
-          this.invokeMethod()
+          const chainId = ethers.utils.hexValue(props.payload.network.chainId).trim()
+          const scope = this
+          window.walletProvider.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId }],
+          }).then(() => {
+            scope.invokeMethod()
+          }).catch((switchError) => {
+            const network = props.payload.network
+            // The network has not been added to MetaMask
+            if (switchError.code === 4902) {
+              window.walletProvider.request({
+                method: 'wallet_addEthereumChain',
+                params: [
+                    {
+                      chainId: chainId, 
+                      chainName: network.name,
+                      rpcUrls: network.rpc,                   
+                      blockExplorerUrls: network.explorers,  
+                      nativeCurrency: network.nativeCurrency
+                    }
+                ]});
+            } else {
+              const errMsg = "Cannot switch to the network";
+              console.log(errMsg)
+              this.sendNotification(SEVERITY.ERROR, errMsg, null, 5000)
+            }
+          });
         } else {
           this.connect()
         }
