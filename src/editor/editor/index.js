@@ -17,9 +17,7 @@ import ToastBlocks from '../blocks/toast'
 import Web3Button from '../blocks/web3-button'
 
 // Primitives
-import WSMForm from 'wsm-form'
 import WSMTailwind from 'wsm-tailwind'
-import WSMWalletConnect from 'wsm-wallet-connect'
 import WSMAnimations from 'wsm-animations'
 import WSMFonts, { WSMFontStyles } from 'wsm-fonts'
 import constants from 'constant'
@@ -79,8 +77,6 @@ const Editor = ({ project, principal }) => {
         ButtonBlocks,
         ImageBlocks,
         VideoBlocks,
-        WSMForm,
-        WSMWalletConnect,
         ToastBlocks,
         WSMTailwind,
         Web3Button

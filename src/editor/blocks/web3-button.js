@@ -4,22 +4,19 @@ const Plugin = (editor) => {
   
     const classes = 'cursor-pointer text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700'
     
+    const content = `
+      <span type="button" class="${classes}" id="${componentId}">
+        Web3 Button
+      </span>
+    `
     const block = {
       id: `section-${componentId}`,
-      label: `
-        <span type="button" class="${classes}" id="${componentId}">
-          Connect
-        </span>
-      `,
+      media: content,
       category: "Web3",
-      content: `
-          <span type="button" class="${classes}" id="${componentId}">
-            Connect
-          </span>
-      `,
+      content,
     };
   
-    const script = function (props, val) {
+    const script = function (props) {
 
       this.constants = {
         CACHE: 'WEB3_CONNECT_CACHED_PROVIDER',
