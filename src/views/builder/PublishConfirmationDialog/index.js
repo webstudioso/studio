@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Dialog, DialogTitle, DialogContent, Box, DialogActions, Button, Grid, Paper } from '@mui/material'
+import { Typography, Dialog, DialogTitle, DialogContent, Box, DialogActions, Button, Grid, Paper } from '@mui/material'
 import { getProjectUrl } from 'utils/project'
 import { IconExternalLink, IconShieldLock } from '@tabler/icons'
 import { getRoute } from 'api/publish'
@@ -7,6 +7,7 @@ import { getUrlWithoutProtocol, queryParams } from 'utils/url'
 import { useDispatch, useSelector } from 'react-redux'
 import { LOADER } from 'store/actions'
 import { FormattedMessage, useIntl } from 'react-intl'
+import { LinkedinIcon, LinkedinShareButton, TwitterIcon, TwitterShareButton } from 'react-share'
 
 const PublishConfirmationDialog = ({ open, project, onClose, principal }) => {
     const intl = useIntl()
@@ -96,6 +97,28 @@ const PublishConfirmationDialog = ({ open, project, onClose, principal }) => {
                             </Box>
                         </Paper>
                     </Grid>
+                </Grid>
+                <Grid container alignItems="center" sx={{mt:2}}>
+                    <Typography color="black" fontWeight="light" fontSize={14} sx={{ marginRight: 1 }}>
+                        {intl.formatMessage({id:"social.text"})}
+                    </Typography>
+                    <Box sx={{ marginRight: '5px' }}>
+                        <LinkedinShareButton 
+                            title={intl.formatMessage({id:"social.share"})}
+                            url={getProjectUrl({ project })}
+                        >
+                            <LinkedinIcon round size={32} />
+                        </ LinkedinShareButton>
+                    </Box>
+                    <Box>
+                        <TwitterShareButton
+                            title={intl.formatMessage({id:"social.share"})}
+                            url={getProjectUrl({ project })}
+                            hashtags={["Web3", "NoCode"]} 
+                        >
+                            <TwitterIcon round size={32} />
+                        </TwitterShareButton>
+                    </Box>
                 </Grid>
             </DialogContent>
             <DialogActions sx={{ px: 8, pb: 5 }}>

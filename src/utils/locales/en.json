@@ -165,5 +165,7 @@
     "wizard.function_attribute_mapping_static_value_description":"This field will be hidden from the user",
     "wizard.function_attribute_mapping_user_address": "User Address",
 
-    "configuration.title": "Configuration"
+    "configuration.title": "Configuration",
+    "social.text": "Share on",
+    "social.share": "Check out my new Web3 website made with @Webstudioso 🤩. Create yours now, it is free!"
 }

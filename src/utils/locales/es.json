@@ -165,5 +165,7 @@
     "wizard.function_attribute_mapping_static_value_description":"Este valor no sera visible para el usuario",
     "wizard.function_attribute_mapping_user_address": "Direccion del Usuario",
 
-    "configuration.title": "Configuracion"
+    "configuration.title": "Configuracion",
+    "social.text": "Comparte en",
+    "social.share": "Mira mi nuevo pagina web 3.0 creada con @Webstudioso 🤩. Crea la tuya hoy mismo, es gratuito!"
 }
