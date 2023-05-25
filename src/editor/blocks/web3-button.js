@@ -70,7 +70,7 @@ const Plugin = (editor) => {
       }
 
       this.originalText = this.getComponent()?.textContent || CONNECT_WALLET;
-      const infuraKey = props.infuraKey || process.env.REACT_APP_INFURA_KEY
+      const infuraKey = props.infuraKey || process.env.REACT_APP_INFURA_API_KEY
       console.log(`Infura ${infuraKey}`)
       this.getProviderOptions = () => {
         const providerOptions = {
