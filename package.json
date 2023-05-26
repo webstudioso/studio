@@ -1,6 +1,6 @@
 {
     "name": "webstudio-app",
-    "version": "0.1.18",
+    "version": "0.1.19",
     "private": false,
     "dependencies": {
         "@auth0/auth0-spa-js": "^1.14.0",
@@ -50,10 +50,10 @@
         "wsm-animations": "^0.0.2",
         "wsm-basic": "^0.0.1",
         "wsm-fonts": "^1.0.1",
-        "wsm-form": "^0.0.39",
+        "wsm-form": "^0.0.41",
         "wsm-tailwind": "^1.0.5",
         "wsm-toast": "^1.0.14",
-        "wsm-wallet-connect": "^0.0.49",
+        "wsm-wallet-connect": "^0.0.51",
         "yup": "^0.32.9"
     },
     "devDependencies": {
