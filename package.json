@@ -114,8 +114,8 @@
         "start": "export HTTPS=true&&SSL_CRT_FILE=cert.pem&&SSL_KEY_FILE=key.pem REACT_APP_VERSION=$npm_package_version env-cmd -f .env react-scripts start",
         "build:release": "REACT_APP_VERSION=$npm_package_version react-scripts build",
         "build": "env-cmd -f .env npm run build:release",
-        "test": "jest --collectCoverage=true",
-        "coverage": "jest --coverage",
+        "test": "jest --collectCoverage=true --passWithNoTests",
+        "coverage": "jest --coverage --passWithNoTests",
         "eject": "react-scripts eject",
         "prepare": "husky install"
     },

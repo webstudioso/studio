@@ -3,7 +3,7 @@ import { Typography, Dialog, DialogTitle, DialogContent, Box, DialogActions, But
 import { getProjectUrl } from 'utils/project'
 import { IconExternalLink, IconShieldLock } from '@tabler/icons'
 import { getRoute } from 'api/publish'
-import { getUrlWithoutProtocol, queryParams } from 'utils/url'
+import { getUrlWithoutProtocol } from 'utils/url'
 import { useDispatch, useSelector } from 'react-redux'
 import { LOADER } from 'store/actions'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -61,8 +61,7 @@ const PublishConfirmationDialog = ({ open, project, onClose, principal }) => {
                                 }}
                                 onClick={() => {
                                     const url = getProjectUrl({ project })
-                                    const queryParam = queryParams()
-                                    window.open(`${url}${queryParam}`, '__blank')
+                                    window.open(url, '__blank')
                                 }}
                                 className="primary-color">
                             <Box display="flex" sx={{ textAlign: "center", width: '100%' }}>
