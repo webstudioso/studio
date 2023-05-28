@@ -30,6 +30,12 @@ $quaternaryColor: #605ed8;
     height: 100vh;
 }
 
+.gjs-field-checkbox input:checked + .gjs-chk-icon {
+    border-color: rgba(0, 0, 0, 0.5);
+    border-width: 0 2px 2px 0;
+    border-style: solid;
+}
+
 .gjs-no-preview {
     position: relative;
     z-index: 1200;
