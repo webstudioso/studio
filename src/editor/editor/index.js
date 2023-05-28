@@ -17,6 +17,8 @@ import ToastBlocks from '../blocks/toast'
 import Web3Button from '../blocks/web3-button'
 import SmartLabel from '../blocks/smart-label'
 
+import ScriptEditor from 'grapesjs-script-editor'
+
 // Primitives
 import WSMWalletConnect from 'wsm-wallet-connect'
 import WSMForm from 'wsm-form'
@@ -40,6 +42,7 @@ const Editor = ({ project, principal }) => {
       container: "#gjs",
       height: "100vh",
       width: "100%",
+      allowScripts: 1,
       fromElement: true,
       selectorManager: { escapeName },
       pageManager: true, // This should be set to true
@@ -85,9 +88,12 @@ const Editor = ({ project, principal }) => {
         Web3Button,
         WSMWalletConnect,
         WSMForm,
-        SmartLabel
+        SmartLabel,
+        ScriptEditor
       ],
-      pluginsOpts: {},
+      pluginsOpts: {
+        [ScriptEditor]: {}
+      },
       canvas: {
         scripts: [
           "https://cdn.jsdelivr.net/npm/webstudio-sdk@0.0.6/dist/main.min.js",
