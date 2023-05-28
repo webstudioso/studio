@@ -15,6 +15,7 @@ import VideoBlocks from '../blocks/video'
 import ButtonBlocks from '../blocks/buttons'
 import ToastBlocks from '../blocks/toast'
 import Web3Button from '../blocks/web3-button'
+import SmartLabel from '../blocks/smart-label'
 
 // Primitives
 import WSMWalletConnect from 'wsm-wallet-connect'
@@ -83,7 +84,8 @@ const Editor = ({ project, principal }) => {
         WSMTailwind,
         Web3Button,
         WSMWalletConnect,
-        WSMForm
+        WSMForm,
+        SmartLabel
       ],
       pluginsOpts: {},
       canvas: {
