@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Typography, Dialog, DialogTitle, DialogContent, Box, DialogActions, Button, Grid, Paper } from '@mui/material'
 import { getProjectUrl } from 'utils/project'
-import { IconExternalLink, IconShieldLock } from '@tabler/icons'
 import { getRoute } from 'api/publish'
-import { getUrlWithoutProtocol } from 'utils/url'
+import { getUrlWithoutProtocol, queryParams } from 'utils/url'
 import { useDispatch, useSelector } from 'react-redux'
 import { LOADER } from 'store/actions'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -53,21 +52,19 @@ const PublishConfirmationDialog = ({ open, project, onClose, principal }) => {
                         <Paper sx={{ 
                                     borderRadius:2, 
                                     p:2, 
-                                    background: '#232424', 
+                                    background: '#212121', 
                                     color: 'white', 
-                                    fontWeight: 'bold', 
+                                    fontWeight: 'normal', 
                                     textAlign:'center',
-                                    cursor: 'pointer'
+                                    cursor: 'pointer',
                                 }}
                                 onClick={() => {
-                                    const url = getProjectUrl({ project })
+                                    const url = `${getProjectUrl({ project })}${queryParams()}`
                                     window.open(url, '__blank')
-                                }}
-                                className="primary-color">
-                            <Box display="flex" sx={{ textAlign: "center", width: '100%' }}>
-                                <IconExternalLink color="white" size={22} />
-                                <Box justifyItems="center" marginLeft={1} lineHeight="25px">
-                                    {intl.formatMessage({id:"publish.visit_website"})}
+                                }}>
+                            <Box display="flex">
+                                <Box justifyItems="center">
+                                    {intl.formatMessage({id:"publish.view_site"})}
                                 </Box>
                             </Box>
                         </Paper>
@@ -76,22 +73,20 @@ const PublishConfirmationDialog = ({ open, project, onClose, principal }) => {
                     <Paper sx={{ 
                             borderRadius:2, 
                             p:2, 
-                            background: '#232424', 
+                            background: '#212121', 
                             color: 'white', 
-                            fontWeight: 'bold', 
+                            fontWeight: 'normal', 
                             textAlign:'center',
                             cursor: 'pointer'
                         }} 
                         disabled={isLoading}
                         onClick={() => {
-                            const url = `https://ipfs.moralis.io:2053/ipfs/${cid}/cert.json`
+                            const url = `https://ipfs.moralis.io:2053/ipfs/${cid}`
                             window.open(url, '__blank')
-                        }}
-                        className="primary-color">
-                            <Box display="flex" sx={{ textAlign: "center", width: '100%' }}>
-                                <IconShieldLock color="white" size={24} />
-                                <Box justifyItems="center" marginLeft={1} lineHeight="25px" marginRight={1}>
-                                    {intl.formatMessage({id:"publish.view_certificate"})}
+                        }}>
+                            <Box display="flex">
+                                <Box justifyItems="center">
+                                    {intl.formatMessage({id:"publish.view_ipfs"})}
                                 </Box>
                             </Box>
                         </Paper>

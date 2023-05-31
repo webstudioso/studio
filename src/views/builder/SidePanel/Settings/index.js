@@ -136,6 +136,8 @@ const Settings = ({ principal, project }) => {
         requestNewDomain(dispatch, account.user, customDomain, project)
     }
 
+    const hasPlan = account?.subscription?.subscriptionId
+
     const customDomainBlock = (
         <Grid container spacing={1} sx={{ mb:3, pb: 1, background: '#fdfdfd', border:'1px solid #f3f3f3' }}>
             <Grid item xs={12}>
@@ -146,15 +148,27 @@ const Settings = ({ principal, project }) => {
                     {intl.formatMessage({ id: 'settings.custom_domain_description' })}
                 </Typography>
             </Grid>
-            <Grid item xs={12} sx={{ mt: 1, pr: 2, pl: 1, pb: 2 }}>
-                    <TextField  fullWidth
-                                variant="standard"
-                                placeholder={intl.formatMessage({ id: 'settings.custom_domain_placeholder' })}
-                                disabled={isLoading}
-                                onChange={(e) => setCustomDomain(e.target.value)}
-                    ></TextField>
-                    <Button fullWidth onClick={handleSubmitCustomDomain}>{intl.formatMessage({ id: 'settings.custom_domain_submit_request' })}</Button>
-            </Grid>
+            { !hasPlan && (
+                <Grid item xs={12} sx={{ mt: 1, pr: 2, pl: 1, pb: 2 }}>
+                        <Button fullWidth                 
+                                onClick={() => {
+                                    window.location.href = 'https://www.webstudio.so/plans-pricing'
+                                }}>
+                                    {intl.formatMessage({ id: 'membership.free' })}
+                        </Button>
+                </Grid>
+            )}
+            { hasPlan && (
+                <Grid item xs={12} sx={{ mt: 1, pr: 2, pl: 1, pb: 2 }}>
+                        <TextField  fullWidth
+                                    variant="standard"
+                                    placeholder={intl.formatMessage({ id: 'settings.custom_domain_placeholder' })}
+                                    disabled={isLoading}
+                                    onChange={(e) => setCustomDomain(e.target.value)}
+                        ></TextField>
+                        <Button fullWidth onClick={handleSubmitCustomDomain}>{intl.formatMessage({ id: 'settings.custom_domain_submit_request' })}</Button>
+                </Grid>
+            )}
         </Grid>
     );
 

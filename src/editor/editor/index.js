@@ -15,9 +15,9 @@ import VideoBlocks from '../blocks/video'
 import ButtonBlocks from '../blocks/buttons'
 import ToastBlocks from '../blocks/toast'
 import Web3Button from '../blocks/web3-button'
-import SmartLabel from '../blocks/smart-label'
+// import SmartLabel from '../blocks/smart-label'
 
-import ScriptEditor from 'grapesjs-script-editor'
+// import ScriptEditor from 'grapesjs-script-editor'
 
 // Primitives
 import WSMWalletConnect from 'wsm-wallet-connect'
@@ -88,11 +88,11 @@ const Editor = ({ project, principal }) => {
         Web3Button,
         WSMWalletConnect,
         WSMForm,
-        SmartLabel,
-        ScriptEditor
+        // SmartLabel,
+        // ScriptEditor
       ],
       pluginsOpts: {
-        [ScriptEditor]: {}
+        // [ScriptEditor]: {}
       },
       canvas: {
         scripts: [

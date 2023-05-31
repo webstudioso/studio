@@ -1,5 +1,6 @@
 import { getProjectUrl } from "utils/project";
 import constants from 'constant'
+import { queryParams } from "utils/url";
 const { EVENTS } = constants
 
 // const cmdPublish = "publish";
@@ -240,7 +241,7 @@ const Plugin = (editor, config) => {
       className: 'project-link-button',
       label: `🌐 ${getProjectUrl({})}`,
       command(editor) {
-        window.open(getProjectUrl({}), "_blank");
+        window.open(`${getProjectUrl({})}${queryParams()}`, "_blank");
       }
     },
     {

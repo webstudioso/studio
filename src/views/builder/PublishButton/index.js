@@ -26,11 +26,9 @@ const PublishButton = ({ principal, project, editor }) => {
     const handlePublish = async () => {
         try {
             showLoader({ dispatch, show: true })
-            // Get latest stored data
-            await editor.load()
             const tags = getUserConfiguredMetadataTags({ project })
             const fonts = getCustomFontsMetadatTags()
-            const pages = getPages({ tags, fonts, editor, project })
+            const pages = await getPages({ tags, fonts, editor, project })
             const upload = await uploadPagesToIPFS({ pages })
             const cid = getCidFromDeployment({ upload })
             setRelease(cid)
@@ -65,7 +63,7 @@ const PublishButton = ({ principal, project, editor }) => {
                 <a style={{ color: '#6366F1'}} href="https://docs.ipfs.tech/concepts/faq/#what-is-ipfs" target="__blank">{intl.formatMessage({id:"publish.ipfs"})}</a>
             </Typography>
             <Button size="small" sx={{ my: 1 }} href={`${getProjectUrl({ project })}${queryParams()}`} target="__blank">{intl.formatMessage({id:"publish.view_site"})}</Button>
-            {release && (<Button size="small" sx={{ m: 1 }} href={getCidReleaseUrl()} target="__blank">{intl.formatMessage({id:"publish.view_ipfs"})}</Button>)}
+            {release && (<Button size="small" sx={{ m: 1 }} href={getCidReleaseUrl(release)} target="__blank">{intl.formatMessage({id:"publish.view_ipfs"})}</Button>)}
         </Fragment>
     )
 
