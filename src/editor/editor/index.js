@@ -164,7 +164,6 @@ const Editor = ({ project, principal }) => {
     })
 
     editor.on("stop:preview", () => {
-      console.log('Preview Dismiss')
       const ed = document.getElementById('gjs')
       ed.classList.remove('gjs-preview')
       ed.classList.add('gjs-no-preview')
