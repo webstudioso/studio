@@ -7,6 +7,7 @@ const contracts = [
         logo: 'https://ipfs-2.thirdwebcdn.com/ipfs/QmeNn6emc8Z3VMTFBKSSozSHiG3qt36bFi7EuPCiGGpo17/0.png',
         source: 'Thirdweb',
         url: 'https://thirdweb.com/thirdweb.eth/DropERC721',
+        tutorial: 'https://youtu.be/aKXh9OMFAvY',
         mapping: {
             claim: {
                 _receiver: { type: 'userAddress' },

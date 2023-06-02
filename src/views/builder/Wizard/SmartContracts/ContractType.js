@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { FormControl, InputLabel, MenuItem, Select,Box, Grid, Typography, IconButton, Button, Tooltip } from '@mui/material'
-import { IconShieldCheck } from '@tabler/icons'
+import { IconShieldCheck, IconVideo } from '@tabler/icons'
 import availableContracts from './SupportedContracts'
 
 const ContractType = ({ value, onChange, intl }) => {
@@ -34,8 +34,16 @@ const ContractType = ({ value, onChange, intl }) => {
                                             </Button>
                                         </Tooltip>
                                         <Box flex={1} />
+                                        {contract.tutorial && (
+                                            <Tooltip title={intl.formatMessage({ id:'guide' })}>
+                                                <IconButton color="inherited" size="small" href={contract.tutorial} target="__blank">
+                                                    <IconVideo />
+                                                </IconButton>
+                                            </Tooltip>
+                                        )}
+                                        <Box flex={1} />
                                         {contract.audited && (
-                                            <IconButton color="primary" size="small">
+                                            <IconButton color="success" size="small">
                                                 <IconShieldCheck />
                                                 <Typography fontSize={10} fontWeight="bold">{intl.formatMessage({ id:'audited' })}</Typography>
                                             </IconButton>    
