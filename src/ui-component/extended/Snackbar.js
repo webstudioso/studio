@@ -89,7 +89,7 @@ const Snackbar = () => {
                     open={open}
                     autoHideDuration={duration}
                     sx={{
-                        top: '5px !important'
+                        top: '5px !important',
                     }}
                     onClose={(e, v) => handleClose(v)}
                 >
