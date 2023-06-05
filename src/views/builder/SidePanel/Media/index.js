@@ -142,7 +142,7 @@ const Media = ({ onLeave, editor }) => {
                                             onClick={async () => {
                                                 const selectedImage = getSelectedImage()
                                                 if (selectedImage) {
-                                                    selectedImage.setAttributes({ src: item.attributes.src })
+                                                    selectedImage.set("src", item.attributes.src)
                                                     editor.store()
                                                     editor.AssetManager.close()
                                                     onLeave()

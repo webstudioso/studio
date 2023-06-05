@@ -76,16 +76,14 @@ html, body {
   }
 
 // ----------------------- END -----------------------------
+.MuiSnackbar-root{
+    z-index: 1299;
+}
 
 .upgrade { 
     margin-left: 10px;
     cursor: pointer;
 }
-
-// Dialog
-// .MuiDialog-root {
-//     z-index: 13000;
-// }
 
 .MuiDialog-paper {
     border-radius: 6px;
