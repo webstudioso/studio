@@ -23,7 +23,7 @@ const SidePanel = ({ open, openCategory, onLeave, principal, project, editor}) =
     const [delay, setDelay] = useState(false)
 
     useEffect(() => {
-        document.addEventListener(EVENTS.CLOSE_DELAY, () => setDelay(true))
+        document.addEventListener(EVENTS.CLOSE_DELAY, (e) => setDelay(true))
         return () => document.removeEventListener(EVENTS.CLOSE_DELAY, () => {})
       }, [])
 
@@ -34,7 +34,7 @@ const SidePanel = ({ open, openCategory, onLeave, principal, project, editor}) =
 
     const dismiss = () => {            
         if (delay) {
-            setTimeout(() => setDelay(false), 2000)
+            setTimeout(() => setDelay(false), 5000)
         } else {
             onClose()
         }

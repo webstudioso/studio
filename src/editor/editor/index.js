@@ -170,10 +170,17 @@ const Editor = ({ project, principal }) => {
     })
 
     editor.on("canvas:drop", (event, element) => {
-      const hasWizard = element.getTrait('payload')
+      // Open payload wizard
+      const hasWizard = element?.getTrait('payload')
       if (hasWizard) {
         editor.select(element)
         editor.runCommand('tlb-settings', { element })
+      }
+      // Open image selector
+      const isImage = element?.attributes?.type === 'image'
+      if (isImage) {
+        editor.select(element)
+        document.dispatchEvent(new CustomEvent(EVENTS.TOGGLE_ASSETS_MODAL))
       }
     })
 
