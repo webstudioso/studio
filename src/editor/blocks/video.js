@@ -9,7 +9,9 @@ const Plugin = (editor) => {
         content: { 
             type: 'video', 
             src,
-            provider: 'so'
+            provider: 'so',
+            muted: true,
+            controls: true
         }
     })
 
@@ -21,7 +23,9 @@ const Plugin = (editor) => {
         content: { 
             type: 'video', 
             src: 'M9DQPT7WZwo',
-            provider: 'yt'
+            provider: 'yt',
+            muted: true,
+            controls: true
         }
     })
 
@@ -32,11 +36,34 @@ const Plugin = (editor) => {
         content: { 
             type: 'video', 
             src: '783455773',
-            provider: 'vi'
+            provider: 'vi',
+            muted: true,
+            controls: true
         }
     })
 
-
+    const dc = editor.DomComponents;
+    dc.addType('video', {
+        extendFn: ['updateTraits'],
+        model: {
+            init() {
+                this.addMutedTrait();
+            },
+    
+            updateTraits() {
+                this.addMutedTrait();
+            },
+    
+            addMutedTrait() {
+                if (!this.getTrait('muted')) {
+                    this.addTrait({
+                        type: 'checkbox',
+                        name: 'muted',
+                    })
+                }
+            },
+        },
+    })
 
     // editor.BlockManager.add('h2',{ 
     //     category: "Text", 
