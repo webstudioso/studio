@@ -10,6 +10,8 @@ import * as TailBlog from 'templates/content/TailBlog'
 import * as Dockerz from 'templates/content/Dockerz'
 import * as Atlas from 'templates/content/Atlas'
 import * as Agenda from 'templates/content/Agenda'
+import * as Landing from 'templates/content/Landing'
+import * as Geoniti from 'templates/content/Geoniti'
 
 const templates = [
     Porto,
@@ -23,7 +25,9 @@ const templates = [
     TailBlog,
     Dockerz,
     Atlas,
-    Agenda
+    Agenda,
+    Landing,
+    Geoniti
 ]
 
 export default templates
