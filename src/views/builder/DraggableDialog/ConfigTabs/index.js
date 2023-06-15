@@ -84,7 +84,7 @@ export default function BasicTabs({ editor }) {
             <Tab label="Design 🎨" {...a11yProps(0)} />
             <Tab label="Properties 🔧" {...a11yProps(1)} />
             {hasWizard && (
-              <Tab label="Wizard 🪄" {...a11yProps(2)} />
+              <Tab label="Wizard 🧙‍♂️" {...a11yProps(2)} />
             )}
         </Tabs>
       </Box>
@@ -93,10 +93,11 @@ export default function BasicTabs({ editor }) {
       <TabPanel value={value} index={1} id="propertyTab">
       </TabPanel>
       {hasWizard && (
-        <TabPanel value={value} index={2} id="wizardTab">
+        <TabPanel value={value} index={3} id="wizardTab">
             <SmartContracts element={element} activeStep={0} editor={editor} changeStep={(step) => console.log(step)} intl={intl} />
         </TabPanel>
       )}
+
     </Box>
   );
 }

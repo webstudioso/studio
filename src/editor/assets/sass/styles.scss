@@ -22,6 +22,14 @@ $quaternaryColor: #605ed8;
     box-shadow: -10px -13px 50px rgb(255 255 255 / 0.5);
 }
 
+.MuiDrawer-root {
+    z-index: 1150;
+}
+
+.gjs-mdl-container {
+    position: absolute;
+}
+
 .gjs-preview {
     position: fixed;
     left: 0px;
@@ -38,7 +46,7 @@ $quaternaryColor: #605ed8;
 
 .gjs-no-preview {
     position: relative;
-    z-index: 1200;
+    z-index: 1100;
     height: calc(100vh - 70px) !important;
 }
 
@@ -257,8 +265,22 @@ $quaternaryColor: #605ed8;
 
 // Modal
 .gjs-mdl-dialog {
-  border-radius: 5px;
-  padding: 8px;
+    border-radius: 4px;
+    padding: 16px;
+}
+
+.CodeMirror {
+    border-radius: 4px;
+}
+
+.gjs-btn-prim {
+    cursor: pointer;
+    border: none;
+    margin-top: 12px;
+    background: #7572F9;
+    padding: 8px 24px;
+    border-radius: 16px;
+    color: white;
 }
 
 .gjs-mdl-container {

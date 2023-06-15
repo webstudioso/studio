@@ -15,6 +15,8 @@ import VideoBlocks from '../blocks/video'
 import ButtonBlocks from '../blocks/buttons'
 import ToastBlocks from '../blocks/toast'
 import Web3Button from '../blocks/web3-button'
+import CustomCode from '../blocks/custom-code'
+import DynamicList from '../blocks/dynamic-list'
 // import SmartLabel from '../blocks/smart-label'
 
 // import ScriptEditor from 'grapesjs-script-editor'
@@ -26,6 +28,12 @@ import WSMTailwind from 'wsm-tailwind'
 import WSMAnimations from 'wsm-animations'
 import WSMFonts, { WSMFontStyles } from 'wsm-fonts'
 import constants from 'constant'
+
+
+
+// import script from '../blocks/button/script'
+
+
 const { EVENTS } = constants
 
 const Editor = ({ project, principal }) => {
@@ -88,6 +96,8 @@ const Editor = ({ project, principal }) => {
         Web3Button,
         WSMWalletConnect,
         WSMForm,
+        CustomCode,
+        DynamicList
         // SmartLabel,
         // ScriptEditor
       ],
@@ -183,6 +193,198 @@ const Editor = ({ project, principal }) => {
         document.dispatchEvent(new CustomEvent(EVENTS.TOGGLE_ASSETS_MODAL))
       }
     })
+
+    const dc = editor.DomComponents;
+    dc.addType('text', {
+
+      model: {
+        defaults: {
+
+          traits: [
+            ...dc.getType('text').model.prototype.defaults.traits,
+            {
+              label: 'Name',
+              name: 'name',
+              type: 'text'
+            }
+          ]
+        }
+      }
+
+    })
+
+
+    dc.addType('button', {
+
+      model: {
+        defaults: {
+          script: function (props) {
+
+              // Get properties
+              const { body, endpoint, web3Signature } = props
+              const scope = this;
+
+              this.sendNotification = (alertSeverity, message, link, timeout) => {
+                  const detail = { 
+                      detail: { 
+                          alertSeverity, 
+                          message, 
+                          link,
+                          timeout
+                      }
+                  };
+                  const cEvent = new CustomEvent('onToast', detail)
+                  document.dispatchEvent(cEvent);
+              }
+
+              this.post = (headers={}) => {
+                console.log("POSTing")
+                fetch(endpoint, { method: "POST", headers, body })
+                .then(() => scope.sendNotification('success', 'sent'));
+              }
+
+              this.signedPost = () => {
+                console.log("Doing signed POST")
+                const wallet = new window.ethers.providers.Web3Provider(window.walletProvider)
+                const signer = wallet.getSigner()
+
+                // Sign
+                signer.signMessage(body).then((signature) =>{
+                  // Invoke POST
+                  const headers = { signature }
+                  scope.post(headers)
+                }).catch((e) => {
+                    console.log(e)
+                    scope.sendNotification('error', e.message)
+                })
+              }
+
+              this.onClick = () => {
+                  if (endpoint) {
+                    try {
+                      console.log(web3Signature)
+                      if (web3Signature) {
+                        this.signedPost()
+                      } else {
+                        this.post()
+                      }
+                    } catch (e) {
+                      this.sendNotification('error', e.message)
+                    }
+                  } else {
+                    this.sendNotification('error', 'Button endpoint not configured')
+                  }
+              }
+
+              // Initialize listener onClick
+              document.getElementById(this.id).addEventListener("click", this.onClick)
+          },
+          endpoint: `https://cdukfsgim7.execute-api.us-east-1.amazonaws.com/generate`,
+          body: `
+            {
+                "message": "RZILUR4ELTSF7P43"
+            }
+            `,
+          web3Signature: true,
+          traits: [
+            ...dc.getType('button').model.prototype.defaults.traits,
+            {
+              label: 'Endpoint',
+              name: 'endpoint',
+              type: 'text'
+            },
+            {
+              label: 'Body',
+              name: 'body',
+              type: 'text'
+            },
+            {
+              label: 'Web3 Signature',
+              name: 'web3Signature',
+              type: 'checkbox'
+            }
+          ],
+          "script-props": ["endpoint", "body", "web3Signature"],
+        }
+      }
+    });
+    //   // view: {
+    //   //   events: {
+    //   //     click: 'send',
+    //   //   },
+  
+    //   //   init() {
+
+    //   //   },
+
+    //   //   fetchAccountData: () => {
+    //   //     console.log(window.ethers)
+    //   //     const wallet = new window.ethers.providers.Web3Provider(window.walletProvider)
+    //   //     const signer = wallet.getSigner()
+    //   //     // return await signer.getAddress();
+    //   //     return "aaaaa"
+    //   //   },
+    //   //   send: () => {
+    //   //     const { attr } = this;
+    //   //     const { endpoint, body } = attr;
+
+    //   //     // em.get('Commands').run(commandNameCustomCode, { target: model });
+    //   //     console.log("clicking")
+
+    //   //     // // Replace body wildcards
+    //   //     // let parsedBody = {}
+    //   //     // Object.keys(body).forEach((key) => {
+    //   //     //   if (body[key] === '$userAddress') {
+    //   //     //     const addr = "a" //await this.fetchAccountData()
+    //   //     //     parsedBody[key] = addr
+    //   //     //   } else if (body[key] === '$signature') {
+    //   //     //     const wallet = new window.ethers.providers.Web3Provider(window.walletProvider)
+    //   //     //     let flatSig = "b" //await wallet.signMessage("123333");
+    //   //     //     console.log(flatSig);
+    //   //     //     parsedBody[key] = flatSig
+    //   //     //   }
+    //   //     // })
+
+    //   //     if (endpoint) {
+    //   //       fetch(endpoint, {
+    //   //           method: "POST",
+    //   //           body,
+    //   //         }).then((r) => {
+    //   //           console.log(r.json())
+    //   //         });
+    //   //       }
+          
+    //   //   },
+    //   // },
+
+    // })
+
+
+    // dc.addType('buttton', {
+
+    //   model: {
+    //     defaults: {
+    //       script: (props) => {
+    //         console.log(props)
+    //         console.log("My button...."+this.id)
+    //       },
+    //       traits: [
+    //         ...dc.getType('button').model.prototype.defaults.traits,
+    //         {
+    //           label: 'Endpoint',
+    //           name: 'endpoint',
+    //           type: 'text'
+    //         },
+    //         {
+    //           label: 'Payload',
+    //           name: 'payload',
+    //           type: 'text'
+    //         }
+    //       ]
+    //     }
+    //   }
+
+    // })
 
     dispatch({ type: SET_EDITOR, editor })
   }

@@ -106,7 +106,7 @@ const EditorView = () => {
 							background:'white', 
 							width: '60px', 
 							boxShadow: open ? '0px' :'5px 0px 5px -5px rgba(0,0,0,0.25);', 
-							zIndex: 1201
+							zIndex: 1198
 						}}>
 							<Grid container sx={{ px: '5px', py: '35px' }}>
 								<Grid item xs={12}>

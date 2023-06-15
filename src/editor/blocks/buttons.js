@@ -68,7 +68,9 @@ const Plugin = (editor) => {
             }
         }
         editor.BlockManager.add(id, block)
+        
     })
+
 
   }
   

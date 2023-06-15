@@ -55,7 +55,7 @@ const SidePanel = ({ open, openCategory, onLeave, principal, project, editor}) =
                     mt: '56px',
                     boxShadow: '15px 15px 15px 0px rgba(0,0,0,0.15)',
                     border: '1px solid #dfe5eb',
-                    zIndex: 10
+                    zIndex: 1150
                 }
             }}
         >
