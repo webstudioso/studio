@@ -29,6 +29,7 @@ const PublishButton = ({ principal, project, editor }) => {
             const tags = getUserConfiguredMetadataTags({ project })
             const fonts = getCustomFontsMetadatTags()
             const pages = await getPages({ tags, fonts, editor, project })
+            console.log(pages)
             const upload = await uploadPagesToIPFS({ pages })
             const cid = getCidFromDeployment({ upload })
             setRelease(cid)

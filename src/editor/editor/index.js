@@ -218,71 +218,10 @@ const Editor = ({ project, principal }) => {
 
       model: {
         defaults: {
-          script: function (props) {
-
-              // Get properties
-              const { body, endpoint, web3Signature } = props
-              const scope = this;
-
-              this.sendNotification = (alertSeverity, message, link, timeout) => {
-                  const detail = { 
-                      detail: { 
-                          alertSeverity, 
-                          message, 
-                          link,
-                          timeout
-                      }
-                  };
-                  const cEvent = new CustomEvent('onToast', detail)
-                  document.dispatchEvent(cEvent);
-              }
-
-              this.post = (headers={}) => {
-                console.log("POSTing")
-                fetch(endpoint, { method: "POST", headers, body })
-                .then(() => scope.sendNotification('success', 'sent'));
-              }
-
-              this.signedPost = () => {
-                console.log("Doing signed POST")
-                const wallet = new window.ethers.providers.Web3Provider(window.walletProvider)
-                const signer = wallet.getSigner()
-
-                // Sign
-                signer.signMessage(body).then((signature) =>{
-                  // Invoke POST
-                  const headers = { signature }
-                  scope.post(headers)
-                }).catch((e) => {
-                    console.log(e)
-                    scope.sendNotification('error', e.message)
-                })
-              }
-
-              this.onClick = () => {
-                  if (endpoint) {
-                    try {
-                      console.log(web3Signature)
-                      if (web3Signature) {
-                        this.signedPost()
-                      } else {
-                        this.post()
-                      }
-                    } catch (e) {
-                      this.sendNotification('error', e.message)
-                    }
-                  } else {
-                    this.sendNotification('error', 'Button endpoint not configured')
-                  }
-              }
-
-              // Initialize listener onClick
-              document.getElementById(this.id).addEventListener("click", this.onClick)
-          },
           endpoint: `https://cdukfsgim7.execute-api.us-east-1.amazonaws.com/generate`,
           body: `
             {
-                "message": "RZILUR4ELTSF7P43"
+                "message": "$valx"
             }
             `,
           web3Signature: true,

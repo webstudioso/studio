@@ -18,6 +18,136 @@ const Plugin = (editor) => {
   
     const script = function (props) {
 
+
+          const scope = this;
+
+
+
+
+
+
+          //     // Get properties
+          //     const { body, endpoint, web3Signature } = props
+          //     const scope = this;
+
+          //     this.getComponent = () => {
+          //       return document.getElementById(this.id)
+          //     }
+
+              this.sendNotification = (alertSeverity, message, link, timeout) => {
+                  const detail = { 
+                      detail: { 
+                          alertSeverity, 
+                          message, 
+                          link,
+                          timeout
+                      }
+                  };
+                  const cEvent = new CustomEvent('onToast', detail)
+                  document.dispatchEvent(cEvent);
+              }
+
+              this.getContext = (element) => {
+                let actionContext = {}
+                const mappedItems = element.parentElement.querySelectorAll('[title]')
+                console.log(mappedItems)
+                mappedItems.forEach((el) => {
+                  console.log(el.attributes.title.value)
+                  actionContext[el.attributes.title.value] = el.innerText;
+                  // const textItems = node.querySelectorAll('[title]'); 
+
+                })
+                console.log(actionContext)
+                return actionContext
+              }
+
+              this.parseBody = (element, body) => {
+                // Check if using map values and find the context
+                const parsed = {}
+                const jsonBody = JSON.parse(body)
+                const paramContext = this.getContext(element)
+                Object.keys(jsonBody).forEach((key) => {
+                  const value = jsonBody[key]
+                  if (value.startsWith('_')) {
+                    parsed[key] = paramContext[value.replace('_','')]
+                  } else {
+                    parsed[key] = value
+                  }
+                })
+                // console.log('Parsed value')
+                // console.log(parsed)
+                return parsed
+              }
+
+              this.post = (element, body={}, headers={}, endpoint, wasParsed=false) => {
+                // console.log("POSTing to "+endpoint)
+                const parsedBody = wasParsed ? body : this.parseBody(element, body)
+                fetch(endpoint, { method: "POST", headers, body: JSON.stringify(parsedBody) })
+                .then((r) => scope.sendNotification('success', 'Request sent', null, 5000))
+                .catch((e) => scope.sendNotification('error', e.message, null, 5000));
+              }
+
+              this.signedPost = (element, body, headers, endpoint) => {
+                console.log("Doing signed POST")
+                const wallet = new window.ethers.providers.Web3Provider(window.walletProvider)
+                const signer = wallet.getSigner()
+
+                // Sign
+                
+                const parsedBody = this.parseBody(element, body)
+                signer.signMessage(JSON.stringify(parsedBody)).then((signature) =>{
+                  // Invoke POST
+                  const allHeaders = { ...headers, signature }
+                  scope.post(element, parsedBody, allHeaders, endpoint, true)
+                }).catch((e) => {
+                    console.log(e)
+                    scope.sendNotification('error', e.message, null, 5000)
+                })
+              }
+
+              this.onClick = (e) => {
+                const element = e.target;
+                const endpoint = element.getAttribute('endpoint')
+                const web3Signature = element.hasAttribute('web3signature')
+                const body = element.getAttribute('body')
+                // console.log(`Signed request? ${web3Signature}`)
+                // console.log(`Target endpoint ${endpoint}`)
+                // console.log(`Payload ${body}`)
+                  if (endpoint) {
+                    try {
+                      console.log(web3Signature)
+                      if (web3Signature) {
+                        this.signedPost(element, body, {}, endpoint)
+                      } else {
+                        this.post(element, body, {}, endpoint, false)
+                      }
+                    } catch (e) {
+                      this.sendNotification('error', e.message)
+                    }
+                  } else {
+                    this.sendNotification('error', 'Button endpoint not configured')
+                  }
+              }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
         this.getProvider = () => {
             const provider = new ethers.providers.Web3Provider(window?.walletProvider);
@@ -35,7 +165,7 @@ const Plugin = (editor) => {
           }
 
         this.getComponent = () => {
-            console.log(this.id)
+            // console.log(this.id)
             return document.getElementById(this.id)
           }
         
@@ -49,45 +179,62 @@ const Plugin = (editor) => {
             this.getComponent().replaceChildren(prototype);
           }
 
+          this.cloneNode = (original, index) => {
+            // We clone and change ids
+            const cloned = original.cloneNode(true)
+            cloned.id = `${cloned.id}${index}`
+            const children = cloned.querySelectorAll("*");
+            // console.log(children)
+            children?.forEach((child) => child.id = `${child.id}${index}`)
+            return cloned
+          }
+
           this.buildChildNodes = (items) => {
 
             const prototype = this.getPrototypeNode();
-            const scope = this;
+
+            this.resetContent();
             items?.forEach((item, index) => {
                 // Skip first component since we are gonna modify the mapping
                 let node;
                 if (index !== 0) {
-                    node = prototype.cloneNode(true);
+                    node = scope.cloneNode(prototype, index);
                     scope.getComponent().appendChild(node);
                 } else {
                     node = scope.getPrototypeNode();
                 }
                 
-                // // Fill content
+                // Fill content
                 const textItems = node.querySelectorAll('[title]'); 
-                console.log(textItems)
+                // console.log(textItems)
                 textItems?.forEach((x) => {
                     x.textContent=item
                 })
 
+                // Set CTA
+                try {
+                  const cta = node.querySelectorAll('button')[0]; 
+                  // console.log(cta)
+                  cta.addEventListener("click", this.onClick)
+                } catch (e) {
+                  console.log(`No CTA`)
+                }
+
             })
-            // children?.forEach(function(item){
-            //   var cln = item.cloneNode(true);
-            //   parent.appendChild(cln);
-            // });
+            
           };
 
           const evalCondition = () => {
       
             if(!props.networkUrl || !props.abi || !props.method) return;
         
-            console.log("Evaling")
+            // console.log("Evaling")
             // const provider = this.getProvider()
             const signer = this.getSigner()
             const abi = JSON.parse(props.abi)
 
-            console.log(signer)
-            console.log(abi)
+            // console.log(signer)
+            // console.log(abi)
       
             const contract = new ethers.Contract(
               props.contractAddress,
@@ -95,16 +242,16 @@ const Plugin = (editor) => {
               signer
             )
           
-            this.resetContent();
+            
             const attrs = [props.attr1, props.attr2, props.attr3, props.attr4, props.attr5, props.attr6].filter((n) => n)
             const fn = contract[props.method]
       
             const scope = this
-            console.log(attrs)
+            // console.log(attrs)
             fn.apply(null, attrs)
                       .then((response) => {
                           console.log(`Response received ${response}`);
-                          console.log(response)
+                          // console.log(response)
                           scope.buildChildNodes(response)
                       }, (error) => {
                           console.log(`Error received ${error}`);

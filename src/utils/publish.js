@@ -28,6 +28,7 @@ export const getPages = async ({ tags=[], fonts=[], editor, project }) => {
       const component = page.getMainComponent()
       const html = editor.getHtml({ component })
       const js = editor.getJs({ component })
+      // console.log(js)
       const css =  editor.getCss({ component })
 
       const pageName = page.attributes?.type === 'main' ? 'index' : page.attributes?.name;
@@ -64,7 +65,7 @@ export const getPages = async ({ tags=[], fonts=[], editor, project }) => {
           </head>
           ${functionalBody}
         </html>`;
-
+              console.log(content)
         pages.push({
           path: `${pageName}.html`,
           content:btoa(unescape(encodeURIComponent(content)))
