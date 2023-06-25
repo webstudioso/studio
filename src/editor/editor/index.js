@@ -15,6 +15,7 @@ import VideoBlocks from '../blocks/video'
 import ButtonBlocks from '../blocks/buttons'
 import ToastBlocks from '../blocks/toast'
 import Web3Button from '../blocks/web3-button'
+import Section from '../blocks/section'
 // import SmartLabel from '../blocks/smart-label'
 
 // import ScriptEditor from 'grapesjs-script-editor'
@@ -88,6 +89,7 @@ const Editor = ({ project, principal }) => {
         Web3Button,
         WSMWalletConnect,
         WSMForm,
+        Section
         // SmartLabel,
         // ScriptEditor
       ],
@@ -96,7 +98,7 @@ const Editor = ({ project, principal }) => {
       },
       canvas: {
         scripts: [
-          "https://cdn.jsdelivr.net/npm/webstudio-sdk@0.0.6/dist/main.min.js",
+          "https://cdn.jsdelivr.net/npm/webstudio-sdk@0.0.23/dist/main.min.js",
           "https://cdn.tailwindcss.com",
           "https://code.jquery.com/jquery-3.6.1.min.js",
           "https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js",
