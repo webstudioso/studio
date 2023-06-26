@@ -44,7 +44,7 @@ export const getPages = async ({ tags=[], fonts=[], editor, project }) => {
             <script src="https://cdn.tailwindcss.com"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
             <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/webstudio-sdk@0.0.26/dist/main.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/webstudio-sdk@0.0.28/dist/main.min.js"></script>
             <style>
                 html {
                     scroll-behavior: smooth;

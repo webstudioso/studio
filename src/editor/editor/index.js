@@ -100,7 +100,7 @@ const Editor = ({ project, principal }) => {
       },
       canvas: {
         scripts: [
-          "https://cdn.jsdelivr.net/npm/webstudio-sdk@0.0.26/dist/main.min.js",
+          "https://cdn.jsdelivr.net/npm/webstudio-sdk@0.0.28/dist/main.min.js",
           "https://cdn.tailwindcss.com",
           "https://code.jquery.com/jquery-3.6.1.min.js",
           "https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js",
