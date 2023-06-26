@@ -41,8 +41,15 @@ export const script = function (props) {
         isJson
     } = utils
 
+    // Propagate events from provider to other components
+    this.onDisconnectedEvent = () => document.dispatchEvent(new Event(EVENT.DISCONNECTED, window.walletProvider))
+    this.onConnectedEvent = () => document.dispatchEvent(new Event(EVENT.CONNECTED, window.walletProvider))
+    this.onNetworkChangedEvent = () => document.dispatchEvent(new Event(EVENT.NETWORK_CHANGED, window.walletProvider))
+    this.onAccountChangedEvent = () => document.dispatchEvent(new Event(EVENT.ACCOUNT_CHANGED, window.walletProvider))
+    this.onChainChangedEvent = () => document.dispatchEvent(new Event(EVENT.CHAIN_CHANGED, window.walletProvider))
+
     this.disconnect = () => {
-        document.dispatchEvent(new Event(EVENT.DISCONNECTED, window.walletProvider))
+        this.onDisconnectEvent()
         try {
             localStorage.removeItem(CACHE);
             localStorage.clear();
@@ -140,7 +147,12 @@ export const script = function (props) {
 
     this.onConnect = (provider) => {
         window.walletProvider = provider
-        document.dispatchEvent(new Event(EVENT.CONNECTED, window.walletProvider))
+        window.walletProvider.on(EVENT.CONNECTED, this.onConnectedEvent)
+        window.walletProvider.on(EVENT.DISCONNECTED, this.onDisconnectedEvent)
+        window.walletProvider.on(EVENT.NETWORK_CHANGED, this.onNetworkChangedEvent)
+        window.walletProvider.on(EVENT.ACCOUNT_CHANGED, this.onAccountChangedEvent)
+        window.walletProvider.on(EVENT.CHAIN_CHANGED, this.onChainChangedEvent)
+        this.onConnectEvent()
         this.onClick()
     }
 
