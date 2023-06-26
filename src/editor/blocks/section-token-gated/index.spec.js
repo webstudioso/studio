@@ -1,7 +1,7 @@
 import Plugin, { script, properties } from "./index"
 import { ethers } from 'ethers'
 
-describe("Section plugin", () => {
+describe("Section Token Gated Plugin", () => {
 
     let initComponent, show, hide, onErrorMessage, getAccount, getSigner, context, getBalances
     beforeAll(() => {

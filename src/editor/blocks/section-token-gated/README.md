@@ -4,6 +4,6 @@ A new drag and drop *<section>* block with NFT token gated rule configuration. A
 
 ### Dependencies
 
-- [webstudio-sdk@0.0.23](https://cdn.jsdelivr.net/npm/webstudio-sdk@0.0.23/dist/main.min.js) - constants and utilities are used to interact with blockchain using etherjs
+- [webstudio-sdk@0.0.27](https://cdn.jsdelivr.net/npm/webstudio-sdk@0.0.27/dist/main.min.js) - constants and utilities are used to interact with blockchain using etherjs
 - [tailwind-css](https://cdn.tailwindcss.com) - constants and utilities are used to interact with blockchain using etherjs
 

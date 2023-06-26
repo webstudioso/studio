@@ -14,14 +14,15 @@ import ImageBlocks from '../blocks/images'
 import VideoBlocks from '../blocks/video'
 import ButtonBlocks from '../blocks/buttons'
 import ToastBlocks from '../blocks/toast'
-import Web3Button from '../blocks/web3-button'
-import Section from '../blocks/section'
+
+import ButtonWeb3 from '../blocks/button-web3'
+import SectionTokenGated from '../blocks/section-token-gated'
 // import SmartLabel from '../blocks/smart-label'
 
 // import ScriptEditor from 'grapesjs-script-editor'
 
 // Primitives
-import WSMWalletConnect from 'wsm-wallet-connect'
+// import WSMWalletConnect from 'wsm-wallet-connect'
 import WSMForm from 'wsm-form'
 import WSMTailwind from 'wsm-tailwind'
 import WSMAnimations from 'wsm-animations'
@@ -86,10 +87,11 @@ const Editor = ({ project, principal }) => {
         VideoBlocks,
         ToastBlocks,
         WSMTailwind,
-        Web3Button,
-        WSMWalletConnect,
+        ButtonWeb3,
+        // WSMWalletConnect,
         WSMForm,
-        Section
+        // ButtonWalletConnect,
+        SectionTokenGated
         // SmartLabel,
         // ScriptEditor
       ],
@@ -98,7 +100,7 @@ const Editor = ({ project, principal }) => {
       },
       canvas: {
         scripts: [
-          "https://cdn.jsdelivr.net/npm/webstudio-sdk@0.0.23/dist/main.min.js",
+          "https://cdn.jsdelivr.net/npm/webstudio-sdk@0.0.26/dist/main.min.js",
           "https://cdn.tailwindcss.com",
           "https://code.jquery.com/jquery-3.6.1.min.js",
           "https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js",
