@@ -85,8 +85,10 @@ export function script(props) {
     }
 
     this.onBalances = (balances) => {
+        console.debug(`Retrieving balances from component ${this.id}`)
         const numBalances = balances?.map((balance) => balance.toNumber())
         const positiveBalances = numBalances?.find((item) => item > 0)
+        console.debug(`Balance retrieved ${positiveBalances}`)
         if (positiveBalances) {
             show(this.id);
         } else {
@@ -95,9 +97,11 @@ export function script(props) {
     }
 
     this.onChange = () => {
+        console.debug(`Component ${this.id} reacting to event change`)
         hide(this.id)
         try {
             const account = getAccount()
+            console.debug(`Current account ${account} of connected wallet`)
             if (!account) return
 
             getBalances({
