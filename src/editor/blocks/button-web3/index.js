@@ -49,7 +49,7 @@ export const script = function (props) {
     this.onChainChangedEvent = () => document.dispatchEvent(new Event(EVENT.CHAIN_CHANGED, window.walletProvider))
 
     this.disconnect = () => {
-        this.onDisconnectEvent()
+        this.onDisconnectedEvent()
         try {
             localStorage.removeItem(CACHE);
             localStorage.clear();
@@ -152,7 +152,7 @@ export const script = function (props) {
         window.walletProvider.on(EVENT.NETWORK_CHANGED, this.onNetworkChangedEvent)
         window.walletProvider.on(EVENT.ACCOUNT_CHANGED, this.onAccountChangedEvent)
         window.walletProvider.on(EVENT.CHAIN_CHANGED, this.onChainChangedEvent)
-        this.onConnectEvent()
+        this.onConnectedEvent()
         this.onClick()
     }
 
