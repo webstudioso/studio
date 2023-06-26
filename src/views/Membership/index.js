@@ -1,5 +1,5 @@
 import { Chip } from '@mui/material'
-import { useIntl } from 'react-intl';
+import { useIntl } from 'react-intl'
 import { useSelector } from 'react-redux'
 
 const Membership = () => {
