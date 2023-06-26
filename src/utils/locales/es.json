@@ -173,5 +173,10 @@
 
     "configuration.title": "Configuracion",
     "social.text": "Comparte en",
-    "social.share": "Mira mi nueva pagina web 3.0 creada con @Webstudioso 🤩. Crea la tuya hoy, es gratis!"
+    "social.share": "Mira mi nueva pagina web 3.0 creada con @Webstudioso 🤩. Crea la tuya hoy, es gratis!",
+
+    "upgrade.title": "Obten Acceso Ilimitado",
+    "upgrade.description": "Esta funcionalidad solo esta disponible para miembros Unlimited o Lifetime",
+    "upgrade.continue": "Continua",
+    "upgrade.now": "Obten Accesso Ilimitado Ahora!"
 }

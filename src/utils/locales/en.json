@@ -173,5 +173,10 @@
 
     "configuration.title": "Configuration",
     "social.text": "Share on",
-    "social.share": "Check out my new Web3 website made with @Webstudioso 🤩. Create yours now, it is free!"
+    "social.share": "Check out my new Web3 website made with @Webstudioso 🤩. Create yours now, it is free!",
+
+    "upgrade.title": "Upgrade to Unlimited",
+    "upgrade.description": "This module is a premium module only available for Unlimited and Lifetime members",
+    "upgrade.continue": "Continue",
+    "upgrade.now": "Upgrade Now!"
 }

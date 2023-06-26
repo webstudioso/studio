@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { LOADER, SET_EDITOR } from 'store/actions'
 import { showError, showSuccess } from 'utils/snackbar'
 import { useIntl } from 'react-intl'
@@ -17,6 +17,8 @@ import ToastBlocks from '../blocks/toast'
 
 import ButtonWeb3 from '../blocks/button-web3'
 import SectionTokenGated from '../blocks/section-token-gated'
+
+import Upgrade from './Upgrade'
 // import SmartLabel from '../blocks/smart-label'
 
 // import ScriptEditor from 'grapesjs-script-editor'
@@ -33,7 +35,11 @@ const { EVENTS } = constants
 const Editor = ({ project, principal }) => {
   const intl = useIntl()
   const dispatch = useDispatch()
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false)
   const projectEndpoint = `${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${project.id}/content`
+
+	const account = useSelector((state) => state.account)
+  const hasPremiumSubscription = () => !!account?.subscription?.subscriptionId
 
   const loadEditor = () => {
 
@@ -173,6 +179,16 @@ const Editor = ({ project, principal }) => {
       ed.classList.add('gjs-no-preview')
     })
 
+    editor.on("block:drag:start", (element) => {
+        const isPremiumFeature = !!element?.attributes?.premium
+        const isPremiumMember = hasPremiumSubscription()
+        console.debug(`Is premium member ${isPremiumMember} is premium block ${isPremiumFeature}`)
+        if (isPremiumFeature && !isPremiumMember) {
+            console.debug('Interrupting...')
+            setShowUpgradeModal(true)
+        }
+    })
+  
     editor.on("canvas:drop", (event, element) => {
       // Open payload wizard
       const hasWizard = element?.getTrait('payload')
@@ -195,7 +211,12 @@ const Editor = ({ project, principal }) => {
     loadEditor()
   }, [])
 
-  return (<div id="gjs" className="gjs-no-preview" />)
+  return (
+    <>
+      <div id="gjs" className="gjs-no-preview" />
+      <Upgrade open={showUpgradeModal} onClose={() => setShowUpgradeModal(false)} />
+    </>
+  )
 }
 
 export default Editor
