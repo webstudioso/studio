@@ -80,7 +80,8 @@ const Chat = ({ editor, principal }) => {
     }, [messageList])
 
     useEffect(() => {
-        console.log(`New target selected ${target}`)
+        console.log(`New target selected`)
+        console.log(target)
     }, [target])
 
     const sendMessage = () => {

@@ -11,7 +11,8 @@ const Plugin = (editor) => {
             src,
             provider: 'so',
             muted: true,
-            controls: true
+            controls: true,
+            autoplay: true
         }
     })
 
@@ -25,7 +26,8 @@ const Plugin = (editor) => {
             src: 'M9DQPT7WZwo',
             provider: 'yt',
             muted: true,
-            controls: true
+            controls: true,
+            autoplay: true
         }
     })
 
@@ -38,7 +40,8 @@ const Plugin = (editor) => {
             src: '783455773',
             provider: 'vi',
             muted: true,
-            controls: true
+            controls: true,
+            autoplay: true
         }
     })
 
@@ -52,6 +55,7 @@ const Plugin = (editor) => {
     
             updateTraits() {
                 this.addMutedTrait();
+                this.addAutoplayTrait();
             },
     
             addMutedTrait() {
@@ -59,6 +63,14 @@ const Plugin = (editor) => {
                     this.addTrait({
                         type: 'checkbox',
                         name: 'muted',
+                    })
+                }
+            },
+            addAutoplayTrait() {
+                if (!this.getTrait('autoplay')) {
+                    this.addTrait({
+                        type: 'checkbox',
+                        name: 'autoplay',
                     })
                 }
             },
