@@ -9,8 +9,10 @@ import { trackEvent } from 'utils/analytics'
 import constants from 'constant'
 import { getTemplateBodyContentFromString, getClassesFromSnippet, isHTMLComponent, isHTMLSegment, isHTMLTemplate } from 'utils/template'
 import { useIntl } from 'react-intl'
+import { useSelector } from 'react-redux'
+import { hasPremiumSubscription } from 'utils/user'
 
-const { ANALYTICS } = constants
+const { ANALYTICS, EVENTS } = constants
 
 let ws
 const actionStyle = "text-black bg-white rounded-full text-xs px-2 py-1 mr-1 my-2"
@@ -24,6 +26,7 @@ const Chat = ({ editor, principal }) => {
     const [chatOpen, setChatOpen] = useState(false)
     const [target, setTarget] = useState(editor?.getSelected())
     const [connected, setConnected] = useState(false)
+    const account = useSelector((state) => state.account)
 
     const scrollBottom = () => {
         const e = ref
@@ -31,7 +34,14 @@ const Chat = ({ editor, principal }) => {
     }
 
     const toggleChat = () => {
-        setChatOpen(!chatOpen)
+        // Only if premium membership, else show modal from editor
+        if (hasPremiumSubscription(account)) {
+            setChatOpen(!chatOpen)
+        }
+        else {
+            console.debug(`Dispatching premium feature display modal`)
+            document.dispatchEvent(new CustomEvent(EVENTS.TOGGLE_PREMIUM_MODAL))
+        }
     }
 
     const initializeSocket = () => {

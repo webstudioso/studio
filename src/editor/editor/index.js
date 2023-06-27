@@ -30,6 +30,7 @@ import WSMTailwind from 'wsm-tailwind'
 import WSMAnimations from 'wsm-animations'
 import WSMFonts, { WSMFontStyles } from 'wsm-fonts'
 import constants from 'constant'
+import { hasPremiumSubscription } from 'utils/user'
 const { EVENTS } = constants
 
 const Editor = ({ project, principal }) => {
@@ -37,9 +38,7 @@ const Editor = ({ project, principal }) => {
   const dispatch = useDispatch()
   const [showUpgradeModal, setShowUpgradeModal] = useState(false)
   const projectEndpoint = `${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${project.id}/content`
-
 	const account = useSelector((state) => state.account)
-  const hasPremiumSubscription = () => !!account?.subscription?.subscriptionId
 
   const loadEditor = () => {
 
@@ -94,15 +93,11 @@ const Editor = ({ project, principal }) => {
         ToastBlocks,
         WSMTailwind,
         ButtonWeb3,
-        // WSMWalletConnect,
         WSMForm,
-        // ButtonWalletConnect,
         SectionTokenGated
-        // SmartLabel,
-        // ScriptEditor
       ],
       pluginsOpts: {
-        // [ScriptEditor]: {}
+        [SectionTokenGated]: { isPremiumMember: hasPremiumSubscription(account) }
       },
       canvas: {
         scripts: [
@@ -181,7 +176,7 @@ const Editor = ({ project, principal }) => {
 
     editor.on("block:drag:start", (element) => {
         const isPremiumFeature = !!element?.attributes?.premium
-        const isPremiumMember = hasPremiumSubscription()
+        const isPremiumMember = hasPremiumSubscription(account)
         console.debug(`Is premium member ${isPremiumMember} is premium block ${isPremiumFeature}`)
         if (isPremiumFeature && !isPremiumMember) {
             console.debug('Interrupting...')
@@ -207,14 +202,23 @@ const Editor = ({ project, principal }) => {
     dispatch({ type: SET_EDITOR, editor })
   }
 
+  const togglePremiumModal = () => {
+      const newState = !showUpgradeModal
+      console.debug(`Toggling premium modal to ${newState}`)
+      setShowUpgradeModal(newState)
+  }
+
   useEffect(() => {
     loadEditor()
+
+    document.addEventListener(EVENTS.TOGGLE_PREMIUM_MODAL, togglePremiumModal)
+    return () => document.removeEventListener(EVENTS.TOGGLE_PREMIUM_MODAL, togglePremiumModal)
   }, [])
 
   return (
     <>
       <div id="gjs" className="gjs-no-preview" />
-      <Upgrade open={showUpgradeModal} onClose={() => setShowUpgradeModal(false)} />
+      <Upgrade open={showUpgradeModal} onClose={togglePremiumModal} />
     </>
   )
 }
