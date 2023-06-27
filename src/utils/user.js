@@ -7,3 +7,7 @@ export const saveUser = debounce(async (user, setterFn) => {
 		setterFn(e.message);
 	}
 }, 300);
+
+export const hasPremiumSubscription = (account) => {
+	return !!account?.subscription?.subscriptionId
+}

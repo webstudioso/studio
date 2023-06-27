@@ -45,7 +45,7 @@ describe("Section Token Gated Plugin", () => {
     })
 
     describe("Invokes editor setup with blocks and properties", () => {
-        it("Has properties defined", async () => {
+        it("Has properties not defined when non premium member", async () => {
             const editor = {
               BlockManager: {
                 add: jest.fn()
@@ -56,6 +56,22 @@ describe("Section Token Gated Plugin", () => {
             }
             Plugin(editor)
             expect(editor.BlockManager.add).toHaveBeenCalled()
+            // By default being a premium feature, shoul not be added properties to configure it
+            expect(editor.DomComponents.addType).not.toHaveBeenCalled()
+        })
+
+        it("Has properties defined when premium member", async () => {
+            const editor = {
+              BlockManager: {
+                add: jest.fn()
+              },
+              DomComponents: {
+                addType: jest.fn()
+              }
+            }
+            Plugin(editor, { isPremiumMember: true })
+            expect(editor.BlockManager.add).toHaveBeenCalled()
+            // By default being a premium feature, shoul not be added properties to configure it
             expect(editor.DomComponents.addType).toHaveBeenCalled()
         })
     })

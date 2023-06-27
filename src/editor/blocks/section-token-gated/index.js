@@ -127,9 +127,12 @@ export function script(props) {
 }
 
 /*eslint no-undef: "off"*/
-const Plugin = async (editor) => {
+const Plugin = async (editor, opts) => {
+
     editor.BlockManager.add(id, block)
-    editor.DomComponents.addType(id, properties)
+    console.log(opts)
+    if (opts?.isPremiumMember)
+        editor.DomComponents.addType(id, properties)
 }
   
 export default Plugin
