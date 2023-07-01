@@ -27,7 +27,7 @@ export const getDiscordPayloadEmbeds = (user, project, domain, color) => {
   ]
 }
 
-export const requestNewDomain = async (dispatch, user, domain, project) => {
+export const requestNewDomain = async (dispatch, user, domain, project, message) => {
     try {
         dispatch({ type: LOADER, show: true });
         const embeds = getDiscordPayloadEmbeds(user, project, domain, 15258703)
@@ -48,8 +48,7 @@ export const requestNewDomain = async (dispatch, user, domain, project) => {
 
         fetch(process.env.REACT_APP_DISCORD_WEBHOOK, options)
             .then((response) => response.json())
-        
-        const message = 'discord_event.custom_domain_request'
+
         showSuccess({ dispatch, message })
     } catch (error) {
         showError({ dispatch, error })
@@ -58,7 +57,7 @@ export const requestNewDomain = async (dispatch, user, domain, project) => {
     }
 }
 
-export const createNewProject = async (dispatch, user, domain, project) => {
+export const createNewProject = async (dispatch, user, domain, project, message) => {
   try {
       dispatch({ type: LOADER, show: true })
       const embeds = getDiscordPayloadEmbeds(user, project, domain, 14177041)
@@ -78,8 +77,7 @@ export const createNewProject = async (dispatch, user, domain, project) => {
       }
       fetch(process.env.REACT_APP_DISCORD_WEBHOOK, options)
           .then((response) => response.json())
-      
-      const message = 'discord_event.project_created'
+
       showSuccess({ dispatch, message })
   } catch (error) {
       showError({ dispatch, error })
@@ -88,7 +86,7 @@ export const createNewProject = async (dispatch, user, domain, project) => {
   }
 }
 
-export const publishProject = async (dispatch, user, domain, project) => {
+export const publishProject = async (dispatch, user, domain, project, message) => {
   try {
       dispatch({ type: LOADER, show: true })
       const embeds = getDiscordPayloadEmbeds(user, project, domain, 12171071)
@@ -108,8 +106,7 @@ export const publishProject = async (dispatch, user, domain, project) => {
       }
       fetch(process.env.REACT_APP_DISCORD_WEBHOOK, options)
           .then((response) => response.json())
-      
-      const message = 'discord_event.project_published'
+
       showSuccess({ dispatch, message })
   } catch (error) {
       showError({ dispatch, error })
