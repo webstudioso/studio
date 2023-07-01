@@ -30,8 +30,8 @@ jobs:
         run: npm run test-ci
       - name: Generating coverage badges
         uses: jpb06/jest-badges-action@latest
-          with:
-            branches: development
+        with:
+          branches: development
       - name: Build
         env: 
           SKIP_PREFLIGHT_CHECK: true
