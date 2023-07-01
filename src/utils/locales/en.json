@@ -178,5 +178,9 @@
     "upgrade.title": "Upgrade to Unlimited",
     "upgrade.description": "This module is a premium module only available for Unlimited and Lifetime members",
     "upgrade.continue": "Continue",
-    "upgrade.now": "Upgrade Now!"
+    "upgrade.now": "Upgrade Now!",
+
+    "discord_event.custom_domain_request": "Request submitted, the team will contact you within 48 hours to your email",
+    "discord_event.project_created": "Your app is ready!",
+    "discord_event.project_published": "Your app is live!"
 }

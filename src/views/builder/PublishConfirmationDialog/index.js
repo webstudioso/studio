@@ -7,12 +7,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { LOADER } from 'store/actions'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { LinkedinIcon, LinkedinShareButton, TwitterIcon, TwitterShareButton } from 'react-share'
+import { publishProject } from 'api/discord'
+
 
 const PublishConfirmationDialog = ({ open, project, onClose, principal }) => {
     const intl = useIntl()
     const dispatch = useDispatch()
     const [cid, setCid] = useState()
     const isLoading = useSelector((state) => state.loader.show)
+    const account = useSelector((state) => state.account)
     
     const loadCid = async() => {
         try {
@@ -20,6 +23,7 @@ const PublishConfirmationDialog = ({ open, project, onClose, principal }) => {
             const id = getUrlWithoutProtocol(project.subdomain)
             const release = await getRoute({ id, principal})
             setCid(release.cid)
+            publishProject(dispatch, account.user, null, project)
         } catch (e) {
             console.log(e)
         } finally {
