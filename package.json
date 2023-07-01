@@ -1,6 +1,6 @@
 {
     "name": "webstudio-app",
-    "version": "0.1.26",
+    "version": "0.1.27",
     "private": false,
     "dependencies": {
         "@auth0/auth0-spa-js": "^1.14.0",
@@ -99,10 +99,10 @@
         ],
         "coverageThreshold": {
             "global": {
-                "branches": 0,
-                "functions": 0,
-                "lines": 0,
-                "statements": 0
+                "branches": 0.95,
+                "functions": 0.95,
+                "lines": 0.95,
+                "statements": 0.95
             }
         },
         "testEnvironment": "jsdom",
