@@ -1,6 +1,6 @@
 {
     "name": "webstudio-app",
-    "version": "0.1.26",
+    "version": "0.1.27",
     "private": false,
     "dependencies": {
         "@auth0/auth0-spa-js": "^1.14.0",
@@ -62,6 +62,7 @@
         "env-cmd": "^10.1.0",
         "eslint": "^8.23.0",
         "eslint-config-react-app": "^7.0.1",
+        "ethers": "^5.7.2",
         "husky": "^8.0.3",
         "jest-mock-axios": "^4.7.0-beta4",
         "lint-staged": "^13.1.0",
@@ -78,6 +79,7 @@
             "src"
         ],
         "coverageReporters": [
+            "json-summary",
             "json",
             "text",
             "html",
@@ -99,10 +101,10 @@
         ],
         "coverageThreshold": {
             "global": {
-                "branches": 0,
-                "functions": 0,
-                "lines": 0,
-                "statements": 0
+                "branches": 0.36,
+                "functions": 1.31,
+                "lines": 3.93,
+                "statements": 3.71
             }
         },
         "testEnvironment": "jsdom",
@@ -119,7 +121,8 @@
         "test": "jest --collectCoverage=true --passWithNoTests",
         "coverage": "jest --coverage --passWithNoTests",
         "eject": "react-scripts eject",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "test-ci": "jest --ci --coverage"
     },
     "eslintConfig": {
         "extends": "react-app"

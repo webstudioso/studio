@@ -1,7 +1,12 @@
-[![Webstudio](https://i.ibb.co/njcYZcb/landing.png)](https://youtu.be/pcbTbq_MDWQ)
+[![Webstudio](https://i.ibb.co/ZW2sQTz/Banner-White-BG.png)](https://youtu.be/pcbTbq_MDWQ)
 
 ![Production Build](https://github.com/webstudioso/studio/actions/workflows/production_deploy.yml/badge.svg)
 ![Development Build](https://github.com/webstudioso/studio/actions/workflows/development_deploy.yml/badge.svg)
+![Branches](./badges/coverage-branches.svg)
+![Functions](./badges/coverage-functions.svg)
+![Lines](./badges/coverage-lines.svg)
+![Statements](./badges/coverage-statements.svg)
+![Jest coverage](./badges/coverage-jest%20coverage.svg)
 
 # [Webstudio](https://webstudio.so)
 

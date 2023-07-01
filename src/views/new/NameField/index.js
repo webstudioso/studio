@@ -24,6 +24,7 @@ import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight'
 import EditIcon from '@mui/icons-material/Edit'
 import HtmlTooltip from 'views/builder/HtmlTooltip'
 import constants from 'constant'
+import { createNewProject } from 'api/discord'
 const { ANALYTICS } = constants
 
 const NameField = ({ principal }) => {
@@ -91,6 +92,7 @@ const NameField = ({ principal }) => {
 			dispatch({ type: SET_PROJECT, project })
 			dispatch({ type: UPDATE_APP, configuration: { new: true } })
 			trackEvent({ name: ANALYTICS.CREATE_PROJECT, params: account.user })
+			createNewProject(dispatch, account.user, null, project)
 			navigate(`/e/${project?.id}`)
 		} catch(e) {
 			console.log(e)
