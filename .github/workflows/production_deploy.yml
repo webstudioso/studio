@@ -25,6 +25,10 @@ jobs:
             ${{ runner.os }}-react-studio-
       - name: Install dependencies
         run: npm i
+      - name: Tests
+        run: npm run test-ci
+      - name: Generating coverage badges
+        uses: jpb06/jest-badges-action@latest
       - name: Build
         env: 
           SKIP_PREFLIGHT_CHECK: true

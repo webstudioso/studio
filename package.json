@@ -78,6 +78,7 @@
             "src"
         ],
         "coverageReporters": [
+            "json-summary",
             "json",
             "text",
             "html",
@@ -119,7 +120,8 @@
         "test": "jest --collectCoverage=true --passWithNoTests",
         "coverage": "jest --coverage --passWithNoTests",
         "eject": "react-scripts eject",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "test-ci": "jest --ci --coverage"
     },
     "eslintConfig": {
         "extends": "react-app"
