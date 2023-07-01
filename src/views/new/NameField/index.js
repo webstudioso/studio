@@ -92,7 +92,7 @@ const NameField = ({ principal }) => {
 			dispatch({ type: SET_PROJECT, project })
 			dispatch({ type: UPDATE_APP, configuration: { new: true } })
 			trackEvent({ name: ANALYTICS.CREATE_PROJECT, params: account.user })
-			createNewProject(dispatch, account.user, null, project, intl.formatMessage('discord_event.project_created'))
+			createNewProject(dispatch, account.user, null, project, intl.formatMessage({ id: 'discord_event.project_created' }))
 			navigate(`/e/${project?.id}`)
 		} catch(e) {
 			console.log(e)
