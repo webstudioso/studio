@@ -133,7 +133,7 @@ const Settings = ({ principal, project }) => {
     );
 
     const handleSubmitCustomDomain = () => {
-        requestNewDomain(dispatch, account.user, customDomain, project)
+        requestNewDomain(dispatch, account.user, customDomain, project, intl.formatMessage({ id: 'discord_event.custom_domain_request' }))
     }
 
     const hasPlan = account?.subscription?.subscriptionId

@@ -55,9 +55,9 @@ describe("Discord Utils", () => {
     describe("requestNewDomain", () => {
         it("calls dispatch 3 times, 2 for loading bar toggling and one for notification when success", async () => {
             const dispatch = jest.fn()
-            requestNewDomain(dispatch, user, domain, project)
+            requestNewDomain(dispatch, user, domain, project, 'testmsg')
             expect(dispatch).toHaveBeenCalledWith({"show": true, "type": "@loader/SHOW"})
-            expect(dispatch).toHaveBeenCalledWith({"alertSeverity": "success", "anchorOrigin": {"horizontal": "center", "vertical": "top"}, "message": "discord_event.custom_domain_request", "open": true, "type": "@snackbar/SNACKBAR_OPEN", "variant": "alert"})
+            expect(dispatch).toHaveBeenCalledWith({"alertSeverity": "success", "anchorOrigin": {"horizontal": "center", "vertical": "top"}, "message": "testmsg", "open": true, "type": "@snackbar/SNACKBAR_OPEN", "variant": "alert"})
             expect(dispatch).toHaveBeenCalledWith({"show": false, "type": "@loader/SHOW"})
         })
 
@@ -66,7 +66,7 @@ describe("Discord Utils", () => {
                 throw new Error('Invalid request')
             })
             const dispatch = jest.fn()
-            requestNewDomain(dispatch, user, domain, project)
+            requestNewDomain(dispatch, user, domain, project, 'testmsg')
             expect(dispatch).toHaveBeenCalledWith({"show": true, "type": "@loader/SHOW"})
             expect(dispatch).toHaveBeenCalledWith({"alertSeverity": "error", "anchorOrigin": {"horizontal": "center", "vertical": "top"}, "message": "Invalid request", "open": true, "type": "@snackbar/SNACKBAR_OPEN", "variant": "alert"})
             expect(dispatch).toHaveBeenCalledWith({"show": false, "type": "@loader/SHOW"})
@@ -76,9 +76,9 @@ describe("Discord Utils", () => {
     describe("createNewProject", () => {
         it("calls dispatch 3 times, 2 for loading bar toggling and one for notification when succes", async () => {
             const dispatch = jest.fn()
-            createNewProject(dispatch, user, domain, project)
+            createNewProject(dispatch, user, domain, project, 'testmsg')
             expect(dispatch).toHaveBeenCalledWith({"show": true, "type": "@loader/SHOW"})
-            expect(dispatch).toHaveBeenCalledWith({"alertSeverity": "success", "anchorOrigin": {"horizontal": "center", "vertical": "top"}, "message": "discord_event.project_created", "open": true, "type": "@snackbar/SNACKBAR_OPEN", "variant": "alert"})
+            expect(dispatch).toHaveBeenCalledWith({"alertSeverity": "success", "anchorOrigin": {"horizontal": "center", "vertical": "top"}, "message": "testmsg", "open": true, "type": "@snackbar/SNACKBAR_OPEN", "variant": "alert"})
             expect(dispatch).toHaveBeenCalledWith({"show": false, "type": "@loader/SHOW"})
         })
 
@@ -87,7 +87,7 @@ describe("Discord Utils", () => {
                 throw new Error('Invalid request')
             })
             const dispatch = jest.fn()
-            createNewProject(dispatch, user, domain, project)
+            createNewProject(dispatch, user, domain, project, 'testmsg')
             expect(dispatch).toHaveBeenCalledWith({"show": true, "type": "@loader/SHOW"})
             expect(dispatch).toHaveBeenCalledWith({"alertSeverity": "error", "anchorOrigin": {"horizontal": "center", "vertical": "top"}, "message": "Invalid request", "open": true, "type": "@snackbar/SNACKBAR_OPEN", "variant": "alert"})
             expect(dispatch).toHaveBeenCalledWith({"show": false, "type": "@loader/SHOW"})
@@ -97,9 +97,9 @@ describe("Discord Utils", () => {
     describe("publishProject", () => {
         it("calls dispatch 3 times, 2 for loading bar toggling and one for notification when succes", async () => {
             const dispatch = jest.fn()
-            publishProject(dispatch, user, domain, project)
+            publishProject(dispatch, user, domain, project, 'testmsg')
             expect(dispatch).toHaveBeenCalledWith({"show": true, "type": "@loader/SHOW"})
-            expect(dispatch).toHaveBeenCalledWith({"alertSeverity": "success", "anchorOrigin": {"horizontal": "center", "vertical": "top"}, "message": "discord_event.project_published", "open": true, "type": "@snackbar/SNACKBAR_OPEN", "variant": "alert"})
+            expect(dispatch).toHaveBeenCalledWith({"alertSeverity": "success", "anchorOrigin": {"horizontal": "center", "vertical": "top"}, "message": "testmsg", "open": true, "type": "@snackbar/SNACKBAR_OPEN", "variant": "alert"})
             expect(dispatch).toHaveBeenCalledWith({"show": false, "type": "@loader/SHOW"})
         })
 
@@ -108,7 +108,7 @@ describe("Discord Utils", () => {
                 throw new Error('Invalid request')
             })
             const dispatch = jest.fn()
-            publishProject(dispatch, user, domain, project)
+            publishProject(dispatch, user, domain, project, 'testmsg')
             expect(dispatch).toHaveBeenCalledWith({"show": true, "type": "@loader/SHOW"})
             expect(dispatch).toHaveBeenCalledWith({"alertSeverity": "error", "anchorOrigin": {"horizontal": "center", "vertical": "top"}, "message": "Invalid request", "open": true, "type": "@snackbar/SNACKBAR_OPEN", "variant": "alert"})
             expect(dispatch).toHaveBeenCalledWith({"show": false, "type": "@loader/SHOW"})

@@ -23,7 +23,7 @@ const PublishConfirmationDialog = ({ open, project, onClose, principal }) => {
             const id = getUrlWithoutProtocol(project.subdomain)
             const release = await getRoute({ id, principal})
             setCid(release.cid)
-            publishProject(dispatch, account.user, null, project)
+            publishProject(dispatch, account.user, null, project, intl.formatMessage({ id: 'discord_event.project_published' }))
         } catch (e) {
             console.log(e)
         } finally {
