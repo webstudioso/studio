@@ -138,8 +138,11 @@ const NameField = ({ principal }) => {
 					InputProps={{
 						endAdornment: (
 						  <InputAdornment position="end">
-							<IconButton edge="end" color="primary" size="large" disabled={!canCreate}
-								onClick={onCreateProject}
+							<IconButton edge="end" 
+										color="primary" 
+										size="large" 
+										disabled={!canCreate}
+										onClick={onCreateProject}
 							>
 							  <ArrowCircleRightIcon sx={{ fontSize:'1.75em'}} />
 							</IconButton>

@@ -21,10 +21,13 @@ import Chat from './Chat'
 import PublishConfirmationDialog from './PublishConfirmationDialog'
 import Membership from 'views/Membership'
 import { trackEvent } from 'utils/analytics'
+import Changelog from 'views/changelog'
+import { useIntl } from 'react-intl'
 
 const { SECTION, PATH, EVENTS, ANALYTICS } = constants
 
 const EditorView = () => {
+	const intl = useIntl()
 	const theme = useTheme()
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
@@ -173,6 +176,7 @@ const EditorView = () => {
 			<PublishConfirmationDialog principal={account.principal} open={openPublishDialog} project={project} onClose={() => setOpenPublishDialog(false)} />
 			{editor && <Chat theme={theme} editor={editor} principal={account.principal} /> }
 			<DraggableDialog open={openDialog} editor={editor} handleClose={() => setOpenDialog(false)}></DraggableDialog>
+			<Changelog intl={intl} />
 		</>
 	)
 }

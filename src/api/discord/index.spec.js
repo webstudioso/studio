@@ -5,7 +5,7 @@ import {
     publishProject
 } from './index'
 
-describe("Discord Utils", () => {
+describe("Discord API", () => {
 
     let user, project, domain
 

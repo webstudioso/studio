@@ -1,5 +1,9 @@
 const constants = {
 	DEFAULT_LOCALE: 'en',
+	CHANGELOG: {
+		CACHE: 'CHANGELOG_CACHE',
+		BASE_URL: 'https://s3.amazonaws.com/webstudio.changelog'
+	},
 	DOCS: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
 	QUERY_PARAMS: {
 		LOCALE: 'locale',
