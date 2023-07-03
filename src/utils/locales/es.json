@@ -182,5 +182,8 @@
     
     "discord_event.custom_domain_request": "Solicitud enviada, seras contactado en menos de 48 horas con las instrucciones de configuracion",
     "discord_event.project_created": "Tu app esta lista!",
-    "discord_event.project_published": "Tu app esta publicada!"
+    "discord_event.project_published": "Tu app esta publicada!",
+
+    "changelog.title": "🚀 Que hay nuevo!",
+    "changelog.close": "Continuar"
 }

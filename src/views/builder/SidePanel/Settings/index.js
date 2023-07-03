@@ -166,7 +166,11 @@ const Settings = ({ principal, project }) => {
                                     disabled={isLoading}
                                     onChange={(e) => setCustomDomain(e.target.value)}
                         ></TextField>
-                        <Button fullWidth onClick={handleSubmitCustomDomain}>{intl.formatMessage({ id: 'settings.custom_domain_submit_request' })}</Button>
+                        <Button fullWidth 
+                                onClick={handleSubmitCustomDomain} 
+                                disabled={isLoading}>
+                                    {intl.formatMessage({ id: 'settings.custom_domain_submit_request' })}
+                        </Button>
                 </Grid>
             )}
         </Grid>

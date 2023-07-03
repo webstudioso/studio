@@ -30,6 +30,21 @@ html, body {
     }
 }
 
+.changelog {
+    h1, h2, h3, h4, h5, h6 {
+        font-size: revert;
+        font-weight: revert;
+    }
+
+    a {
+        color: #4240d3;
+        text-decoration: revert;
+    }
+
+    ul {
+        list-style: inside;
+    }
+}
 
 // Studio AI Chat bubble waiting for response animation
 .typing {
