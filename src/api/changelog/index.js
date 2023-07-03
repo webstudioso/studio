@@ -5,7 +5,7 @@ export const getChangelog = async (locale) => {
     let changelogText, changelogMatchValue
     try {
         const changelogUrl = `${CHANGELOG.BASE_URL}/CHANGELOG_${locale}.md`
-        changelogText = await fetch(changelogUrl).then((r) => r.text())
+        changelogText = await fetch(changelogUrl, { cache: 'no-cache' }).then((r) => r.text())
         changelogMatchValue = changelogText.substring(0, 35)
     } catch (e) {
         console.log(e)

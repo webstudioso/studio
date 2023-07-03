@@ -19,7 +19,7 @@ describe("Changelog API", () => {
     describe("getChangelog", () => {
         it("Returns an object with full message and cropped key for caching", async () => {
             const log = await getChangelog('es')
-            expect(fetch).toHaveBeenCalledWith('https://s3.amazonaws.com/webstudio.changelog/CHANGELOG_es.md')
+            expect(global.fetch).toHaveBeenCalledWith('https://s3.amazonaws.com/webstudio.changelog/CHANGELOG_es.md', {cache: 'no-cache'})
             expect(log.changelogText).toBe(msg)
             expect(log.changelogMatchValue).toBe(log.changelogText.substring(0, 35))
         })
@@ -28,7 +28,7 @@ describe("Changelog API", () => {
                 throw new Error('Invalid request')
             })
             const log = await getChangelog('en')
-            expect(fetch).toHaveBeenCalledWith('https://s3.amazonaws.com/webstudio.changelog/CHANGELOG_en.md')
+            expect(global.fetch).toHaveBeenCalledWith('https://s3.amazonaws.com/webstudio.changelog/CHANGELOG_en.md', {cache: 'no-cache'})
             expect(log).toHaveProperty('changelogText')
             expect(log).toHaveProperty('changelogMatchValue')
             expect(log.changelogText).toBe(undefined)
