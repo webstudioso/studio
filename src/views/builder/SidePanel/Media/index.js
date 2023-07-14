@@ -47,11 +47,6 @@ const Media = ({ onLeave, editor }) => {
         reader.readAsDataURL(file)
     }
 
-    const getSelectedImage = () => {
-        const selected = editor.getSelected();
-        return selected && selected.is('image') ? selected : null
-    }
-
     const uploadButton = (
         <Box sx={{ position:'absolute', right:20, top: 18}}>
             <Button color="primary" variant="outlined" component="label">
@@ -117,14 +112,14 @@ const Media = ({ onLeave, editor }) => {
             <Typography>{ intl.formatMessage({id: 'image_manager.uploaded_assets' })}</Typography>
             <Grid container spacing={2} ref={ref} sx={{ pl: 2, pt: 2 }}>
                 {editor.AssetManager.getAll().models.map((item, index) => (
-                    <Grid item xs={4} key={index} sx={{ cursor: getSelectedImage() ? 'pointer' : 'normal', position:'relative', padding:'0px !important' }} onMouseEnter={() => setSelected(item.id)}>
-                        <Paper elevation={0} sx={{ p:1, background:'transparent' }} className={selected === item.id && getSelectedImage() ? "blurred" : ""}>
+                    <Grid item xs={4} key={index} sx={{ cursor: selected ? 'pointer' : 'normal', position:'relative', padding:'0px !important' }} onMouseEnter={() => setSelected(item.id)}>
+                        <Paper elevation={0} sx={{ p:1, background:'transparent' }} className={selected === item.id ? "blurred" : ""}>
                             <Tooltip title={item.attributes.src.split('/').pop()}>
                                 <img src={item.attributes.src} width="100%" alt={item.id} />
                             </Tooltip>
                         </Paper>
 
-                        {selected === item.id && getSelectedImage() && (
+                        {selected === item.id && (
                             
                         <Tooltip title={item.attributes.src.split('/').pop()}>
                             <Box sx={{
@@ -140,13 +135,15 @@ const Media = ({ onLeave, editor }) => {
                                 >
                                     <Button elevation={0} 
                                             onClick={async () => {
-                                                const selectedImage = getSelectedImage()
-                                                if (selectedImage) {
-                                                    selectedImage.set("src", item.attributes.src)
-                                                    editor.store()
-                                                    editor.AssetManager.close()
-                                                    onLeave()
+                                                const component = editor.getSelected()
+                                                if (component.is('image')) {
+                                                    component.set("src", item.attributes.src)
+                                                } else {
+                                                    component.setStyle({ 'background-image': `url("${item.attributes.src}")` });
                                                 }
+                                                editor.store()
+                                                editor.AssetManager.close()
+                                                onLeave()
                                             }}
                                             sx={{
                                                 position: 'absolute',
