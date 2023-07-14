@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 import { Box, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText, Button } from '@mui/material'
 import { getCachedChangelogMatchValue, getChangelog, setChangelogMatchValue } from 'api/changelog'
