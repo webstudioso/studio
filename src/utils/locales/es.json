@@ -4,6 +4,7 @@
 
     "login_page.app_name": "Webstudio",
     "login_page.app_version": "Beta",
+    "login_page.email": "Correo electronico",
 
     "new_page.title": "Crea un nuevo proyecto",
     "new_page.title_tooltip": "El nombre de tu proyecto ayudara a la audiencia a reconocer tu marca. (4-30 caracteres)",

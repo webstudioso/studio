@@ -11,7 +11,7 @@ import { getAllProjects } from 'api/project'
 import { getMemoedProject } from 'utils/project'
 import { trackEvent } from 'utils/analytics'
 import { getSubscription } from 'api/subscription'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import constants from 'constant'
 const { 
 	SESSION_DURATION_SEC, 
@@ -24,6 +24,7 @@ const {
 const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY)
 
 const Login = () => {
+	const intl = useIntl()
 	const [existingProject] = useState(getMemoedProject())
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
@@ -121,7 +122,7 @@ const Login = () => {
 				</Typography>
 				<br />
 				{ !isLoading && (
-					<TextField 	placeholder="Enter your email address"
+					<TextField 	placeholder={ intl.formatMessage( { id: 'login_page.email' }) }
 								sx={{ minWidth: 260, my: 2 }}
 								autoFocus
 								type="email"
