@@ -57,7 +57,9 @@ describe("Section Token Gated Plugin", () => {
             Plugin(editor)
             expect(editor.BlockManager.add).toHaveBeenCalled()
             // By default being a premium feature, shoul not be added properties to configure it
-            expect(editor.DomComponents.addType).not.toHaveBeenCalled()
+            // expect(editor.DomComponents.addType).not.toHaveBeenCalled()
+            // We are enabling this feature as free for now
+            expect(editor.DomComponents.addType).toHaveBeenCalled()
         })
 
         it("Has properties defined when premium member", async () => {
