@@ -1,21 +1,16 @@
 import { useState, useEffect, useRef } from 'react'
-import { Paper, Box, TextField, Fab, InputAdornment, Typography, IconButton, Stack, Tooltip, Button } from '@mui/material'
+import { Paper, Box, TextField, Fab, InputAdornment, Typography, IconButton, Stack, Tooltip } from '@mui/material'
 import RateReviewIcon from '@mui/icons-material/RateReview'
 import CloseIcon from '@mui/icons-material/Close'
 import SendIcon from '@mui/icons-material/Send'
-import ReactMarkdown from "react-markdown"
-import rehypeRaw from 'rehype-raw'
 import { trackEvent } from 'utils/analytics'
 import constants from 'constant'
-import { getTemplateBodyContentFromString, getClassesFromSnippet, isHTMLComponent, isHTMLSegment, isHTMLTemplate } from 'utils/template'
+import { getTemplateBodyContentFromString } from 'utils/template'
 import { useIntl } from 'react-intl'
-import { useSelector } from 'react-redux'
-import { hasPremiumSubscription } from 'utils/user'
 
-const { ANALYTICS, EVENTS } = constants
+const { ANALYTICS } = constants
 
 let ws
-const actionStyle = "text-black bg-white rounded-full text-xs px-2 py-1 mr-1 my-2"
 
 const Chat = ({ editor, principal }) => {
     const intl = useIntl()
@@ -24,9 +19,8 @@ const Chat = ({ editor, principal }) => {
     const [message, setMessage] = useState()
     const [messageList, setMessageList] = useState([])
     const [chatOpen, setChatOpen] = useState(false)
-    const [target, setTarget] = useState(editor?.getSelected())
+    // const [target, setTarget] = useState(editor?.getSelected())
     const [connected, setConnected] = useState(false)
-    const account = useSelector((state) => state.account)
 
     const scrollBottom = () => {
         const e = ref
@@ -35,13 +29,13 @@ const Chat = ({ editor, principal }) => {
 
     const toggleChat = () => {
         // Only if premium membership, else show modal from editor
-        if (hasPremiumSubscription(account)) {
+        // if (hasPremiumSubscription(account)) {
             setChatOpen(!chatOpen)
-        }
-        else {
-            console.debug(`Dispatching premium feature display modal`)
-            document.dispatchEvent(new CustomEvent(EVENTS.TOGGLE_PREMIUM_MODAL))
-        }
+        // }
+        // else {
+        //     console.debug(`Dispatching premium feature display modal`)
+        //     document.dispatchEvent(new CustomEvent(EVENTS.TOGGLE_PREMIUM_MODAL))
+        // }
     }
 
     const initializeSocket = () => {
@@ -52,7 +46,7 @@ const Chat = ({ editor, principal }) => {
             ws.onclose = () => setConnected(false)
             ws.onmessage = (event) => {
                 const received = JSON.parse(event.data)
-                console.log(`Received ${received}`)
+                console.log(`Received ${event.data}`)
                 if (received.text)
                     setLastMessage({
                         self: false,
@@ -66,7 +60,7 @@ const Chat = ({ editor, principal }) => {
 
     useEffect(() => {
         initializeSocket()
-        editor.on('component:toggled', () => setTarget(editor?.getSelected()))
+        // editor.on('component:toggled', () => setTarget(editor?.getSelected()))
         const reconnect = setInterval(() => initializeSocket(), 10000)
         return () => {
             clearInterval(reconnect)
@@ -89,10 +83,10 @@ const Chat = ({ editor, principal }) => {
         scrollBottom()
     }, [messageList])
 
-    useEffect(() => {
-        console.log(`New target selected`)
-        console.log(target)
-    }, [target])
+    // useEffect(() => {
+    //     console.log(`New target selected`)
+    //     console.log(target)
+    // }, [target])
 
     const sendMessage = () => {
         setMessage('')
@@ -117,31 +111,32 @@ const Chat = ({ editor, principal }) => {
         }
     }
 
-    const appendToCanvas = (element) => {
-        if (target) {
-            // Add before selected item
-            const collection = target?.collection
-            const index = target?.index()
-            const destination = index === 0 ? index : index-1
-            collection.add(element, {at: destination  })
-        } else {
-            // Add top of page
-            editor.getComponents().add(element, {at: 0  })
-        }
-    }
+    // const appendToCanvas = (element) => {
+    //     if (target) {
+    //         // Add before selected item
+    //         const collection = target?.collection
+    //         const index = target?.index()
+    //         const destination = index === 0 ? index : index-1
+    //         collection.add(element, {at: destination  })
+    //     } else {
+    //         // Add top of page
+    //         editor.getComponents().add(element, {at: 0  })
+    //     }
+    // }
 
-    const replaceTemplate = (template) => {                                                   
+    const replaceTemplate = (template) => {           
+        console.log(template)                                        
         const body = getTemplateBodyContentFromString(template)
         editor.setComponents(body)  
     }
 
-    const replaceStyles = (styles) => {
-        const classNames = getClassesFromSnippet(styles)
-        const cs = classNames.split(" ");
-        cs.forEach((c) => {
-            target.addClass(`.${c}`)
-        })
-    }
+    // const replaceStyles = (styles) => {
+    //     const classNames = getClassesFromSnippet(styles)
+    //     const cs = classNames.split(" ");
+    //     cs.forEach((c) => {
+    //         target.addClass(`.${c}`)
+    //     })
+    // }
 
     const placeholderBubble = lastMessage?.self && (
         <Paper  key={9001} elevation={0} className="studio-ai-bubble">
@@ -153,8 +148,8 @@ const Chat = ({ editor, principal }) => {
         </Paper>
     )
 
-    const addTooltip = intl.formatMessage({id:'copilot.block_add'})
-    const styleTooltip = intl.formatMessage({id:'copilot.style_replace'})
+    // const addTooltip = intl.formatMessage({id:'copilot.block_add'})
+    // const styleTooltip = intl.formatMessage({id:'copilot.style_replace'})
     const templateTooltip = intl.formatMessage({id:'copilot.template_replace'})
     const intro = intl.formatMessage({id:'copilot.welcome'})
 
@@ -172,8 +167,8 @@ const Chat = ({ editor, principal }) => {
                 bottom: 15, 
                 right: 15, 
                 zIndex: 1202, 
-                height: 450, 
-                width: 300, 
+                height: 550, 
+                width: 450, 
                 borderRadius:4
             }}
         >
@@ -188,7 +183,7 @@ const Chat = ({ editor, principal }) => {
                     </IconButton>
                 </Stack>
             </Box>
-            <Box sx={{ height: 320, mb:1, p: 2, overflowY:'scroll' }} ref={ref} >
+            <Box sx={{ height: 420, mb:1, p: 2, overflowY:'scroll' }} ref={ref} >
                     {connected && (
                         <Paper  key={10000} 
                                 elevation={0}
@@ -197,68 +192,50 @@ const Chat = ({ editor, principal }) => {
                         </Paper>
                     )}
                     {connected && messageList && messageList?.map((m, index) => {
-                        return (
-                            <Paper  key={index} 
-                                    elevation={0}
-                                    className={ m.self ? 'studio-ai-my-bubble' : 'studio-ai-bubble'}>
-                                <ReactMarkdown  rehypePlugins={[rehypeRaw]} children={m.text}
-                                    components={{
-                                        code({node, inline, className, children, ...props}) {
-                                            
-                                            return isHTMLTemplate(children) ?
-                                                (
-                                                    <Tooltip title={templateTooltip}>
-                                                        <Button color="secondary" 
-                                                                variant="contained" 
-                                                                onClick={() => replaceTemplate(children)}
-                                                                size="small"
-                                                                className={actionStyle}>
-                                                            {intl.formatMessage({id:'copilot.replace_template_button'})}
-                                                        </Button>
-                                                    </Tooltip>
-                                                ) :
-                                                    isHTMLSegment(children) ?
-                                                (
-                                                    <Tooltip title={addTooltip}>
-                                                        <Button color="secondary" 
-                                                                variant="contained" 
-                                                                onClick={() => appendToCanvas(children[0])}
-                                                                size="small"
-                                                                className={actionStyle}>
-                                                            {intl.formatMessage({id:'copilot.add_canvas_button'})}
-                                                        </Button>
-                                                    </Tooltip>
-                                                ) :
-                                                    isHTMLComponent(children) ?
-                                                (
-                                                    <div>
-                                                        <Tooltip title={addTooltip}>
-                                                            <Button color="secondary" 
-                                                                    variant="contained" 
-                                                                    onClick={() => appendToCanvas(children[0])}
-                                                                    size="small"
-                                                                    className={actionStyle}>
-                                                                {intl.formatMessage({id:'copilot.add_canvas_button'})}
-                                                            </Button>
-                                                        </Tooltip>
-                                                        <Tooltip title={styleTooltip}>
-                                                            <Button color="secondary" 
-                                                                    variant="contained" 
-                                                                    disabled={!target}
-                                                                    onClick={() => replaceStyles(children)}
-                                                                    size="small"
-                                                                    className={actionStyle}>
-                                                                {intl.formatMessage({id:'copilot.paste_styles_button'})}
-                                                            </Button>
-                                                        </Tooltip>
-                                                    </div>
-                                                ) : 
-                                                "Not supported"
-                                        }
-                                    }}
-                                ></ReactMarkdown>
-                            </Paper>
-                        )
+                        
+                        if (m.self) {
+                            // My message
+                            return (
+                                <Paper  key={index} 
+                                        elevation={0}
+                                        className='studio-ai-my-bubble'>
+                                        { m.text}
+                                </Paper>
+                            )
+                        } else {
+                            // Message by copilot
+                            return (
+                                <Tooltip title={templateTooltip}>
+                                    <Paper  key={index} 
+                                            elevation={0}>
+                                                <Box style={{ background: 'white' }}>
+                                                    <iframe
+                                                        title="Preview"
+                                                        srcdoc={`
+                                                        <html>
+                                                            <head>
+                                                                </script><script type="text/javascript" src="https://cdn.tailwindcss.com"></script>
+                                                            </head>
+                                                            <body>
+                                                                ${getTemplateBodyContentFromString(m.text)}
+                                                            </body>
+                                                        </html>
+                                                    `} id="viewer-chat" />
+                                                    <button fullWidth 
+                                                            variant="filled" 
+                                                            size="large"
+                                                            onClick={() => replaceTemplate(m.text)}
+                                                
+                                                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                                    >
+                                                        { intl.formatMessage({ id: 'copilot.template_replace' })}
+                                                    </button>
+                                                </Box>
+                                                
+                                    </Paper>
+                                </Tooltip>
+                            )
+                        }
                     })}
 
                     {

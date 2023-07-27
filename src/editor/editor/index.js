@@ -174,15 +174,16 @@ const Editor = ({ project, principal }) => {
       ed.classList.add('gjs-no-preview')
     })
 
-    editor.on("block:drag:start", (element) => {
-        const isPremiumFeature = !!element?.attributes?.premium
-        const isPremiumMember = hasPremiumSubscription(account)
-        console.debug(`Is premium member ${isPremiumMember} is premium block ${isPremiumFeature}`)
-        if (isPremiumFeature && !isPremiumMember) {
-            console.debug('Interrupting...')
-            setShowUpgradeModal(true)
-        }
-    })
+    // For enabling premium blocks
+    // editor.on("block:drag:start", (element) => {
+    //     const isPremiumFeature = !!element?.attributes?.premium
+    //     const isPremiumMember = hasPremiumSubscription(account)
+    //     console.debug(`Is premium member ${isPremiumMember} is premium block ${isPremiumFeature}`)
+    //     if (isPremiumFeature && !isPremiumMember) {
+    //         console.debug('Interrupting...')
+    //         setShowUpgradeModal(true)
+    //     }
+    // })
   
     editor.on("canvas:drop", (event, element) => {
       // Open payload wizard
