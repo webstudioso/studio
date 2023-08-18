@@ -31,6 +31,8 @@ import WSMAnimations from 'wsm-animations'
 import WSMFonts, { WSMFontStyles } from 'wsm-fonts'
 import constants from 'constant'
 import { hasPremiumSubscription } from 'utils/user'
+import { disableDefaultRTE, enableContextMenu } from './Utils'
+import { bringToFront, moveToBack } from 'utils/properties'
 const { EVENTS } = constants
 
 const Editor = ({ project, principal }) => {
@@ -47,6 +49,7 @@ const Editor = ({ project, principal }) => {
 
     const editor = grapesjs.init({
       container: "#gjs",
+      dragMode: 'translate',
       height: "100vh",
       width: "100%",
       allowScripts: 1,
@@ -135,28 +138,51 @@ const Editor = ({ project, principal }) => {
       showSuccess({ dispatch, message: intl.formatMessage({id:'action.auto_saved'})})
     })
 
-    editor.on('component:selected', () => {
+    editor.on('component:selected', (component) => {
+      // console.log(some, argument);
       const commandToAdd = 'tlb-settings'
-      const selectedComponent = editor.getSelected()
-      const defaultToolbar = selectedComponent.get('toolbar')
+      const defaultToolbar = component.get('toolbar')
       const commandExists = defaultToolbar.some(item => item.command === commandToAdd)
 
+      component.set('resizable', true)
       // if it doesn't already exist, add it
       if (!commandExists) {
-        selectedComponent.set({
-          toolbar: [ ...defaultToolbar, {  
-            attributes: {
-            // class: commandIcon
-            }, 
-            command: commandToAdd,
-            label: `
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3b97e2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
-                <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
-              </svg>
-            `
-          }]
+        component.set({
+          toolbar: [ ...defaultToolbar, 
+            {  
+              attributes: { title: "Bring to front" },
+              command: bringToFront,
+              label: `
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-up" width="20" height="20" viewBox="0 0 24 24" stroke-width="0.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M7 11l5 -5l5 5" />
+                  <path d="M7 17l5 -5l5 5" />
+                </svg>
+              `
+            },
+            {  
+              attributes: { title: "Move to back" },
+              command: moveToBack,
+              label: `
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-down" width="20" height="20" viewBox="0 0 24 24" stroke-width="0.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M7 7l5 5l5 -5" />
+                  <path d="M7 13l5 5l5 -5" />
+                </svg>
+              `
+            },
+            {  
+              attributes: { title: "Edit" },
+              command: commandToAdd,
+              label: `
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3b97e2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+                  <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+                </svg>
+              `
+            }
+          ]
         })
       }
     })
@@ -185,7 +211,16 @@ const Editor = ({ project, principal }) => {
     //     }
     // })
   
+      
+    editor.on("canvas:dragenter", (event, element) => {
+      // Make dragging grid based
+      editor.setDragMode('relative')
+    })
+  
     editor.on("canvas:drop", (event, element) => {
+      // Reset drag mode
+      editor.setDragMode('translate')
+
       // Open payload wizard
       const hasWizard = element?.getTrait('payload')
       if (hasWizard) {
@@ -200,7 +235,21 @@ const Editor = ({ project, principal }) => {
       }
     })
 
+    // Disable ContextMenu and open Block Edit panel on right click
+    enableContextMenu(editor)
+    disableDefaultRTE(editor)
+
     dispatch({ type: SET_EDITOR, editor })
+
+    // Load custom fonts in the platform as well 
+    WSMFontStyles.forEach((url) => {
+      var fontImport = document.createElement("link");
+      fontImport.rel = "stylesheet";
+      fontImport.type = "text/css";
+      fontImport.href = url;
+      document.getElementsByTagName("head")[0].appendChild(fontImport)
+    })
+
   }
 
   const togglePremiumModal = () => {
@@ -209,18 +258,21 @@ const Editor = ({ project, principal }) => {
       setShowUpgradeModal(newState)
   }
 
+
+
   useEffect(() => {
     loadEditor()
 
     document.addEventListener(EVENTS.TOGGLE_PREMIUM_MODAL, togglePremiumModal)
     return () => document.removeEventListener(EVENTS.TOGGLE_PREMIUM_MODAL, togglePremiumModal)
+
   }, [])
 
   return (
-    <>
+    <div>
       <div id="gjs" className="gjs-no-preview" />
       <Upgrade open={showUpgradeModal} onClose={togglePremiumModal} />
-    </>
+    </div>
   )
 }
 

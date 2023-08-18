@@ -28,6 +28,9 @@ export const getDiscordPayloadEmbeds = (user, project, domain, color) => {
 }
 
 export const requestNewDomain = async (dispatch, user, domain, project, message) => {
+
+    if (process.env.REACT_APP_HOST_ENV === 'dev') return
+
     try {
         dispatch({ type: LOADER, show: true });
         const embeds = getDiscordPayloadEmbeds(user, project, domain, 15258703)
@@ -58,59 +61,65 @@ export const requestNewDomain = async (dispatch, user, domain, project, message)
 }
 
 export const createNewProject = async (dispatch, user, domain, project, message) => {
-  try {
-      dispatch({ type: LOADER, show: true })
-      const embeds = getDiscordPayloadEmbeds(user, project, domain, 14177041)
-      const payload = {
-          "username": "Webhook",
-          "avatar_url": "https://i.ibb.co/9s3x1YJ/Transparent-modified.png",
-          "content": "New project created",
-          embeds
-      }
 
-      const options = {
-          method: "POST",
-          body: JSON.stringify(payload),
-          headers: {
-              "Content-Type": "application/json",
-          },
-      }
-      fetch(process.env.REACT_APP_DISCORD_WEBHOOK, options)
-          .then((response) => response.json())
+    if (process.env.REACT_APP_HOST_ENV === 'dev') return
+        
+    try {
+        dispatch({ type: LOADER, show: true })
+        const embeds = getDiscordPayloadEmbeds(user, project, domain, 14177041)
+        const payload = {
+            "username": "Webhook",
+            "avatar_url": "https://i.ibb.co/9s3x1YJ/Transparent-modified.png",
+            "content": "New project created",
+            embeds
+        }
 
-      showSuccess({ dispatch, message })
-  } catch (error) {
-      showError({ dispatch, error })
-  } finally {
-      dispatch({ type: LOADER, show: false })
-  }
+        const options = {
+            method: "POST",
+            body: JSON.stringify(payload),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }
+        fetch(process.env.REACT_APP_DISCORD_WEBHOOK, options)
+            .then((response) => response.json())
+
+        showSuccess({ dispatch, message })
+    } catch (error) {
+        showError({ dispatch, error })
+    } finally {
+        dispatch({ type: LOADER, show: false })
+    }
 }
 
 export const publishProject = async (dispatch, user, domain, project, message) => {
-  try {
-      dispatch({ type: LOADER, show: true })
-      const embeds = getDiscordPayloadEmbeds(user, project, domain, 12171071)
-      const payload = {
-          "username": "Webhook",
-          "avatar_url": "https://i.ibb.co/9s3x1YJ/Transparent-modified.png",
-          "content": "Project published",
-          embeds
-      }
 
-      const options = {
-          method: "POST",
-          body: JSON.stringify(payload),
-          headers: {
-              "Content-Type": "application/json",
-          },
-      }
-      fetch(process.env.REACT_APP_DISCORD_WEBHOOK, options)
-          .then((response) => response.json())
+    if (process.env.REACT_APP_HOST_ENV === 'dev') return
 
-      showSuccess({ dispatch, message })
-  } catch (error) {
-      showError({ dispatch, error })
-  } finally {
-      dispatch({ type: LOADER, show: false })
-  }
+    try {
+        dispatch({ type: LOADER, show: true })
+        const embeds = getDiscordPayloadEmbeds(user, project, domain, 12171071)
+        const payload = {
+            "username": "Webhook",
+            "avatar_url": "https://i.ibb.co/9s3x1YJ/Transparent-modified.png",
+            "content": "Project published",
+            embeds
+        }
+
+        const options = {
+            method: "POST",
+            body: JSON.stringify(payload),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }
+        fetch(process.env.REACT_APP_DISCORD_WEBHOOK, options)
+            .then((response) => response.json())
+
+        showSuccess({ dispatch, message })
+    } catch (error) {
+        showError({ dispatch, error })
+    } finally {
+        dispatch({ type: LOADER, show: false })
+    }
 }

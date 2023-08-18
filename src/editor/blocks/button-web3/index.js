@@ -16,6 +16,8 @@ const block = {
 }
   
 export const script = function (props) {
+    console.log(props)
+    console.log(JSON.stringify(props))
     const { 
         Web3Modal,
         constants,

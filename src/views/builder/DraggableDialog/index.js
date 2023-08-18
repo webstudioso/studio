@@ -3,46 +3,30 @@ import { Typography} from '@mui/material'
 import Dialog from '@mui/material/Dialog'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
-import Paper from '@mui/material/Paper'
-import Draggable from 'react-draggable'
 import ConfigTabs from "./ConfigTabs"
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
-import { useIntl } from 'react-intl'
+import { upperFirst } from 'lodash'
+import DraggablePaper from './Draggable'
 
-function PaperComponent(props) {
-  return (
-    <Draggable
-      handle="#draggable-dialog-title"
-      cancel={'[class*="MuiDialogContent-root"]'}
-    >
-      <Paper {...props} />
-    </Draggable>
-  );
-}
-
-const DraggableDialog = ({ open, handleClose, editor }) => {
-  const intl = useIntl()
+const DraggableDialog = ({ open, handleClose, editor, intl }) => {
   const ref = useRef(null);
+
+  const getType = () => {
+    return editor?.getSelected()?.attributes?.type
+  }
 
   return (
       <Dialog
         open={open}
         onClose={handleClose}
-        PaperComponent={PaperComponent}
+        PaperComponent={DraggablePaper}
         hideBackdrop
         aria-labelledby="draggable-dialog-title"
       >
         <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
             <Typography className="title-text">
-                <span style={{ 
-                    background: '#7572F9', 
-                    padding: '3px 6px',
-                    borderRadius: '4px',
-                    color: 'white',
-                    marginRight: '8px'
-                }}>{editor?.getSelected()?.attributes?.tagName}</span>
-                {intl.formatMessage({id:'configuration.title'})}
+                {`${upperFirst(getType())} ${intl.formatMessage({id:'configuration.title'})}`}
             </Typography>
           <IconButton
             aria-label="close"
@@ -59,10 +43,10 @@ const DraggableDialog = ({ open, handleClose, editor }) => {
         </DialogTitle>
         <DialogContent  ref={ref}         
                         sx={{
-                            width: 400,
+                            width: 380,
                             height: 450
                         }}>
-            <ConfigTabs editor={editor} />
+            <ConfigTabs editor={editor} intl={intl} />
         </DialogContent>
       </Dialog>
   )

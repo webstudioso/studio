@@ -88,7 +88,7 @@ const SmartContracts = ({ element, intl }) => {
     }
 
     return (
-        <Grid container spacing={3}>            
+        <Grid container spacing={3} paddingTop={2}>            
             <Networks value={payload?.network?.chainId} onChange={handleNetworkChange} intl={intl} />
             <ContractType   value={payload?.contract?.name} 
                             onChange={handleContractTypeChange} 
