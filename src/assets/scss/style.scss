@@ -312,19 +312,24 @@ html, body {
 }
 
 .MuiFab-root:hover {
-    background: white;
-    color: black;
+    background: white !important;
+    color: black !important;
 }
 
-.fab {
-    margin: 0px;
-    top: auto;
-    right: 20px;
-    bottom: 20px;
-    left: auto;
-    position: fixed;
-    background: red;
-};
+// .fab {
+//     margin: 0px;
+//     top: auto;
+//     right: 20px;
+//     bottom: 20px;
+//     left: auto;
+//     position: fixed;
+//     background: red;
+// };
+
+.MuiFab-root {
+    background: #000 !important;
+    color: #fff !important;
+}
 
 .bg-container { 
     background: url(../images/bg.jpg);
