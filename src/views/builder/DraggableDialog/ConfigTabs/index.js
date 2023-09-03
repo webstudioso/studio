@@ -4,7 +4,11 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import SmartContracts from 'views/builder/Wizard/SmartContracts';
-import { useIntl } from 'react-intl';
+import Text from 'views/builder/ComponentPropertiesModal/Text';
+import PaletteOutlinedIcon from '@mui/icons-material/PaletteOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import PlayCircleOutlinedIcon from '@mui/icons-material/PlayCircleOutlined';
+import { Tooltip } from '@mui/material';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -18,7 +22,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p: 0 }}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -33,10 +37,9 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs({ editor }) {
-  const intl = useIntl()
-  const [element, setElement] = useState();
-  const hasWizard = element && element.attributes.hasOwnProperty('payload')
+export default function BasicTabs({ editor, intl }) {
+  const [selected, setSelected] = useState()
+  const [hasWizard, setWizard] = useState(false)
 
 
   const [value, setValue] = useState(0);
@@ -44,14 +47,12 @@ export default function BasicTabs({ editor }) {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
+  }
 
-  useEffect(() => {
-    // if (!filter) return;
-    if (!editor) return;
+  const isText = () => selected?.attributes?.type === 'text'
 
-    const elem = editor.getSelected()
-    setElement(elem)
+  const loadPanels = () => {
+  
     // Styles
     const styleManager = editor.StyleManager;
     const selectorMnager = editor.SelectorManager;
@@ -62,9 +63,11 @@ export default function BasicTabs({ editor }) {
     const selectBlock = selectorMnager.render(allSelectors);
     const designTab = document.getElementById('designTab');
     // designTab.firstElementChild?.remove();
-    designTab.prepend(styleBlock);
-    designTab.prepend(selectBlock);
-    selectorMnager.__update();
+    if (!isText()) {
+      designTab.prepend(styleBlock);
+      designTab.prepend(selectBlock);
+      selectorMnager.__update();
+    }
 
     const traitManager = editor.TraitManager;
     const traitBlock = traitManager.render();
@@ -72,31 +75,49 @@ export default function BasicTabs({ editor }) {
     // traitTab.firstElementChild?.remove();
     traitTab.prepend(traitBlock);
 
-    if (elem && elem.attributes.hasOwnProperty('payload'))
-    setValue(2)
+    if (selected && selected.attributes.hasOwnProperty('payload'))
+      setValue(2)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }
+
+  useEffect(() => {
+    if (selected) {
+      loadPanels()
+      // console.log(selected?.attributes)
+      setWizard(selected && selected?.attributes?.hasOwnProperty('payload'))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected])
+
+  useEffect(() => {
+    setSelected(editor?.getSelected())
     // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [])
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" fullWidth>
-            <Tab label="Design 🎨" {...a11yProps(0)} />
-            <Tab label="Properties 🔧" {...a11yProps(1)} />
-            {hasWizard && (
-              <Tab label="Wizard 🪄" {...a11yProps(2)} />
-            )}
+        {/* { isText() && <Text editor={editor} selected={selected} /> } */}
+     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+            <Tab label={<Tooltip title={intl.formatMessage({id:'props.style'})}><PaletteOutlinedIcon /></Tooltip>} {...a11yProps(0)}/>
+            <Tab label={<Tooltip title={intl.formatMessage({id:'props.metadata'})}><SettingsOutlinedIcon /></Tooltip>} {...a11yProps(1)}/>
+            {hasWizard && (<Tab label={<Tooltip title={intl.formatMessage({id:'props.actions'})}><PlayCircleOutlinedIcon /></Tooltip>} {...a11yProps(2)}/> )}
         </Tabs>
       </Box>
       <TabPanel value={value} index={0} id="designTab">
+              { isText() && <Text editor={editor} selected={selected} intl={intl} /> }
+              {/* <Box id="designTab"></Box> */}
       </TabPanel>
       <TabPanel value={value} index={1} id="propertyTab">
-      </TabPanel>
-      {hasWizard && (
-        <TabPanel value={value} index={2} id="wizardTab">
-            <SmartContracts element={element} activeStep={0} editor={editor} changeStep={(step) => console.log(step)} intl={intl} />
-        </TabPanel>
-      )}
+
+      </TabPanel> 
+
+      {hasWizard && (<TabPanel value={value} index={2} id="wizardTab">
+
+            <SmartContracts element={selected} activeStep={0} editor={editor} changeStep={(step) => console.log(step)} intl={intl} />
+        
+        </TabPanel>    )}
+
     </Box>
   );
 }

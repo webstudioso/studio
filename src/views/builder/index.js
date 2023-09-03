@@ -175,7 +175,7 @@ const EditorView = () => {
 			/>
 			<PublishConfirmationDialog principal={account.principal} open={openPublishDialog} project={project} onClose={() => setOpenPublishDialog(false)} />
 			{editor && <Chat theme={theme} editor={editor} principal={account.principal} /> }
-			<DraggableDialog open={openDialog} editor={editor} handleClose={() => setOpenDialog(false)}></DraggableDialog>
+			<DraggableDialog open={openDialog} editor={editor} handleClose={() => setOpenDialog(false)} intl={intl}></DraggableDialog>
 			<Changelog intl={intl} />
 		</>
 	)

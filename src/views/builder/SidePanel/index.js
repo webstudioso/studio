@@ -68,6 +68,7 @@ const SidePanel = ({ open, openCategory, onLeave, principal, project, editor}) =
                         spacing={1}
                         sx={{
                             borderTop: '5px solid #6366F1',
+                            p: 1
                         }}
                     >
                         <Box sx={{ minWidth: 120, m: '15px' }}>

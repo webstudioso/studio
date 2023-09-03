@@ -3,7 +3,6 @@ import constants from 'constant'
 import { queryParams } from "utils/url";
 const { EVENTS } = constants
 
-// const cmdPublish = "publish";
 const cmdDeviceDesktop = "set-device-desktop";
 const cmdDeviceTablet = "set-device-tablet";
 const cmdDeviceMobile = "set-device-mobile";
@@ -12,11 +11,9 @@ const Plugin = (editor, config) => {
   const pn = editor.Panels;
   const eConfig = editor.getConfig();
   const osm = "open-sm";
-  // const otm = "open-tm";
   const ola = "open-layers";
   const obl = "open-blocks";
   const prv = "preview";
-  // const hlp = "help";
 
   eConfig.showDevices = 0;
 
@@ -28,124 +25,13 @@ const Plugin = (editor, config) => {
     {
       id: "options",
       buttons: [
-        // {
-        //   id: hlp,
-        //   context: hlp,
-        //   command: (e) => window.open('https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08','_newtab'),
-        //   attributes: { title: "Help" },
-        //   label: `
-        //     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-help" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        //       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        //       <circle cx="12" cy="12" r="9" />
-        //       <line x1="12" y1="17" x2="12" y2="17.01" />
-        //       <path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" />
-        //     </svg>
-        //   `,
-        // },
-        // {
-        //   id: prv,
-        //   context: prv,
-        //   command: (e) => e.runCommand(prv),
-        //   attributes: { title: "Preview" },
-        //   // className: 'fa fa-eye',
-        //   label: `
-        //     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        //         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        //         <circle cx="12" cy="12" r="2"></circle>
-        //         <path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"></path>
-        //     </svg>
-        // `,
-        // },
-        // {
-        //   id: 'manage-users',
-        //   context: 'manage-users',
-        //   command(editor) { 
-        //     console.log("Toggle modal");
-        //     console.log(editor.getProjectData());
-        //     document.dispatchEvent(new CustomEvent('toggleUsers', {
-        //       detail: editor
-        //     }));  
-        //   },
-        //   attributes: { title: "Manager Users" },
-        //   // className: 'fa fa-eye',
-        //   label: `
-        //     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        //       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        //       <circle cx="9" cy="7" r="4" />
-        //       <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-        //       <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-        //       <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
-        //     </svg>
-        //   `,
-        // },
-
-        // clearCanvasButton,
-        // publishButton,
-        // {
-        //   id: 'alert-button',
-        //   attributes: { title: "Change template" },
-        //   label: `
-        //   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        //     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        //     <rect x="8" y="8" width="12" height="12" rx="2" />
-        //     <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
-        //   </svg>
-        //   `,
-        //   command(editor) { 
-        //     console.log("Toggle modal");
-        //     console.log(editor.getProjectData());
-        //     document.dispatchEvent(new CustomEvent('toggleTemplates', {
-        //       detail: editor
-        //     }));  
-        //   }
-        // }
       ],
     },
     {
       id: "views",
       buttons: [
-        // {
-        //   id: osm,
-        //   command: osm,
-        //   // active: true,cm
-        //   // className: 'fa fa-paint-brush',
-        //   label: `
-        //     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        //         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        //         <path d="M12 21a9 9 0 1 1 0 -18a9 8 0 0 1 9 8a4.5 4 0 0 1 -4.5 4h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25"></path>
-        //         <circle cx="7.5" cy="10.5" r=".5" fill="currentColor"></circle>
-        //         <circle cx="12" cy="7.5" r=".5" fill="currentColor"></circle>
-        //         <circle cx="16.5" cy="10.5" r=".5" fill="currentColor"></circle>
-        //     </svg>
-        // `,
-        // },
-        // {
-        //   id: 'edit-ico',
-        //   command: (e) => e.runCommand('edit-script'),
-        //   // className: 'fa fa-cog',
-        //   label: `
-        //     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        //         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        //         <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
-        //         <circle cx="12" cy="12" r="3"></circle>
-        //     </svg>
-        // `,
-        // },
-        // {
-        //   id: otm,
-        //   command: otm,
-        //   // className: 'fa fa-cog',
-        //   label: `
-        //     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        //         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        //         <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
-        //         <circle cx="12" cy="12" r="3"></circle>
-        //     </svg>
-        // `,
-        // },
         {
           id: "undo",
-          // className: 'fa fa-undo',
           command: (e) => e.runCommand("core:undo"),
           attributes: { title: "Undo" },
           label: `
@@ -162,7 +48,6 @@ const Plugin = (editor, config) => {
         },
         {
           id: "redo",
-          // className: 'fa fa-undo',
           command: (e) => e.runCommand("core:redo"),
           attributes: { title: "Redo" },
           label: `
@@ -181,7 +66,6 @@ const Plugin = (editor, config) => {
           id: obl,
           command: obl,
           active: true,
-          // className: 'fa fa-th-large',
           label: `
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-package" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -193,30 +77,6 @@ const Plugin = (editor, config) => {
             </svg>
         `,
         }
-        // {
-        //   id: ola,
-        //   command: ola,
-        //   label: `<svg style="display: block; max-width:22px viewBox="0 0 24 24">
-        //       <path fill="currentColor" d="M12,16L19.36,10.27L21,9L12,2L3,9L4.63,10.27M12,18.54L4.62,12.81L3,14.07L12,21.07L21,14.07L19.37,12.8L12,18.54Z" />
-        //   </svg>`
-        // },
-        // {
-        //   id: 'open-pages',
-        //   attributes: {
-        //       title: 'Pages'
-        //   },
-        //   label: `
-        //     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        //       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        //       <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-        //       <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-        //       <line x1="12" y1="11" x2="12" y2="17" />
-        //       <line x1="9" y1="14" x2="15" y2="14" />
-        //     </svg>
-        //   `,
-        //   command: 'open-pages',
-        //   togglable: false
-        // }
       ],
     },
   ]);
@@ -247,7 +107,6 @@ const Plugin = (editor, config) => {
     {
       id: cmdDeviceDesktop,
       command: cmdDeviceDesktop,
-      //   className: 'fa fa-desktop',
       attributes: { title: "Desktop" },
       active: 1,
       label: `
@@ -263,7 +122,6 @@ const Plugin = (editor, config) => {
     {
       id: cmdDeviceTablet,
       command: cmdDeviceTablet,
-      //   className: 'fa fa-tablet',
       attributes: { title: "Tablet Portrait" },
       label: `
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-tablet" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -276,7 +134,6 @@ const Plugin = (editor, config) => {
     {
       id: cmdDeviceMobile,
       command: cmdDeviceMobile,
-      //   className: 'fa fa-mobile',
       attributes: { title: "Mobile Portrait" },
       label: `
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-mobile" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -309,14 +166,6 @@ const Plugin = (editor, config) => {
     });
 
   var cmdm = editor.Commands;
-
-  cmdm.add("canvas-clear", () => {
-    // if(confirm('Are you sure to clean the canvas?')) {
-    setTimeout(function () {
-      localStorage.clear();
-    }, 0);
-    // }
-  });
   cmdm.add(cmdDeviceDesktop, {
     run: (ed) => ed.setDevice("Desktop"),
     stop: () => {},
@@ -330,10 +179,7 @@ const Plugin = (editor, config) => {
     stop: () => {},
   });
 
-
-
   cmdm.add('tlb-settings', (ed) => {
-  
     document.dispatchEvent(new CustomEvent(EVENTS.TOGGLE_SETTINGS_MODAL, {
       detail: ed
     }));  

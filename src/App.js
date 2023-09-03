@@ -20,11 +20,11 @@ const App = () => {
 				<ProgressProvider>
 					<CssBaseline />
 					<Locales>
-						<>
+						<div onContextMenu={(e) => e.preventDefault()}>
 							{ loadingBar }
 							<Routes />
 							<Snackbar />
-						</>
+						</div>
 					</Locales>
 				</ProgressProvider>
 			</ThemeProvider>

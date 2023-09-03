@@ -62,8 +62,8 @@ const PublishButton = ({ principal, project, editor }) => {
                 {intl.formatMessage({ id:'publish.tooltip'})}<br/>
                 <a style={{ color: '#6366F1'}} href="https://docs.ipfs.tech/concepts/faq/#what-is-ipfs" target="__blank">{intl.formatMessage({id:"publish.ipfs"})}</a>
             </Typography>
-            <Button size="small" sx={{ my: 1 }} href={`${getProjectUrl({ project })}${queryParams()}`} target="__blank">{intl.formatMessage({id:"publish.view_site"})}</Button>
-            {release && (<Button size="small" sx={{ m: 1 }} href={getCidReleaseUrl(release)} target="__blank">{intl.formatMessage({id:"publish.view_ipfs"})}</Button>)}
+            <Button fullWidth size="small" sx={{ my: 1 }} href={`${getProjectUrl({ project })}${queryParams()}`} target="__blank">{intl.formatMessage({id:"publish.view_site"})}</Button>
+            {release && (<Button fullWidth size="small" sx={{ m: 1 }} href={getCidReleaseUrl(release)} target="__blank">{intl.formatMessage({id:"publish.view_ipfs"})}</Button>)}
         </Fragment>
     )
 
