@@ -291,7 +291,7 @@ const Chat = ({ editor, principal }) => {
             </Box>
         </Paper>
         </Box><Box sx={{ position: 'fixed', bottom: 15, right: 15, zIndex: 1201 }}>
-                <Fab variant="extended" color="primary" size="large" aria-label="assistant" onClick={toggleChat}>
+                <Fab variant="extended" color="primary" size="large" aria-label="assistant" onClick={toggleChat} sx={{ background: 'black', color: 'white'}}>
                     <RateReviewIcon sx={{ mr: 1 }} />
                     {intl.formatMessage({id:'copilot'})}
                     <Box className={connected ? "online-signal" : "offline-signal"}/>

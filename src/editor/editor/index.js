@@ -27,7 +27,7 @@ import Upgrade from './Upgrade'
 // import WSMWalletConnect from 'wsm-wallet-connect'
 import WSMForm from 'wsm-form'
 import WSMTailwind from 'wsm-tailwind'
-import WSMAnimations from 'wsm-animations'
+// import WSMAnimations from 'wsm-animations'
 import WSMFonts, { WSMFontStyles } from 'wsm-fonts'
 import constants from 'constant'
 import { hasPremiumSubscription } from 'utils/user'
@@ -87,7 +87,7 @@ const Editor = ({ project, principal }) => {
         PluginEditorPanelButtons,
         PluginScriptEditor,
         PageManager,
-        WSMAnimations,
+        // WSMAnimations,
         WSMFonts,
         TextBlocks,
         ButtonBlocks,
