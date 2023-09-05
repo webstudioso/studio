@@ -1,12 +1,13 @@
 /*eslint no-undef: "off"*/
 const Plugin = (editor) => {
-  
+
     editor.BlockManager.add('h1',{ 
         category: "Text",
         media: '<h1 class="text-3xl font-bold selected-font">Add Heading 1</h1>', 
         content: { 
             type: 'text', 
-            content: '<h1>Add Heading 1</h1>',
+            tagName: 'h1',
+            content: 'Add Heading 1',
             classes: ['text-3xl', 'font-bold']
         }
     })
@@ -15,7 +16,8 @@ const Plugin = (editor) => {
         media: '<h2 class="text-2xl font-medium selected-font">Add Heading 2</h2>', 
         content: { 
             type: 'text', 
-            content: '<h2>Add Heading 2</h2>',
+            tagName: 'h2',
+            content: 'Add Heading 2',
             classes: ['text-2xl', 'font-medium']
         }
     })
@@ -23,8 +25,9 @@ const Plugin = (editor) => {
         category: "Text", 
         media: '<h3 class="text-xl font-normal selected-font">Add Heading 3</h3>', 
         content: { 
-            type: 'text', 
-            content: '<h3>Add Heading 3</h3>',
+            type: 'text',
+            tagName: 'h3',
+            content: 'Add Heading 3',
             classes: ['text-xl', 'font-normal']
         }
     })
@@ -33,7 +36,8 @@ const Plugin = (editor) => {
         media: '<h4 class="text-xl font-bold selected-font">Add Heading 4</h4>', 
         content: { 
             type: 'text', 
-            content: '<h4>Add Heading 4</h4>',
+            tagName: 'h4',
+            content: 'Add Heading 4',
             classes: ['text-xl', 'font-bold']
         }
     })
@@ -42,7 +46,8 @@ const Plugin = (editor) => {
         media: '<h5 class="text-xl font-light selected-font">Add Heading 5</h5>', 
         content: { 
             type: 'text', 
-            content: '<h5>Add Heading 5</h5>',
+            tagName: 'h5',
+            content: 'Add Heading 5',
             classes: ['text-xl', 'font-light']
         }
     })
@@ -50,8 +55,9 @@ const Plugin = (editor) => {
         category: "Text", 
         media: '<h6 class="text-xl font-bold selected-font">Add Heading 6</h6>', 
         content: { 
-            type: 'text', 
-            content: '<h6>Add Heading 6</h6>',
+            type: 'text',
+            tagName: 'h6',
+            content: 'Add Heading 6',
             classes: ['text-xl', 'font-bold']
         }
     })
@@ -60,8 +66,9 @@ const Plugin = (editor) => {
         category: "Text", 
         media: `<p class="text-xl font-bold selected-font">${paragraph}</p>`, 
         content: { 
-            type: 'text', 
-            content: `<p>${paragraph}</p>`,
+            type: 'text',
+            tagName: 'p',
+            content: paragraph,
             classes: ['text-xl', 'font-bold']
         }
     })
@@ -70,7 +77,8 @@ const Plugin = (editor) => {
         media: `<p class="text-lg selected-font">${paragraph}</p>`, 
         content: { 
             type: 'text', 
-            content: `<p>${paragraph}</p>`,
+            tagName: 'p',
+            content: paragraph,
             classes: ['text-lg'] 
         }
     })
@@ -79,7 +87,8 @@ const Plugin = (editor) => {
         media: `<p class="text-md font-medium selected-font">${paragraph}</p>`, 
         content: { 
             type: 'text', 
-            content: `<p>${paragraph}</p>` ,
+            tagName: 'p',
+            content: paragraph,
             classes: ['text-md', 'font-medium']
         }
     })
