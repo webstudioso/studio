@@ -191,9 +191,9 @@
     "props.style": "Look and Feel",
     "props.metadata": "Configuration and Metadata",
     "props.actions": "Actions",
-    "props.animations_title": "Animations",
+    "props.animations_title": "Add animations",
     "props.animations": "Animations powered by animate.css",
-    "props.link_title": "Links",
+    "props.link_title": "Add Links to other sites and pages",
     "props.link": "Configure this text with links to other pages, sections or download file",
     "props.none": "None",
     "props.page": "Page",
@@ -221,5 +221,14 @@
     "props.link_email_subject_placeholder": "Add a catchy subject line...",
     "props.link_document_title": "Link to Document Download",
     "props.link_document_button": "Upload Document",
-    "props.link_section_placeholder": "Name of the section component"
+    "props.link_section_placeholder": "Name of the section component",
+    "props.font_family": "Font Family",
+    "props.font_size": "Font Size",
+    "props.text_style": "Text Style",
+    "props.text_properties": "Text Behavior",
+    "props.border_style": "Border Style",
+    "props.border_width": "Border Width",
+    "props.bg_color": "Background Color",
+    "props.padding": "Padding"
+
 }

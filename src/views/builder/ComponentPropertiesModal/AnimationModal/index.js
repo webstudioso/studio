@@ -15,6 +15,7 @@ const AnimationModal = ({ selected, anchorEl, open, onClose, intl }) => {
 
     useEffect(() => {
         setAnimation(getCurrentClasses(selected, ANIMATIONS))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const handleAnimation = (anim) => {
