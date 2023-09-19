@@ -14,17 +14,3 @@ export const enableContextMenu = (editor) => {
         }
     })
 }
-
-export const disableDefaultRTE = (editor) => {
-    editor.setCustomRte({
-        // ...
-        /**
-         * The signature of the function is the same of the `enable`
-         */
-        disable(el, rte) {
-          el.contentEditable = true;
-          rte?.focusManager?.blur(true);
-        },
-        // enable() {}
-      });
-}

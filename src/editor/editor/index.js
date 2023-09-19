@@ -31,7 +31,7 @@ import WSMTailwind from 'wsm-tailwind'
 import WSMFonts, { WSMFontStyles } from 'wsm-fonts'
 import constants from 'constant'
 import { hasPremiumSubscription } from 'utils/user'
-import { disableDefaultRTE, enableContextMenu } from './Utils'
+import { enableContextMenu } from './Utils'
 import { bringToFront, moveToBack } from 'utils/properties'
 const { EVENTS } = constants
 
@@ -237,7 +237,6 @@ const Editor = ({ project, principal }) => {
 
     // Disable ContextMenu and open Block Edit panel on right click
     enableContextMenu(editor)
-    disableDefaultRTE(editor)
 
     dispatch({ type: SET_EDITOR, editor })
 

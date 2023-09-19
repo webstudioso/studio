@@ -193,7 +193,7 @@
     "props.actions": "Acciones",
     "props.animations_title": "Animaciones",
     "props.animations": "Animaciones gracias a la libreria animate.css",
-    "props.link_title": "Enlaces",
+    "props.link_title": "Agrega enlaces a otros sitios web o paginas",
     "props.link": "Configura este texto con enlaces a otras paginas, secciones o descarga de archivos",
     "props.none": "Sin Enlance",
     "props.page": "Pagina",
@@ -219,5 +219,13 @@
     "props.link_email_subject": "Titulo del Email",
     "props.link_document_title": "Enlace a Descarga de Documento",
     "props.link_document_button": "Subir Archivo",
-    "props.link_section_placeholder": "Nombre de la seccion"
+    "props.link_section_placeholder": "Nombre de la seccion",
+    "props.font_family": "Estilo",
+    "props.font_size": "Tamano",
+    "props.text_style": "Estilo",
+    "props.text_properties": "Propiedades",
+    "props.border_style": "Bordes",
+    "props.border_width": "Grosor de Borde",
+    "props.bg_color": "Color de Fondo",
+    "props.padding": "Espaciado"
 }

@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 import { Grid, Select, MenuItem, Typography, Box } from '@mui/material'
 import { sortBy } from 'lodash'
 import constants from 'constant'
-import Style from './Style'
+import TextStyle from './TextStyle'
+import TextProperties from './TextPropeties'
+import BorderStyle from '../BorderStyle'
 
 const { TAILWIND } = constants
 
@@ -24,12 +26,14 @@ const Text = ({ editor, selected, intl }) => {
         setFontSize(parseInt(selected.getStyle('font-size')?.replace('px','')))
         const selectedDevice = editor.Devices.getSelected()
         setDevice(selectedDevice.id)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
         if (fontSize) {
             selected.setStyle({'font-size': `${fontSize}px`});
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [fontSize])
 
     const cleanup = () => {
@@ -54,7 +58,7 @@ const Text = ({ editor, selected, intl }) => {
         <Grid container spacing={2} padding={0} paddingTop={2}>
             <Grid item xs={6}>
                 <Box justifyContent="center">
-                    <Typography variant="body" fontWeight="bold" fontSize={12}>Font Family</Typography>
+                    <Typography variant="body" fontWeight="bold" fontSize={12}>{intl.formatMessage({id:'props.font_family'})}</Typography>
                 </Box>
                 <Select size="small" defaultValue={getDefaultFontFamily()}>
                     { fontOptions.map((font) => {
@@ -72,7 +76,7 @@ const Text = ({ editor, selected, intl }) => {
 
             <Grid item xs={6}>
                 <Box justifyContent="center">
-                    <Typography variant="body" fontWeight="bold" fontSize={12}>Font Size</Typography>
+                    <Typography variant="body" fontWeight="bold" fontSize={12}>{intl.formatMessage({id:'props.font_size'})}</Typography>
                 </Box>
                 <Select size="small" value={findProp()}
                         renderValue={ (value) => value }
@@ -97,11 +101,21 @@ const Text = ({ editor, selected, intl }) => {
             </Grid>
             <Grid item xs={12}>
                 <Box justifyContent="center">
-                    <Typography variant="body" fontWeight="bold" fontSize={12}>Text Alignment</Typography>
+                    <Typography variant="body" fontWeight="bold" fontSize={12}>{intl.formatMessage({id:'props.text_style'})}</Typography>
                 </Box>
-                <Style editor={editor} selected={selected} intl={intl} />
+                <TextStyle editor={editor} selected={selected} intl={intl} />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
+                <Box justifyContent="center">
+                    <Typography variant="body" fontWeight="bold" fontSize={12}>{intl.formatMessage({id:'props.text_properties'})}</Typography>
+                </Box>
+                <TextProperties editor={editor} selected={selected} intl={intl} />
+            </Grid>
+            <Grid item xs={6}>
+                <Box justifyContent="center">
+                    <Typography variant="body" fontWeight="bold" fontSize={12}>{intl.formatMessage({id:'props.border_style'})}</Typography>
+                </Box>
+                <BorderStyle editor={editor} selected={selected} intl={intl} />
             </Grid>
         </Grid>
     )

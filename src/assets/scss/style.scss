@@ -975,3 +975,16 @@ html, body {
   .nft-image:hover {
     transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
   }
+
+  .bg-stripes-white {
+    background-image: linear-gradient(135deg,#ffffffbf 10%,#0000 0,#0000 50%,#ffffffbf 0,#ffffffbf 60%,#0000 0,#0000);
+    background-size: 7.07px 7.07px;
+  }
+
+  .w-8 {
+    width: 2rem;
+}
+
+.gjs-rte-toolbar {
+    display: none;
+}
