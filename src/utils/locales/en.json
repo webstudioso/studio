@@ -229,6 +229,7 @@
     "props.border_style": "Border Style",
     "props.border_width": "Border Width",
     "props.bg_color": "Background Color",
-    "props.padding": "Padding"
+    "props.padding": "Padding",
+    "props.radius": "Border Radius"
 
 }

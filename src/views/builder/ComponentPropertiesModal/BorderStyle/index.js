@@ -3,10 +3,12 @@ import { Button, Tooltip } from '@mui/material'
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import LineWeightIcon from '@mui/icons-material/LineWeight';
 import PaddingIcon from '@mui/icons-material/Padding';
+import RoundedCornerOutlinedIcon from '@mui/icons-material/RoundedCornerOutlined';
 import Paper from '@mui/material/Paper'
 import Color from 'views/builder/ComponentPropertiesModal/ColorModal'
 import BorderWidthModal from './WidthModal';
 import PaddingModal from './PaddingModal';
+import RadiusModal from './RadiusModal';
 
 
 export default function BorderStyle({ editor, selected, intl }) {
@@ -26,6 +28,11 @@ export default function BorderStyle({ editor, selected, intl }) {
   const [isPaddingOpen, setPaddingOpen] = useState(false)
   const togglePaddingPicker = () => {
     setPaddingOpen(!isPaddingOpen)
+  }
+
+  const [isRadiusOpen, setRadiusOpen] = useState(false)
+  const toggleRadiusPicker = () => {
+    setRadiusOpen(!isRadiusOpen)
   }
 
   return (
@@ -73,6 +80,20 @@ export default function BorderStyle({ editor, selected, intl }) {
                           anchorEl={anchorEl?.current} 
                           open={isPaddingOpen} 
                           onClose={togglePaddingPicker}
+            />
+
+          {/* Border Radius */}
+          <Tooltip title={intl.formatMessage({id:'props.radius'})}>
+            <Button size="small" sx={{ minWidth: '44px'}} onClick={toggleRadiusPicker}>          
+              <RoundedCornerOutlinedIcon sx={{ fill: 'rgba(0,0,0,0.5)' }} ref={anchorEl}/>
+            </Button>
+          </Tooltip>
+
+          <RadiusModal    editor={editor} 
+                          selected={selected} 
+                          anchorEl={anchorEl?.current} 
+                          open={isRadiusOpen} 
+                          onClose={toggleRadiusPicker}
             />
 
       </Paper>

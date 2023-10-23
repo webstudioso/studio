@@ -105,17 +105,17 @@ const Text = ({ editor, selected, intl }) => {
                 </Box>
                 <TextStyle editor={editor} selected={selected} intl={intl} />
             </Grid>
-            <Grid item xs={6}>
-                <Box justifyContent="center">
-                    <Typography variant="body" fontWeight="bold" fontSize={12}>{intl.formatMessage({id:'props.text_properties'})}</Typography>
-                </Box>
-                <TextProperties editor={editor} selected={selected} intl={intl} />
-            </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={8}>
                 <Box justifyContent="center">
                     <Typography variant="body" fontWeight="bold" fontSize={12}>{intl.formatMessage({id:'props.border_style'})}</Typography>
                 </Box>
                 <BorderStyle editor={editor} selected={selected} intl={intl} />
+            </Grid>
+            <Grid item xs={4}>
+                <Box justifyContent="center">
+                    <Typography variant="body" fontWeight="bold" fontSize={12}>{intl.formatMessage({id:'props.text_properties'})}</Typography>
+                </Box>
+                <TextProperties editor={editor} selected={selected} intl={intl} />
             </Grid>
         </Grid>
     )
