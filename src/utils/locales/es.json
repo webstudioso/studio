@@ -227,5 +227,6 @@
     "props.border_style": "Bordes",
     "props.border_width": "Grosor de Borde",
     "props.bg_color": "Color de Fondo",
-    "props.padding": "Espaciado"
+    "props.padding": "Espaciado",
+    "props.radius": "Curvas"
 }
