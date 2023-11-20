@@ -235,8 +235,8 @@ $quaternaryColor: #605ed8;
 }
 
 .gjs-pn-btn.gjs-pn-active {
-  background-color: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 0 3px rgba(0, 255, 251, 0.15) inset;
+  background-color: rgba(255, 255, 255, 0);
+  box-shadow: 0 0 3px rgba(0, 255, 251, 00) inset;
 }
 
 .gjs-pn-btn:hover::before {
