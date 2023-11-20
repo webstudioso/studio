@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useTheme } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom'
 import { Grid, Box, AppBar, Toolbar, Typography, IconButton, Button } from '@mui/material'
-import { IconSettings, IconPlus, IconFiles, IconTemplate, IconPhoto } from '@tabler/icons'
+import { IconSettings, IconPlus, IconFiles, IconTemplate, IconPhoto, IconBrandYoutube } from '@tabler/icons'
 import { Editor } from 'editor'
 import { useDispatch, useSelector } from 'react-redux'
 import { UPDATE_APP } from 'store/actions'
@@ -24,7 +24,7 @@ import { trackEvent } from 'utils/analytics'
 import Changelog from 'views/changelog'
 import { useIntl } from 'react-intl'
 
-const { SECTION, PATH, EVENTS, ANALYTICS } = constants
+const { SECTION, PATH, EVENTS, ANALYTICS, INFO_URL } = constants
 
 const EditorView = () => {
 	const intl = useIntl()
@@ -150,7 +150,16 @@ const EditorView = () => {
 								<Grid item xs={12}>
 									<HelpButton />
 								</Grid>
-
+								<Grid item xs={12}>
+									<HtmlTooltip title={<TooltipFragment title="section.tutorial_tooltip_title" description="section.tutorial_tooltip_description" />} placement="right-start">
+										<IconButton color="error" size="large" onClick={() => {
+											// Redirect to youtube channel
+											window.open(INFO_URL.ACADEMY, '__blank')
+										}}>
+											<IconBrandYoutube />
+										</IconButton>
+									</HtmlTooltip>
+								</Grid>
 							</Grid>
 						</Grid>
 						<Grid item xs sx={{ py: '15px', px: '30px'}}>

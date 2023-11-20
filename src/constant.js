@@ -86,7 +86,8 @@ const constants = {
 		MEDIA: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
 		DASHBOARD: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
 		NEW_TITLE: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
-		HELP: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08'
+		HELP: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
+		ACADEMY: 'https://www.youtube.com/playlist?list=PLIgTSKomaa7cbn2MygfYfMTnHWXaKsYwD'
 	},
 	EVENTS: {
 		CLOSE_DELAY: 'addCloseDelay',

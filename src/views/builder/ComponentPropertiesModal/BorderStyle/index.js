@@ -54,7 +54,7 @@ export default function BorderStyle({ editor, selected, intl }) {
             />
 
           {/* BG Color */}
-          <Tooltip title={intl.formatMessage({id:'props.bg_color'})}>
+          <Tooltip title={intl.formatMessage({id:'props.border_color'})}>
             <Button size="small" sx={{ minWidth: '44px'}} onClick={toggleBorderColorPicker}>          
               <BorderColorIcon sx={{ fill: 'rgba(0,0,0,0.5)' }} ref={anchorEl}/>
             </Button>

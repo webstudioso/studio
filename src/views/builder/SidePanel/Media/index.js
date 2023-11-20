@@ -48,8 +48,8 @@ const Media = ({ onLeave, editor }) => {
     }
 
     const uploadButton = (
-        <Box sx={{ position:'absolute', right:20, top: 18}}>
-            <Button color="primary" variant="outlined" component="label">
+        <Box sx={{ position:'absolute', right:20, top: 15}}>
+            <Button color="primary" variant="outlined" component="label" size="small">
                 { intl.formatMessage({id: 'image_manager.upload_media'})}
                 <input
                     type="file"
@@ -139,7 +139,12 @@ const Media = ({ onLeave, editor }) => {
                                                 if (component.is('image')) {
                                                     component.set("src", item.attributes.src)
                                                 } else {
-                                                    component.setStyle({ 'background-image': `url("${item.attributes.src}")` });
+                                                    component.setStyle({ 
+                                                        'background-image': `url("${item.attributes.src}")`,
+                                                        'background-size': 'cover',
+                                                        'background-repeat': 'no-repeat',
+                                                        'background-position': 'center'
+                                                    });
                                                 }
                                                 editor.store()
                                                 editor.AssetManager.close()
