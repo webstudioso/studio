@@ -49,7 +49,7 @@ const Editor = ({ project, principal }) => {
 
     const editor = grapesjs.init({
       container: "#gjs",
-      dragMode: 'translate',
+      // dragMode: 'absolute',
       height: "100vh",
       width: "100%",
       allowScripts: 1,
@@ -210,17 +210,8 @@ const Editor = ({ project, principal }) => {
     //         setShowUpgradeModal(true)
     //     }
     // })
-  
-      
-    editor.on("canvas:dragenter", (event, element) => {
-      // Make dragging grid based
-      editor.setDragMode('relative')
-    })
-  
-    editor.on("canvas:drop", (event, element) => {
-      // Reset drag mode
-      editor.setDragMode('translate')
 
+    editor.on("canvas:drop", (event, element) => {
       // Open payload wizard
       const hasWizard = element?.getTrait('payload')
       if (hasWizard) {

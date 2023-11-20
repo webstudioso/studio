@@ -8,15 +8,18 @@ import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify'
 import FormatBoldIcon from '@mui/icons-material/FormatBold'
 import FormatItalicIcon from '@mui/icons-material/FormatItalic'
 import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined'
+import ContrastOutlinedIcon from '@mui/icons-material/ContrastOutlined';
 import FormatColorFillIcon from '@mui/icons-material/FormatColorFill'
+import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import Paper from '@mui/material/Paper'
 import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 import FormatColorTextIcon from '@mui/icons-material/FormatColorText'
 import constants from 'constant'
 import Color from 'views/builder/ComponentPropertiesModal/ColorModal'
+import ShadowModal from 'views/builder/ComponentPropertiesModal/ShadowModal'
 
-const { TAILWIND } = constants
+const { TAILWIND, EVENTS } = constants
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   '& .MuiToggleButtonGroup-grouped': {
@@ -70,6 +73,11 @@ export default function TextStyle({ editor, selected, intl }) {
   const [isBgColorOpen, setBgColorOpen] = useState(false)
   const toggleBgColorPicker = () => {
     setBgColorOpen(!isBgColorOpen)
+  }
+
+  const [isShadowModalOpen, setShadowModalOpen] = useState(false)
+  const toggleShadowModal = () => {
+    setShadowModalOpen(!isShadowModalOpen)
   }
 
 
@@ -143,6 +151,25 @@ export default function TextStyle({ editor, selected, intl }) {
                     open={isBgColorOpen} 
                     onClose={toggleBgColorPicker}
                     prefix="bg-"
+            />
+
+          {/* BG Image */}
+          <Button size="small" sx={{ minWidth: '44px'}} onClick={() => {
+            document.dispatchEvent(new CustomEvent(EVENTS.TOGGLE_ASSETS_MODAL))
+          }}>          
+            <ImageOutlinedIcon sx={{ fill: 'rgba(0,0,0,0.5)' }} ref={anchorEl}/>
+          </Button>
+
+          {/* Shadow */}
+          <Button size="small" sx={{ minWidth: '44px'}} onClick={toggleShadowModal}>          
+            <ContrastOutlinedIcon sx={{ fill: 'rgba(0,0,0,0.5)' }} ref={anchorEl}/>
+          </Button>
+
+          <ShadowModal  editor={editor} 
+                        selected={selected} 
+                        anchorEl={anchorEl?.current} 
+                        open={isShadowModalOpen} 
+                        onClose={toggleShadowModal}
             />
 
       </Paper>
