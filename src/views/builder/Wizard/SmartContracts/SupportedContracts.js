@@ -4,7 +4,7 @@ const contracts = [
         audited: true,
         name: 'contract.nftdrop_title',
         description: 'contract.nftdrop_description',
-        logo: 'https://ipfs-2.thirdwebcdn.com/ipfs/QmeNn6emc8Z3VMTFBKSSozSHiG3qt36bFi7EuPCiGGpo17/0.png',
+        logo: 'https://storage.googleapis.com/replit/images/1659463020076_6483e4c69d07e29e3e338476360041cd.png',
         source: 'Thirdweb',
         url: 'https://thirdweb.com/thirdweb.eth/DropERC721',
         tutorial: 'https://youtu.be/aKXh9OMFAvY',
