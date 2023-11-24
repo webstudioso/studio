@@ -43,7 +43,7 @@ export default function TextStyle({ editor, selected, intl }) {
   const [currentClasses, setCurrentClasses] = useState([])
 
   useEffect(() => {
-    setCurrentClasses(selected.getClasses())
+    setCurrentClasses(selected?.getClasses() || [])
     // eslint-disable-next-line
   }, [])
  
@@ -52,7 +52,7 @@ export default function TextStyle({ editor, selected, intl }) {
       if (newItem) {
         selected.addClass(newItem)
       }
-      setCurrentClasses(selected.getClasses())
+      setCurrentClasses(selected?.getClasses())
   }
 
   const getAlignment = () => {

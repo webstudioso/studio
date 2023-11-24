@@ -232,5 +232,8 @@
     "props.bg_color": "Color de Fondo",
     "props.border_color": "Color de Bordes",
     "props.padding": "Espaciado",
-    "props.radius": "Curvas"
+    "props.radius": "Curvas",
+    "props.class_setting": "Editor Avanzado de Estilos",
+    "props.class_setting_tooltip": "Manualmente agrega o elimina estilos de las librerias de TailwindCSS y AnimateCSS sobre el componente"
+
 }

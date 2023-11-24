@@ -2,7 +2,7 @@ import constants from 'constant'
 const { LINK, LINK_PREFIX } = constants
 
 export const getCurrentClasses = (selectedComponent, options) => {
-    const existingClasses = selectedComponent.getClasses()
+    const existingClasses = selectedComponent?.getClasses() || []
     const listed = options.map((item) => item.value).filter((val) => val !== null)
     const currentClasses = existingClasses.filter((cls) => listed.includes(cls))
     return currentClasses.length > 0 ? currentClasses[0] : null

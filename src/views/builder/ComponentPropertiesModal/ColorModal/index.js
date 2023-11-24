@@ -10,8 +10,8 @@ const ColorModal = ({ selected, anchorEl, open, onClose, prefix }) => {
     const [availableColors] = useState(TAILWIND.FONT_COLORS.map((color) => VARIANTS.map((variant) => `${color}-${variant}`)).flat())
 
     const cleanup = () => {
-        const myClasses = selected.getClasses()
-        const todelete = myClasses.filter((cls) => cls.startsWith(prefix) && TAILWIND.FONT_COLORS.includes(cls.split('-')[1]))
+        const myClasses = selected?.getClasses()
+        const todelete = myClasses?.filter((cls) => cls.startsWith(prefix) && TAILWIND.FONT_COLORS.includes(cls.split('-')[1]))
         selected.removeClass(todelete)
         return todelete
     }
