@@ -116,6 +116,21 @@ const Editor = ({ project, principal }) => {
           ...WSMFontStyles
         ],
       },
+      deviceManager: {
+        devices: [
+            {
+                name: 'Desktop',
+            },
+            {
+                name: 'Tablet',
+                width: '768px',
+            },
+            {
+                name: 'Mobile portrait',
+                width: '375px',
+            }
+        ]
+      }
     })
 
     // Storage events
