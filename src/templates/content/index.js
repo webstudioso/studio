@@ -13,6 +13,7 @@ import * as Agenda from 'templates/content/Agenda'
 import * as Landing from 'templates/content/Landing'
 import * as Geoniti from 'templates/content/Geoniti'
 import * as ETHDublin from 'templates/content/ETHDublin'
+import * as Wellness from 'templates/content/Wellness'
 
 const templates = [
     Porto,
@@ -29,7 +30,8 @@ const templates = [
     Agenda,
     Landing,
     Geoniti,
-    ETHDublin
+    ETHDublin,
+    Wellness
 ]
 
 export default templates
