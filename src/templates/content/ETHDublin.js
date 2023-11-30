@@ -23,7 +23,7 @@ const template = `
             <div class="flex justify-center"></div>
           </div>
           <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-            <img alt="hero" src="https://ipfs.moralis.io:2053/ipfs/QmNP1ftNdC69HA7v1FG2cjqqXeW6yw54aJGkRTmQTemiL2/photo_2023-11-14_14-50-44.jpg" class="object-center rounded">
+            <img alt="hero" src="https://gateway.ipfs.io/ipfs/QmNP1ftNdC69HA7v1FG2cjqqXeW6yw54aJGkRTmQTemiL2/photo_2023-11-14_14-50-44.jpg" class="object-center rounded">
           </div>
         </div>
       </section>
@@ -37,7 +37,7 @@ const template = `
         <div class="flex flex-wrap -m-4">
           <div class="p-4 lg:w-1/2">
             <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-              <img alt="team" src="https://ipfs.moralis.io:2053/ipfs/QmSE6ErUZsogYW8WuXQ7Sc2dZ4Zgit5eVJPeE5cZWSZZ73/prize.PNG" class="flex-shrink-0 rounded-lg w-48 h-48 object-center sm:mb-0 mb-4">
+              <img alt="team" src="https://gateway.ipfs.io/ipfs/QmSE6ErUZsogYW8WuXQ7Sc2dZ4Zgit5eVJPeE5cZWSZZ73/prize.PNG" class="flex-shrink-0 rounded-lg w-48 h-48 object-center sm:mb-0 mb-4">
               <div class="flex-grow sm:pl-8">
                 <h2 id="ig2pw" class="title-font font-medium text-lg text-gray-900 font-bold lg:text-2xl">Prize Pool</h2>
                 <p id="ifbpu" class="mb-4 lg:text-lg">A large prize pool across multiple tracks and bounties! (last years prize pool was $12k usdc!)</p>
@@ -51,7 +51,7 @@ const template = `
           </div>
           <div class="p-4 lg:w-1/2">
             <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-              <img alt="team" src="https://ipfs.moralis.io:2053/ipfs/QmRY1b41M7trXAVHxUrba7bNwp1D42uD5ZFzUqsPh4R7LN/Workshop.PNG" class="flex-shrink-0 rounded-lg w-48 h-48 object-center sm:mb-0 mb-4">
+              <img alt="team" src="https://gateway.ipfs.io/ipfs/QmRY1b41M7trXAVHxUrba7bNwp1D42uD5ZFzUqsPh4R7LN/Workshop.PNG" class="flex-shrink-0 rounded-lg w-48 h-48 object-center sm:mb-0 mb-4">
               <div class="flex-grow sm:pl-8">
                 <h2 id="ijxrb8" class="title-font font-medium text-lg text-gray-900 font-bold lg:text-2xl">Workshops</h2>
                 <p id="if2b3z" class="mb-4 lg:text-lg">Various educational workshops from building dApps to Staking Economy and much much more!</p>
@@ -65,7 +65,7 @@ const template = `
           </div>
           <div class="p-4 lg:w-1/2">
             <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-              <img alt="team" src="https://ipfs.moralis.io:2053/ipfs/QmWtoHNricni8WhYkGes7JR5g9PisV6sYdYKXKy2eMCsxj/Panels.PNG" class="flex-shrink-0 rounded-lg w-48 h-48 object-center sm:mb-0 mb-4">
+              <img alt="team" src="https://gateway.ipfs.io/ipfs/QmWtoHNricni8WhYkGes7JR5g9PisV6sYdYKXKy2eMCsxj/Panels.PNG" class="flex-shrink-0 rounded-lg w-48 h-48 object-center sm:mb-0 mb-4">
               <div class="flex-grow sm:pl-8">
                 <h2 id="ik7tax" class="title-font font-medium text-lg text-gray-900 font-bold lg:text-2xl">Expert Panels</h2>
                 <p id="i8mny8" class="mb-4 lg:text-lg">A variety of expert lead talks on hot industry topics like DeFi, NFTs and Stablecoins.</p>
@@ -79,7 +79,7 @@ const template = `
           </div>
           <div class="p-4 lg:w-1/2">
             <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-              <img alt="team" src="https://ipfs.moralis.io:2053/ipfs/QmP4icX3EufvALXotPUZjCMftL5T2uCZm992VcbW9Zu2ey/Experts.PNG" class="flex-shrink-0 rounded-lg w-48 h-48 object-center sm:mb-0 mb-4">
+              <img alt="team" src="https://gateway.ipfs.io/ipfs/QmP4icX3EufvALXotPUZjCMftL5T2uCZm992VcbW9Zu2ey/Experts.PNG" class="flex-shrink-0 rounded-lg w-48 h-48 object-center sm:mb-0 mb-4">
               <div class="flex-grow sm:pl-8">
                 <h2 id="i1dki6" class="title-font font-medium text-lg text-gray-900 font-bold lg:text-2xl">Networking</h2>
                 <p id="itd69o" class="mb-4 lg:text-lg">Several social events to mingle with the community and talk all things Web3!</p>
@@ -93,7 +93,7 @@ const template = `
           </div>
           <div class="p-4 lg:w-1/2">
             <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-              <img alt="team" src="https://ipfs.moralis.io:2053/ipfs/QmNtGWrahi1y2Q3C5YiQBHZpj1wg7AVhpGw2GH3oJNMAy6/Gift.PNG" class="flex-shrink-0 rounded-lg w-48 h-48 object-center sm:mb-0 mb-4">
+              <img alt="team" src="https://gateway.ipfs.io/ipfs/QmNtGWrahi1y2Q3C5YiQBHZpj1wg7AVhpGw2GH3oJNMAy6/Gift.PNG" class="flex-shrink-0 rounded-lg w-48 h-48 object-center sm:mb-0 mb-4">
               <div class="flex-grow sm:pl-8">
                 <h2 id="ia2px" class="title-font font-medium text-lg text-gray-900 font-bold lg:text-2xl">Freebies &amp; Discounts</h2>
                 <p id="iwu9e" class="mb-4 lg:text-lg">We will have lots of free tickets to local attractions within Dublin along with discounts on products and services!</p>
@@ -107,7 +107,7 @@ const template = `
           </div>
           <div class="p-4 lg:w-1/2">
             <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-              <img alt="team" src="https://ipfs.moralis.io:2053/ipfs/QmaZaiz765GDRJeGww48bQt6WT9WoKK4qTMwNmRA8WcwQ2/Side.PNG" class="flex-shrink-0 rounded-lg w-48 h-48 object-center sm:mb-0 mb-4">
+              <img alt="team" src="https://gateway.ipfs.io/ipfs/QmaZaiz765GDRJeGww48bQt6WT9WoKK4qTMwNmRA8WcwQ2/Side.PNG" class="flex-shrink-0 rounded-lg w-48 h-48 object-center sm:mb-0 mb-4">
               <div class="flex-grow sm:pl-8">
                 <h2 id="i8sc1" class="title-font font-medium text-lg text-gray-900 font-bold lg:text-2xl">Side Events</h2>
                 <p id="i8vnk" class="mb-4 lg:text-lg">TBD</p>
@@ -130,24 +130,24 @@ const template = `
           <div class="flex flex-wrap md:-m-2 -m-1">
             <div class="flex flex-wrap w-1/2">
               <div class="md:p-2 p-1 w-1/2">
-                <img alt="gallery" src="https://ipfs.moralis.io:2053/ipfs/QmempwK6qz5vyFRjEyZPYLE1fFsqKTx8REMEa3K19oRNTU/5.jpg" class="w-full object-cover h-full object-center block">
+                <img alt="gallery" src="https://gateway.ipfs.io/ipfs/QmempwK6qz5vyFRjEyZPYLE1fFsqKTx8REMEa3K19oRNTU/5.jpg" class="w-full object-cover h-full object-center block">
               </div>
               <div class="md:p-2 p-1 w-1/2">
-                <img alt="gallery" src="https://ipfs.moralis.io:2053/ipfs/Qma8GMhaiMrondLSdhbCBipmA3P87coG6LhtPNxDWS7jWp/6.jpg" class="w-full object-cover h-full object-center block">
+                <img alt="gallery" src="https://gateway.ipfs.io/ipfs/Qma8GMhaiMrondLSdhbCBipmA3P87coG6LhtPNxDWS7jWp/6.jpg" class="w-full object-cover h-full object-center block">
               </div>
               <div class="md:p-2 p-1 w-full">
-                <img alt="gallery" src="https://ipfs.moralis.io:2053/ipfs/QmQpTj5jWp6gu8gt1sVdATsRw5ukz5oB676R3i8jFyWLsP/3.jfif" class="w-full h-full object-cover object-center block">
+                <img alt="gallery" src="https://gateway.ipfs.io/ipfs/QmQpTj5jWp6gu8gt1sVdATsRw5ukz5oB676R3i8jFyWLsP/3.jfif" class="w-full h-full object-cover object-center block">
               </div>
             </div>
             <div class="flex flex-wrap w-1/2">
               <div class="md:p-2 p-1 w-full">
-                <img alt="gallery" src="https://ipfs.moralis.io:2053/ipfs/QmXxKChNZwNyhrvFGC12bWXngbgh2iMdCtWQ8xTp7kEgGp/4.jfif" class="w-full h-full object-cover object-center block">
+                <img alt="gallery" src="https://gateway.ipfs.io/ipfs/QmXxKChNZwNyhrvFGC12bWXngbgh2iMdCtWQ8xTp7kEgGp/4.jfif" class="w-full h-full object-cover object-center block">
               </div>
               <div class="md:p-2 p-1 w-1/2">
-                <img alt="gallery" src="https://ipfs.moralis.io:2053/ipfs/QmRxFB8Divb7ihdPf1KrP5ibAjJ2BkNDvNMgyEXykTywjt/2.jpg" class="w-full object-cover h-full object-center block">
+                <img alt="gallery" src="https://gateway.ipfs.io/ipfs/QmRxFB8Divb7ihdPf1KrP5ibAjJ2BkNDvNMgyEXykTywjt/2.jpg" class="w-full object-cover h-full object-center block">
               </div>
               <div class="md:p-2 p-1 w-1/2">
-                <img alt="gallery" src="https://ipfs.moralis.io:2053/ipfs/QmTG1JYFC6bAD3NRRwJmSiHbXZKQHaBQuZDYPPjX5odDV9/1.jfif" class="w-full object-cover h-full object-center block">
+                <img alt="gallery" src="https://gateway.ipfs.io/ipfs/QmTG1JYFC6bAD3NRRwJmSiHbXZKQHaBQuZDYPPjX5odDV9/1.jfif" class="w-full object-cover h-full object-center block">
               </div>
             </div>
           </div>
@@ -157,7 +157,7 @@ const template = `
             <div class="flex flex-wrap -m-4">
               <div class="p-4 md:w-1/3">
                 <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                  <img src="https://ipfs.moralis.io:2053/ipfs/Qma8GMhaiMrondLSdhbCBipmA3P87coG6LhtPNxDWS7jWp/6.jpg" alt="blog" class="lg:h-48 md:h-36 w-full object-cover object-center">
+                  <img src="https://gateway.ipfs.io/ipfs/Qma8GMhaiMrondLSdhbCBipmA3P87coG6LhtPNxDWS7jWp/6.jpg" alt="blog" class="lg:h-48 md:h-36 w-full object-cover object-center">
                   <div class="p-6 items-center flex flex-col">
                     <h1 id="ip0sf7" class="title-font text-lg font-medium text-gray-900 mb-3 lg:text-3xl">Hack</h1>
                     <p id="ik8umv" class="leading-relaxed mb-3 lg:text-lg">Don't miss out on hacking at Ireland's biggest Web3 hackathon in 2024!</p>
@@ -167,7 +167,7 @@ const template = `
               </div>
               <div class="p-4 md:w-1/3">
                 <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                  <img src="https://ipfs.moralis.io:2053/ipfs/QmempwK6qz5vyFRjEyZPYLE1fFsqKTx8REMEa3K19oRNTU/5.jpg" alt="blog" class="lg:h-48 md:h-36 w-full object-cover object-center">
+                  <img src="https://gateway.ipfs.io/ipfs/QmempwK6qz5vyFRjEyZPYLE1fFsqKTx8REMEa3K19oRNTU/5.jpg" alt="blog" class="lg:h-48 md:h-36 w-full object-cover object-center">
                   <div class="p-6 items-center flex flex-col">
                     <h1 id="i4tt8m" class="title-font text-lg font-medium text-gray-900 mb-3 lg:text-3xl">Volunteer</h1>
                     <p id="i7kmlg" class="leading-relaxed mb-3 lg:text-lg">Even is you can't BUIDL, tell us why you belong at ETH Dublin 2024!</p>
@@ -177,7 +177,7 @@ const template = `
               </div>
               <div class="p-4 md:w-1/3">
                 <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                  <img src="https://ipfs.moralis.io:2053/ipfs/QmXxKChNZwNyhrvFGC12bWXngbgh2iMdCtWQ8xTp7kEgGp/4.jfif" alt="blog" class="lg:h-48 md:h-36 w-full object-cover object-center">
+                  <img src="https://gateway.ipfs.io/ipfs/QmXxKChNZwNyhrvFGC12bWXngbgh2iMdCtWQ8xTp7kEgGp/4.jfif" alt="blog" class="lg:h-48 md:h-36 w-full object-cover object-center">
                   <div class="p-6 items-center flex flex-col">
                     <h1 id="i2d4r6" class="title-font text-lg font-medium text-gray-900 mb-3 lg:text-3xl">Sponsor</h1>
                     <p id="iboyf9" class="leading-relaxed mb-3 lg:text-lg">Join as a sponsor and support us in Engineering Ireland's Tech Culture!</p>

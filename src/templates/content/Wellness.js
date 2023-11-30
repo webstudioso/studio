@@ -24,7 +24,7 @@ const template = `
         <div class="flex justify-center"></div>
       </div>
       <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-        <img alt="hero" src="https://ipfs.moralis.io:2053/ipfs/QmPW7dFRrSRDrnGkoTdmrkzwHV7sVbSFHj9JXrQEyiYY3n/3521794.jpg" class="object-cover object-center rounded">
+        <img alt="hero" src="https://gateway.ipfs.io/ipfs/QmPW7dFRrSRDrnGkoTdmrkzwHV7sVbSFHj9JXrQEyiYY3n/3521794.jpg" class="object-cover object-center rounded">
       </div>
     </div>
   </section>

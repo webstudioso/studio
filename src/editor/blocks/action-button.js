@@ -83,7 +83,7 @@ const Plugin = (editor) => {
     //   const nft = evt.detail;
     //   const meta = JSON.parse(nft.metadata);
     //   console.log(meta);
-    //   const img = meta.image.startsWith('ipfs://') ? `https://ipfs.moralis.io:2053/ipfs/${meta.image.split('ipfs://')[1]}` : meta.image;
+    //   const img = meta.image.startsWith('ipfs://') ? `https://gateway.ipfs.io/ipfs/${meta.image.split('ipfs://')[1]}` : meta.image;
     //   payload = {
     //     username: "Webstudio Webhook",
     //     avatar_url: "https://i.ibb.co/ZHC5n6b/S3-SNU-jpg-2.png",

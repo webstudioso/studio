@@ -97,7 +97,7 @@ const Plugin = (editor) => {
   
         list.forEach((item, index) => {
           const meta = JSON.parse(item.metadata);
-          const imageDisplay = meta.image.startsWith('ipfs://') ? `https://ipfs.moralis.io:2053/ipfs/${meta.image.split('ipfs://')[1]}` : meta.image;
+          const imageDisplay = meta.image.startsWith('ipfs://') ? `https://gateway.ipfs.io/ipfs/${meta.image.split('ipfs://')[1]}` : meta.image;
           $(`#nft-container-${index + 1}`).attr(
             "data-metadata",
             JSON.stringify(item)

@@ -85,7 +85,7 @@ const PublishConfirmationDialog = ({ open, project, onClose, principal }) => {
                         }} 
                         disabled={isLoading}
                         onClick={() => {
-                            const url = `https://ipfs.moralis.io:2053/ipfs/${cid}`
+                            const url = `https://gateway.ipfs.io/ipfs/${cid}`
                             window.open(url, '__blank')
                         }}>
                             <Box display="flex">
