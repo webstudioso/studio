@@ -3,7 +3,7 @@ const template = `
   <div data-new-gr-c-s-check-loaded="14.1112.0" data-gr-ext-installed="" id="ifb9" class="bg-gradient-to-br from-gray-900 to-black">
     <header id="ih3oeg" class="text-gray-600 body-font z-20 relative">
       <div id="iuosox" class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-        <img src="https://ipfs.moralis.io:2053/ipfs/QmRMSz96QTrmpfEmm9enGzKjYqJFHvKGJ4E8PTSWrXoiyw/Geoniti.png" id="i6nnus" class="h-8">
+        <img src="https://gateway.ipfs.io/ipfs/QmRMSz96QTrmpfEmm9enGzKjYqJFHvKGJ4E8PTSWrXoiyw/Geoniti.png" id="i6nnus" class="h-8">
         <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
           <span class="ml-3 text-white text-2xl">Geoniti</span>
         </a>
@@ -293,7 +293,7 @@ const template = `
       </section>
       <section id="ifbhs7" class="text-gray-600 body-font"></section>
       <div id="i1vzl5" class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col mt-24">
-        <img src="https://ipfs.moralis.io:2053/ipfs/QmRMSz96QTrmpfEmm9enGzKjYqJFHvKGJ4E8PTSWrXoiyw/Geoniti.png" id="ilsknl" class="h-8">
+        <img src="https://gateway.ipfs.io/ipfs/QmRMSz96QTrmpfEmm9enGzKjYqJFHvKGJ4E8PTSWrXoiyw/Geoniti.png" id="ilsknl" class="h-8">
         <span class="ml-3 text-white text-2xl">Geoniti</span>
         <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"></a>
         <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2023 powered by Webstudio.so</p>

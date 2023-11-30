@@ -10,7 +10,7 @@ const template = `
       class="container mx-auto flex justify-between items-center py-4 px-6"
     >
       <img
-        src="https://ipfs.moralis.io:2053/ipfs/QmTHJupYVzaeW3Wt83mjcLeb46HZfhm4juhqYspzwTaCMc/63c82b39613fec2e21b4bf3a_ETH Dublin Logo-p-500.webp"
+        src="https://gateway.ipfs.io/ipfs/QmTHJupYVzaeW3Wt83mjcLeb46HZfhm4juhqYspzwTaCMc/63c82b39613fec2e21b4bf3a_ETH Dublin Logo-p-500.webp"
         class="h-10 w-auto"
       />
       <nav id="iim6k">
@@ -73,7 +73,7 @@ const template = `
           </div>
           <div id="i1abeg" class="flex items-center max-w-4xl mb-4">
             <img
-              src="https://ipfs.moralis.io:2053/ipfs/QmWMZcNZiYZgJWbcfzNbbbsEcXDXDhNTiPKTCCe8qu9AEz/1526510.jpeg"
+              src="https://gateway.ipfs.io/ipfs/QmWMZcNZiYZgJWbcfzNbbbsEcXDXDhNTiPKTCCe8qu9AEz/1526510.jpeg"
               class="w-20 h-20 mr-2 rounded-full"
             />
             <div id="ir8nyg">
@@ -108,7 +108,7 @@ const template = `
           </div>
           <div id="io1fme" class="flex items-center max-w-4xl mb-4">
             <img
-              src="https://ipfs.moralis.io:2053/ipfs/QmbbaycigiKzDtct9R2xug3MNWHPSYNaefD6nXGZf9pFQa/SCzPcg_L_400x400.jpeg"
+              src="https://gateway.ipfs.io/ipfs/QmbbaycigiKzDtct9R2xug3MNWHPSYNaefD6nXGZf9pFQa/SCzPcg_L_400x400.jpeg"
               class="w-20 h-20 mr-2 rounded-full"
             />
             <div id="iixwlq"><h2 class="font-medium">Eomji Park</h2></div>
@@ -138,7 +138,7 @@ const template = `
           </div>
           <div id="i81fau" class="flex items-center max-w-4xl mb-4">
             <img
-              src="https://ipfs.moralis.io:2053/ipfs/QmZqQgmkBQpTpUD4P76EoXqKmf5S7MGxE5Gb8muxKw1a7i/2023-05-11 21.03.00.jpg"
+              src="https://gateway.ipfs.io/ipfs/QmZqQgmkBQpTpUD4P76EoXqKmf5S7MGxE5Gb8muxKw1a7i/2023-05-11 21.03.00.jpg"
               class="w-20 h-20 mr-2 rounded-full"
             />
             <div id="in8b9p"><h2 class="font-medium">Neal Roche</h2></div>
@@ -167,7 +167,7 @@ const template = `
           </div>
           <div id="ietejx" class="flex items-center max-w-4xl mb-4">
             <img
-              src="https://ipfs.moralis.io:2053/ipfs/QmWMZcNZiYZgJWbcfzNbbbsEcXDXDhNTiPKTCCe8qu9AEz/1526510.jpeg"
+              src="https://gateway.ipfs.io/ipfs/QmWMZcNZiYZgJWbcfzNbbbsEcXDXDhNTiPKTCCe8qu9AEz/1526510.jpeg"
               class="w-20 h-20 mr-2 rounded-full"
             />
             <div id="iyhl7f">
@@ -202,7 +202,7 @@ const template = `
           </div>
           <div id="ics7w6" class="flex items-center max-w-4xl mb-4">
             <img
-              src="https://ipfs.moralis.io:2053/ipfs/QmXpZFH3zb9BNDKyrBFREndNuKzT7oZj7QNXdzzRtW7nra/1636582228539.jpeg"
+              src="https://gateway.ipfs.io/ipfs/QmXpZFH3zb9BNDKyrBFREndNuKzT7oZj7QNXdzzRtW7nra/1636582228539.jpeg"
               class="w-20 h-20 mr-2 rounded-full"
             />
             <div id="ioefdv"><h2 class="font-medium">Bianca Buzea</h2></div>
@@ -236,7 +236,7 @@ const template = `
           </div>
           <div id="i4n3jz" class="flex items-center max-w-4xl mb-4">
             <img
-              src="https://ipfs.moralis.io:2053/ipfs/QmPdaavmWyubk78CuhwfjFHoeRJrLPSQn673Qo3PjcAtDg/SHlzS-Vl_400x400.jpeg"
+              src="https://gateway.ipfs.io/ipfs/QmPdaavmWyubk78CuhwfjFHoeRJrLPSQn673Qo3PjcAtDg/SHlzS-Vl_400x400.jpeg"
               class="w-20 h-20 mr-2 rounded-full"
             />
             <div id="i29fna"><h2 class="font-medium">Solange Gueiros</h2></div>
@@ -262,7 +262,7 @@ const template = `
       >
         <div id="ia561" class="bg-white shadow-lg rounded-lg overflow-hidden">
           <img
-            src="https://ipfs.moralis.io:2053/ipfs/QmXpZFH3zb9BNDKyrBFREndNuKzT7oZj7QNXdzzRtW7nra/1636582228539.jpeg"
+            src="https://gateway.ipfs.io/ipfs/QmXpZFH3zb9BNDKyrBFREndNuKzT7oZj7QNXdzzRtW7nra/1636582228539.jpeg"
             class="w-full h-56 object-cover object-center"
           />
           <div id="iwpso" class="p-4">
@@ -271,7 +271,7 @@ const template = `
             </div>
             <div id="ibne9" class="flex items-center max-w-4xl">
               <img
-                src="https://ipfs.moralis.io:2053/ipfs/QmbKXqugV7ueUcyJgHHSn6heFVqfY15U2cKjYSB43hHnjf/1676901162049.jpeg"
+                src="https://gateway.ipfs.io/ipfs/QmbKXqugV7ueUcyJgHHSn6heFVqfY15U2cKjYSB43hHnjf/1676901162049.jpeg"
                 class="w-20 h-20 mr-2"
               />
               <div id="izbhz">
@@ -298,7 +298,7 @@ const template = `
         </div>
         <div id="i8wrsy" class="bg-white shadow-lg rounded-lg overflow-hidden">
           <img
-            src="https://ipfs.moralis.io:2053/ipfs/QmZqQgmkBQpTpUD4P76EoXqKmf5S7MGxE5Gb8muxKw1a7i/2023-05-11 21.03.00.jpg"
+            src="https://gateway.ipfs.io/ipfs/QmZqQgmkBQpTpUD4P76EoXqKmf5S7MGxE5Gb8muxKw1a7i/2023-05-11 21.03.00.jpg"
             class="w-full h-56 object-cover object-center"
           />
           <div id="iii543" class="p-4">
@@ -307,7 +307,7 @@ const template = `
             </div>
             <div id="izbcsk" class="flex items-center max-w-4xl">
               <img
-                src="https://ipfs.moralis.io:2053/ipfs/QmbVuy9u4qntmV2QjfgN7aMmrJj2hFtvddiJT5tscUNPG1/1680503006254 (1).jpeg"
+                src="https://gateway.ipfs.io/ipfs/QmbVuy9u4qntmV2QjfgN7aMmrJj2hFtvddiJT5tscUNPG1/1680503006254 (1).jpeg"
                 class="w-20 h-20 mr-2 rounded-full"
               />
               <div id="ignmtb">
@@ -330,7 +330,7 @@ const template = `
         </div>
         <div id="ilqeqv" class="bg-white shadow-lg rounded-lg overflow-hidden">
           <img
-            src="https://ipfs.moralis.io:2053/ipfs/QmPdaavmWyubk78CuhwfjFHoeRJrLPSQn673Qo3PjcAtDg/SHlzS-Vl_400x400.jpeg"
+            src="https://gateway.ipfs.io/ipfs/QmPdaavmWyubk78CuhwfjFHoeRJrLPSQn673Qo3PjcAtDg/SHlzS-Vl_400x400.jpeg"
             class="w-full h-56 object-cover"
           />
           <div id="iekkoc" class="p-4">
@@ -339,7 +339,7 @@ const template = `
             </div>
             <div id="irh46" class="flex items-center max-w-4xl">
               <img
-                src="https://ipfs.moralis.io:2053/ipfs/QmZKXvBpvwzRwKREeQgtQ9umDGDUcWS7TQeVzggR231Y2d/qvSHhRyC_400x400.jpeg"
+                src="https://gateway.ipfs.io/ipfs/QmZKXvBpvwzRwKREeQgtQ9umDGDUcWS7TQeVzggR231Y2d/qvSHhRyC_400x400.jpeg"
                 class="w-20 h-20 mr-2"
               />
               <div id="imv2p">
@@ -368,7 +368,7 @@ const template = `
         </div>
         <div id="izw7es" class="bg-white shadow-lg rounded-lg overflow-hidden">
           <img
-            src="https://ipfs.moralis.io:2053/ipfs/QmWMZcNZiYZgJWbcfzNbbbsEcXDXDhNTiPKTCCe8qu9AEz/1526510.jpeg"
+            src="https://gateway.ipfs.io/ipfs/QmWMZcNZiYZgJWbcfzNbbbsEcXDXDhNTiPKTCCe8qu9AEz/1526510.jpeg"
             class="w-full h-56 object-cover object-center"
           />
           <div id="igt7oj" class="p-4">
@@ -377,7 +377,7 @@ const template = `
             </div>
             <div id="iafhee" class="flex items-center max-w-4xl">
               <img
-                src="https://ipfs.moralis.io:2053/ipfs/QmTTdgChs2dpjxAfQJKGsBjvz19aG7QzdvSrzPg4MkGiNB/Logo (1).jpg"
+                src="https://gateway.ipfs.io/ipfs/QmTTdgChs2dpjxAfQJKGsBjvz19aG7QzdvSrzPg4MkGiNB/Logo (1).jpg"
                 class="w-20 h-20 mr-2"
               />
               <div id="ivax0o">
@@ -404,7 +404,7 @@ const template = `
         </div>
         <div id="imzq1j" class="bg-white shadow-lg rounded-lg overflow-hidden">
           <img
-            src="https://ipfs.moralis.io:2053/ipfs/QmbbaycigiKzDtct9R2xug3MNWHPSYNaefD6nXGZf9pFQa/SCzPcg_L_400x400.jpeg"
+            src="https://gateway.ipfs.io/ipfs/QmbbaycigiKzDtct9R2xug3MNWHPSYNaefD6nXGZf9pFQa/SCzPcg_L_400x400.jpeg"
             class="w-full h-56 object-cover object-top"
           />
           <div id="i6wdkq" class="p-4">
@@ -413,7 +413,7 @@ const template = `
             </div>
             <div id="ielmiz" class="flex items-center max-w-4xl">
               <img
-                src="https://ipfs.moralis.io:2053/ipfs/QmSi3BckTp2RXM6R3JUnv2QRwfdU21ztxnRJmvjHbdwwh4/1680009438331.jpeg"
+                src="https://gateway.ipfs.io/ipfs/QmSi3BckTp2RXM6R3JUnv2QRwfdU21ztxnRJmvjHbdwwh4/1680009438331.jpeg"
                 class="w-20 h-20 mr-2 rounded-full"
               />
               <div id="i7wqqf">

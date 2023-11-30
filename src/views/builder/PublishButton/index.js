@@ -21,7 +21,7 @@ const PublishButton = ({ principal, project, editor }) => {
     const [release, setRelease] = useState()
     const dispatch = useDispatch()
 
-    const getCidReleaseUrl = () => `https://ipfs.moralis.io:2053/ipfs/${release}`
+    const getCidReleaseUrl = () => `https://gateway.ipfs.io/ipfs/${release}`
 
     const handlePublish = async () => {
         try {
