@@ -123,6 +123,14 @@ $quaternaryColor: #605ed8;
     color: black !important;
 }
 
+.gjs-label-wrp {
+    margin-right: 5px;
+}
+
+[role=tabpanel] {
+    padding-top: 8px;
+}
+
 .gjs-toolbar {
     position: absolute;
     background-color: #3b97e3;

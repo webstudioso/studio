@@ -15,8 +15,8 @@ import VideoBlocks from '../blocks/video'
 import ButtonBlocks from '../blocks/buttons'
 import ToastBlocks from '../blocks/toast'
 
-import ButtonWeb3 from '../blocks/button-web3'
-import SectionTokenGated from '../blocks/section-token-gated'
+import Web3Button from '../blocks/web3-button'
+import SectionTokenGated from '../blocks/web3-container'
 
 import Upgrade from './Upgrade'
 // import SmartLabel from '../blocks/smart-label'
@@ -25,7 +25,7 @@ import Upgrade from './Upgrade'
 
 // Primitives
 // import WSMWalletConnect from 'wsm-wallet-connect'
-import WSMForm from 'wsm-form'
+// import WSMForm from 'wsm-form'
 import WSMTailwind from 'wsm-tailwind'
 // import WSMAnimations from 'wsm-animations'
 import WSMFonts, { WSMFontStyles } from 'wsm-fonts'
@@ -33,6 +33,8 @@ import constants from 'constant'
 import { hasPremiumSubscription } from 'utils/user'
 import { enableContextMenu } from './Utils'
 import { bringToFront, moveToBack } from 'utils/properties'
+import Web3Form from '../blocks/web3-form'
+
 const { EVENTS } = constants
 
 const Editor = ({ project, principal }) => {
@@ -95,8 +97,9 @@ const Editor = ({ project, principal }) => {
         VideoBlocks,
         ToastBlocks,
         WSMTailwind,
-        ButtonWeb3,
-        WSMForm,
+        Web3Button,
+        Web3Form,
+        // WSMForm,
         SectionTokenGated
       ],
       pluginsOpts: {
@@ -104,10 +107,8 @@ const Editor = ({ project, principal }) => {
       },
       canvas: {
         scripts: [
-          "https://cdn.jsdelivr.net/npm/webstudio-sdk@0.0.28/dist/main.min.js",
+          "https://cdn.jsdelivr.net/npm/webstudio-sdk@1.0.1/dist/main.min.js",
           "https://cdn.tailwindcss.com",
-          "https://code.jquery.com/jquery-3.6.1.min.js",
-          "https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js",
         ],
         // The same would be for external styles
         styles: [
@@ -292,12 +293,12 @@ const Editor = ({ project, principal }) => {
     // })
 
     editor.on("canvas:drop", (event, element) => {
-      // Open payload wizard
-      const hasWizard = element?.getTrait('payload')
-      if (hasWizard) {
-        editor.select(element)
-        editor.runCommand('tlb-settings', { element })
-      }
+      // // Open payload wizard
+      // const hasWizard = element?.getTrait('payload')
+      // if (hasWizard) {
+      //   editor.select(element)
+      //   editor.runCommand('tlb-settings', { element })
+      // }
       // Open image selector
       const isImage = element?.attributes?.type === 'image'
       if (isImage) {
