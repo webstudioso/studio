@@ -49,10 +49,6 @@ export default function BasicTabs({ editor, intl }) {
     setValue(newValue);
   }
 
-  useEffect(() => {
-    console.log(value)
-  }, [value])
-
   const loadPanels = () => {
  
     const traitManager = editor.TraitManager;

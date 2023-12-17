@@ -13,8 +13,8 @@ const block = {
     `,
     name: id,
     content: {
-      tagName:'w3m-button',
-      type: 'w3m-button'
+      tagName: id,
+      type: id
     }
 }
   
@@ -36,6 +36,7 @@ export const script = function (props) {
     const { createWeb3Modal, defaultConfig } = window.webstudio.web3Modal
     const metadata = { name, description, url, icons: [icon] }
     
+    window.networks = networks
     window.modal = createWeb3Modal({
         ethersConfig: defaultConfig({ metadata }),
         chains: [defaultNetwork],
@@ -44,13 +45,13 @@ export const script = function (props) {
     })
     window.modal.setThemeMode(themeMode)
 
-    // this.handleChange = ({ provider, providerType, address, chainId, isConnected }) => {
-    //   window.walletProvider = provider
-    //   console.log("provider?")
-    //   console.log(window.walletProvider)
-    // }
+    this.handleChange = ({ provider, providerType, address, chainId, isConnected }) => {
+        console.log("Status changed!")
+        window.currentChain = networks.find((network) => network.chainId === chainId)
+        console.log(window)
+    }
 
-    // window.modal.subscribeProvider(this.handleChange)
+    window.modal.subscribeProvider(this.handleChange)
 }
 
 export const properties = {

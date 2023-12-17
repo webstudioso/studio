@@ -35,11 +35,10 @@ export const loadBlocks = (editor, opt) => {
         </label>
         <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="text" placeholder="Function second input">
         <button class="my-2 shadow bg-black hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
-          Call Smart Contract Function
+          Smart Contract Action
         </button>
       </form>
     `,
-    label: 'Smart Contract Form',
     content: {
       type: typeForm,
       components: [ {

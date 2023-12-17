@@ -1,9 +1,9 @@
 /*eslint no-undef: "off"*/
-const script = function (props) {
+const script = function (props={}) {
 
     const {
         ethers
-    } = window.webstudio
+    } = window?.webstudio
 
     const { 
         BrowserProvider, 
@@ -11,6 +11,14 @@ const script = function (props) {
         parseUnits,
         encodeBytes32String
     } = ethers
+
+    const {
+        file,
+        method,
+        contract,
+    } = props
+
+    console.log(method)
 
     this.getComponent = () => {
         return document.getElementById(this.id);
@@ -87,24 +95,25 @@ const script = function (props) {
                 // Do nothing
                 
         }
-        console.log(`getValue for input ${required} is ${value}`);
-        return value;
+        console.log(`getValue for input ${required} is ${value}`)
+        return value
     }
 
     this.getAbi = () => {
-        return JSON.parse(props.abi);
+        const content = JSON.parse(file?.content)
+        return content
     }
 
     this.getMethod = () => {
-        const abi = this.getAbi();
-        const method = abi.find((item) => item.name === props.method);
-        console.log(`getMethod ${method?.name}`);
-        return method;
+        const abiTgt = this.getAbi()
+        const methodTgt = abiTgt.filter((item) => item.type === 'function')[method]
+        console.log(`getMethod ${methodTgt?.name}`)
+        return methodTgt;
     }
 
     this.getProvider = () => {
-        const walletProvider = window?.modal?.getWalletProvider();
-        const provider = new BrowserProvider(walletProvider);
+        const walletProvider = window?.modal?.getWalletProvider()
+        const provider = new BrowserProvider(walletProvider)
         return provider;
     }
 
@@ -116,21 +125,21 @@ const script = function (props) {
 
     this.getFunction = async () => {
         const signer = await this.getSigner();
-        const abi = this.getAbi();
-        const method = this.getMethod();
-        const contract = new Contract(props.contract, abi, signer);
-        const targetFunction = contract[method.name];
+        const abiTgt = this.getAbi();
+        const methodTgt = this.getMethod();
+        const contractTgt = new Contract(contract, abiTgt, signer);
+        const targetFunction = contractTgt[methodTgt.name];
         console.log(`getFunction ${JSON.stringify(targetFunction)}`);
         return targetFunction;
     }
 
-    this.parseMethodInputs = (method) => {
-        return method?.inputs?.map((input) => input.name) || [];
+    this.parseMethodInputs = (methodTgt) => {
+        return methodTgt?.inputs?.map((input) => input.name) || [];
     }
 
     this.getAttributes = () => {
-        const method = this.getMethod();
-        const requiredAttributes = this.parseMethodInputs(method);
+        const methodTgt = this.getMethod();
+        const requiredAttributes = this.parseMethodInputs(methodTgt);
         const args = [];
         const component = this.getComponent();
         // Function args
@@ -175,7 +184,7 @@ const script = function (props) {
                     scope.sendNotification(
                         'success', 
                         'Your transaction was successful, view it on the explorer',
-                        `${props.explorerUrl}/tx/${response.hash}`,
+                        `${window?.currentChain?.explorerUrl}/tx/${response.hash}`,
                         5000
                     )
                 }, (error) => {

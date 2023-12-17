@@ -58,133 +58,50 @@ const formatterTrait =           {
 export const form = {
   isComponent: el => el.tagName === 'FORM',
   model: {
+    init() {
+      this.listenTo(this, 'change:file', this.buildMethodOptions)
+      this.buildMethodOptions()
+    },
+    buildMethodOptions() {
+      try {
+        const traits = this.get('traits')
+        const abiTrait = traits.where({name:'file'})[0]
+        const abi = JSON.parse(abiTrait?.attributes?.value?.content)
+        const options = abi?.filter((item) => item.type === 'function').map((item, index) => {
+          return { name: item.name, value: index }
+        })
+        var methodTrait = traits.where({name: 'method'})[0]
+        methodTrait.set('options', options)
+      } catch (ex) {
+        console.log(`File could not be parsed as a valid json file ${ex}`)
+      }
+    },
     defaults: {
       script,
       tagName: 'form',
       droppable: ':not(form)',
       draggable: ':not(form)',
-      // attributes: { method: 'get' },
       contract: '0x419B6DA1Cc20Ca3592EeD67cc69BadCf0cC7Ada9',
-      abi: `[
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "_to",
-              "type": "address"
-            },
-            {
-              "internalType": "bytes32",
-              "name": "_ipfsHash",
-              "type": "bytes32"
-            }
-          ],
-          "name": "mint",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "_to",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "uint256",
-              "name": "_tokenId",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "bytes32",
-              "name": "_ipfsHash",
-              "type": "bytes32"
-            }
-          ],
-          "name": "Mint",
-          "type": "event"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "_to",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_tokenId",
-              "type": "uint256"
-            }
-          ],
-          "name": "transfer",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "_from",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "_to",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "uint256",
-              "name": "_tokenId",
-              "type": "uint256"
-            }
-          ],
-          "name": "Transfer",
-          "type": "event"
-        }
-      ]`,
-      method: 'mint',
-      explorerUrl: 'https://mumbai.polygonscan.com',
-      // payload: {},
       traits: [
-          // {
-          //     type: 'select',
-          //     name: 'method',
-          //     options: [
-          //         {value: 'get', name: 'GET'},
-          //         {value: 'post', name: 'POST'},
-          //     ],
-          // }, 
-          // {
-          //     name: 'action',
-          // }
           {
-              name: 'contract', changeProp: 1
+              name: 'contract', 
+              changeProp: 1
           },
           {
-              name: 'abi', changeProp: 2
+              name: 'file', 
+              type: 'file', 
+              label: 'ABI', 
+              changeProp: 1
           },
           {
-              name: 'method', changeProp: 3
-          },
-          {
-              name: 'explorerUrl', changeProp: 4
-          },
-          // {
-          //     name: 'payload', changeProp: 1
-          // }
+              label: 'Method',
+              name: 'method',
+              type: 'select',
+              options: [],
+              changeProp: 1
+          }
       ],
-      "script-props": ["contract", "abi", "method", "explorerUrl", /* "payload" */],
+      "script-props": ["contract", "file", "method"],
     },
   },
 

@@ -9,14 +9,20 @@ import PluginScriptEditor from '@auth0/auth0-spa-js'
 import PageManager from './Plugins/PageManager'
 import PluginEditorPanelButtons from './Panel/Buttons'
 
+
+
+import TraitABI from '../traits/file'
+
 import TextBlocks from '../blocks/text'
 import ImageBlocks from '../blocks/images'
 import VideoBlocks from '../blocks/video'
 import ButtonBlocks from '../blocks/buttons'
 import ToastBlocks from '../blocks/toast'
 
-import Web3Button from '../blocks/web3-button'
-import SectionTokenGated from '../blocks/web3-container'
+import Web3LoginButton from '../blocks/web3-login-button'
+import Web3ActionButton from '../blocks/web3-action-button'
+import Web3GatedSection from '../blocks/web3-gated-section'
+import Web3ContractForm from '../blocks/web3-contract-form'
 
 import Upgrade from './Upgrade'
 // import SmartLabel from '../blocks/smart-label'
@@ -33,7 +39,7 @@ import constants from 'constant'
 import { hasPremiumSubscription } from 'utils/user'
 import { enableContextMenu } from './Utils'
 import { bringToFront, moveToBack } from 'utils/properties'
-import Web3Form from '../blocks/web3-form'
+
 
 const { EVENTS } = constants
 
@@ -86,6 +92,7 @@ const Editor = ({ project, principal }) => {
       },
       panels: { defaults: [] },
       plugins: [
+        TraitABI,
         PluginEditorPanelButtons,
         PluginScriptEditor,
         PageManager,
@@ -97,13 +104,14 @@ const Editor = ({ project, principal }) => {
         VideoBlocks,
         ToastBlocks,
         WSMTailwind,
-        Web3Button,
-        Web3Form,
-        // WSMForm,
-        SectionTokenGated
+        // Web3
+        Web3LoginButton,
+        Web3ActionButton,
+        Web3ContractForm,
+        Web3GatedSection
       ],
       pluginsOpts: {
-        [SectionTokenGated]: { isPremiumMember: hasPremiumSubscription(account) }
+        [Web3GatedSection]: { isPremiumMember: hasPremiumSubscription(account) }
       },
       canvas: {
         scripts: [

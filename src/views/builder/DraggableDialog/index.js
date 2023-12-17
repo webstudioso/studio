@@ -52,8 +52,8 @@ const DraggableDialog = ({ open, handleClose, editor, intl }) => {
         </DialogTitle>
         <DialogContent  ref={ref}         
                         sx={{
-                            width: 370,
-                            height: 450
+                            width: 420,
+                            height: 470
                         }}>
             <ConfigTabs editor={editor} intl={intl} />
         </DialogContent>

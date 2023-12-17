@@ -1,25 +1,28 @@
 import script from "../script";
 
-const abi = `[
-    {
-      "inputs": [
+const file = {
+    name: 'test.json',
+    content:`[
         {
-          "internalType": "address",
-          "name": "_to",
-          "type": "address"
-        },
-        {
-          "internalType": "bytes32",
-          "name": "_ipfsHash",
-          "type": "bytes32"
+        "inputs": [
+            {
+            "internalType": "address",
+            "name": "_to",
+            "type": "address"
+            },
+            {
+            "internalType": "bytes32",
+            "name": "_ipfsHash",
+            "type": "bytes32"
+            }
+        ],
+        "name": "mint",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
         }
-      ],
-      "name": "mint",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    }
-]`;
+    ]`
+};
 
 describe("Form script", () => {
 
@@ -56,6 +59,10 @@ describe("Form script", () => {
 
         window.modal = {
             getWalletProvider: jest.fn(),
+        }
+
+        window.currentChain = {
+            explorerUrl: 'https://explorer.com'
         }
     });
 
@@ -212,8 +219,8 @@ describe("Form script", () => {
 
         it("Invokes function with parameters from form inputs", async () => {
             const props = {
-                abi,
-                method: 'mint'
+                file,
+                method: 0
             }
             const fn = new script(props);
             fn.getFunction = () => { return jest.fn().mockResolvedValue({ hash: '123' }) }
@@ -224,8 +231,8 @@ describe("Form script", () => {
 
         it("Invokes function with parameters from form inputs", async () => {
             const props = {
-                abi,
-                method: 'mint'
+                file,
+                method: 0
             }
             const fn = new script(props);
             fn.getFunction = () => { return jest.fn().mockResolvedValue({ hash: '123' }) }
@@ -236,8 +243,8 @@ describe("Form script", () => {
 
         it("Displays network error when onchain call fails", async () => {
             const props = {
-                abi,
-                method: 'mint'
+                file,
+                method: 0
             }
             const errorMessage = 'details here';
             const onError = new CustomEvent('onToast', {
@@ -258,7 +265,7 @@ describe("Form script", () => {
     describe("getAbi", () => {
         it("Parses a string abi into a json object", async () => {
             const props = {
-                abi
+                file
             }
             const fn = new script(props);
             const parsedAbi = fn.getAbi();
@@ -270,8 +277,8 @@ describe("Form script", () => {
     describe("getMethod", () => {
         it("Finds the method within the abi and returns it", async () => {
             const props = {
-                abi,
-                method: 'mint'
+                file,
+                method: 0
             }
             const fn = new script(props);
             const method = fn.getMethod();
@@ -280,13 +287,13 @@ describe("Form script", () => {
         });
     });
 
-    // describe("getProvider", () => {
-    //     it("Returns the current provider", async () => {
-    //         const fn = new script();
-    //         fn.getProvider();
-    //         expect(window.modal.getWalletProvider()).toHaveBeenCalled();
-    //     });
-    // });
+    describe("getProvider", () => {
+        it("Returns the current provider", async () => {
+            const fn = new script();
+            fn.getProvider();
+            expect(window.modal.getWalletProvider).toHaveBeenCalled();
+        });
+    });
 
     describe("getSigner", () => {
         it("Returns the current signer", async () => {
@@ -300,57 +307,57 @@ describe("Form script", () => {
         });
     });
 
-    // describe("getFunction", () => {
-    //     it("Returns the contract function ready to be invoked", async () => {
-    //         const props = {
-    //             abi,
-    //             method: 'mint'
-    //         }
-    //         const fn = new script(props);
-    //         const getSigner = jest.fn();
-    //         fn.getProvider = jest.fn().mockImplementation(() => {
-    //             return { getSigner }
-    //         })
-    //         fn.getFunction();
-    //         expect(global.ethers.Contract).toHaveBeenCalled();
-    //     });
-    // });
+    describe("getFunction", () => {
+        it("Returns the contract function ready to be invoked", async () => {
+            const props = {
+                file,
+                method: 0
+            }
+            const fn = new script(props);
+            const getSigner = jest.fn();
+            fn.getProvider = jest.fn().mockImplementation(() => {
+                return { getSigner }
+            })
+            const tgtFn = await fn.getFunction();
+            expect(typeof tgtFn).toBe('function');
+        });
+    });
 
-    // describe("getAttributes", () => {
+    describe("getAttributes", () => {
 
-    //     let addrInput, urlInput;
-    //     beforeAll(() => {
-    //         // Mock child inputs
-    //         addrInput = document.createElement('input');
-    //         addrInput.setAttribute("type", "text");
-    //         addrInput.setAttribute("name", "_to");
-    //         addrInput.value = "0x123";
-    //         mockElement.appendChild(addrInput);
+        let addrInput, urlInput;
+        beforeAll(() => {
+            // Mock child inputs
+            addrInput = document.createElement('input');
+            addrInput.setAttribute("type", "text");
+            addrInput.setAttribute("name", "_to");
+            addrInput.value = "0x123";
+            mockElement.appendChild(addrInput);
 
-    //         urlInput = document.createElement('input');
-    //         urlInput.setAttribute("type", "text");
-    //         urlInput.setAttribute("name", "_ipfsHash");
-    //         urlInput.value = "https://demo.com";
-    //         mockElement.appendChild(urlInput);
+            urlInput = document.createElement('input');
+            urlInput.setAttribute("type", "text");
+            urlInput.setAttribute("name", "_ipfsHash");
+            urlInput.value = "https://demo.com";
+            mockElement.appendChild(urlInput);
 
-    //     });
+        });
 
-    //     it("Returns list of attribute values from form", async () => {
-    //         const props = {
-    //             abi,
-    //             method: 'mint'
-    //         }
-    //         const fn = new script(props);
-    //         const attrs = fn.getAttributes();
-    //         expect(window.webstudio.ethers.Contract).toHaveBeenCalled();
-    //     });
-    // });
+        it("Returns list of attribute values from form", async () => {
+            const props = {
+                file,
+                method: 0
+            }
+            const fn = new script(props);
+            const attrs = fn.getAttributes();
+            expect(attrs.length).toEqual(3);
+        });
+    });
 
     describe("parseMethodInputs", () => {
         it("Returns list of attribute names required by method name", () => {
             const props = {
-                abi,
-                method: 'mint'
+                file,
+                method: 0
             }
             const fn = new script(props);
             fn.getOptions = jest.fn().mockReturnValue(null)
@@ -378,7 +385,7 @@ describe("Form script", () => {
                   "type": "function"
                 }
             ];
-            const fn = new script({ abi });
+            const fn = new script({ file });
             fn.getOptions = jest.fn().mockReturnValue(null)
             expect(fn.getAttributes(abiContentEmpty[0]).length).toBe(0);
             expect(fn.getAttributes(abiContentNull[0]).length).toBe(0);
@@ -394,8 +401,8 @@ describe("Form script", () => {
             valueInput.value = "123";
             mockElement.appendChild(valueInput);
             const props = {
-                abi,
-                method: 'mint'
+                file,
+                method: 0
             }
             const fn = new script(props);
             fn.getOptions = jest.fn().mockReturnValue({ value: 1 })
