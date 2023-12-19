@@ -1,6 +1,6 @@
 {
     "name": "webstudio-app",
-    "version": "0.1.44",
+    "version": "0.1.45",
     "private": false,
     "dependencies": {
         "@auth0/auth0-spa-js": "^1.14.0",

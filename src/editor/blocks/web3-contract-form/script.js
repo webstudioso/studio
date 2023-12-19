@@ -80,6 +80,7 @@ const script = function (props={}) {
     }
 
     this.getValue = (component, required) => {
+        console.log(`Requesting value for field name: ${required}`)
         const attr = component.elements[required];
         let value = attr.value || this.getDefaultValue(component, required);
         const format = attr?.attributes?.format?.value;
@@ -101,6 +102,7 @@ const script = function (props={}) {
 
     this.getAbi = () => {
         const content = JSON.parse(file?.content)
+        console.log(`getAbi ${content}`)
         return content
     }
 
@@ -142,6 +144,7 @@ const script = function (props={}) {
         const requiredAttributes = this.parseMethodInputs(methodTgt);
         const args = [];
         const component = this.getComponent();
+        console.log(`Attributes required ${requiredAttributes}`)
         // Function args
         requiredAttributes.forEach((required) => args.push(this.getValue(component, required)));
         const txOptions = this.getOptions(component)
@@ -179,8 +182,10 @@ const script = function (props={}) {
             const scope = this;
             console.log(`Invoking target function with attributes ${targetAttributes}, is function? ${targetFunction instanceof Function}`);
             targetFunction.apply(null, targetAttributes)
-                .then((response) => {
-                    console.log(`Response received ${response}`);
+                .then((response, param1, param2) => {
+                    console.log(`Response received ${JSON.stringify(response)}`);
+                    console.log(param1)
+                    console.log(param2)
                     scope.sendNotification(
                         'success', 
                         'Your transaction was successful, view it on the explorer',

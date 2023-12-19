@@ -106,7 +106,7 @@ const Editor = ({ project, principal }) => {
         WSMTailwind,
         // Web3
         Web3LoginButton,
-        Web3ActionButton,
+        // Web3ActionButton,
         Web3ContractForm,
         Web3GatedSection
       ],
