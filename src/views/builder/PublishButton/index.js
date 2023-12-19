@@ -12,7 +12,7 @@ import { IconInfoCircle } from '@tabler/icons'
 import HtmlTooltip from '../HtmlTooltip'
 import constants from 'constant'
 import { useIntl } from 'react-intl'
-const { ANALYTICS, EVENTS } = constants
+const { ANALYTICS, EVENTS, IPFS_PROVIDER } = constants
 
 const PublishButton = ({ principal, project, editor }) => {
     const intl = useIntl()
@@ -21,7 +21,7 @@ const PublishButton = ({ principal, project, editor }) => {
     const [release, setRelease] = useState()
     const dispatch = useDispatch()
 
-    const getCidReleaseUrl = () => `https://gateway.ipfs.io/ipfs/${release}`
+    const getCidReleaseUrl = () => `${IPFS_PROVIDER}/${release}`
 
     const handlePublish = async () => {
         try {

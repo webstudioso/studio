@@ -8,6 +8,9 @@ import { LOADER } from 'store/actions'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { LinkedinIcon, LinkedinShareButton, TwitterIcon, TwitterShareButton } from 'react-share'
 import { publishProject } from 'api/discord'
+import constants from 'constant'
+
+const { IPFS_PROVIDER } = constants
 
 
 const PublishConfirmationDialog = ({ open, project, onClose, principal }) => {
@@ -85,7 +88,7 @@ const PublishConfirmationDialog = ({ open, project, onClose, principal }) => {
                         }} 
                         disabled={isLoading}
                         onClick={() => {
-                            const url = `https://gateway.ipfs.io/ipfs/${cid}`
+                            const url = `${IPFS_PROVIDER}/${cid}`
                             window.open(url, '__blank')
                         }}>
                             <Box display="flex">

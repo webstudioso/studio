@@ -24,7 +24,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 0 }}>
+        <Box>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -48,10 +48,6 @@ export default function BasicTabs({ editor, intl }) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   }
-
-  useEffect(() => {
-    console.log(value)
-  }, [value])
 
   const loadPanels = () => {
  
@@ -89,14 +85,14 @@ export default function BasicTabs({ editor, intl }) {
               <StyleManager selected={selected} />
       </TabPanel>
       <TabPanel value={value} index={1} id="propertyTab">
-
+        {hasWizard && <SmartContracts element={selected} activeStep={0} editor={editor} changeStep={(step) => console.log(step)} intl={intl} />}
       </TabPanel> 
 
-      {hasWizard && (<TabPanel value={value} index={2} id="wizardTab">
+      {/* {hasWizard && (<TabPanel value={value} index={2} id="wizardTab">
 
             <SmartContracts element={selected} activeStep={0} editor={editor} changeStep={(step) => console.log(step)} intl={intl} />
         
-        </TabPanel>    )}
+        </TabPanel>    )} */}
 
     </Box>
   );

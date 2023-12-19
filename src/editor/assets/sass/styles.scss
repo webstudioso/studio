@@ -108,10 +108,15 @@ $quaternaryColor: #605ed8;
     border-top: 4px solid #7572f9;
 }
 
+.gjs-field-checkbox {
+    padding: 0 !important;
+}
+
 .gjs-field {
-    background-color: #F6F6FF;
-    border: 1px solid #D7D6FF;
-    border-radius: 4px;
+    background-color: #F3F3FF;
+    border: 1px solid #dedef1;
+    border-radius: 5px;
+    padding: 4px;
 }
 
 .gjs-sm-field.gjs-sm-composite {
@@ -119,8 +124,20 @@ $quaternaryColor: #605ed8;
     border: 1px solid #D7D6FF;
 }
 
+.gjs-field-abi {
+    border: 0px;
+}
+
 .gjs-clm-tags #gjs-clm-new {
     color: black !important;
+}
+
+.gjs-label-wrp {
+    margin-right: 5px;
+}
+
+[role=tabpanel] {
+    padding-top: 8px;
 }
 
 .gjs-toolbar {

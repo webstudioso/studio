@@ -1,4 +1,4 @@
-import Plugin, { script, properties } from "./index"
+import Plugin, { script, properties } from "../index"
 import { ethers } from 'ethers'
 
 describe("Section Token Gated Plugin", () => {

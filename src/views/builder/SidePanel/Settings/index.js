@@ -207,20 +207,21 @@ const Settings = ({ principal, project }) => {
             <Grid item xs={8} sx={{ mt: 1 }}>
                     <Typography>{intl.formatMessage({id:"settings.favicon_preview_in_browser"})}</Typography>
                     <Box sx={{ position:'relative' }}>
-                        <img src={tabFrame} height={41} alt={intl.formatMessage({id:"settings.favicon_preview_in_browser"})} />
+                        <img    src={tabFrame}
+                                alt={intl.formatMessage({id:"settings.favicon_preview_in_browser"})} />
                         <img src={metadata?.icon} 
                             alt="Icon" 
                             style={{
                                 position: 'absolute',
-                                top: 15,
-                                left:50,
+                                top: '35%',
+                                left: '17%',
                                 height:16
                             }}
                         />
                         <span style={{
                                 position: 'absolute',
-                                top: 15,
-                                left:70,
+                                top: '35%',
+                                left: '23%',
                                 height:16,
                                 fontSize:9,
                                 fontWeight:'bold',

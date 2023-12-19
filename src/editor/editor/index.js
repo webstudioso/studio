@@ -9,14 +9,20 @@ import PluginScriptEditor from '@auth0/auth0-spa-js'
 import PageManager from './Plugins/PageManager'
 import PluginEditorPanelButtons from './Panel/Buttons'
 
+
+
+import TraitABI from '../traits/file'
+
 import TextBlocks from '../blocks/text'
 import ImageBlocks from '../blocks/images'
 import VideoBlocks from '../blocks/video'
 import ButtonBlocks from '../blocks/buttons'
 import ToastBlocks from '../blocks/toast'
 
-import ButtonWeb3 from '../blocks/button-web3'
-import SectionTokenGated from '../blocks/section-token-gated'
+import Web3LoginButton from '../blocks/web3-login-button'
+import Web3ActionButton from '../blocks/web3-action-button'
+import Web3GatedSection from '../blocks/web3-gated-section'
+import Web3ContractForm from '../blocks/web3-contract-form'
 
 import Upgrade from './Upgrade'
 // import SmartLabel from '../blocks/smart-label'
@@ -25,7 +31,7 @@ import Upgrade from './Upgrade'
 
 // Primitives
 // import WSMWalletConnect from 'wsm-wallet-connect'
-import WSMForm from 'wsm-form'
+// import WSMForm from 'wsm-form'
 import WSMTailwind from 'wsm-tailwind'
 // import WSMAnimations from 'wsm-animations'
 import WSMFonts, { WSMFontStyles } from 'wsm-fonts'
@@ -33,6 +39,8 @@ import constants from 'constant'
 import { hasPremiumSubscription } from 'utils/user'
 import { enableContextMenu } from './Utils'
 import { bringToFront, moveToBack } from 'utils/properties'
+
+
 const { EVENTS } = constants
 
 const Editor = ({ project, principal }) => {
@@ -84,6 +92,7 @@ const Editor = ({ project, principal }) => {
       },
       panels: { defaults: [] },
       plugins: [
+        TraitABI,
         PluginEditorPanelButtons,
         PluginScriptEditor,
         PageManager,
@@ -95,19 +104,19 @@ const Editor = ({ project, principal }) => {
         VideoBlocks,
         ToastBlocks,
         WSMTailwind,
-        ButtonWeb3,
-        WSMForm,
-        SectionTokenGated
+        // Web3
+        Web3LoginButton,
+        // Web3ActionButton,
+        Web3ContractForm,
+        Web3GatedSection
       ],
       pluginsOpts: {
-        [SectionTokenGated]: { isPremiumMember: hasPremiumSubscription(account) }
+        [Web3GatedSection]: { isPremiumMember: hasPremiumSubscription(account) }
       },
       canvas: {
         scripts: [
-          "https://cdn.jsdelivr.net/npm/webstudio-sdk@0.0.28/dist/main.min.js",
+          "https://cdn.jsdelivr.net/npm/webstudio-sdk@1.0.1/dist/main.min.js",
           "https://cdn.tailwindcss.com",
-          "https://code.jquery.com/jquery-3.6.1.min.js",
-          "https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js",
         ],
         // The same would be for external styles
         styles: [
@@ -292,12 +301,12 @@ const Editor = ({ project, principal }) => {
     // })
 
     editor.on("canvas:drop", (event, element) => {
-      // Open payload wizard
-      const hasWizard = element?.getTrait('payload')
-      if (hasWizard) {
-        editor.select(element)
-        editor.runCommand('tlb-settings', { element })
-      }
+      // // Open payload wizard
+      // const hasWizard = element?.getTrait('payload')
+      // if (hasWizard) {
+      //   editor.select(element)
+      //   editor.runCommand('tlb-settings', { element })
+      // }
       // Open image selector
       const isImage = element?.attributes?.type === 'image'
       if (isImage) {
