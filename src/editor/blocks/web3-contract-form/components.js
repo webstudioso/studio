@@ -81,7 +81,6 @@ export const form = {
       tagName: 'form',
       droppable: ':not(form)',
       draggable: ':not(form)',
-      contract: '0x419B6DA1Cc20Ca3592EeD67cc69BadCf0cC7Ada9',
       traits: [
           {
               name: 'contract', 
