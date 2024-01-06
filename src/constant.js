@@ -5,7 +5,7 @@ const constants = {
 		CACHE: 'CHANGELOG_CACHE',
 		BASE_URL: 'https://s3.amazonaws.com/webstudio.changelog'
 	},
-	DOCS: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
+	DOCS: 'https://docs.webstudio.so',
 	QUERY_PARAMS: {
 		LOCALE: 'locale',
 		EMAIL: 'email'
@@ -356,7 +356,23 @@ const constants = {
 	LINK_ACTION: {
 		NEW_TAB: 'new_tab',
 		CURRENT_TAB: 'current_tab'
-	}
+	},
+	PAGE_OPTIONS: [
+		{
+			label: 'landing_page',
+			image: 'https://i.ibb.co/XD8zHVG/landing-page.jpg',
+			contract: null
+		},
+		{
+			label: 'blog',
+			image: 'https://i.ibb.co/wdfccDj/blog.jpg',
+			contract: 'WebstudioBlogV1'
+		},
+		// {
+		//     label: 'ecommerce',
+		//     image: 'https://i.ibb.co/BsYRDDQ/ecommerce.jpg
+		// }
+	]
 };
 
 export default constants;

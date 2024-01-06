@@ -295,7 +295,7 @@ const metadata = {
    preview: 'https://bafybeib2whon3avnkqz2guoweupl6fif7vzqypv3zvlsixbnfwgjtha3ki.ipfs.w3s.link/PortoPreview.png',
    name: 'Porto',
    description: 'template.porto',
-   tags: ['Landing Page'],
+   tags: ['landing_page'],
    premium: false
 }
 

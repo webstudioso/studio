@@ -335,7 +335,7 @@ const metadata = {
    preview: 'https://bafybeiftrnq7ikdjtunfr2ps7vdaas5o4bewblanr6g2chyx24xliukg24.ipfs.w3s.link/geoniti-full.png',
    name: 'Geoniti',
    description: 'template.geoniti',
-   tags: ['Landing Page'],
+   tags: ['landing_page'],
    premium: false
 }
 

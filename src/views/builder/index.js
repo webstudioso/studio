@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useTheme } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom'
 import { Grid, Box, AppBar, Toolbar, Typography, IconButton, Button } from '@mui/material'
-import { IconSettings, IconPlus, IconFiles, IconTemplate, IconPhoto, IconBrandYoutube } from '@tabler/icons'
+import { IconPlus, IconFiles, IconTemplate, IconPhoto, IconSeo, IconWorld } from '@tabler/icons'
 import { Editor } from 'editor'
 import { useDispatch, useSelector } from 'react-redux'
 import { UPDATE_APP } from 'store/actions'
@@ -14,7 +14,7 @@ import PublishButton from './PublishButton'
 import DraggableDialog from './DraggableDialog'
 import HtmlTooltip from './HtmlTooltip'
 import constants from 'constant'
-import Modal from 'views/templates'
+import TemplateModal from 'views/templates'
 import TooltipFragment from 'views/builder/TooltipFragment'
 import HelpButton from './HelpButton'
 import Chat from './Chat'
@@ -129,17 +129,18 @@ const EditorView = () => {
 								<Grid item xs={12}>
 									<HtmlTooltip title={<TooltipFragment title="section.settings_tooltip_title" description="section.settings_tooltip_description"  />} placement="right-start">
 										<IconButton color="primary" size="large" onClick={() => handleOpenSidePanel(openCategory !== SECTION.SETTINGS ? SECTION.SETTINGS : null)}>
-											<IconSettings />
+											<IconWorld />
 										</IconButton>
 									</HtmlTooltip>
 								</Grid>
-								<Grid item xs={12}>
+								{/* <Grid item xs={12}>
 									<HtmlTooltip title={<TooltipFragment title="section.templates_tooltip_title" description="section.templates_tooltip_description" />} placement="right-start">
 										<IconButton color="primary" size="large" onClick={() => handleOpenSidePanel(openCategory !== SECTION.TEMPLATE ? SECTION.TEMPLATE : null)}>
 											<IconTemplate />
 										</IconButton>
 									</HtmlTooltip>
-								</Grid>
+								</Grid> */}
+								
 								<Grid item xs={12}>
 									<HtmlTooltip title={<TooltipFragment title="section.media_tooltip_title" description="section.media_tooltip_description" />} placement="right-start">
 										<IconButton color="primary" size="large" onClick={() => handleOpenSidePanel(openCategory !== SECTION.MEDIA ? SECTION.MEDIA : null)}>
@@ -147,19 +148,11 @@ const EditorView = () => {
 										</IconButton>
 									</HtmlTooltip>
 								</Grid>
+								
 								<Grid item xs={12}>
 									<HelpButton />
 								</Grid>
-								<Grid item xs={12}>
-									<HtmlTooltip title={<TooltipFragment title="section.tutorial_tooltip_title" description="section.tutorial_tooltip_description" />} placement="right-start">
-										<IconButton color="error" size="large" onClick={() => {
-											// Redirect to youtube channel
-											window.open(INFO_URL.ACADEMY, '__blank')
-										}}>
-											<IconBrandYoutube />
-										</IconButton>
-									</HtmlTooltip>
-								</Grid>
+
 							</Grid>
 						</Grid>
 						<Grid item xs sx={{ py: '15px', px: '30px'}}>
@@ -172,15 +165,16 @@ const EditorView = () => {
 				</Grid>
 			</Grid>
 			<SidePanel open={open} openCategory={openCategory} principal={account.principal} project={project} editor={editor} onLeave={handleCloseSidePanel} />
-			<Modal  open={appState.new} 
-					onLeave={() => {
-						dispatch({
-							type: UPDATE_APP,
-							configuration: { new: false }
-						})
-					}} 
-					editor={editor} 
-					principal={account.principal}
+			<TemplateModal  open={appState.new} 
+							onLeave={() => {
+								dispatch({
+									type: UPDATE_APP,
+									configuration: { new: false }
+								})
+							}} 
+							editor={editor} 
+							principal={account.principal}
+							project={project}
 			/>
 			<PublishConfirmationDialog principal={account.principal} open={openPublishDialog} project={project} onClose={() => setOpenPublishDialog(false)} />
 			{editor && <Chat theme={theme} editor={editor} principal={account.principal} /> }

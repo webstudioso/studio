@@ -6,16 +6,26 @@ import {
     Typography,
     Button,
     TextField,
-    IconButton
+    IconButton,
+    Container
 } from '@mui/material'
 import { IconTrash } from '@tabler/icons'
 import { getProjectUrl } from 'utils/project'
 import { truncate } from 'utils/format'
 import { useIntl } from 'react-intl'
+import PageTypes from './PageTypes'
+import { isHome } from 'utils/pages'
+import Section from '../Section'
+import { UPDATE_APP, LOADER, SET_PROJECT } from 'store/actions'
+import { useDispatch } from 'react-redux'
+import PagePicker from './PagePicker'
+import SmartContracts from './SmartContracts'
 
 const Pages = ({ editor, project }) => {
+    const dispatch = useDispatch()
     const intl = useIntl()
     const ref = useRef(null);
+    const inputRef = useRef(null);
     const [pages, setPages] = useState([])
     const [selectedPage, setSelectedPage] = useState()
 
@@ -39,8 +49,16 @@ const Pages = ({ editor, project }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    useEffect(() => {
+        const name = getName(selectedPage)
+        setName(name)
+        if (!selectedPage || !isHome(selectedPage))
+            inputRef.current.focus()
+    }, [selectedPage])
+
     const getName = (page) => {
-        return page.attributes.type === 'main' ? 'index' : page.attributes.name
+        return !page ? '' :
+                page.attributes.type === 'main' ? 'index' : page.attributes.name
     }
 
     const pageList = pages?.map((page) => 
@@ -78,18 +96,100 @@ const Pages = ({ editor, project }) => {
         loadPages()
     }
 
-    const isHome = () => {
-        return selectedPage?.attributes?.type === 'main'
-    }
-
     // const ALPHA_NUMERIC_DASH_REGEX = /^[a-z0-9]+$/;
 
-    const getPageNme = () => isHome() ? '' : `/${name}`
+    const getPageNme = () => isHome(selectedPage) ? '' : `/${name}`
     const getPagePath = () => `${getProjectUrl({ project })}${getPageNme()}`
 
+    const pathInput = (
+        <TextField  sx={{ my: 1 }}
+                fullWidth
+                // size="small"
+                variant="standard"
+                disabled={isHome(selectedPage)}
+                // InputLabelProps={{ shrink: true }}
+                value={isHome(selectedPage) ? ' ' : name}
+                placeholder={intl.formatMessage({id:'page_manager.path_input_placeholder'})} 
+                onChange={(e) => {
+                    const name = e.target.value.replaceAll(' ', '').toLowerCase();
+                    setName(name)
+                }}
+                inputRef={inputRef}
+                autoFocus={true}
+                inputProps={{
+                    style: {
+                        color: '#222'
+                    }
+                }}
+                InputProps={{
+                    startAdornment: (
+                        <Typography>
+                            { getProjectUrl({ project }) }
+                            { isHome(selectedPage) ? '' : '/' }
+                        </Typography>
+                    ),
+                }}
+        />
+    )
+
+    const saveButton = (
+        <Button 
+                fullWidth
+                disabled={isHome() || !name}
+                // sx={{ mt: 1 }}
+                onClick={() => {
+                        const pageManager = editor.Pages;
+
+                        if (selectedPage) {
+                            // Is update
+                            // pageManager.remove(selectedPage.id)
+                            // const home = getHomePage()
+                            // console.log(home)
+                            // pageManager.select(home)
+                            selectedPage?.set('name', name);
+
+                            saveAndReload()
+                        } else {
+                            // Is new
+                            pageManager.add({
+                                name,
+                                component: `<div>New page ${name}</div>`
+                            });
+
+                            saveAndReload()
+                            // Select last page
+                    
+                            const allPages = pageManager.getAll();
+                            pageManager.select(allPages[allPages.length - 1])
+                        }
+
+
+            }}>{selectedPage ? intl.formatMessage({ id: 'page_manager.save'}) : intl.formatMessage({ id: 'page_manager.create'})}</Button>
+    )
+
+    const handleDeletePage = () => {
+        const pageManager = editor.Pages;
+        pageManager.remove(selectedPage.id)
+        const home = getHomePage()
+        pageManager.select(home)
+        saveAndReload()
+    }
+
     return (
-        <Grid container>
-            <Grid item xs={4} sx={{ 
+        <Container sx={{ 
+            height: 'calc(100vh - 110px)', 
+            overflow: 'auto',
+            border: '1px solid #dfe5eb',
+            borderLeft: '0px',
+            paddingTop: 1
+        }}>
+            <PagePicker editor={editor} 
+                        project={project} 
+                        pages={pages} 
+                        setSelectedPage={setSelectedPage}
+                        selectedPage={selectedPage}
+            />
+            {/* <Grid item xs={4} sx={{ 
                 height: 'calc(100vh - 110px)', 
                 overflow: 'auto', 
                 background: '#f7f8f8', 
@@ -106,96 +206,49 @@ const Pages = ({ editor, project }) => {
                         setName('')
                         setSelectedPage(null)
                 }}>{intl.formatMessage({ id: 'page_manager.new_page' })}</Button>
-            </Grid>
-            <Grid item xs={8} sx={{ 
-                height: 'calc(100vh - 110px)', 
-                overflow: 'auto',
-                borderTop: '1px solid #dfe5eb',
-            }}>
-                <Grid container sx={{ p: 3 }} id="myPages" ref={ref}>
-                    <Grid item xs={12}>
-                        <Grid item sx={{ height: 25 }}>
-                            <Typography fontWeight="bold" color="black" style={{ float: 'left' }}>{intl.formatMessage({ id:'page_manager.page_details_title'})}</Typography>
-                            { !isHome() && selectedPage &&
-                            (<IconButton color="inherit" 
-                                        size="small"
-                                        style={{ float: 'right' }}
-                                        onClick={() => {
-                                            const pageManager = editor.Pages;
-                                            pageManager.remove(selectedPage.id)
-                                            const home = getHomePage()
-                                            pageManager.select(home)
-                                            saveAndReload()
-                                        }}
-                            >
-                                <IconTrash size={15} />
-                            </IconButton>
-                            )}
-                        </Grid>
-                        <TextField  autoFocus 
-                                    sx={{ mt: 2}}
-                                    fullWidth
-                                    size="small"
-                                    variant="standard" 
-                                    label={intl.formatMessage({id:'page_manager.path_input_label'})}
-                                    disabled={isHome()}
-                                    InputLabelProps={{ shrink: true }}
-                                    value={name}
-                                    placeholder={intl.formatMessage({id:'page_manager.path_input_placeholder'})} 
-                                    onChange={(e) => {
-                                        const name = e.target.value.replaceAll(' ', '').toLowerCase();
-                                        setName(name)
-                                    }} 
-                        />
-                        <Box className="project-link-button" sx={{ fontSize: '11px !important', my: 1, color:'black' }}>
-                             🌐 {truncate(getPagePath(), 37)}
-                        </Box>
-                        <Button 
-                            size="small"
-                            fullWidth
-                            variant="outlined"
-                            elevation={0}
-                            disabled={isHome() || !name}
-                            // sx={{ mt: 1 }}
-                            onClick={() => {
-                                    const pageManager = editor.Pages;
-
-                                    if (selectedPage) {
-                                        // Is update
-                                        // pageManager.remove(selectedPage.id)
-                                        // const home = getHomePage()
-                                        // console.log(home)
-                                        // pageManager.select(home)
-                                        selectedPage?.set('name', name);
-
-                                        saveAndReload()
-                                    } else {
-                                        // Is new
-                                        pageManager.add({
-                                            name,
-                                            component: `<div>New page ${name}</div>`
-                                        });
-
-                                        saveAndReload()
-                                        // Select last page
-                                
-                                        const allPages = pageManager.getAll();
-                                        pageManager.select(allPages[allPages.length - 1])
-                                    }
+            </Grid> */}
 
 
-                        }}>{selectedPage ? intl.formatMessage({ id: 'page_manager.save'}) : intl.formatMessage({ id: 'page_manager.create'})}</Button>
-                    </Grid>
+                <Section title="page_manager.path_input_label" description="page_manager.path_input_description">
+                    {pathInput}
+                    {saveButton}
+                </Section>
 
-                    {/* <Templates /> */}
-                    {/* {!filter && (
-                    <Box sx={{ mx: '10px', p: '5px' }} textAlign="center" justifyContent="center">
-                        <img src={draganddrop} width="100%" height="auto" />
-                        <Typography fontSize={16} color="black">Select a component 👈 and drag it to the canvas 👉</Typography>
-                    </Box>)} */}
-                </Grid>
-            </Grid>
-        </Grid>
+                {/* <Section title="page_manager.purpose_label" description="page_manager.purpose_description">
+                    <PageTypes  editor={editor} 
+                                project={project} 
+                                pages={pages} 
+                                setSelectedPage={setSelectedPage}
+                                selectedPage={selectedPage}
+                    />
+                </Section> */}
+
+                <Section title="section.templates_tooltip_title" description="section.templates_tooltip_description">
+                    {
+                        selectedPage && (
+                            <Button fullWidth onClick={() => {
+                                // Prompt template pick full screen modal
+                                dispatch({ type: UPDATE_APP, configuration: { new: true } })
+                            }}>
+                                {intl.formatMessage({ id: 'section.templates_tooltip_action' })}
+                            </Button>
+                        )
+                    }
+                </Section>
+
+                <Section title="page_manager.smart_contract_label" description="page_manager.smart_contract_description">
+                    <SmartContracts project={project} />
+                </Section>
+
+                {
+                    selectedPage && (
+                        <Button color="error" fullWidth onClick={handleDeletePage}>
+                            {intl.formatMessage({ id: 'page_manager.delete' })}
+                        </Button>
+                    )
+                }
+
+        </Container>
     )
 }
 

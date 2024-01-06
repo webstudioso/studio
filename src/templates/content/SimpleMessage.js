@@ -17,7 +17,7 @@ const metadata = {
    preview: 'https://i.ibb.co/RHVgf80/Simple-Message.png',
    name: 'Simple Message',
    description: 'template.simple_message',
-   tags: ['Landing Page'],
+   tags: ['landing_page'],
    premium: false
 }
 

@@ -109,7 +109,10 @@ const Media = ({ onLeave, editor }) => {
                 </TextField>
             </Box>
 
-            <Typography>{ intl.formatMessage({id: 'image_manager.uploaded_assets' })}</Typography>
+            <Grid container spacing={2} sx={{ pl: 4, pt: 2 }}>
+                <Typography variant="h4">{ intl.formatMessage({id: 'image_manager.uploaded_assets' })}</Typography>
+            </Grid>
+
             <Grid container spacing={2} ref={ref} sx={{ pl: 2, pt: 2 }}>
                 {editor.AssetManager.getAll().models.map((item, index) => (
                     <Grid item xs={4} key={index} sx={{ cursor: selected ? 'pointer' : 'normal', position:'relative', padding:'0px !important' }} onMouseEnter={() => setSelected(item.id)}>

@@ -50,14 +50,11 @@ export const getDefaultMetadataForProject = ({ project }) => {
 
 const MEMO = 'WSProject'
 export const memoProject = (project) => {
-	const formattedProject = JSON.stringify(project)
-	localStorage.setItem(MEMO, formattedProject)
+	localStorage.setItem(MEMO, project)
 }
 
 export const getMemoedProject = () => {
-	const project = localStorage.getItem(MEMO)
-	const savedProject = project ? JSON.parse(project) : null
-	return savedProject
+	return localStorage.getItem(MEMO)
 }
 
 export const forgetMemoProject = () => {

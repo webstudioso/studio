@@ -60,9 +60,9 @@ const style = `
 const metadata = {
    image: 'https://bafybeih6o4hfz6fdsrzsp52n6fnkpnqat7qgvudbtqtnehroc5ca47jpfe.ipfs.w3s.link/AppLandingPagePreview.png',
    preview: 'https://bafybeiaagrtcdtbl2uoedjqxbaqcufefryjr3aksud2nkvzpqrhaau6fxa.ipfs.w3s.link/AppLandingPage.png',
-   name: 'App Landing Page',
+   name: 'App landing_page',
    description: 'template.app_landing_page',
-   tags: ['Landing Page'],
+   tags: ['landing_page'],
    premium: false
 }
 

@@ -296,7 +296,7 @@ const metadata = {
    preview: 'https://bafybeib2oakvgcv7hajmkefg2sdtnlnfd3ffqhm2h2rjksrk7txjyg2gai.ipfs.w3s.link/AtlasPreview.png',
    name: 'Atlas',
    description: 'template.atlas',
-   tags: ['Landing Page'],
+   tags: ['landing_page'],
    premium: false
 }
 

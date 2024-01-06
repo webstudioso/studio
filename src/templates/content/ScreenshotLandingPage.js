@@ -522,9 +522,9 @@ button,.gradient2{background-color:#f39f86;background-image:linear-gradient(315d
 const metadata = {
    image: 'https://bafybeigay45qmfjqkremcaqqqpzoqrdzvyhc3m4rz5kpkzsepqo2g63zjy.ipfs.w3s.link/ScreenshotLandingPage.png',
    preview: 'https://bafybeial667pawqcxif3zkssb37pf3ggi5gtezgasp4tar7gs2vsn4ur7q.ipfs.w3s.link/ScreenshotLandingPagePreview.png',
-   name: 'Screenshot Landing Page',
+   name: 'Screenshot landing_page',
    description: 'template.screenshot_landing_page',
-   tags: ['Landing Page'],
+   tags: ['landing_page'],
    premium: false
 }
 

@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { LOADER } from 'store/actions'
 import availableTemplates from 'templates/content'
 import { FormattedMessage, useIntl } from 'react-intl'
+import { publishMetadata } from 'api/publish'
+import { getContractsInTemplateNotInProjectMetadata } from 'utils/pages'
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -14,15 +16,38 @@ const Item = styled(Paper)(({ theme }) => ({
     borderRadius: '4px'
 }))
 
-const Templates = ({ onLeave, fullScreen=false }) => {
+const Templates = ({ onLeave, fullScreen=false, type, principal }) => {
     const intl = useIntl()
     const dispatch = useDispatch()
     const [selected, setSelected] = useState()
     const isLoading = useSelector((state) => state.loader.show)
 	const editor = useSelector((state) => state.editor.editor)
+	const project = useSelector((state) => state.editor.project)
+
+    const { metadata } = project
+
+    const launchContract = (contractType) => {
+        console.log(`Launching contract for metadata tag ${contractType}`)
+        return '0xaabcabcabfabf020aabfc0298abbc11'
+    }
 
     const onHandleSelectTemplate = async (template) => {
         dispatch({ type: LOADER, show: true })
+        const pendingContracts = getContractsInTemplateNotInProjectMetadata({ template, metadata })
+        pendingContracts.forEach((contract) => {
+            const address = launchContract(contract)
+            metadata[`webstudio:${contract}_contract`] = address
+        })
+
+        if (pendingContracts) {
+            await publishMetadata({ 
+                id: project.id, 
+                principal, 
+                metadata 
+            })
+        }
+
+        // Set HTML and CSS
         setTimeout(() => {
             editor.setComponents(template.template)
             editor.setStyle(template.style)
@@ -32,7 +57,9 @@ const Templates = ({ onLeave, fullScreen=false }) => {
 
     const spinner = isLoading && (<CircularProgress size={18} sx={{ ml: 1 }} />)
 
-    const templateList = availableTemplates.map((template, index) => (
+    const templateList = availableTemplates
+        .filter((item) => item.metadata.tags.includes(type))
+        .map((template, index) => (
         <Grid item xs={fullScreen ? 6:12} md={fullScreen ? 4:6} lg={fullScreen ? 3:6} key={index} sx={{ mb: 5, cursor: 'pointer' }}
             onMouseEnter={() => {
                 setSelected(index)

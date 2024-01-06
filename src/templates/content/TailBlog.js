@@ -232,7 +232,7 @@ const metadata = {
    preview: 'https://bafybeib3xhsfhk7djlhfzrxodibe5hgtkojx34qncprqj3e2rvpy453m4q.ipfs.w3s.link/TailBlogPreview.png',
    name: 'TailBlog',
    description: 'template.tailblog',
-   tags: ['Landing Page'],
+   tags: ['landing_page'],
    premium: false
 }
 

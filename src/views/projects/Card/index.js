@@ -17,7 +17,7 @@ const Card = ({ project, principal }) => {
 
 	const selectProject = () => {
 		dispatch({ type: SET_PROJECT, project })
-		memoProject(project)
+		memoProject(project.id)
 		navigate(`/e/${project?.id}`)
 	}
 

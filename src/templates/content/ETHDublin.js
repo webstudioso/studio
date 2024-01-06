@@ -286,7 +286,7 @@ const metadata = {
    preview: 'https://i.ibb.co/5T9kbn4/ETHDublin-Full.png',
    name: 'ETHDublin',
    description: 'template.ethdublin',
-   tags: ['Landing Page'],
+   tags: ['landing_page'],
    premium: false
 }
 

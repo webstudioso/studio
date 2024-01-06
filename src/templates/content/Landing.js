@@ -8,7 +8,7 @@ const template = `
     <div class="h-32 md:h-40"></div>
     <p class="font-sans text-4xl font-bold text-gray-200 max-w-5xl lg:text-7xl lg:pr-24 md:text-6xl"> Spend less time coding and more time creating </p>
     <div class="h-10"></div>
-    <p class="max-w-2xl font-serif text-xl text-gray-400 md:text-2xl"> Imagine being able to spent less time... This is a demonstration landing page made with tailwindcss </p>
+    <p class="max-w-2xl font-serif text-xl text-gray-400 md:text-2xl"> Imagine being able to spent less time... This is a demonstration landing_page made with tailwindcss </p>
     <div class="h-32 md:h-40"></div>
     <div class="grid gap-8 md:grid-cols-2">
       <div class="flex flex-col justify-center">
@@ -150,7 +150,7 @@ const metadata = {
    preview: 'https://bafybeifzmbd2cwm3fuw7no5rljqvbjgieze7tflaxjwhastgmqkhundgme.ipfs.w3s.link/landing.png',
    name: 'Landing',
    description: 'template.landing',
-   tags: ['Landing Page'],
+   tags: ['landing_page'],
    premium: false
 }
 

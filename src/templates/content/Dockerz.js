@@ -351,7 +351,7 @@ const metadata = {
    preview: 'https://bafybeiauc6xrnwiwhfir24p4quw3nxxqdh33cxwcsmx27k6bxchjg3aiba.ipfs.w3s.link/DitchPreview.png',
    name: 'Ditch',
    description: 'template.dockerz',
-   tags: ['Landing Page'],
+   tags: ['landing_page'],
    premium: false
 }
 

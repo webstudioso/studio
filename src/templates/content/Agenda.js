@@ -462,7 +462,7 @@ const metadata = {
    preview: 'https://bafybeiea2zleajdciksw7oopput6wsxaxp3smun53cgx23b7aceh2aupme.ipfs.w3s.link/Agenda.png',
    name: 'Agenda',
    description: 'template.agenda',
-   tags: ['Landing Page'],
+   tags: ['landing_page'],
    premium: false
 }
 

@@ -7,7 +7,7 @@ import { Magic } from 'magic-sdk'
 import { getQueryParam } from 'utils/url'
 import { showError } from 'utils/snackbar'
 import { LOGIN, SET_PROJECT, THEME_LOCALE } from 'store/actions'
-import { getAllProjects } from 'api/project'
+import { getAllProjects, getProjectById } from 'api/project'
 import { getMemoedProject } from 'utils/project'
 import { trackEvent } from 'utils/analytics'
 import { getSubscription } from 'api/subscription'
@@ -25,7 +25,7 @@ const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY)
 
 const Login = () => {
 	const intl = useIntl()
-	const [existingProject] = useState(getMemoedProject())
+	const [existingProjectId] = useState(getMemoedProject())
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const [isLoading, setLoading] = useState(true)
@@ -59,9 +59,10 @@ const Login = () => {
 			dispatch({ type: LOGIN, payload: { user , principal, projects, subscription }})
 			if (projects && projects.length > 0) {
 				// Has some projects created
-				if (existingProject) {
-					dispatch({ type: SET_PROJECT, project: existingProject })
-					navigate(`/e/${existingProject?.id}`)
+				if (existingProjectId) {
+					const project = await getProjectById({ projectId: existingProjectId, principal })
+					dispatch({ type: SET_PROJECT, project })
+					navigate(`/e/${project?.id}`)
 				} else {
 					navigate(PATH.ADMIN)
 				}

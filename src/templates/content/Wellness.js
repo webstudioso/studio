@@ -382,7 +382,7 @@ const metadata = {
    preview: 'https://i.ibb.co/svfRjgM/wellness-full.png',
    name: 'Wellness',
    description: 'template.wellness',
-   tags: ['Landing Page'],
+   tags: ['landing_page'],
    premium: false
 }
 

@@ -220,7 +220,7 @@ const metadata = {
    preview: 'https://bafybeicvszfap2mkwpj3oiagds4gpvsdh33j3lsuy7aaq3kc7c2of7yspu.ipfs.w3s.link/Profile.png',
    name: 'Prima Persona',
    description: 'template.prima_persona',
-   tags: ['Landing Page'],
+   tags: ['landing_page'],
    premium: false
 }
 

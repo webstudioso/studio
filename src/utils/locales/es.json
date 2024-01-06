@@ -16,7 +16,7 @@
     "new_page.error_invalid_character": "Solo puede contener letras, numeros y guiones",
 
     "template_page.title": "Selecciona una Plantilla",
-    "template_page.title_tooltip": "Reemplaza la plantilla actualmente seleccionada para tu proyecto. Todos tus cambios en el proyecto se perderan",
+    "template_page.title_tooltip": "Reemplaza la plantilla actualmente seleccionada para tu proyecto. Todos tus cambios visuales en el proyecto se perderan",
     "template_page.pick_later": "Selecciona Despues",
     "template_page.pick": "Selecciona",
     "template_page.free": "Gratis",
@@ -39,14 +39,13 @@
     "section.media_tooltip_description": "Sube imagenes y videos a la nube decentralizada para usarlas en el editor",
     "section.templates_tooltip_title": "Cambiar Plantilla",
     "section.templates_tooltip_description": "Reemplaza la plantilla actual. Esto deshacera todos tus cambios en el canvas",
-    "section.settings_tooltip_title": "Configura SEO",
+    "section.templates_tooltip_action": "Cambiar Plantilla",
+    "section.settings_tooltip_title": "Optimizacion para Motores de Busqueda",
     "section.settings_tooltip_description": "Edita las propiedades de tu aplicacion, dominio privado y redes sociales",
     "section.pages_tooltip_title": "Administrar Paginas",
     "section.pages_tooltip_description": "Cambia la pagina actual, crea nuevas paginas y manejalas",
     "section.blocks_tooltip_title": "Agregar Elementos",
     "section.blocks_tooltip_description": "Selecciona elementos y arrastralos al canvas 👉",
-    "section.tutorial_tooltip_title": "Centro de Aprendizaje",
-    "section.tutorial_tooltip_description": "Obtenga más información sobre los componentes y cómo crear soluciones completas utilizando las configuraciones y bloques de arrastrar y soltar de Webstudio.",
 
     "image_manager.pick": "Seleccionar",
     "image_manager.upload_media": "Subir Archivos",
@@ -55,11 +54,22 @@
     "image_manager.media_uploaded": "Imagen Agregada",
 
     "page_manager.new_page": "Agregar pagina",
-    "page_manager.page_details_title": "Configuracion de Pagina",
-    "page_manager.path_input_label": "Ruta",
-    "page_manager.path_input_placeholder": "Ruta web en minuscula e.g blog",
+    "page_manager.page_details_title": "Configuracion de Página",
+    "page_manager.path_input_label": "Nombre de Pagina",
+    "page_manager.path_input_description": "Ruta URL de la página para la página. Debe ser una cadena alfanumérica en minúsculas, exclusiva de su proyecto. La página de inicio no se puede modificar.",
+    "page_manager.path_input_placeholder": "ej. nuestro-equipo",
     "page_manager.save": "Guardar Pagina",
+    "page_manager.delete": "Eliminar Pagina",
     "page_manager.create": "Crear Pagina",
+    "page_manager.purpose_label": "Tipo de Pagina",
+    "page_manager.purpose_description": "Seleccione el tipo de página entre página de destino básica (personalizada), blog y comercio electrónico y configúrelo",
+    "page_manager.type_landing_page": "Pagina Estandar",
+    "page_manager.type_landing_page_description": "Pagina basica para contenido flexible usando drag & drop.",
+    "page_manager.type_blog": "Blog",
+    "page_manager.type_blog_description": "Manejado por contrato inteligente con articulos remunerables via NFT.",
+    "page_manager.smart_contract_label": "Contrato Inteligente",
+    "page_manager.smart_contract_description": "Administre y ajuste la configuración del contrato inteligente de la página actual habilitando manejo de contenido y monetizacion.",
+    "page_manager.smart_contract_action": "Guardar Cambios",
 
     "settings.title": "Titulo",
     "settings.description": "El texto mostrado en la pestana del navegador y los enlaces sociales. Ayuda a la audiencia a entender de que se trata el proyecto",
@@ -237,5 +247,4 @@
     "props.radius": "Curvas",
     "props.class_setting": "Editor Avanzado de Estilos",
     "props.class_setting_tooltip": "Manualmente agrega o elimina estilos de las librerias de TailwindCSS y AnimateCSS sobre el componente"
-
 }

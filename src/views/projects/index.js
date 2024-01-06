@@ -37,7 +37,7 @@ const Projects = () => {
 		const guestProject = await getProjectById({ principal: account.principal, projectId: invitedProject })
 		if (guestProject?.id) {
 			dispatch({ type: SET_PROJECT, project: guestProject })
-			memoProject(guestProject)
+			memoProject(guestProject?.id)
 			navigate(`/e/${guestProject?.id}`)
 		} else {
 			const error = intl.formatMessage({ id: "dashboard.error_no_permission" })

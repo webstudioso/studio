@@ -9,7 +9,7 @@ import {
 import InfoButton from '../InfoButton'
 import Blocks from './Blocks'
 import Pages from './Pages'
-import Templates from '../../templates/List'
+import Templates from '../../templates/Templates'
 import Settings from './Settings'
 import Media from "./Media"
 import constants from 'constant'
@@ -82,7 +82,6 @@ const SidePanel = ({ open, openCategory, onLeave, principal, project, editor}) =
                 <Grid item>
                     {openCategory === SECTION.BLOCKS && (<Blocks onLeave={onLeave} editor={editor} project={project} />)}
                     {openCategory === SECTION.PAGES && (<Pages onLeave={onLeave} editor={editor} project={project} />)}
-                    {openCategory === SECTION.TEMPLATE && (<Templates onLeave={onLeave} editor={editor} project={project} />)}
                     {openCategory === SECTION.SETTINGS && (<Settings onLeave={onLeave} principal={principal} project={project} editor={editor} />)}
                     {openCategory === SECTION.MEDIA && (<Media onLeave={onLeave} editor={editor} project={project} />)}
                 </Grid>

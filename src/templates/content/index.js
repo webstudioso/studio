@@ -15,11 +15,12 @@ import * as Geoniti from 'templates/content/Geoniti'
 import * as ETHDublin from 'templates/content/ETHDublin'
 import * as Wellness from 'templates/content/Wellness'
 import * as SimpleMessage from 'templates/content/SimpleMessage'
+import * as BlogLight from 'templates/content/BlogLight'
+import * as BlogDark from 'templates/content/BlogDark'
 
 const templates = [
+    // Basic
     Porto,
-    // Profile,
-    // Streamer,
     AppLandingPage,
     ScreenshotLandingPage,
     Landwind,
@@ -33,7 +34,10 @@ const templates = [
     Geoniti,
     ETHDublin,
     Wellness,
-    SimpleMessage
+    SimpleMessage,
+    // Blogs
+    BlogLight,
+    BlogDark
 ]
 
 export default templates

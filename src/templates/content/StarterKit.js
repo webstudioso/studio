@@ -45,7 +45,7 @@ const template = `
                            <polygon points="-30,95 583,95 583,65" class="text-pink-600 fill-current"></polygon>
                         </svg>
                         <h4 class="text-xl font-bold text-white">Great for your awesome project</h4>
-                        <p class="text-md font-light mt-2 text-white">Putting together a page has never been easier than matching together pre-made components. From landing pages presentation to login areas, you can easily customise and built your pages.</p>
+                        <p class="text-md font-light mt-2 text-white">Putting together a page has never been easier than matching together pre-made components. From landing_pages presentation to login areas, you can easily customise and built your pages.</p>
                      </blockquote>
                   </div>
                </div>
@@ -202,7 +202,7 @@ const template = `
                         <div class="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150"><img alt="..." class="align-middle border-none max-w-full h-auto rounded-lg" src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/profile.jpg"></div>
                      </div>
                      <div class="w-full lg:w-4/12 px-4">
-                        <h5 class="text-xl font-semibold pb-4 text-center">Landing Page</h5>
+                        <h5 class="text-xl font-semibold pb-4 text-center">landing_page</h5>
                         <div class="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150"><img alt="..." class="align-middle border-none max-w-full h-auto rounded-lg" src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/landing.jpg"></div>
                      </div>
                   </div>
@@ -446,7 +446,7 @@ const metadata = {
    preview: 'https://bafybeidirrqjstjjdkooch5t2gi477bxwh6izmpicwme6qdyvtgnrnacfi.ipfs.w3s.link/StarterKitPreview.png',
    name: 'Tailwind Starter Kit',
    description: 'template.starter_kit',
-   tags: ['Landing Page'],
+   tags: ['landing_page'],
    premium: false
 }
 

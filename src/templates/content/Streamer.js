@@ -461,7 +461,7 @@ const metadata = {
    preview: 'https://bafybeidwdpgeks3rlrhvv5yxtbc3xaxbkv2n35fphbdnaekfjumfllceme.ipfs.w3s.link/StreamerPreview.png',
    name: 'Streamer',
    description: 'template.streamer',
-   tags: ['Landing Page'],
+   tags: ['landing_page'],
    premium: false
 }
 
