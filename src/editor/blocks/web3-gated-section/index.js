@@ -91,7 +91,7 @@ export function script(props) {
 
     this.onBalances = (balances) => {
         console.debug(`Retrieving balances from component ${this.id}`)
-        const numBalances = balances?.map((balance) => balance.toNumber())
+        const numBalances = balances?.map((balance) => parseInt(balance))
         const positiveBalances = numBalances?.find((item) => item > 0)
         console.debug(`Balance retrieved ${positiveBalances}`)
         if (positiveBalances) {

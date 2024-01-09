@@ -54,6 +54,7 @@
         "wsm-tailwind": "^1.0.5",
         "wsm-toast": "^1.0.14",
         "wsm-wallet-connect": "^0.0.51",
+        "ethers": "^6.9.2",
         "yup": "^0.32.9"
     },
     "devDependencies": {
@@ -66,7 +67,6 @@
         "env-cmd": "^10.1.0",
         "eslint": "^8.23.0",
         "eslint-config-react-app": "^7.0.1",
-        "ethers": "^5.7.2",
         "husky": "^8.0.3",
         "jest-environment-jsdom": "^29.6.4",
         "jest-mock-axios": "^4.7.0-beta4",

@@ -7,6 +7,7 @@ import availableTemplates from 'templates/content'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { publishMetadata } from 'api/publish'
 import { getContractsInTemplateNotInProjectMetadata } from 'utils/pages'
+import { deployContract } from 'api/contract'
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -26,20 +27,31 @@ const Templates = ({ onLeave, fullScreen=false, type, principal }) => {
 
     const { metadata } = project
 
-    const launchContract = (contractType) => {
+    const launchContract = async (contractType) => {
         console.log(`Launching contract for metadata tag ${contractType}`)
-        return '0xaabcabcabfabf020aabfc0298abbc11'
+        const url = 'https://raw.githubusercontent.com/webstudioso/smart-contracts/master/artifacts/contracts/Blog.sol/Blog.json'
+        const contractInfo = await (await fetch(url)).json();
+        console.log(contractInfo)
+        return await deployContract({ project, contractInfo })
     }
 
     const onHandleSelectTemplate = async (template) => {
         dispatch({ type: LOADER, show: true })
         const pendingContracts = getContractsInTemplateNotInProjectMetadata({ template, metadata })
-        pendingContracts.forEach((contract) => {
-            const address = launchContract(contract)
-            metadata[`webstudio:${contract}_contract`] = address
+        const actions = pendingContracts.map((contract) => launchContract(contract))
+        const contractAddresses = await Promise.all(actions)
+        contractAddresses.forEach((contractAddress, index) => {
+            metadata[`webstudio:${pendingContracts[index]}_contract`] = contractAddress
         })
+        console.log(metadata)
+        // pendingContracts.forEach(async (contract) => {
+        //     const address = await launchContract(contract)
+        //     metadata[`webstudio:${contract}_contract`] = address
+        //     console.log(address)
+        // })
+        // console.log(metadata)
 
-        if (pendingContracts) {
+        if (contractAddresses) {
             await publishMetadata({ 
                 id: project.id, 
                 principal, 

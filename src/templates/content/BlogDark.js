@@ -14,8 +14,7 @@ const metadata = {
     tags: ['blog'],
     premium: false,
     contracts: {
-        blog: 'WebstudioBlogV1',
-        marketplace : 'WebstudioMarketplaceV1'
+        blog: 'WebstudioBlogV1'
     }
 }
 

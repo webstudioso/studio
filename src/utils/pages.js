@@ -14,16 +14,17 @@ export const getContractsInTemplate = (template) => {
 }
 
 export const getContractsInMetadata = (metadata) => {
+    console.log(metadata)
     const metadataKeys = Object.keys(metadata)
-    console.log(metadataKeys)
-    const contractKeys = metadataKeys.filter((key) => key.startsWith('webstudio:') && key.endsWith('_contract'))
-    console.log(contractKeys)
-    return contractKeys ? contractKeys.map((key) => {
+    const contractKeys = metadataKeys?.filter((key) => key.startsWith('webstudio:') && key.endsWith('_contract'))
+    const items = contractKeys ? contractKeys?.map((key) => {
         return {
             key,
             value: metadata[key]
         }
     }) : []
+    console.log(items)
+    return items
 }
 
 export const getContractsInTemplateNotInProjectMetadata = ({ template, metadata }) => {
@@ -31,5 +32,6 @@ export const getContractsInTemplateNotInProjectMetadata = ({ template, metadata 
     const requiredContracts = getContractsInTemplate(template)
     const pendingContracts = requiredContracts.filter((required) => !(`webstudio:${required}_contract` in metadata))
     console.log(`Pending contracts ${pendingContracts}`)
-    return pendingContracts
+    // return pendingContracts
+    return requiredContracts
 }

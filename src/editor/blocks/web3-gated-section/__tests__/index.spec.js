@@ -157,10 +157,7 @@ describe("Section Token Gated Plugin", () => {
                 exclusiveRule: true,
                 contractType: 'ERC721'
             }
-            new script(props).onBalances([
-                ethers.BigNumber.from("0"),
-                ethers.BigNumber.from("1")
-            ])
+            new script(props).onBalances([ 0,1 ])
             expect(show).toHaveBeenCalled()
         })
 
@@ -169,9 +166,7 @@ describe("Section Token Gated Plugin", () => {
                 exclusiveRule: true,
                 contractType: 'ERC721'
             }
-            new script(props).onBalances([
-                ethers.BigNumber.from("1")
-            ])
+            new script(props).onBalances([1])
             expect(show).toHaveBeenCalled()
         })
 
@@ -180,9 +175,7 @@ describe("Section Token Gated Plugin", () => {
                 exclusiveRule: true,
                 contractType: 'ERC721'
             }
-            new script(props).onBalances([
-                ethers.BigNumber.from("0")
-            ])
+            new script(props).onBalances([0])
             expect(onErrorMessage).toHaveBeenCalled()
         })
     })

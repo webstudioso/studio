@@ -361,12 +361,12 @@ const constants = {
 		{
 			label: 'landing_page',
 			image: 'https://i.ibb.co/XD8zHVG/landing-page.jpg',
-			contract: null
 		},
 		{
 			label: 'blog',
 			image: 'https://i.ibb.co/wdfccDj/blog.jpg',
-			contract: 'WebstudioBlogV1'
+			contract: 'Blog',
+			src: 'https://raw.githubusercontent.com/webstudioso/smart-contracts/master/artifacts/contracts/Blog.sol/Blog.json'
 		},
 		// {
 		//     label: 'ecommerce',
