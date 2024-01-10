@@ -20,7 +20,7 @@ import ButtonBlocks from '../blocks/buttons'
 import ToastBlocks from '../blocks/toast'
 
 import Web3LoginButton from '../blocks/web3-login-button'
-import Web3ActionButton from '../blocks/web3-action-button'
+// import Web3ActionButton from '../blocks/web3-action-button'
 import Web3GatedSection from '../blocks/web3-gated-section'
 import Web3ContractForm from '../blocks/web3-contract-form'
 

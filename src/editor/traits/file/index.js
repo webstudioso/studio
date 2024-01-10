@@ -16,8 +16,8 @@ const Plugin = (editor) => {
                 </label>
             `
             const parent = this
-            el.ondrop = function (e) {
-                this.className = '';
+            el.ondragover  = el.ondragenter = (e) => e.preventDefault()
+            el.ondrop = (e) => {
                 e.preventDefault();
                 const files = e.dataTransfer.files;
                 parent.processFile({
