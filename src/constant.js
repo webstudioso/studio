@@ -1,5 +1,5 @@
 const constants = {
-	IPFS_PROVIDER: 'https://ipfs.moralis.io:2053/ipfs',
+	IPFS_PROVIDER: 'https://gateway.ipfs.io/ipfs',
 	DEFAULT_LOCALE: 'en',
 	CHANGELOG: {
 		CACHE: 'CHANGELOG_CACHE',
