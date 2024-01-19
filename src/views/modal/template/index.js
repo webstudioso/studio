@@ -2,9 +2,10 @@ import { useState, memo } from 'react'
 import { Box, Grid, Paper, Button, Typography, CircularProgress, Chip } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { useDispatch, useSelector } from 'react-redux'
-import { LOADER } from 'store/actions'
+import { HIDE_MODAL, LOADER } from 'store/actions'
 import availableTemplates from 'templates/content'
 import { FormattedMessage, useIntl } from 'react-intl'
+import ModalToolbar from 'views/modal/toolbar'
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -14,7 +15,7 @@ const Item = styled(Paper)(({ theme }) => ({
     borderRadius: '4px'
 }))
 
-const Templates = ({ onLeave, fullScreen=false }) => {
+const Template = () => {
     const intl = useIntl()
     const dispatch = useDispatch()
     const [selected, setSelected] = useState()
@@ -26,14 +27,14 @@ const Templates = ({ onLeave, fullScreen=false }) => {
         setTimeout(() => {
             editor.setComponents(template.template)
             editor.setStyle(template.style)
-            if (fullScreen) onLeave()
+            dispatch({ type: HIDE_MODAL })
         }, 250)
     }
 
     const spinner = isLoading && (<CircularProgress size={18} sx={{ ml: 1 }} />)
 
     const templateList = availableTemplates.map((template, index) => (
-        <Grid item xs={fullScreen ? 6:12} md={fullScreen ? 4:6} lg={fullScreen ? 3:6} key={index} sx={{ mb: 5, cursor: 'pointer' }}
+        <Grid item xs={12} md={4} lg={3} key={index} sx={{ mb: 5, cursor: 'pointer' }}
             onMouseEnter={() => {
                 setSelected(index)
             }}
@@ -107,19 +108,27 @@ const Templates = ({ onLeave, fullScreen=false }) => {
     ))
 
     return (
-        <Grid container spacing={2} sx={{ 
-            height: fullScreen ? 'calc(100vh - 70px)' : 'calc(100vh - 120px)', 
-            overflow: 'auto', 
-            background: '#f7f8f8', 
-            border: '1px solid #dfe5eb',
-            borderLeft: '0px',
-            marginTop: '0px',
-            p: 2,
-            pt: 0
-        }}>
-            {templateList}
-        </Grid>
+        <>
+            <ModalToolbar  	title='template_page.title' 
+                            tooltip='template_page.title_tooltip'
+                            ctaLabel='template_page.pick_later'
+                            ctaAction={() => dispatch({ type: HIDE_MODAL })}
+                            onClose={() => dispatch({ type: HIDE_MODAL })}
+            />
+            <Grid   container spacing={2} sx={{
+                    height: 'calc(100vh - 70px)',
+                    overflow: 'auto',
+                    background: '#f7f8f8',
+                    border: '1px solid #dfe5eb',
+                    borderLeft: '0px',
+                    marginTop: '0px',
+                    p: 2,
+                    pt: 0
+            }}>
+                {templateList}
+            </Grid>
+        </>
     )
 }
 
-export default memo(Templates)
+export default memo(Template)

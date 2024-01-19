@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const uploadPagesToIPFS = async ({ pages }) => {
+export const uploadFilesToIPFS = async ({ pages }) => {
     const upload = await axios.post('https://deep-index.moralis.io/api/v2/ipfs/uploadFolder',
         pages,
         {

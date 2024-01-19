@@ -1,12 +1,13 @@
 import { useState, useRef } from 'react'
 import { Box, Grid, Paper, Button, Typography, Tooltip, TextField, InputAdornment, IconButton } from '@mui/material'
-import { uploadPagesToIPFS } from 'api/publish'
+import { uploadFilesToIPFS } from 'api/publish'
 import { LOADER } from 'store/actions'
 import { useDispatch } from 'react-redux'
 import constants from 'constant'
 import { showError, showSuccess } from 'utils/snackbar'
 import { useIntl } from 'react-intl'
 import { AddCircle } from '@mui/icons-material'
+import { fileToBase64 } from 'utils/file'
 const { EVENTS } = constants
 
 const Media = ({ onLeave, editor }) => {
@@ -20,31 +21,21 @@ const Media = ({ onLeave, editor }) => {
         document.dispatchEvent(new CustomEvent(EVENTS.CLOSE_DELAY));
         dispatch({ type: LOADER, show: true });
         const file = e.target.files[0];
-
-        // Encode the file using the FileReader API
-        const reader = new FileReader();
-        reader.onloadend = async () => {
-            // Use a regex to remove data url part
-            const base64String = reader.result
-                .replace('data:', '')
-                .replace(/^.+,/, '')
-                const pages = [{
-                    path: file.name,
-                    content: base64String
-                }]
-            try {
-                const upload = await uploadPagesToIPFS({pages})
-                const uploadedFilePath = upload[0].path;
-                editor.AssetManager.add([uploadedFilePath])
-                showSuccess({ dispatch, message:  intl.formatMessage({id: 'image_manager.media_uploaded'})  })
-            } catch(e) {
-                showError({ dispatch, message: e.message })
-            } finally {
-                dispatch({ type: LOADER, show: false });
-            }
-
+        const content = await fileToBase64(file)
+        const pages = [{
+            path: file.name,
+            content
+        }]
+        try {
+            const upload = await uploadFilesToIPFS({pages})
+            const uploadedFilePath = upload[0].path;
+            editor.AssetManager.add([uploadedFilePath])
+            showSuccess({ dispatch, message:  intl.formatMessage({id: 'image_manager.media_uploaded'})  })
+        } catch(e) {
+            showError({ dispatch, message: e.message })
+        } finally {
+            dispatch({ type: LOADER, show: false })
         }
-        reader.readAsDataURL(file)
     }
 
     const uploadButton = (

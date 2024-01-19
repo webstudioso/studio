@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Grid, Button,TextField, Typography, Box, Stack } from '@mui/material'
 import { getProjectById } from 'api/project'
-import { publishMetadata, uploadPagesToIPFS } from 'api/publish'
+import { publishMetadata, uploadFilesToIPFS } from 'api/publish'
 import { LOADER, SET_PROJECT } from "store/actions";
 import { useDispatch, useSelector } from 'react-redux'
 import { getDefaultMetadataForProject } from 'utils/project'
@@ -57,7 +57,7 @@ const Settings = ({ principal, project }) => {
                     path: 'favicon.jpeg',
                     content: base64String
                 }]
-                const upload = await uploadPagesToIPFS({pages})
+                const upload = await uploadFilesToIPFS({pages})
                 const uploadedFilePath = upload[0].path
 
                 const currMeta = {...metadata}
@@ -87,7 +87,7 @@ const Settings = ({ principal, project }) => {
                     path: 'favicon.jpeg',
                     content: base64String
                 }]
-                const upload = await uploadPagesToIPFS({pages});
+                const upload = await uploadFilesToIPFS({pages});
                 const uploadedFilePath = upload[0].path;
 
                 const currMeta = {...metadata};

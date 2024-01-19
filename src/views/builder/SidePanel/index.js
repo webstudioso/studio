@@ -9,7 +9,7 @@ import {
 import InfoButton from '../InfoButton'
 import Blocks from './Blocks'
 import Pages from './Pages'
-import Templates from '../../templates/List'
+import Templates from '../../modal/template'
 import Settings from './Settings'
 import Media from "./Media"
 import constants from 'constant'

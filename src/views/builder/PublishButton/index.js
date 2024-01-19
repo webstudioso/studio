@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react'
 import { Button, Typography, CircularProgress, IconButton } from '@mui/material'
-import { uploadPagesToIPFS, publishRouting } from 'api/publish'
+import { uploadFilesToIPFS, publishRouting } from 'api/publish'
 import { useDispatch, useSelector } from 'react-redux'
 import { showLoader } from 'utils/loader'
 import { getCidFromDeployment, getCustomFontsMetadatTags, getPages, getUserConfiguredMetadataTags, getWebstudioUrl } from 'utils/publish'
@@ -29,7 +29,7 @@ const PublishButton = ({ principal, project, editor }) => {
             const tags = getUserConfiguredMetadataTags({ project })
             const fonts = getCustomFontsMetadatTags()
             const pages = await getPages({ tags, fonts, editor, project })
-            const upload = await uploadPagesToIPFS({ pages })
+            const upload = await uploadFilesToIPFS({ pages })
             const cid = getCidFromDeployment({ upload })
             setRelease(cid)
 

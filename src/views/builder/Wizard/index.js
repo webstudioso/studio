@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useState } from 'react'
 import { DialogActions, Dialog, Toolbar, AppBar, Typography, Slide, Button, Stepper, Step, StepLabel, Box } from '@mui/material'
 import InfoButton from '../InfoButton'
-import Templates from '../../templates/List'
+import Templates from '../../modal/template'
 import { FormattedMessage, useIntl } from 'react-intl'
 import SmartContracts from './SmartContracts'
 import { element } from 'prop-types'

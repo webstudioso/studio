@@ -67,3 +67,7 @@ export const LOADER = '@loader/SHOW';
 // action - editor
 export const SET_EDITOR = '@editor/SET_EDITOR';
 export const SET_PROJECT = '@editor/SET_PROJECT';
+
+// action - modal
+export const SHOW_MODAL = '@editor/SHOW_MODAL';
+export const HIDE_MODAL = '@editor/HIDE_MODAL';

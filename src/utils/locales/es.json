@@ -47,6 +47,8 @@
     "section.blocks_tooltip_description": "Selecciona elementos y arrastralos al canvas 👉",
     "section.tutorial_tooltip_title": "Centro de Aprendizaje",
     "section.tutorial_tooltip_description": "Obtenga más información sobre los componentes y cómo crear soluciones completas utilizando las configuraciones y bloques de arrastrar y soltar de Webstudio.",
+    "section.blog_tooltip_title": "Entrada de Blog",
+    "section.blog_tooltip_description": "Escribe una entrada de blog sobre una historia relevante para tu audiencia",
 
     "image_manager.pick": "Seleccionar",
     "image_manager.upload_media": "Subir Archivos",
@@ -236,6 +238,8 @@
     "props.padding": "Espaciado",
     "props.radius": "Curvas",
     "props.class_setting": "Editor Avanzado de Estilos",
-    "props.class_setting_tooltip": "Manualmente agrega o elimina estilos de las librerias de TailwindCSS y AnimateCSS sobre el componente"
+    "props.class_setting_tooltip": "Manualmente agrega o elimina estilos de las librerias de TailwindCSS y AnimateCSS sobre el componente",
 
+    "blog.title": "Título",
+    "blog.tell_your_story": "Cuenta tu historia..."
 }

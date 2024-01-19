@@ -1,5 +1,6 @@
 const constants = {
 	IPFS_PROVIDER: 'https://gateway.ipfs.io/ipfs',
+	BLOG_CONTENT: 'WS_BLOG_CONTENT',
 	DEFAULT_LOCALE: 'en',
 	CHANGELOG: {
 		CACHE: 'CHANGELOG_CACHE',
@@ -54,7 +55,11 @@ const constants = {
 		MEDIA: 'media',
 		DASHBOARD: 'dashboard',
 		HELP: 'help',
-		ADVANCED_STYLES: 'advanced_styles'
+		ADVANCED_STYLES: 'advanced_styles',
+		BLOG: 'blog'
+	},
+	MODAL_TOOLBAR: {
+		
 	},
 	INFO_URL: {
 		BLOCKS: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',

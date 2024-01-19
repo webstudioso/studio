@@ -1,4 +1,4 @@
-import Plugin from '../index'
+import Plugin from '../file/index'
 
 describe("File Trait", () => {
 

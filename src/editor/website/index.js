@@ -6,25 +6,25 @@ import { showError, showSuccess } from 'utils/snackbar'
 import { useIntl } from 'react-intl'
 import grapesjs from 'grapesjs'
 import PluginScriptEditor from '@auth0/auth0-spa-js'
-import PageManager from './Plugins/PageManager'
-import PluginEditorPanelButtons from './Panel/Buttons'
+import PageManager from 'editor/website/plugins/page-manager'
+import PluginEditorPanelButtons from 'editor/website/panel/buttons'
 
 
 
-import TraitABI from '../traits/file'
+import TraitABI from 'editor/website/traits/file'
 
-import TextBlocks from '../blocks/text'
-import ImageBlocks from '../blocks/images'
-import VideoBlocks from '../blocks/video'
-import ButtonBlocks from '../blocks/buttons'
-import ToastBlocks from '../blocks/toast'
+import TextBlocks from 'editor/website/blocks/text'
+import ImageBlocks from 'editor/website/blocks/images'
+import VideoBlocks from 'editor/website/blocks/video'
+import ButtonBlocks from 'editor/website/blocks/buttons'
+import ToastBlocks from 'editor/website/blocks/toast'
 
-import Web3LoginButton from '../blocks/web3-login-button'
+import Web3LoginButton from 'editor/website/blocks/web3-login-button'
 // import Web3ActionButton from '../blocks/web3-action-button'
-import Web3GatedSection from '../blocks/web3-gated-section'
-import Web3ContractForm from '../blocks/web3-contract-form'
+import Web3GatedSection from 'editor/website/blocks/web3-gated-section'
+import Web3ContractForm from 'editor/website/blocks/web3-contract-form'
 
-import Upgrade from './Upgrade'
+import Upgrade from 'editor/website/upgrade'
 // import SmartLabel from '../blocks/smart-label'
 
 // import ScriptEditor from 'grapesjs-script-editor'
@@ -37,13 +37,13 @@ import WSMTailwind from 'wsm-tailwind'
 import WSMFonts, { WSMFontStyles } from 'wsm-fonts'
 import constants from 'constant'
 import { hasPremiumSubscription } from 'utils/user'
-import { enableContextMenu } from './Utils'
+import { enableContextMenu } from './utils'
 import { bringToFront, moveToBack } from 'utils/properties'
 
 
 const { EVENTS } = constants
 
-const Editor = ({ project, principal }) => {
+const WebsiteEditor = ({ project, principal }) => {
   const intl = useIntl()
   const dispatch = useDispatch()
   const [showUpgradeModal, setShowUpgradeModal] = useState(false)
@@ -355,4 +355,4 @@ const Editor = ({ project, principal }) => {
   )
 }
 
-export default Editor
+export default WebsiteEditor

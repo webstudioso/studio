@@ -47,6 +47,8 @@
     "section.blocks_tooltip_description": "Drag and drop new components into the canvas 👉",
     "section.tutorial_tooltip_title": "Learning Center",
     "section.tutorial_tooltip_description": "Learn about components and how to build full solutions using Webstudio's drag and drop blocks and configurations",
+    "section.blog_tooltip_title": "Write a Blog Post",
+    "section.blog_tooltip_description": "Write a new story for your audience",
 
     "image_manager.pick": "Pick",
     "image_manager.upload_media": "Upload New Media",
@@ -238,5 +240,8 @@
     "props.padding": "Padding",
     "props.radius": "Border Radius",
     "props.class_setting": "Advanced Style Manager",
-    "props.class_setting_tooltip": "Manually add or remove style classes from TailwindCSS and AnimateCSS libraries on this component"
+    "props.class_setting_tooltip": "Manually add or remove style classes from TailwindCSS and AnimateCSS libraries on this component",
+
+    "blog.title": "Title",
+    "blog.tell_your_story": "Tell your story..."
 }

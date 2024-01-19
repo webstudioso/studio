@@ -12,6 +12,7 @@ import loader from './loaderReducer';
 import account from './accountReducer';
 import editor from './editorReducer';
 import wizard from './wizardReducer';
+import modal from './modalReducer';
 
 // ==============================|| COMBINE REDUCER ||============================== //
 
@@ -32,6 +33,7 @@ const reducer = combineReducers({
     customization,
     snackbar,
     loader,
+    modal
 });
 
 export default reducer;

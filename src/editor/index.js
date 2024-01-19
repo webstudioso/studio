@@ -1,5 +1,8 @@
-import "./assets/sass/styles.scss";
-// import "bootstrap/dist/css/bootstrap.css";
-import Editor from "./editor";
+import "editor/website/assets/sass/styles.scss"
+import WebsiteEditor from "editor/website"
+import ContentEditor from "./content"
 
-export { Editor };
+export { 
+    WebsiteEditor,
+    ContentEditor
+}
