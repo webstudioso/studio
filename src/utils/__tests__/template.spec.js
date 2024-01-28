@@ -1,4 +1,4 @@
-import { getTemplateBodyContentFromString } from "./template"
+import { getTemplateBodyContentFromString } from "../template"
 
 describe('Template utils', () => {
     test('Returns original text is no html code is found', () => {

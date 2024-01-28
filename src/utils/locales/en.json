@@ -45,7 +45,7 @@
     "section.pages_tooltip_description": "Select current page, add new and manage existing pages",
     "section.blocks_tooltip_title": "Add Elements",
     "section.blocks_tooltip_description": "Drag and drop new components into the canvas 👉",
-    "section.tutorial_tooltip_title": "Learning Center",
+    "section.tutorial_tooltip_title": "Youtube",
     "section.tutorial_tooltip_description": "Learn about components and how to build full solutions using Webstudio's drag and drop blocks and configurations",
 
     "image_manager.pick": "Pick",

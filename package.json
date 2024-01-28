@@ -1,6 +1,6 @@
 {
     "name": "webstudio-app",
-    "version": "0.1.45",
+    "version": "0.1.46",
     "private": false,
     "dependencies": {
         "@auth0/auth0-spa-js": "^1.14.0",
@@ -40,7 +40,6 @@
         "react-responsive-carousel": "^3.2.23",
         "react-router-dom": "^6.0.0-beta.5",
         "react-scripts": "^5.0.1",
-        "react-share": "^4.4.1",
         "redux": "^4.0.5",
         "redux-persist": "^6.0.0",
         "rehype-raw": "^6.1.1",
@@ -104,10 +103,10 @@
         ],
         "coverageThreshold": {
             "global": {
-                "branches": 1.2,
-                "functions": 6.98,
-                "lines": 9.95,
-                "statements": 9.59
+                "branches": 3.07,
+                "functions": 7.46,
+                "lines": 10.85,
+                "statements": 10.44
             }
         },
         "testEnvironment": "jsdom",

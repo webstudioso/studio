@@ -130,7 +130,7 @@ const Settings = ({ principal, project }) => {
                     <Button fullWidth onClick={handleSaveMetadata}>{intl.formatMessage({ id: 'settings.save_title' })}</Button>
             </Grid>
         </Grid>
-    );
+    )
 
     const handleSubmitCustomDomain = () => {
         requestNewDomain(dispatch, account.user, customDomain, project, intl.formatMessage({ id: 'discord_event.custom_domain_request' }))

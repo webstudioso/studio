@@ -5,6 +5,8 @@ import HtmlTooltip from '../HtmlTooltip'
 import constants from 'constant'
 import { useIntl } from 'react-intl'
 
+const { INFO_URL } = constants
+
 const HelpButton = () => {
     const intl = useIntl()
     const helpTooltip = (
@@ -15,6 +17,7 @@ const HelpButton = () => {
                 </IconButton>
             </Typography>
             <Button size="small" href={constants.INFO_URL['HELP']} target="__blank">{intl.formatMessage({id:'help.resources'})}</Button><br />
+            <Button size="small" href={INFO_URL.ACADEMY} target="__blank">{intl.formatMessage({id:'section.tutorial_tooltip_title'})}</Button><br />
             <Button size="small" href='https://calendly.com/webstudioso' target="__blank">{intl.formatMessage({id:'help.book_call'})}</Button><br />
             <Button size="small" href='https://discord.gg/CYYX8yUVgc' target="__blank">{intl.formatMessage({id:'help.chat_with_us'})}</Button><br />
             <Button size="small" href='https://twitter.com/webstudioso' target="__blank">{intl.formatMessage({id:'help.twitter'})}</Button><br />
@@ -26,7 +29,7 @@ const HelpButton = () => {
 
 	return (
         <HtmlTooltip title={helpTooltip} placement="right-start">
-            <IconButton color="warning" size="large">
+            <IconButton color="primary" size="large">
                 <IconHelp />
             </IconButton>
         </HtmlTooltip>

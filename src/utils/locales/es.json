@@ -45,7 +45,7 @@
     "section.pages_tooltip_description": "Cambia la pagina actual, crea nuevas paginas y manejalas",
     "section.blocks_tooltip_title": "Agregar Elementos",
     "section.blocks_tooltip_description": "Selecciona elementos y arrastralos al canvas 👉",
-    "section.tutorial_tooltip_title": "Centro de Aprendizaje",
+    "section.tutorial_tooltip_title": "Youtube",
     "section.tutorial_tooltip_description": "Obtenga más información sobre los componentes y cómo crear soluciones completas utilizando las configuraciones y bloques de arrastrar y soltar de Webstudio.",
 
     "image_manager.pick": "Seleccionar",

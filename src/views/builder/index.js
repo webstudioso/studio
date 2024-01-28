@@ -18,7 +18,7 @@ import Modal from 'views/templates'
 import TooltipFragment from 'views/builder/TooltipFragment'
 import HelpButton from './HelpButton'
 import Chat from './Chat'
-import PublishConfirmationDialog from './PublishConfirmationDialog'
+import PublishConfirmationDialog from 'views/modal/PublishConfirmation'
 import Membership from 'views/Membership'
 import { trackEvent } from 'utils/analytics'
 import Changelog from 'views/changelog'
@@ -149,16 +149,6 @@ const EditorView = () => {
 								</Grid>
 								<Grid item xs={12}>
 									<HelpButton />
-								</Grid>
-								<Grid item xs={12}>
-									<HtmlTooltip title={<TooltipFragment title="section.tutorial_tooltip_title" description="section.tutorial_tooltip_description" />} placement="right-start">
-										<IconButton color="error" size="large" onClick={() => {
-											// Redirect to youtube channel
-											window.open(INFO_URL.ACADEMY, '__blank')
-										}}>
-											<IconBrandYoutube />
-										</IconButton>
-									</HtmlTooltip>
 								</Grid>
 							</Grid>
 						</Grid>
