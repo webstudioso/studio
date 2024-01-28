@@ -8,7 +8,7 @@ const script = function (props={}) {
     const { 
         BrowserProvider, 
         Contract, 
-        parseUnits,
+        parseEther,
         encodeBytes32String
     } = ethers
 
@@ -56,9 +56,10 @@ const script = function (props={}) {
     }
 
     this.formatToWei = (value) => {
+        console.log(`formatToWei input received ${value} of type ${typeof value}`);
         const valueInput = typeof value === 'string' ? value : String(value);
-        const parsedValue = parseUnits(valueInput, "ether");
-        console.log(`formatToWei input ${value} to ${parsedValue}`);
+        const parsedValue = parseEther(valueInput)?.toString();
+        console.log(`formatToWei input ${value} to ${parsedValue} of type ${typeof parsedValue}`);
         return parsedValue;
     }
 
@@ -206,20 +207,22 @@ const script = function (props={}) {
                         `${window?.currentChain?.explorerUrl}/tx/${response.hash}`
                     )
                 }, (error) => {
+                    const errorMessage =    error?.reason ? error?.reason : 
+                                            error?.data?.message ? error?.data?.message :
+                                            error
                     console.log(`Error received ${error}`);
                     scope.sendNotification(
                         'error',
                         'Something Went Wrong!', 
-                        error?.reason
+                        errorMessage
                     )
                 });
-        } catch (e) {
-            console.log(`Method call failed received ${e}`);
+        } catch (error) {
+            console.log(`Method call failed received ${error}`);
             this.sendNotification(
-                'error', 
-                e,
-                null,
-                5000
+                'error',
+                'Something Went Wrong!', 
+                error?.message
             )
         }
     }

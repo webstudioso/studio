@@ -39,7 +39,7 @@ describe("Form script", () => {
 
         window.webstudio = {
                 ethers: {
-                    parseUnits: jest.fn(),
+                    parseEther: jest.fn(),
                     encodeBytes32String: jest.fn(),
                     BrowserProvider: jest.fn().mockImplementation(() => { return {} }),
                     // providers: {
@@ -138,11 +138,11 @@ describe("Form script", () => {
             expect(window.webstudio.ethers.encodeBytes32String).toHaveBeenCalledWith("Hello world");  
         });
 
-        it("Calls ethers utils parseUnits if transformer is used", async () => {
+        it("Calls ethers utils parseEther if transformer is used", async () => {
             const components = {
                 elements: {
                     required: {
-                        value: '20',
+                        value: '0.001',
                         attributes: {
                             format: {
                                 value: 'toWei'
@@ -154,15 +154,16 @@ describe("Form script", () => {
             const required = 'required';
             const fn = new script();
             fn.getValue(components, required);
-            expect(window.webstudio.ethers.parseUnits).toHaveBeenCalledWith('20', 'ether');  
+            expect(window.webstudio.ethers.parseEther).toHaveBeenCalledWith('0.001');  
         });
     });
 
     describe("formatToWei", () => {
         it("Transforms strings to wei", () => {
+            window.webstudio.ethers.parseEther = jest.fn()
             const fn = new script();
             fn.formatToWei(1);
-            expect(window.webstudio.ethers.parseUnits).toHaveBeenCalledWith("1", "ether");  
+            expect(window.webstudio.ethers.parseEther).toHaveBeenCalledWith("1");  
         });
     });
 
