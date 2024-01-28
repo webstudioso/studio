@@ -8,7 +8,7 @@ const script = function (props={}) {
     const { 
         BrowserProvider, 
         Contract, 
-        parseUnits,
+        parseEther,
         encodeBytes32String
     } = ethers
 
@@ -28,23 +28,38 @@ const script = function (props={}) {
         this.getComponent().addEventListener('submit', this.handleSubmit);
     }
 
-    this.sendNotification = (alertSeverity, message, link, timeout) => {
+    // this.sendNotification = (alertSeverity, message, link, timeout) => {
+    //     const detail = { 
+    //         detail: { 
+    //             alertSeverity, 
+    //             message, 
+    //             link,
+    //             timeout
+    //         }
+    //     };
+    //     const cEvent = new CustomEvent('onToast', detail)
+    //     document.dispatchEvent(cEvent);
+    // }
+
+    this.sendNotification = (alertSeverity, title, message, cta, ctaUrl) => {
         const detail = { 
             detail: { 
-                alertSeverity, 
-                message, 
-                link,
-                timeout
+                alertSeverity,
+                title,
+                message,
+                cta,
+                ctaUrl,
             }
         };
-        const cEvent = new CustomEvent('onToast', detail)
-        document.dispatchEvent(cEvent);
+        const event = new CustomEvent('onToast', detail)
+        document.dispatchEvent(event)
     }
 
     this.formatToWei = (value) => {
+        console.log(`formatToWei input received ${value} of type ${typeof value}`);
         const valueInput = typeof value === 'string' ? value : String(value);
-        const parsedValue = parseUnits(valueInput, "ether");
-        console.log(`formatToWei input ${value} to ${parsedValue}`);
+        const parsedValue = parseEther(valueInput)?.toString();
+        console.log(`formatToWei input ${value} to ${parsedValue} of type ${typeof parsedValue}`);
         return parsedValue;
     }
 
@@ -182,32 +197,32 @@ const script = function (props={}) {
             const scope = this;
             console.log(`Invoking target function with attributes ${targetAttributes}, is function? ${targetFunction instanceof Function}`);
             targetFunction.apply(null, targetAttributes)
-                .then((response, param1, param2) => {
+                .then((response) => {
                     console.log(`Response received ${JSON.stringify(response)}`);
-                    console.log(param1)
-                    console.log(param2)
                     scope.sendNotification(
-                        'success', 
+                        'success',
+                        'Successful!', 
                         'Your transaction was successful, view it on the explorer',
-                        `${window?.currentChain?.explorerUrl}/tx/${response.hash}`,
-                        5000
+                        'View transaction in explorer',
+                        `${window?.currentChain?.explorerUrl}/tx/${response.hash}`
                     )
                 }, (error) => {
+                    const errorMessage =    error?.reason ? error?.reason : 
+                                            error?.data?.message ? error?.data?.message :
+                                            error
                     console.log(`Error received ${error}`);
                     scope.sendNotification(
-                        'error', 
-                        error?.message,
-                        null,
-                        5000
+                        'error',
+                        'Something Went Wrong!', 
+                        errorMessage
                     )
                 });
-        } catch (e) {
-            console.log(`Method call failed received ${e}`);
+        } catch (error) {
+            console.log(`Method call failed received ${error}`);
             this.sendNotification(
-                'error', 
-                e,
-                null,
-                5000
+                'error',
+                'Something Went Wrong!', 
+                error?.message
             )
         }
     }

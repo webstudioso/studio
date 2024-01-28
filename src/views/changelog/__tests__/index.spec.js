@@ -1,9 +1,8 @@
 import React from "react"
-import {render, screen} from '@testing-library/react'
+import { render, act } from '@testing-library/react'
 import { unmountComponentAtNode } from "react-dom"
-import { act } from "react-dom/test-utils"
 
-import Changelog from "./index"
+import Changelog from "../index"
 
 let container = null
 const intl = {

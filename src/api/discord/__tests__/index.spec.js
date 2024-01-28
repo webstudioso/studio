@@ -4,7 +4,7 @@ import {
     requestNewDomain, 
     createNewProject, 
     publishProject
-} from './index'
+} from '../index'
 
 describe("Discord API", () => {
 

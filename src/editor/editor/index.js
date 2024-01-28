@@ -17,7 +17,7 @@ import TextBlocks from '../blocks/text'
 import ImageBlocks from '../blocks/images'
 import VideoBlocks from '../blocks/video'
 import ButtonBlocks from '../blocks/buttons'
-import ToastBlocks from '../blocks/toast'
+import ModalBlock from '../blocks/modal'
 
 import Web3LoginButton from '../blocks/web3-login-button'
 // import Web3ActionButton from '../blocks/web3-action-button'
@@ -102,13 +102,13 @@ const Editor = ({ project, principal }) => {
         ButtonBlocks,
         ImageBlocks,
         VideoBlocks,
-        ToastBlocks,
         WSMTailwind,
         // Web3
         Web3LoginButton,
         // Web3ActionButton,
         Web3ContractForm,
-        Web3GatedSection
+        Web3GatedSection,
+        ModalBlock
       ],
       pluginsOpts: {
         [Web3GatedSection]: { isPremiumMember: hasPremiumSubscription(account) }
