@@ -4,7 +4,7 @@ import { getProjectById } from 'api/project'
 import { publishMetadata, uploadPagesToIPFS } from 'api/publish'
 import { LOADER, SET_PROJECT } from "store/actions";
 import { useDispatch, useSelector } from 'react-redux'
-import { getDefaultMetadataForProject } from 'utils/project'
+import { getDefaultMetadataForProject, memoProject } from 'utils/project'
 import { showError, showSuccess } from 'utils/snackbar'
 import tabFrame from 'assets/images/browserTabSkeleton.png'
 import constants from 'constant'
@@ -28,6 +28,7 @@ const Settings = ({ principal, project }) => {
             await publishMetadata({ id: project.id, principal, metadata: data  })
             showSuccess({ dispatch, message: intl.formatMessage({ id : 'action.metadata_saved' }) })
             const updatedProject = await getProjectById({ projectId: project.id, principal })
+            memoProject(updatedProject)
             dispatch({ type: SET_PROJECT, project:updatedProject })
         } catch(e) {
             console.log(e)

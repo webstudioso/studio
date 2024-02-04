@@ -62,7 +62,10 @@ const Editor = ({ project, principal }) => {
       width: "100%",
       allowScripts: 1,
       fromElement: true,
-      selectorManager: { escapeName },
+      selectorManager: { 
+        escapeName,
+        componentFirst: true,
+      },
       pageManager: true, // This should be set to true
       assetManager: {
         custom: {
