@@ -1,5 +1,5 @@
 import { Fragment, useState } from 'react'
-import { Button, Typography, CircularProgress, IconButton } from '@mui/material'
+import { Button, Typography, CircularProgress, IconButton, Box } from '@mui/material'
 import { uploadPagesToIPFS, publishRouting } from 'api/publish'
 import { useDispatch, useSelector } from 'react-redux'
 import { showLoader } from 'utils/loader'
@@ -51,6 +51,8 @@ const PublishButton = ({ principal, project, editor }) => {
         }
     }
 
+    const onSaveAsTemplate = () => document.dispatchEvent(new CustomEvent(EVENTS.TOGGLE_SAVE_TEMPLATE_MODAL))
+
     const publishTooltip = (
         <Fragment>
             <Typography fontWeight="bold" color="inherit">{intl.formatMessage({ id:'publish'})}
@@ -62,8 +64,10 @@ const PublishButton = ({ principal, project, editor }) => {
                 {intl.formatMessage({ id:'publish.tooltip'})}<br/>
                 <a style={{ color: '#6366F1'}} href="https://docs.ipfs.tech/concepts/faq/#what-is-ipfs" target="__blank">{intl.formatMessage({id:"publish.ipfs"})}</a>
             </Typography>
-            <Button fullWidth size="small" sx={{ my: 1 }} href={`${getProjectUrl({ project })}${queryParams()}`} target="__blank">{intl.formatMessage({id:"publish.view_site"})}</Button>
-            {release && (<Button fullWidth size="small" sx={{ m: 1 }} href={getCidReleaseUrl(release)} target="__blank">{intl.formatMessage({id:"publish.view_ipfs"})}</Button>)}
+            <Box flex={1} marginBottom={1}/>
+            <Button fullWidth size="small" href={`${getProjectUrl({ project })}${queryParams()}`} target="__blank">{intl.formatMessage({id:"publish.view_site"})}</Button>
+            {release && (<Button fullWidth size="small" href={getCidReleaseUrl(release)} target="__blank">{intl.formatMessage({id:"publish.view_ipfs"})}</Button>)}
+            <Button fullWidth size="small" onClick={onSaveAsTemplate}>{intl.formatMessage({id:"publish.save_template"})}</Button>
         </Fragment>
     )
 

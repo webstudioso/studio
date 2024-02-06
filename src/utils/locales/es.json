@@ -21,6 +21,15 @@
     "template_page.pick": "Selecciona",
     "template_page.free": "Gratis",
 
+    "template_page.name": "Nombre de la plantilla",
+    "template_page.name_placeholder": "Porto",
+    "template_page.description": "Breve descripcion en 1 linea",
+    "template_page.description_placeholder": "Tailwind NFT minting page",
+    "template_page.tags": "Etiqueta para ser mostrada",
+    "template_page.tags_placeholder": "e.j. Landing Page",
+    "template_page.publish_success": "Plantilla enviada para revision!",
+    "template_page.publish_description": "Tu proyecto sera convertido en plantilla y publicado para todos los usuarios luego de ser evaluado. Seras contactado via email durante el proceso.",
+
     "dashboard.title": "Mis Proyectos",
     "dashboard.title_tooltip": "Abre un proyecto existente o crea un nuevo proyecto con el editor sin codigo. Adicionalmente aqui puedes borrar proyectos.",
     "dashboard.open_project_card": "Abrir en Editor",
@@ -38,7 +47,7 @@
     "section.media_tooltip_title": "Multimedia",
     "section.media_tooltip_description": "Sube imagenes y videos a la nube decentralizada para usarlas en el editor",
     "section.templates_tooltip_title": "Cambiar Plantilla",
-    "section.templates_tooltip_description": "Reemplaza la plantilla actual. Esto deshacera todos tus cambios en el canvas",
+    "section.templates_tooltip_description": "Reemplaza el proyecto actual con nueva plantilla. Todos tus cambios actuales seran sobreescritos",
     "section.settings_tooltip_title": "Configura SEO",
     "section.settings_tooltip_description": "Edita las propiedades de tu aplicacion, dominio privado y redes sociales",
     "section.pages_tooltip_title": "Administrar Paginas",
@@ -85,6 +94,7 @@
     "action.auto_saved": "Cambios guardados",
     "action.auto_saved_error": "Hubo un error guardando los cambios, contact a un administrador",
 
+    "cancel": "Cancelar",
     "publish": "Publicar",
     "publish.tooltip": "Haz click on publicar para que tus cambios vayan en vivo. Tu sitio web sera alojado en",
     "publish.ipfs": "Interplanetary File System",
@@ -94,6 +104,7 @@
     "publish.is_live_description": "Tus cambios seran visibles para todos los visitantes en un par de minutos. Un nuevo certificado se ha generado par tu publicacion.",
     "publish.visit_website": "Visitar Sitio Web",
     "publish.view_certificate": "Ver Certificado",
+    "publish.save_template": "Guardar Como Plantilla 💾",
 
     "copilot": "Studio AI",
     "copilot.block_add": "Agrega elemento nuevo en el canvas previo del elemento seleccionado actualmente",
@@ -237,5 +248,4 @@
     "props.radius": "Curvas",
     "props.class_setting": "Editor Avanzado de Estilos",
     "props.class_setting_tooltip": "Manualmente agrega o elimina estilos de las librerias de TailwindCSS y AnimateCSS sobre el componente"
-
 }

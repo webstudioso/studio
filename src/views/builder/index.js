@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useTheme } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom'
 import { Grid, Box, AppBar, Toolbar, Typography, IconButton, Button } from '@mui/material'
-import { IconSettings, IconPlus, IconFiles, IconTemplate, IconPhoto, IconBrandYoutube } from '@tabler/icons'
+import { IconSettings, IconPlus, IconFiles, IconTemplate, IconPhoto } from '@tabler/icons'
 import { Editor } from 'editor'
 import { useDispatch, useSelector } from 'react-redux'
 import { UPDATE_APP } from 'store/actions'
@@ -23,8 +23,9 @@ import Membership from 'views/Membership'
 import { trackEvent } from 'utils/analytics'
 import Changelog from 'views/changelog'
 import { useIntl } from 'react-intl'
+import SaveTemplateModal from 'views/modal/SaveTemplate'
 
-const { SECTION, PATH, EVENTS, ANALYTICS, INFO_URL } = constants
+const { SECTION, PATH, EVENTS, ANALYTICS } = constants
 
 const EditorView = () => {
 	const intl = useIntl()
@@ -33,6 +34,7 @@ const EditorView = () => {
 	const dispatch = useDispatch()
 	const [openDialog, setOpenDialog] = useState(false)
 	const [openPublishDialog, setOpenPublishDialog] = useState(false)
+	const [openSaveTemplateDialog, setOpenSaveTemplateDialog] = useState(false)
 	const [openCategory, setOpenCategory] = useState()
 	const [open, setOpen] = useState(false)
 
@@ -43,13 +45,15 @@ const EditorView = () => {
 
 	useEffect(() => {
 		trackEvent({ name: ANALYTICS.EDITOR_OPEN , params: account.user })
-		document.addEventListener(EVENTS.TOGGLE_PUBLISH_MODAL, () => setOpenPublishDialog(true));
-		document.addEventListener(EVENTS.TOGGLE_SETTINGS_MODAL, () => setOpenDialog(true));
-		document.addEventListener(EVENTS.TOGGLE_ASSETS_MODAL, () => handleOpenSidePanel(SECTION.MEDIA));
+		document.addEventListener(EVENTS.TOGGLE_PUBLISH_MODAL, () => setOpenPublishDialog(true))
+		document.addEventListener(EVENTS.TOGGLE_SAVE_TEMPLATE_MODAL, () => setOpenSaveTemplateDialog(true))
+		document.addEventListener(EVENTS.TOGGLE_SETTINGS_MODAL, () => setOpenDialog(true))
+		document.addEventListener(EVENTS.TOGGLE_ASSETS_MODAL, () => handleOpenSidePanel(SECTION.MEDIA))
 		return () => {
-			document.removeEventListener(EVENTS.TOGGLE_PUBLISH_MODAL, () => {});
-			document.removeEventListener(EVENTS.TOGGLE_SETTINGS_MODAL, () => {});
-			document.removeEventListener(EVENTS.TOGGLE_ASSETS_MODAL, () => {});
+			document.removeEventListener(EVENTS.TOGGLE_PUBLISH_MODAL, () => {})
+			document.removeEventListener(EVENTS.TOGGLE_SAVE_TEMPLATE_MODAL, () => {})
+			document.removeEventListener(EVENTS.TOGGLE_SETTINGS_MODAL, () => {})
+			document.removeEventListener(EVENTS.TOGGLE_ASSETS_MODAL, () => {})
 		}
 	}, [])
 
@@ -172,10 +176,15 @@ const EditorView = () => {
 					editor={editor} 
 					principal={account.principal}
 			/>
+
+			{/* Modals */}
 			<PublishConfirmationDialog principal={account.principal} open={openPublishDialog} project={project} onClose={() => setOpenPublishDialog(false)} />
-			{editor && <Chat theme={theme} editor={editor} principal={account.principal} /> }
-			<DraggableDialog open={openDialog} editor={editor} handleClose={() => setOpenDialog(false)} intl={intl}></DraggableDialog>
+			<SaveTemplateModal editor={editor} principal={account.principal} open={openSaveTemplateDialog} project={project} onClose={() => setOpenSaveTemplateDialog(false)}/>
 			<Changelog intl={intl} />
+			<DraggableDialog open={openDialog} editor={editor} handleClose={() => setOpenDialog(false)} intl={intl}></DraggableDialog>
+
+			{/* AI Chat  */}
+			{editor && <Chat theme={theme} editor={editor} principal={account.principal} /> }
 		</>
 	)
 }
