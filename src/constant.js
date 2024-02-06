@@ -77,7 +77,8 @@ const constants = {
 		TOGGLE_ASSETS_MODAL: 'toggleAssetsModal',
 		TOGGLE_PUBLISH_MODAL: 'togglePublishModal',
 		WIZARD_OPEN: 'wizardOpen',
-		TOGGLE_PREMIUM_MODAL: 'togglePremiumModal'
+		TOGGLE_PREMIUM_MODAL: 'togglePremiumModal',
+		TOGGLE_SAVE_TEMPLATE_MODAL: 'toggleSaveTemplateModal'
 	},
 	WIZARD: {
 		SMART_CONTRACT: 'SMART_CONTRACT'

@@ -1,10 +1,10 @@
-import { useState, memo } from 'react'
-import { Box, Grid, Paper, Button, Typography, CircularProgress, Chip } from '@mui/material'
+import { useState, memo, useEffect } from 'react'
+import { Box, Grid, Paper, Button, Typography, CircularProgress, Chip, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { LOADER } from 'store/actions'
-import availableTemplates from 'templates/content'
 import { FormattedMessage, useIntl } from 'react-intl'
+import { getTemplateById, getTemplates } from 'api/template'
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -18,14 +18,30 @@ const Templates = ({ onLeave, fullScreen=false }) => {
     const intl = useIntl()
     const dispatch = useDispatch()
     const [selected, setSelected] = useState()
+    const [picked, setPicked] = useState()
+    const [availableTemplates, setAvailableTemplates] = useState([])
     const isLoading = useSelector((state) => state.loader.show)
 	const editor = useSelector((state) => state.editor.editor)
+    const account = useSelector((state) => state.account)
 
-    const onHandleSelectTemplate = async (template) => {
+    const loadTemplates = async () => {
         dispatch({ type: LOADER, show: true })
+        const list = await getTemplates({ principal: account.principal })
+        setAvailableTemplates(list)
+        dispatch({ type: LOADER, show: false })
+    }
+
+    useEffect(() => {
+        loadTemplates()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    const confirmTemplate = async () => {
+        dispatch({ type: LOADER, show: true })
+        const baseTemplate = await getTemplateById({ id: picked?.id , principal: account.principal })
         setTimeout(() => {
-            editor.setComponents(template.template)
-            editor.setStyle(template.style)
+            editor.loadProjectData(JSON.parse(baseTemplate.content))
+            setPicked()
             if (fullScreen) onLeave()
         }, 250)
     }
@@ -42,7 +58,7 @@ const Templates = ({ onLeave, fullScreen=false }) => {
                 <Box sx={{
                     width: '100%',
                     height: '100%',
-                    background: `url(${template.metadata.image})`,
+                    background: `url(${template.preview})`,
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'top',
@@ -63,7 +79,7 @@ const Templates = ({ onLeave, fullScreen=false }) => {
                 className="overlay"
                 >
                     <Button 
-                            onClick={() => onHandleSelectTemplate(template)}
+                            onClick={() => setPicked(template)}
                             disabled={isLoading}
                             sx={{
                                 borderRadius: '50px',
@@ -85,13 +101,13 @@ const Templates = ({ onLeave, fullScreen=false }) => {
                         color: 'black',
                         textAlign: 'center'
                     }}>
-                        <Typography variant="body" fontWeight="bold" color="#555" fontSize={16}>{intl.formatMessage({ id: template.metadata.description })}</Typography>
+                        <Typography variant="body" fontWeight="bold" color="#555" fontSize={16}>{intl.formatMessage({ id: template.description })}</Typography>
                     </Box>
                 </Box>)}
                 <Box sx={{py:2, px: 1 }}>
                     <Grid container direction="row">
                         <Grid item>
-                            <Typography variant="body" fontWeight="bold" color="#555" fontSize={16}>{template.metadata.name}</Typography>
+                            <Typography variant="body" fontWeight="bold" color="#555" fontSize={16}>{template.name}</Typography>
                         </Grid>
                         <Box flexGrow={1}></Box>
                         <Grid item>
@@ -106,6 +122,26 @@ const Templates = ({ onLeave, fullScreen=false }) => {
         </Grid>
     ))
 
+    const dialog = (
+        <Dialog
+            open={!!picked}
+            onClose={() => setPicked()}
+        >
+            <DialogTitle>
+                { intl.formatMessage({ id: 'section.templates_tooltip_title' }) }
+            </DialogTitle>
+            <DialogContent>
+                <DialogContentText>
+                    { intl.formatMessage({ id: 'section.templates_tooltip_description' }) }
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions sx={{ px: 4 }}>
+                <Button onClick={() => setPicked()}>{ intl.formatMessage({ id: 'cancel' }) }</Button>
+                <Button onClick={confirmTemplate}>{ intl.formatMessage({id:'action.continue'}) }</Button>
+            </DialogActions>
+        </Dialog>
+    )
+
     return (
         <Grid container spacing={2} sx={{ 
             height: fullScreen ? 'calc(100vh - 70px)' : 'calc(100vh - 120px)', 
@@ -118,6 +154,7 @@ const Templates = ({ onLeave, fullScreen=false }) => {
             pt: 0
         }}>
             {templateList}
+            {dialog}
         </Grid>
     )
 }
