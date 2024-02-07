@@ -6,13 +6,14 @@ import LoginIcon from '@mui/icons-material/Login';
 import { Magic } from 'magic-sdk'
 import { getQueryParam } from 'utils/url'
 import { showError } from 'utils/snackbar'
-import { LOGIN, SET_PROJECT, THEME_LOCALE } from 'store/actions'
+import { LOAD_TEMPLATES, LOGIN, SET_PROJECT, THEME_LOCALE } from 'store/actions'
 import { getAllProjects } from 'api/project'
 import { getMemoedProject } from 'utils/project'
 import { trackEvent } from 'utils/analytics'
 import { getSubscription } from 'api/subscription'
 import { FormattedMessage, useIntl } from 'react-intl'
 import constants from 'constant'
+import { getTemplates } from 'api/template';
 const { 
 	SESSION_DURATION_SEC, 
 	QUERY_PARAMS,  
@@ -51,11 +52,22 @@ const Login = () => {
 	const authenticate = async () => {
 		const isAuthenticated = await m?.user?.isLoggedIn()
 		if (isAuthenticated) {
-			const principal = await m.user.getIdToken({ lifespan: SESSION_DURATION_SEC })
-			const user = await m.user.getMetadata(principal)
-			const projects = await getAllProjects({ principal })
-			const subscription = await getSubscription({ email: user.email })
+
+			const promisesAuth = [
+				m.user.getIdToken({ lifespan: SESSION_DURATION_SEC }),
+				m.user.getMetadata()
+			]
+			const [principal, user] = await Promise.all(promisesAuth)
+
+			const promisesData = [
+				getAllProjects({ principal }),
+				getSubscription({ email: user.email }),
+				getTemplates({ principal })
+			]
+			const [projects, subscription, availableTemplates] = await Promise.all(promisesData)
+
 			trackEvent({ name: ANALYTICS.APP_OPEN , params: user })
+			dispatch({ type: LOAD_TEMPLATES, availableTemplates })
 			dispatch({ type: LOGIN, payload: { user , principal, projects, subscription }})
 			if (projects && projects.length > 0) {
 				// Has some projects created

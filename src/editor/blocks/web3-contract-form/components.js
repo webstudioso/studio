@@ -10,10 +10,6 @@ export const typeLabel = 'label';
 export const typeOption = 'option';
 
 
-const idTrait = {
-  name: 'id',
-};
-
 const forTrait = {
   name: 'for',
 };
@@ -38,11 +34,6 @@ const requiredTrait = {
 const optionTrait = {
   type: 'checkbox',
   name: 'txOption',
-};
-
-const checkedTrait = {
-  type: 'checkbox',
-  name: 'checked',
 };
 
 const formatterTrait =           {

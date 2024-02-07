@@ -67,3 +67,6 @@ export const LOADER = '@loader/SHOW';
 // action - editor
 export const SET_EDITOR = '@editor/SET_EDITOR';
 export const SET_PROJECT = '@editor/SET_PROJECT';
+
+// action - templates
+export const LOAD_TEMPLATES = "@templates/LOAD";
