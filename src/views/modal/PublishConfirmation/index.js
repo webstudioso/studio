@@ -17,7 +17,6 @@ const PublishConfirmationModal = ({ open, project, onClose, principal }) => {
     const intl = useIntl()
     const dispatch = useDispatch()
     const [cid, setCid] = useState()
-    const isLoading = useSelector((state) => state.loader.show)
     const account = useSelector((state) => state.account)
     
     const loadCid = async() => {

@@ -1,10 +1,10 @@
-import { useState, memo, useEffect } from 'react'
+import { useState, memo } from 'react'
 import { Box, Grid, Paper, Button, Typography, CircularProgress, Chip, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { LOADER } from 'store/actions'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { getTemplateById, getTemplates } from 'api/template'
+import { getTemplateById } from 'api/template'
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -19,22 +19,10 @@ const Templates = ({ onLeave, fullScreen=false }) => {
     const dispatch = useDispatch()
     const [selected, setSelected] = useState()
     const [picked, setPicked] = useState()
-    const [availableTemplates, setAvailableTemplates] = useState([])
     const isLoading = useSelector((state) => state.loader.show)
 	const editor = useSelector((state) => state.editor.editor)
     const account = useSelector((state) => state.account)
-
-    const loadTemplates = async () => {
-        dispatch({ type: LOADER, show: true })
-        const list = await getTemplates({ principal: account.principal })
-        setAvailableTemplates(list)
-        dispatch({ type: LOADER, show: false })
-    }
-
-    useEffect(() => {
-        loadTemplates()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    const availableTemplates = useSelector((state) => state?.template?.availableTemplates)
 
     const confirmTemplate = async () => {
         dispatch({ type: LOADER, show: true })
