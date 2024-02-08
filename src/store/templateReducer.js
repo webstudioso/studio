@@ -2,7 +2,8 @@
 import * as actionTypes from './actions';
 
 const initialState = {
-    availableTemplates: []
+    availableTemplates: [],
+    myTemplates: []
 };
 
 // ==============================|| SNACKBAR REDUCER ||============================== //

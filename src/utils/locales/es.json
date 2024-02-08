@@ -1,4 +1,10 @@
 {
+    "landing_page": "Página de destino",
+    "live_demo": "Demo",
+    "documentation": "Documentacion",
+    "community_templates": "Plantillas Publicas",
+    "created_by_me": "Mis Plantillas",
+
     "membership.unlimited": "Plan Ilimitado 👑",
     "membership.free": "Obten Acceso Ilimitado",
 
@@ -25,10 +31,15 @@
     "template_page.name_placeholder": "Porto",
     "template_page.description": "Breve descripcion en 1 linea",
     "template_page.description_placeholder": "Tailwind NFT minting page",
-    "template_page.tags": "Etiqueta para ser mostrada",
+    "template_page.tags": "Categorias",
     "template_page.tags_placeholder": "e.j. Landing Page",
     "template_page.publish_success": "Plantilla enviada para revision!",
     "template_page.publish_description": "Tu proyecto sera convertido en plantilla y publicado para todos los usuarios luego de ser evaluado. Seras contactado via email durante el proceso.",
+    "template_page.save_as_new": "Guardar como nueva plantilla",
+    "template_page.identifier": "ID de plantilla",
+    "template_page.private": "Plantilla privada",
+    "template_page.demo": "Enlace a Demo en Vivo",
+    "template_page.docs": "Enlace a Documentacion",
 
     "dashboard.title": "Mis Proyectos",
     "dashboard.title_tooltip": "Abre un proyecto existente o crea un nuevo proyecto con el editor sin codigo. Adicionalmente aqui puedes borrar proyectos.",
@@ -95,6 +106,7 @@
     "action.auto_saved_error": "Hubo un error guardando los cambios, contact a un administrador",
 
     "cancel": "Cancelar",
+    "last_updated": "Ultima actualizacion",
     "publish": "Publicar",
     "publish.tooltip": "Haz click on publicar para que tus cambios vayan en vivo. Tu sitio web sera alojado en",
     "publish.ipfs": "Interplanetary File System",
@@ -170,23 +182,6 @@
 
     "audited": "Auditado",
     "guide": "Mira el video guia para aprender mas",
-
-    "contract.nftdrop_title": "NFT Drop",
-    "contract.nftdrop_description": "Lanza una collection de NFT unicos a un precio fijo",
-    "contract.custom_title": "Contrato Personalizado",
-    "contract.custom_description": "Selecciona un archivo ABI con formato .json",
-    "contract.upload_abi_json": "Selecciona un ABI con formato .json",
-    "contract.explore_url": "Explora y lanza contrato",
-
-    "wizard.network_label": "Red",
-    "wizard.contract_type_label": "Tipo de Contrato",
-    "wizard.contract_address_placeholder": "0x...",
-    "wizard.contract_address_label": "Identificador de Contrato",
-    "wizard.function_pick_label": "Selecciona Funcion",
-    "wizard.function_attribute_mapping_label": "Origen de la Data",
-    "wizard.function_attribute_mapping_static_value": "Valor Estatico",
-    "wizard.function_attribute_mapping_static_value_description":"Este valor no sera visible para el usuario",
-    "wizard.function_attribute_mapping_user_address": "Direccion del Usuario",
 
     "configuration.title": "Configuracion",
     "social.text": "Comparte en",

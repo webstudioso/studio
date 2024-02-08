@@ -179,7 +179,7 @@ const EditorView = () => {
 
 			{/* Modals */}
 			<PublishConfirmationDialog principal={account.principal} open={openPublishDialog} project={project} onClose={() => setOpenPublishDialog(false)} />
-			<SaveTemplateModal editor={editor} principal={account.principal} open={openSaveTemplateDialog} project={project} onClose={() => setOpenSaveTemplateDialog(false)}/>
+			{ openSaveTemplateDialog && (<SaveTemplateModal editor={editor} principal={account.principal} open={openSaveTemplateDialog} project={project} onClose={() => setOpenSaveTemplateDialog(false)}/>) }
 			<Changelog intl={intl} />
 			<DraggableDialog open={openDialog} editor={editor} handleClose={() => setOpenDialog(false)} intl={intl}></DraggableDialog>
 

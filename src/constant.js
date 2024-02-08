@@ -1,6 +1,15 @@
 const constants = {
 	IPFS_PROVIDER: 'https://gateway.ipfs.io/ipfs',
 	DEFAULT_LOCALE: 'en',
+	TEMPLATES: {
+		DEFAULT_IMAGE: 'https://i.ibb.co/619tC6J/imageonline-co-placeholder-image.jpg',
+		DEFAULT: 'default_template',
+		DEFAULT_DEMO_URL: 'https://my-template.webstudio.so',
+		DEFAULT_DOCS_URL: 'https://docs.webstudio.so/templates#my-template',
+		CATEGORIES: [
+			'landing_page'
+		]
+	},
 	CHANGELOG: {
 		CACHE: 'CHANGELOG_CACHE',
 		BASE_URL: 'https://s3.amazonaws.com/webstudio.changelog'

@@ -1,4 +1,10 @@
 {
+    "landing_page": "Landing Page",
+    "live_demo": "Live Demo",
+    "documentation": "Documentation",
+    "community_templates": "Community Templates",
+    "created_by_me": "Created by Me",
+
     "membership.unlimited": "Unlimited Plan 👑",
     "membership.free": "Get Unlimited Access",
 
@@ -25,10 +31,15 @@
     "template_page.name_placeholder": "Porto",
     "template_page.description": "Brief one line description",
     "template_page.description_placeholder": "Tailwind NFT minting page",
-    "template_page.tags": "Template tag to be displayed",
+    "template_page.tags": "Categories",
     "template_page.tags_placeholder": "e.g Landing Page",
     "template_page.publish_success": "Your template is in review!",
     "template_page.publish_description": "By submitting this project as a template it will go through a review and we will contact you for further details via email before making it public",
+    "template_page.save_as_new": "Save as a new template",
+    "template_page.identifier": "Template ID",
+    "template_page.private": "Toggle to make this template private",
+    "template_page.demo": "Live Preview Link",
+    "template_page.docs": "Documentation & Information Link",
 
     "dashboard.title": "My Projects",
     "dashboard.title_tooltip": "Launch the no-code editor for existing projects or create a new one. Here you can also delete projects",
@@ -95,6 +106,7 @@
     "action.auto_saved_error": "There was an error saving your changes, please contact an admin",
 
     "cancel": "Cancel",
+    "last_updated": "Last updated on",
     "publish": "Publish",
     "publish.tooltip": "Click Publish to go live with your latest changes. Your website will be hosted in the",
     "publish.ipfs": "Interplanetary File System",
@@ -170,23 +182,6 @@
 
     "audited": "Audited",
     "guide": "Watch the tutorial video to learn more",
-
-    "contract.nftdrop_title": "NFT Drop",
-    "contract.nftdrop_description": "Release collection of unique NFTs for a set price",
-    "contract.custom_title": "Custom Contract",
-    "contract.custom_description": "Upload an EVM compatible ABI with .json format",
-    "contract.upload_abi_json": "Upload abi file in .json format",
-    "contract.explore_url": "Explore and launch contract",
-
-    "wizard.network_label": "Network",
-    "wizard.contract_type_label": "Contract Type",
-    "wizard.contract_address_placeholder": "0x...",
-    "wizard.contract_address_label": "Contract Address",
-    "wizard.function_pick_label": "Select Function",
-    "wizard.function_attribute_mapping_label": "How is this value input",
-    "wizard.function_attribute_mapping_static_value": "Static Value",
-    "wizard.function_attribute_mapping_static_value_description":"This field will be hidden from the user",
-    "wizard.function_attribute_mapping_user_address": "User Address",
 
     "configuration.title": "Settings",
     "social.text": "Share on",

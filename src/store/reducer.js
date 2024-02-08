@@ -6,12 +6,10 @@ import storage from 'redux-persist/lib/storage';
 import customization from './customizationReducer';
 import snackbar from './snackbarReducer';
 import cartReducer from './cartReducer';
-import kanban from './kanbanReducer';
 import app from 'store/appReducer';
 import loader from './loaderReducer';
 import account from './accountReducer';
 import editor from './editorReducer';
-import wizard from './wizardReducer';
 import template from './templateReducer';
 
 // ==============================|| COMBINE REDUCER ||============================== //
@@ -25,11 +23,9 @@ const reducer = combineReducers({
         },
         cartReducer
     ),
-    kanban,
     app,
     account,
     editor,
-    wizard,
     customization,
     snackbar,
     loader,
