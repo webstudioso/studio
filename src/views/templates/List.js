@@ -1,18 +1,48 @@
-import { useState, memo } from 'react'
-import { Box, Grid, Paper, Button, Typography, CircularProgress, Chip, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import React, { useState, memo } from 'react'
+import { 
+    Box, 
+    Grid, 
+    Button,
+    Dialog, 
+    DialogTitle, 
+    DialogContent, 
+    DialogActions, 
+    DialogContentText,
+    Tabs,
+    Tab
+} from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { LOADER } from 'store/actions'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { useIntl } from 'react-intl'
 import { getTemplateById } from 'api/template'
+import Card from './Card'
 
-const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body2,
-    textAlign: 'left',
-    color: theme.palette.text.secondary,
-    height: 450,
-    borderRadius: '4px'
-}))
+const CustomTabPanel = (props) => {
+    const { children, value, index, ...other } = props;
+  
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+            <Grid container spacing={2} sx={{ p: 2, pr: 1 }}>
+                {children}
+            </Grid>
+        )}
+      </div>
+    );
+}
+
+function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`,
+    };
+}  
 
 const Templates = ({ onLeave, fullScreen=false }) => {
     const intl = useIntl()
@@ -22,7 +52,12 @@ const Templates = ({ onLeave, fullScreen=false }) => {
     const isLoading = useSelector((state) => state.loader.show)
 	const editor = useSelector((state) => state.editor.editor)
     const account = useSelector((state) => state.account)
-    const availableTemplates = useSelector((state) => state?.template?.availableTemplates)
+    const templates = useSelector((state) => state?.template)
+
+    const {
+        availableTemplates,
+        myTemplates
+    } = templates
 
     const confirmTemplate = async () => {
         dispatch({ type: LOADER, show: true })
@@ -34,81 +69,37 @@ const Templates = ({ onLeave, fullScreen=false }) => {
         }, 250)
     }
 
-    const spinner = isLoading && (<CircularProgress size={18} sx={{ ml: 1 }} />)
+    const templateList = availableTemplates?.map((template, index) => {
+        return (
+            <Card   template={template}
+                    selected={selected}
+                    index={index}
+                    onHover={setSelected}
+                    isLoading={isLoading}
+                    intl={intl}
+                    onPick={setPicked}
+                    fullScreen={fullScreen}
+                    showPrice={true}
+                    showStatus={false}
+            />
+        )
+    })
 
-    const templateList = availableTemplates.map((template, index) => (
-        <Grid item xs={fullScreen ? 6:12} md={fullScreen ? 4:6} lg={fullScreen ? 3:6} key={index} sx={{ mb: 5, cursor: 'pointer' }}
-            onMouseEnter={() => {
-                setSelected(index)
-            }}
-        >
-            <Item elevation={6} sx={{position: 'relative'}}>
-                <Box sx={{
-                    width: '100%',
-                    height: '100%',
-                    background: `url(${template.preview})`,
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'top',
-                }}
-                className={index === selected ? "blurred" : ""}
-                >
-                </Box>
-                {index ===selected && (
-                <Box sx={{
-                    width: '102%',
-                    height: '102%',
-                    background: `rgba(255,255,255,0.85)`,
-                    position: 'absolute',
-                    top: '-1%',
-                    left: '-1%',
-                    zIndex: 1000
-                }}
-                className="overlay"
-                >
-                    <Button 
-                            onClick={() => setPicked(template)}
-                            disabled={isLoading}
-                            sx={{
-                                borderRadius: '50px',
-                                position: 'absolute',
-                                top: '35%',
-                                left: '25%',
-                                width: '50%'
-                            }}
-                            className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-full text-sm px-5 py-3 text-center mr-2 mb-2"
-                    >
-                        <FormattedMessage id="template_page.pick" />
-                        {spinner}
-                    </Button>
-                    <Box sx={{
-                        position: 'absolute',
-                        top: '55%',
-                        left: '10%',
-                        width: '80%',
-                        color: 'black',
-                        textAlign: 'center'
-                    }}>
-                        <Typography variant="body" fontWeight="bold" color="#555" fontSize={16}>{intl.formatMessage({ id: template.description })}</Typography>
-                    </Box>
-                </Box>)}
-                <Box sx={{py:2, px: 1 }}>
-                    <Grid container direction="row">
-                        <Grid item>
-                            <Typography variant="body" fontWeight="bold" color="#555" fontSize={16}>{template.name}</Typography>
-                        </Grid>
-                        <Box flexGrow={1}></Box>
-                        <Grid item>
-                            <Chip label={<FormattedMessage id="template_page.free" />} color="primary" size="small" />
-                        </Grid>
-                      
-                    </Grid>
-                    
-
-                </Box>
-            </Item>
-        </Grid>
-    ))
+    const myTemplateList = myTemplates.map((template, index) => {
+        return (
+            <Card   template={template}
+                    selected={selected}
+                    index={index}
+                    onHover={setSelected}
+                    isLoading={isLoading}
+                    intl={intl}
+                    onPick={setPicked}
+                    fullScreen={fullScreen}
+                    showPrice={false}
+                    showStatus={true}
+            />
+        )
+    })
 
     const dialog = (
         <Dialog
@@ -130,6 +121,9 @@ const Templates = ({ onLeave, fullScreen=false }) => {
         </Dialog>
     )
 
+    const [value, setValue] = React.useState(0)
+    const onTabChange = (e, newValue) => setValue(newValue)
+
     return (
         <Grid container spacing={2} sx={{ 
             height: fullScreen ? 'calc(100vh - 70px)' : 'calc(100vh - 120px)', 
@@ -141,7 +135,21 @@ const Templates = ({ onLeave, fullScreen=false }) => {
             p: 2,
             pt: 0
         }}>
+
+        <Box sx={{ borderBottom: 1, borderColor: 'divider', width: '100%' }}>
+        <Tabs value={value} onChange={onTabChange} aria-label="basic tabs example">
+            <Tab label={intl.formatMessage({ id: 'community_templates' })} {...a11yProps(0)} sx={{ width: '50%'}} />
+            <Tab label={intl.formatMessage({ id: 'created_by_me' })} {...a11yProps(1)} sx={{ width: '50%'}}/>
+        </Tabs>
+        </Box>
+        <CustomTabPanel value={value} index={0}>
             {templateList}
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={1}>
+            {myTemplateList}
+        </CustomTabPanel>
+
+            
             {dialog}
         </Grid>
     )

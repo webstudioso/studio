@@ -9,9 +9,9 @@ import BorderStyle from '../BorderStyle'
 const { TAILWIND } = constants
 
 const resolution = {
-    desktop: 'lg:',
-    tablet: 'md:',
-    mobilePortrait: ''
+    'Desktop': 'lg:',
+    'Tablet': 'md:',
+    'Mobile portrait': ''
 }
 const Text = ({ editor, selected, intl }) => {
 

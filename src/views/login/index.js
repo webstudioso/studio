@@ -13,7 +13,7 @@ import { trackEvent } from 'utils/analytics'
 import { getSubscription } from 'api/subscription'
 import { FormattedMessage, useIntl } from 'react-intl'
 import constants from 'constant'
-import { getTemplates } from 'api/template';
+import { getMyTemplates, getTemplates } from 'api/template';
 const { 
 	SESSION_DURATION_SEC, 
 	QUERY_PARAMS,  
@@ -25,6 +25,7 @@ const {
 const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY)
 
 const Login = () => {
+	console.log("yeehaa")
 	const intl = useIntl()
 	const [existingProject] = useState(getMemoedProject())
 	const navigate = useNavigate()
@@ -62,12 +63,13 @@ const Login = () => {
 			const promisesData = [
 				getAllProjects({ principal }),
 				getSubscription({ email: user.email }),
-				getTemplates({ principal })
+				getTemplates({ principal }),
+				getMyTemplates({ principal, author: user.issuer})
 			]
-			const [projects, subscription, availableTemplates] = await Promise.all(promisesData)
+			const [projects, subscription, availableTemplates, myTemplates] = await Promise.all(promisesData)
 
 			trackEvent({ name: ANALYTICS.APP_OPEN , params: user })
-			dispatch({ type: LOAD_TEMPLATES, availableTemplates })
+			dispatch({ type: LOAD_TEMPLATES, ...{ availableTemplates, myTemplates }})
 			dispatch({ type: LOGIN, payload: { user , principal, projects, subscription }})
 			if (projects && projects.length > 0) {
 				// Has some projects created

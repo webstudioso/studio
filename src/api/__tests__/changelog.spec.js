@@ -2,7 +2,7 @@ import {
     getChangelog,
     getCachedChangelogMatchValue,
     setChangelogMatchValue
-} from '../index'
+} from '../changelog'
 
 describe("Changelog API", () => {
 

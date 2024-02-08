@@ -44,6 +44,15 @@ html, body {
     fill: rgba(0,0,0,0.5);
 }
 
+[role="alert"] {
+    padding: 8px;
+}
+
+.MuiAlert-icon {
+    width: 48px;
+    margin-left: 8px;
+}
+
 .changelog {
 
     h1, h2, h3, h4, h5, h6 {

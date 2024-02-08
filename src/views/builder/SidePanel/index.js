@@ -50,7 +50,7 @@ const SidePanel = ({ open, openCategory, onLeave, principal, project, editor}) =
             onMouseLeave={dismiss}
             PaperProps={{
                 sx: {
-                    width: openCategory === SECTION.TEMPLATE ? '45vw' : '35vw',
+                    width: openCategory === SECTION.TEMPLATE ? '50vw' : '35vw',
                     ml: '60px',
                     mt: '56px',
                     boxShadow: '15px 15px 15px 0px rgba(0,0,0,0.15)',

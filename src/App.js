@@ -6,7 +6,6 @@ import themes from "themes";
 import Locales from "ui-component/Locales";
 import Snackbar from "ui-component/extended/Snackbar";
 import Loader from 'ui-component/Loader';
-import { ProgressProvider } from "contexts/ProgressContext";
 
 const App = () => {
 	const loading = useSelector((state) => state.loader.show);
@@ -17,16 +16,14 @@ const App = () => {
 	return (
 		<StyledEngineProvider injectFirst>
 			<ThemeProvider theme={ themes(customization) }>
-				<ProgressProvider>
-					<CssBaseline />
-					<Locales>
-						<div onContextMenu={(e) => e.preventDefault()}>
-							{ loadingBar }
-							<Routes />
-							<Snackbar />
-						</div>
-					</Locales>
-				</ProgressProvider>
+				<CssBaseline />
+				<Locales>
+					<div onContextMenu={(e) => e.preventDefault()}>
+						{ loadingBar }
+						<Routes />
+						<Snackbar />
+					</div>
+				</Locales>
 			</ThemeProvider>
 		</StyledEngineProvider>
 	);
