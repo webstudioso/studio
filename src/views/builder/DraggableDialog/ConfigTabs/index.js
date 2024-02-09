@@ -78,6 +78,8 @@ export default function BasicTabs({ editor, intl }) {
               <InfoButton tooltip="props.class_setting_tooltip" section="ADVANCED_STYLES" />
               <StyleManager selected={selected} />
       </TabPanel>
+      <TabPanel value={value} index={1} id="propertyTab">
+      </TabPanel>
     </Box>
   );
 }
