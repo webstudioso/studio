@@ -16,7 +16,7 @@ import {
     Chip,
     Stack
 } from '@mui/material'
-import { uploadPagesToIPFS } from 'api/publish'
+import { uploadPagesToIPFS } from 'api/route'
 import { useDispatch, useSelector } from 'react-redux'
 import { LOADER, LOAD_TEMPLATES } from 'store/actions'
 import { FormattedMessage, useIntl } from 'react-intl'

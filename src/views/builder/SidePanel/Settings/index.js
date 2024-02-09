@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { Grid, Button,TextField, Typography, Box, Stack } from '@mui/material'
 import { getProjectById } from 'api/project'
-import { publishMetadata, uploadPagesToIPFS } from 'api/publish'
+import { publishMetadata, uploadPagesToIPFS } from 'api/route'
 import { LOADER, SET_PROJECT } from "store/actions";
 import { useDispatch, useSelector } from 'react-redux'
-import { getDefaultMetadataForProject, memoProject } from 'utils/project'
+import { getDefaultMetadataForProject, getProjectUrl, memoProject } from 'utils/project'
 import { showError, showSuccess } from 'utils/snackbar'
 import tabFrame from 'assets/images/browserTabSkeleton.png'
 import constants from 'constant'
-import { requestNewDomain } from 'api/discord';
+import { notifyDiscordWebhook } from 'api/discord';
 import { useIntl } from 'react-intl';
 const { EVENTS } = constants
 
@@ -133,8 +133,28 @@ const Settings = ({ principal, project }) => {
         </Grid>
     )
 
-    const handleSubmitCustomDomain = () => {
-        requestNewDomain(dispatch, account.user, customDomain, project, intl.formatMessage({ id: 'discord_event.custom_domain_request' }))
+    const handleSubmitCustomDomain = async () => {
+        try {
+            const message = intl.formatMessage({ id: 'discord_event.custom_domain_request' })
+            dispatch({ type: LOADER, show: true })
+            await notifyDiscordWebhook({
+                username: account.user.email,
+                avatar_url: project?.metadata['icon'],
+                content: 'Request setup for custom domain',
+                name: account?.user?.issuer,
+                title: customDomain,
+                url: getProjectUrl({ project }),
+                color: 15258703,
+                issuer: account?.user?.issuer,
+                subdomain: project?.subdomain,
+                image: project?.metadata['og:image']
+            })
+            showSuccess({ dispatch, message })
+        } catch (e) {
+            showError({ dispatch, error: e.message })
+        } finally {
+            dispatch({ type: LOADER, show: false });
+        }
     }
 
     const hasPlan = account?.subscription?.subscriptionId

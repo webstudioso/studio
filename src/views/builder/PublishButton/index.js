@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react'
 import { Button, Typography, CircularProgress, IconButton, Box } from '@mui/material'
-import { uploadPagesToIPFS, publishRouting } from 'api/publish'
+import { uploadPagesToIPFS, publishRouting } from 'api/route'
 import { useDispatch, useSelector } from 'react-redux'
 import { showLoader } from 'utils/loader'
 import { getCidFromDeployment, getCustomFontsMetadatTags, getPages, getUserConfiguredMetadataTags, getWebstudioUrl } from 'utils/publish'

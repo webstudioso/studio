@@ -19,12 +19,13 @@ import { UPDATE_APP, LOADER, SET_PROJECT } from 'store/actions'
 import { useNavigate } from 'react-router-dom'
 import { trackEvent } from 'utils/analytics'
 import { useIntl } from 'react-intl'
-import { getDefaultMetadataForProject } from 'utils/project'
+import { getDefaultMetadataForProject, getProjectUrl } from 'utils/project'
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight'
 import EditIcon from '@mui/icons-material/Edit'
 import HtmlTooltip from 'views/builder/HtmlTooltip'
 import constants from 'constant'
-import { createNewProject } from 'api/discord'
+import { notifyDiscordWebhook } from 'api/discord'
+import { showError, showSuccess } from 'utils/snackbar'
 const { ANALYTICS } = constants
 
 const NameField = ({ principal }) => {
@@ -92,10 +93,24 @@ const NameField = ({ principal }) => {
 			dispatch({ type: SET_PROJECT, project })
 			dispatch({ type: UPDATE_APP, configuration: { new: true } })
 			trackEvent({ name: ANALYTICS.CREATE_PROJECT, params: account.user })
-			createNewProject(dispatch, account.user, null, project, intl.formatMessage({ id: 'discord_event.project_created' }))
+			
+			notifyDiscordWebhook({
+                username: account.user.email,
+                avatar_url: project?.metadata['icon'],
+                content: 'Project created',
+                name: account?.user?.issuer,
+                title: project?.name,
+                url: getProjectUrl({ project }),
+                color: 14177041,
+                issuer: account?.user?.issuer,
+                subdomain: project?.subdomain,
+                image: project?.metadata['og:image']
+            })
+			showSuccess({ dispatch, message: intl.formatMessage({ id: 'discord_event.project_created' })})
 			navigate(`/e/${project?.id}`)
 		} catch(e) {
 			console.log(e)
+			showError({ dispatch, error: e.message })
 		} finally {
 			dispatch({ type: LOADER, show: false })
 		}

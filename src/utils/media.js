@@ -1,5 +1,5 @@
 import { showSuccess, showError } from "./snackbar";
-import { uploadPagesToIPFS } from "api/publish";
+import { uploadPagesToIPFS } from "api/route";
 import { LOADER } from 'store/actions'
 import constants from '../constant';
 

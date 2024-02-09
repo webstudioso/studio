@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Box, Grid, Paper, Button, Typography, Tooltip, TextField, InputAdornment, IconButton, Stack } from '@mui/material'
-import { uploadPagesToIPFS } from 'api/publish'
+import { uploadPagesToIPFS } from 'api/route'
 import { LOADER } from 'store/actions'
 import { useDispatch } from 'react-redux'
 import constants from 'constant'
