@@ -73,6 +73,7 @@
     "image_manager.paste_url": "Or paste an image URL",
     "image_manager.uploaded_assets": "My Uploads",
     "image_manager.media_uploaded": "Media Uploaded",
+    "image_manager.media_removed": "Media Removed",
 
     "page_manager.new_page": "Add a new page",
     "page_manager.page_details_title": "Page Configuration",

@@ -25,7 +25,6 @@ const {
 const m = new Magic(process.env.REACT_APP_MAGIC_API_KEY)
 
 const Login = () => {
-	console.log("yeehaa")
 	const intl = useIntl()
 	const [existingProject] = useState(getMemoedProject())
 	const navigate = useNavigate()

@@ -73,6 +73,7 @@
     "image_manager.paste_url": "O agrega una imagen via URL",
     "image_manager.uploaded_assets": "Mis Archivos",
     "image_manager.media_uploaded": "Imagen Agregada",
+    "image_manager.media_removed": "Imagen Eliminada",
 
     "page_manager.new_page": "Agregar pagina",
     "page_manager.page_details_title": "Configuracion de Pagina",

@@ -90,6 +90,7 @@ const Snackbar = () => {
                     autoHideDuration={duration}
                     sx={{
                         top: '5px !important',
+                        height: 44
                     }}
                     onClose={(e, v) => handleClose(v)}
                 >
