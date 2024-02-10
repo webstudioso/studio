@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Grid, Button,TextField, Typography, Box, Stack } from '@mui/material'
-import { getProjectById } from 'api/project'
-import { publishMetadata, uploadPagesToIPFS } from 'api/route'
+import { getProjectById, publishMetadata } from 'api/project'
 import { LOADER, SET_PROJECT } from "store/actions";
 import { useDispatch, useSelector } from 'react-redux'
 import { getDefaultMetadataForProject, getProjectUrl, memoProject } from 'utils/project'
@@ -10,6 +9,7 @@ import tabFrame from 'assets/images/browserTabSkeleton.png'
 import constants from 'constant'
 import { notifyDiscordWebhook } from 'api/discord';
 import { useIntl } from 'react-intl';
+import { uploadFilesToIpfs } from 'api/ipfs';
 const { EVENTS } = constants
 
 
@@ -27,7 +27,7 @@ const Settings = ({ principal, project }) => {
         try {
             await publishMetadata({ id: project.id, principal, metadata: data  })
             showSuccess({ dispatch, message: intl.formatMessage({ id : 'action.metadata_saved' }) })
-            const updatedProject = await getProjectById({ projectId: project.id, principal })
+            const updatedProject = await getProjectById({ id: project.id, principal })
             memoProject(updatedProject)
             dispatch({ type: SET_PROJECT, project:updatedProject })
         } catch(e) {
@@ -58,7 +58,7 @@ const Settings = ({ principal, project }) => {
                     path: 'favicon.jpeg',
                     content: base64String
                 }]
-                const upload = await uploadPagesToIPFS({pages})
+                const upload = await uploadFilesToIpfs(pages)
                 const uploadedFilePath = upload[0].path
 
                 const currMeta = {...metadata}
@@ -88,7 +88,7 @@ const Settings = ({ principal, project }) => {
                     path: 'favicon.jpeg',
                     content: base64String
                 }]
-                const upload = await uploadPagesToIPFS({pages});
+                const upload = await uploadFilesToIpfs(pages);
                 const uploadedFilePath = upload[0].path;
 
                 const currMeta = {...metadata};

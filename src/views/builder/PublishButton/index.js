@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react'
 import { Button, Typography, CircularProgress, IconButton, Box } from '@mui/material'
-import { uploadPagesToIPFS, publishRouting } from 'api/route'
+import { publishRouting } from 'api/route'
 import { useDispatch, useSelector } from 'react-redux'
 import { showLoader } from 'utils/loader'
 import { getCidFromDeployment, getCustomFontsMetadatTags, getPages, getUserConfiguredMetadataTags, getWebstudioUrl } from 'utils/publish'
@@ -9,9 +9,10 @@ import { getProjectUrl } from 'utils/project'
 import { queryParams } from 'utils/url'
 import { trackEvent } from 'utils/analytics'
 import { IconInfoCircle } from '@tabler/icons'
-import HtmlTooltip from '../HtmlTooltip'
 import constants from 'constant'
 import { useIntl } from 'react-intl'
+import { uploadFilesToIpfs } from 'api/ipfs'
+import HtmlTooltip from 'views/builder/HtmlTooltip'
 const { ANALYTICS, EVENTS, IPFS_PROVIDER } = constants
 
 const PublishButton = ({ principal, project, editor }) => {
@@ -29,7 +30,7 @@ const PublishButton = ({ principal, project, editor }) => {
             const tags = getUserConfiguredMetadataTags({ project })
             const fonts = getCustomFontsMetadatTags()
             const pages = await getPages({ tags, fonts, editor, project })
-            const upload = await uploadPagesToIPFS({ pages })
+            const upload = await uploadFilesToIpfs(pages)
             const cid = getCidFromDeployment({ upload })
             setRelease(cid)
 

@@ -1,7 +1,7 @@
 import { showSuccess, showError } from "./snackbar";
-import { uploadPagesToIPFS } from "api/route";
 import { LOADER } from 'store/actions'
 import constants from '../constant';
+import { uploadFilesToIpfs } from "api/ipfs";
 
 const { EVENTS } = constants
 
@@ -21,7 +21,7 @@ export const handleMediaUpload = async (file, dispatch, editor, intl, onUpload) 
                 content: base64String
             }]
         try {
-            const upload = await uploadPagesToIPFS({pages})
+            const upload = await uploadFilesToIpfs(pages)
             const uploadedFilePath = upload[0].path;
             editor.AssetManager.add([uploadedFilePath])
             onUpload(uploadedFilePath)

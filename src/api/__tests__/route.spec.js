@@ -1,8 +1,7 @@
-import { 
-    uploadPagesToIPFS,
+import {
     publishRouting,
-    publishMetadata,
-    getRoute
+    getRoute,
+    deleteRoute
 } from 'api/route';
 import axios from 'axios'
 
@@ -14,23 +13,19 @@ describe('Route api', () => {
     const principal = '123abc'
     const cid = 'ipfs_url'
     const id = 'subdomain'
-    const moralisKey = 'abc'
-    const metadata = {
-        a: 1,
-        b: 2
-    }
 
     process.env.REACT_APP_WEBSTUDIO_API_URL = webstudioUrl
-    process.env.REACT_APP_MORALIS_API_KEY = moralisKey
 
     beforeAll(() => {
         axios.get.mockImplementation(() => Promise.resolve({ data: [] }))
         axios.post.mockImplementation(() => Promise.resolve({ data: [] }))
+        axios.delete.mockImplementation(() => Promise.resolve({ data: [] }))
     })
 
     afterEach(() => {
         axios.get.mockClear()
         axios.post.mockClear()
+        axios.delete.mockClear()
     })
 
     describe('getRoute', () => {
@@ -46,24 +41,6 @@ describe('Route api', () => {
                 }
             })
             expect(route).toEqual([])
-        })
-
-    })
-
-    describe('publishMetadata', () => {
-
-        it('Invokes a post call with project metadata', async () => {
-            const meta = await publishMetadata({ id, principal, metadata })
-            expect(axios.post).toHaveBeenCalledWith(`${webstudioUrl}/project/${id}/metadata`,
-            metadata,
-            {
-                headers: {
-                  Accept: 'application/json',
-                  AuthorizeToken: 'Bearer 123abc',
-                  'Content-Type': 'application/json'
-                }
-            })
-            expect(meta).toEqual([])
         })
 
     })
@@ -89,26 +66,19 @@ describe('Route api', () => {
 
     })
 
-    describe('uploadPagesToIPFS', () => {
+    describe('deleteRoute', () => {
 
-        it('Invokes a post call to upload ipfs', async () => {
-            const pages = [
-                {
-                    id: 1,
-                    url: 'test'
-                }
-            ]
-            const uris = await uploadPagesToIPFS({ pages })
-            expect(axios.post).toHaveBeenCalledWith(`https://deep-index.moralis.io/api/v2/ipfs/uploadFolder`,
-            pages,
+        it('Invokes a delete call with principal to remove route', async () => {
+            const route = await deleteRoute({ id, principal })
+            expect(axios.delete).toHaveBeenCalledWith(`${webstudioUrl}/route/${id}`,
             {
                 headers: {
-                    'X-API-KEY': moralisKey,
-                    accept: 'application/json',
-                    'Content-Type': 'application/json'
+                  Accept: 'application/json',
+                  AuthorizeToken: 'Bearer 123abc',
+                  'Content-Type': 'application/json'
                 }
             })
-            expect(uris).toEqual([])
+            expect(route).toEqual([])
         })
 
     })

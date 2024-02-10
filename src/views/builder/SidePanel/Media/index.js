@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Box, Grid, Paper, Button, Typography, Tooltip, TextField, InputAdornment, IconButton, Stack } from '@mui/material'
-import { uploadPagesToIPFS } from 'api/route'
 import { LOADER } from 'store/actions'
 import { useDispatch } from 'react-redux'
 import constants from 'constant'
@@ -8,6 +7,7 @@ import { showError, showSuccess } from 'utils/snackbar'
 import { useIntl } from 'react-intl'
 import { AddCircle, Clear } from '@mui/icons-material'
 import { IconEye } from '@tabler/icons'
+import { uploadFilesToIpfs } from 'api/ipfs'
 const { EVENTS } = constants
 
 const Media = ({ onLeave, editor }) => {
@@ -33,7 +33,7 @@ const Media = ({ onLeave, editor }) => {
                     content: base64String
                 }]
             try {
-                const upload = await uploadPagesToIPFS({pages})
+                const upload = await uploadFilesToIpfs(pages)
                 const uploadedFilePath = upload[0].path;
                 editor.AssetManager.add([uploadedFilePath])
                 showSuccess({ dispatch, message:  intl.formatMessage({id: 'image_manager.media_uploaded'})  })

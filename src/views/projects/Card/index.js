@@ -8,6 +8,8 @@ import { forgetMemoProject, memoProject } from 'utils/project'
 import { deleteProject } from 'api/project'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import { FormattedMessage } from 'react-intl'
+import { deleteRoute } from 'api/route'
+import { getUrlWithoutProtocol } from 'utils/url'
 
 const Card = ({ project, principal }) => {
 	const navigate = useNavigate()
@@ -29,7 +31,19 @@ const Card = ({ project, principal }) => {
 
 	const handleDelete = async () => {
 		dispatch({ type: LOADER, show: true })
-		await deleteProject({ project, principal})
+
+		try {
+			const deletions = [
+				deleteProject({ id: project.id, principal }),
+				deleteRoute({ id: getUrlWithoutProtocol(project.subdomain), principal }),
+				...(project?.domain && deleteRoute({ id: project.domain, principal }))
+			]
+
+			await Promise.all(deletions)
+		} catch (e) {
+			console.log(e)
+		}
+
 		forgetMemoProject()
 		dispatch({ type: LOADER, show: false })
 		navigate(`/`)

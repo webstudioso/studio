@@ -89,7 +89,7 @@ const NameField = ({ principal }) => {
 		appData.metadata = getDefaultMetadataForProject({ project: appData })
 		try {
 			await createProject({ appData, principal })
-			const project = await getProjectById({ projectId: appData.subdomain, principal })
+			const project = await getProjectById({ id: appData.subdomain, principal })
 			dispatch({ type: SET_PROJECT, project })
 			dispatch({ type: UPDATE_APP, configuration: { new: true } })
 			trackEvent({ name: ANALYTICS.CREATE_PROJECT, params: account.user })
