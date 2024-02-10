@@ -4,8 +4,6 @@
 
 // third-party
 @import '~react-perfect-scrollbar/dist/css/styles.css';
-// @import '~slick-carousel/slick/slick.css';
-// @import '~slick-carousel/slick/slick-theme.css';
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 $primary-font:  'Montserrat';
@@ -342,7 +340,7 @@ html, body {
 }
 
 .bg-container { 
-    background: url(../images/bg.jpg);
+    background: url(../images/wallpaper.jpg);
     background-size: cover;
     background-repeat: repeat;
     background-position: center;

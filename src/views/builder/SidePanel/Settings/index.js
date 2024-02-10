@@ -5,7 +5,7 @@ import { LOADER, SET_PROJECT } from "store/actions";
 import { useDispatch, useSelector } from 'react-redux'
 import { getDefaultMetadataForProject, getProjectUrl, memoProject } from 'utils/project'
 import { showError, showSuccess } from 'utils/snackbar'
-import tabFrame from 'assets/images/browserTabSkeleton.png'
+import tabFrame from 'assets/images/tab.png'
 import constants from 'constant'
 import { notifyDiscordWebhook } from 'api/discord';
 import { useIntl } from 'react-intl';
