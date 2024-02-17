@@ -17,10 +17,7 @@ $quaternaryColor: #605ed8;
     margin: 0px;
 }
 
-.gjs-frame-wrapper {
-    height: 100% !important;
-    width: 100% !important;
-}
+
 
 .ai-preview {
     zoom: 0.12;
@@ -37,6 +34,11 @@ $quaternaryColor: #605ed8;
     top: 0px;
     z-index: 1203;
     height: 100vh;
+}
+
+.gjs-preview .gjs-frame-wrapper {
+    height: 100% !important;
+    width: 100% !important;
 }
 
 .gjs-field-checkbox input:checked + .gjs-chk-icon {

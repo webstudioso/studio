@@ -17,7 +17,7 @@ export const agendas = [
                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                     clip-rule="evenodd" />
                 </svg>
-                Central Standard Time (GMT-6)
+                <p>Central Standard Time (GMT-6)</p>
             </span>
             </div>
 
@@ -36,7 +36,7 @@ export const agendas = [
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                         clip-rule="evenodd" />
                     </svg>
-                    9:00 - 10:00
+                    <p>9:00 - 10:00</p>
                 </span>
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                     <a href="#" class="hover:underline">Opening remarks</a>
@@ -64,7 +64,7 @@ export const agendas = [
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                         clip-rule="evenodd" />
                     </svg>
-                    11:00 - 12:00
+                    <p>11:00 - 12:00</p>
                 </span>
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                     <a href="#" class="hover:underline">Bergside LLC: Controlling the video traffic flows</a>
@@ -92,7 +92,7 @@ export const agendas = [
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                         clip-rule="evenodd" />
                     </svg>
-                    11:00 - 12:00
+                    <p>9:00 - 10:00</p>
                 </span>
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                     <a href="#" class="hover:underline">Bergside LLC: Controlling the video traffic flows</a>
@@ -120,7 +120,7 @@ export const agendas = [
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                         clip-rule="evenodd" />
                     </svg>
-                    12:00 - 13:00
+                    <p>12:00 - 13:00</p>
                 </span>
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                     <a href="#" class="hover:underline">Coffee & networking</a>
@@ -155,7 +155,7 @@ export const agendas = [
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                         clip-rule="evenodd" />
                     </svg>
-                    15:00 - 16:00
+                    <p>15:00 - 16:00</p>
                 </span>
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                     <a href="#" class="hover:underline">Updates from the Open Source Multimedia community</a>
@@ -183,7 +183,7 @@ export const agendas = [
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                         clip-rule="evenodd" />
                     </svg>
-                    15:00 - 16:00
+                    <p>15:00 - 16:00</p>
                 </span>
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                     <a href="#" class="hover:underline">Updates from the Open Source Multimedia community</a>
@@ -211,7 +211,7 @@ export const agendas = [
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                         clip-rule="evenodd" />
                     </svg>
-                    17:00 - 18:00
+                    <p>15:00 - 16:00</p>
                 </span>
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                     <a href="#" class="hover:underline">Scaling your brand from €0 to multimillion euros</a>
@@ -269,7 +269,7 @@ export const agendas = [
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                         clip-rule="evenodd" />
                     </svg>
-                    10:00 - 11:00
+                    <p>10:00 - 11:00</p>
                 </span>
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                     <a href="#" class="hover:underline">Women in Streaming Media Networking</a>
@@ -297,7 +297,7 @@ export const agendas = [
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                         clip-rule="evenodd" />
                     </svg>
-                    13:00 - 14:00
+                    <p>13:00 - 14:00</p>
                 </span>
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                     <a href="#" class="hover:underline">The importance of platform optimisation in times of expensive ads</a>
@@ -325,7 +325,7 @@ export const agendas = [
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                         clip-rule="evenodd" />
                     </svg>
-                    12:00 - 13:00
+                    <p>12:00 - 13:00</p>
                 </span>
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                     <a href="#" class="hover:underline">Coffee & networking</a>
@@ -360,7 +360,7 @@ export const agendas = [
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                         clip-rule="evenodd" />
                     </svg>
-                    14:00 - 15:00
+                    <p>14:00 - 15:00</p>
                 </span>
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                     <a href="#" class="hover:underline">Flowbite - An Open Framework for Forensic Watermarking</a>
@@ -400,7 +400,7 @@ export const agendas = [
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                         clip-rule="evenodd" />
                     </svg>
-                    14:00 - 15:00
+                    <p>14:00 - 15:00</p>
                 </span>
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                     <a href="#" class="hover:underline">Flowbite - An Open Framework for Forensic Watermarking</a>
@@ -440,7 +440,7 @@ export const agendas = [
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                         clip-rule="evenodd" />
                     </svg>
-                    14:00 - 15:00
+                    <p>14:00 - 15:00</p>
                 </span>
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                     <a href="#" class="hover:underline">Exploring the balance between customer acquisition and retention</a>
@@ -486,7 +486,7 @@ export const agendas = [
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                         clip-rule="evenodd" />
                     </svg>
-                    9:00 - 10:00
+                    <p>9:00 - 10:00</p>
                 </span>
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                     <a href="#" class="hover:underline">Opening remarks</a>
@@ -514,7 +514,7 @@ export const agendas = [
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                         clip-rule="evenodd" />
                     </svg>
-                    11:00 - 12:00
+                    <p>11:00 - 12:00</p>
                 </span>
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                     <a href="#" class="hover:underline">Bergside LLC: Controlling the video traffic flows</a>
@@ -542,7 +542,7 @@ export const agendas = [
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                         clip-rule="evenodd" />
                     </svg>
-                    11:00 - 12:00
+                    <p>11:00 - 12:00</p>
                 </span>
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                     <a href="#" class="hover:underline">Bergside LLC: Controlling the video traffic flows</a>
@@ -570,7 +570,7 @@ export const agendas = [
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                         clip-rule="evenodd" />
                     </svg>
-                    12:00 - 13:00
+                    <p>12:00 - 13:00</p>
                 </span>
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                     <a href="#" class="hover:underline">Coffee & networking</a>
@@ -605,7 +605,7 @@ export const agendas = [
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                         clip-rule="evenodd" />
                     </svg>
-                    15:00 - 16:00
+                    <p>15:00 - 16:00</p>
                 </span>
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                     <a href="#" class="hover:underline">Updates from the Open Source Multimedia community</a>
@@ -633,7 +633,7 @@ export const agendas = [
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                         clip-rule="evenodd" />
                     </svg>
-                    17:00 - 18:00
+                    <p>15:00 - 16:00</p>
                 </span>
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                     <a href="#" class="hover:underline">Scaling your brand from €0 to multimillion euros</a>
@@ -685,7 +685,7 @@ export const agendas = [
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                         clip-rule="evenodd" />
                     </svg>
-                    Wednesday 18:00 - 20:00 PDT
+                    <p>Wednesday 18:00 - 20:00 PDT</p>
                 </span>
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                     <a href="#" class="hover:underline">Drinks & networking</a>
@@ -734,7 +734,7 @@ export const agendas = [
             d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
             clip-rule="evenodd" />
         </svg>
-        Central Standard Time (GMT-6)
+        <p>Central Standard Time (GMT-6)</p>
       </span>
     </div>
 
