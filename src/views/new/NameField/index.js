@@ -19,12 +19,13 @@ import { UPDATE_APP, LOADER, SET_PROJECT } from 'store/actions'
 import { useNavigate } from 'react-router-dom'
 import { trackEvent } from 'utils/analytics'
 import { useIntl } from 'react-intl'
-import { getDefaultMetadataForProject } from 'utils/project'
+import { getDefaultMetadataForProject, getProjectUrl } from 'utils/project'
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight'
 import EditIcon from '@mui/icons-material/Edit'
 import HtmlTooltip from 'views/builder/HtmlTooltip'
 import constants from 'constant'
-import { createNewProject } from 'api/discord'
+import { notifyDiscordWebhook } from 'api/discord'
+import { showError, showSuccess } from 'utils/snackbar'
 const { ANALYTICS } = constants
 
 const NameField = ({ principal }) => {
@@ -88,14 +89,28 @@ const NameField = ({ principal }) => {
 		appData.metadata = getDefaultMetadataForProject({ project: appData })
 		try {
 			await createProject({ appData, principal })
-			const project = await getProjectById({ projectId: appData.subdomain, principal })
+			const project = await getProjectById({ id: appData.subdomain, principal })
 			dispatch({ type: SET_PROJECT, project })
 			dispatch({ type: UPDATE_APP, configuration: { new: true } })
 			trackEvent({ name: ANALYTICS.CREATE_PROJECT, params: account.user })
-			createNewProject(dispatch, account.user, null, project, intl.formatMessage({ id: 'discord_event.project_created' }))
+			
+			notifyDiscordWebhook({
+                username: account.user.email,
+                avatar_url: project?.metadata['icon'],
+                content: 'Project created',
+                name: account?.user?.issuer,
+                title: project?.name,
+                url: getProjectUrl({ project }),
+                color: 14177041,
+                issuer: account?.user?.issuer,
+                subdomain: project?.subdomain,
+                image: project?.metadata['og:image']
+            })
+			showSuccess({ dispatch, message: intl.formatMessage({ id: 'discord_event.project_created' })})
 			navigate(`/e/${project?.id}`)
 		} catch(e) {
 			console.log(e)
+			showError({ dispatch, error: e.message })
 		} finally {
 			dispatch({ type: LOADER, show: false })
 		}
@@ -113,10 +128,10 @@ const NameField = ({ principal }) => {
 		>
 			<Grid item xs={12}>
 				<TextField
-					fontSize="3em"
 					placeholder={intl.formatMessage({ id: "new_page.input_placeholder" })}
 					variant="standard"
 					defaultValue={appName}
+					className="text-gray-900"
 					fullWidth
 					onChange={(e) => generateSubdomain(e.target.value)}
 					autoFocus
@@ -127,24 +142,42 @@ const NameField = ({ principal }) => {
 								fontWeight: "lighter",
 								color: "#888"
 							}
-						}
+						},
+						root: {
+							color: 'red',
+							"& .MuiOutlinedInput-root": {
+							  "& fieldset": {
+								borderColor: "rgba(0, 0, 0, 0.23)"  // default
+							  },
+							  "&.Mui-focused fieldset": {
+								border: "2px solid red"             // focus
+							  }
+							}
+						  }
 					}}
 					inputProps={{
 						style: {
-							fontSize: 40,
-							color: theme.palette.primary.dark
-						}
+							fontSize: 34,
+							fontWeight: "lighter",
+							color: "#888"
+						},
+						root: {
+							color: 'red',
+							"& .MuiOutlinedInput-root": {
+							  "& fieldset": {
+								borderColor: "rgba(0, 0, 0, 0.23)"  // default
+							  },
+							  "&.Mui-focused fieldset": {
+								border: "2px solid red"             // focus
+							  }
+							}
+						  }
 					}}
 					InputProps={{
 						endAdornment: (
 						  <InputAdornment position="end">
-							<IconButton edge="end" 
-										color="primary" 
-										size="large" 
-										disabled={!canCreate}
-										onClick={onCreateProject}
-							>
-							  <ArrowCircleRightIcon sx={{ fontSize:'1.75em'}} />
+							<IconButton edge="end" color="primary" disabled={!canCreate} onClick={onCreateProject}>
+							  <ArrowCircleRightIcon className={`text-4xl cursor-pointer`}/>
 							</IconButton>
 						  </InputAdornment>
 						),
@@ -176,14 +209,7 @@ const NameField = ({ principal }) => {
 			</Grid>
 			<Grid item xs={12} sx={{ p: 0, minHeight: 44 }}>
 				{error && (
-					<Alert variant="outlined" severity="error"
-						sx={{
-							fontSize: "1em",
-							height: 28,
-							border: 0,
-							color: "#c62828"
-						}}
-					>
+					<Alert variant="standard" severity="error" className="text-red-500 border-red-100 border">
 						{error}
 					</Alert>
 				)}

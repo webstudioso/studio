@@ -1,7 +1,7 @@
 import { lazy } from 'react'
 import { useRoutes } from 'react-router-dom'
 import Loadable from 'ui-component/Loadable'
-import AuthGuard from 'utils/route-guard/AuthGuard'
+import AuthGuard from 'routes/AuthGuard'
 
 const CreateProjectView = Loadable(lazy(() => import('views/new')))
 const LoginView = Loadable(lazy(() => import('views/login')))

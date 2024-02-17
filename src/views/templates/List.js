@@ -114,7 +114,7 @@ const Templates = ({ onLeave, fullScreen=false }) => {
                     { intl.formatMessage({ id: 'section.templates_tooltip_description' }) }
                 </DialogContentText>
             </DialogContent>
-            <DialogActions sx={{ px: 4 }}>
+            <DialogActions sx={{ px: 4, pb: 2 }}>
                 <Button onClick={() => setPicked()}>{ intl.formatMessage({ id: 'cancel' }) }</Button>
                 <Button onClick={confirmTemplate}>{ intl.formatMessage({id:'action.continue'}) }</Button>
             </DialogActions>

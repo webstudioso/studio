@@ -1,11 +1,12 @@
+// editor
+@import 'editor.module.scss';
+
 // color variants
-@import 'themes-vars.module.scss';
+@import 'theme.module.scss';
 @import 'loader.module.scss';
 
 // third-party
 @import '~react-perfect-scrollbar/dist/css/styles.css';
-// @import '~slick-carousel/slick/slick.css';
-// @import '~slick-carousel/slick/slick-theme.css';
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 $primary-font:  'Montserrat';
@@ -49,8 +50,7 @@ html, body {
 }
 
 .MuiAlert-icon {
-    width: 48px;
-    margin-left: 8px;
+    margin: 0px 4px;
 }
 
 .changelog {
@@ -268,9 +268,6 @@ html, body {
     }
 }
 
-.container {
-    background-color: transparent;
-}
 
 // ==============================|| LIGHT BOX ||============================== //
 .slick-arrow:before {
@@ -342,7 +339,7 @@ html, body {
 }
 
 .bg-container { 
-    background: url(../images/bg.jpg);
+    background: url(../images/wallpaper.jpg);
     background-size: cover;
     background-repeat: repeat;
     background-position: center;
@@ -519,13 +516,11 @@ html, body {
         &:hover,
         &.ps--clicking {
             width: 5px;
-            background-color: transparent;
         }
     }
     &.ps--scrolling-y > .ps__rail-y,
     &.ps--scrolling-x > .ps__rail-x {
         opacity: 0.4;
-        background-color: transparent;
     }
 }
 

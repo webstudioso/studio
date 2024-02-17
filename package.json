@@ -1,6 +1,6 @@
 {
     "name": "webstudio-app",
-    "version": "0.1.49",
+    "version": "0.1.51",
     "private": false,
     "dependencies": {
         "@auth0/auth0-spa-js": "^1.14.0",
@@ -21,6 +21,7 @@
         "grapesjs": "^0.21.7",
         "grapesjs-plugin-forms": "^2.0.5",
         "grapesjs-script-editor": "^1.0.3",
+        "grapesjs-tabs": "^1.0.6",
         "jss": "^10.7.1",
         "jss-rtl": "^0.3.0",
         "jwt-decode": "^3.1.2",
@@ -99,14 +100,15 @@
             "!**/templates/**",
             "!**/template/**",
             "!src/__tests__/**",
-            "!src/lib/assets/**"
+            "!src/lib/assets/**",
+            "!src/*.js"
         ],
         "coverageThreshold": {
             "global": {
-                "branches": 3,
-                "functions": 7,
-                "lines": 10,
-                "statements": 10
+                "branches": 8,
+                "functions": 13,
+                "lines": 16,
+                "statements": 16
             }
         },
         "testEnvironment": "jsdom",

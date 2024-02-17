@@ -71,8 +71,8 @@ const SidePanel = ({ open, openCategory, onLeave, principal, project, editor}) =
                             p: 1
                         }}
                     >
-                        <Box sx={{ minWidth: 120, m: '15px' }}>
-                            <Typography variant="h4" color="black" fontWeight="bolder">
+                        <Box sx={{ minWidth: 120, px: 1 }}>
+                            <Typography variant="body" color="black" fontWeight="bolder">
                                 { openCategory && intl.formatMessage({ id: `section.${openCategory}_tooltip_title` }) }
                                 { openCategory && (<InfoButton tooltip={`section.${openCategory}_tooltip_description`} />) }
                             </Typography>

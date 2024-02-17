@@ -16,7 +16,6 @@ import {
     Chip,
     Stack
 } from '@mui/material'
-import { uploadPagesToIPFS } from 'api/publish'
 import { useDispatch, useSelector } from 'react-redux'
 import { LOADER, LOAD_TEMPLATES } from 'store/actions'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -24,6 +23,7 @@ import { showError, showSuccess } from 'utils/snackbar'
 import { getMyTemplates, getTemplates, publishTemplate } from 'api/template'
 import constants from 'constant'
 import FullScreenFrame from './FullScreenFrame'
+import { uploadFilesToIpfs } from 'api/ipfs'
 
 const { TEMPLATES } = constants
 
@@ -102,7 +102,7 @@ const SaveTemplateModal = ({ open, onClose, project, editor }) => {
                     content: base64String
                 }]
             try {
-                const upload = await uploadPagesToIPFS({pages})
+                const upload = await uploadFilesToIpfs(pages)
                 const uploadedFilePath = upload[0].path
                 setImageUrl(uploadedFilePath)
                 showSuccess({ dispatch, message:  intl.formatMessage({id: 'image_manager.media_uploaded'})  })

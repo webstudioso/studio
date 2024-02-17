@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
 import { Dialog, DialogTitle, DialogContent, Box, DialogActions, Button, Grid } from '@mui/material'
 import { getProjectUrl } from 'utils/project'
-import { getRoute } from 'api/publish'
+import { getRoute } from 'api/route'
 import { getUrlWithoutProtocol, queryParams } from 'utils/url'
 import { useDispatch, useSelector } from 'react-redux'
 import { LOADER } from 'store/actions'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { publishProject } from 'api/discord'
+import { notifyDiscordWebhook } from 'api/discord'
 import constants from 'constant'
-import SocialWebsiteCard from 'ui-component/cards/SocialWebsiteCard'
+import SocialWebsiteCard from 'ui-component/SocialWebsiteCard'
+import { showError, showSuccess } from 'utils/snackbar'
 
 const { IPFS_PROVIDER } = constants
 
@@ -25,9 +26,23 @@ const PublishConfirmationModal = ({ open, project, onClose, principal }) => {
             const id = getUrlWithoutProtocol(project.subdomain)
             const release = await getRoute({ id, principal})
             setCid(release.cid)
-            publishProject(dispatch, account.user, null, project, intl.formatMessage({ id: 'discord_event.project_published' }))
+
+            notifyDiscordWebhook({
+                username: account.user.email,
+                avatar_url: project?.metadata['icon'],
+                content: 'Project published',
+                name: account?.user?.issuer,
+                title: '',
+                url: getProjectUrl({ project }),
+                color: 12171071,
+                issuer: account?.user?.issuer,
+                subdomain: project?.subdomain,
+                image: project?.metadata['og:image']
+            })
+            showSuccess({ dispatch, message: intl.formatMessage({ id: 'discord_event.project_published' })})
         } catch (e) {
             console.log(e)
+            showError({ dispatch, error: e.message })
         } finally {
             dispatch({ type: LOADER, show: false })
         }

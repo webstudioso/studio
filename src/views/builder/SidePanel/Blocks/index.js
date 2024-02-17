@@ -26,6 +26,7 @@ const Blocks = ({ onLeave, editor }) => {
         if (!filter) return
         const blockManager = editor.Blocks
         const blocks = blockManager.getAll()
+        console.log(blocks)
         const filtered = blocks.filter(block => block.get('category').id === filter)
         const blocksContainer = blockManager.render(filtered, {ignoreCategories:true})
         ref.current.appendChild(blocksContainer)
@@ -33,27 +34,29 @@ const Blocks = ({ onLeave, editor }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filter])
 
-    const categoryList = categories?.map((cat) => 
-        <Grid   id={cat.id} 
-                key={cat.id}
-                item 
-                sx={{ 
-                    p: '5px 10px', 
-                    m: '0px 10px',
-                    cursor: 'pointer',
-                    borderRadius: '50px',
-                    background: filter === cat.id ? '#E8E8FF' : 'transparent',
-                    border: filter === cat.id ? '1px solid #D7D6FF' : '1px solid transparent'
-                }} 
-                onMouseEnter={(e) => {
-                    setFilter(cat.id);
-                }}
-        >
-            <Typography fontWeight="normal" color={
-                filter === cat.id ? '#3F41A4' : 'black'
-            } fontSize={14}>{intl.formatMessage({id: `blocks.${cat.label.toLowerCase()}`})}</Typography>
-        </Grid> 
-    )
+    const categoryList = categories?.map((cat) => {
+        return (
+            <Grid   id={cat.id} 
+                    key={cat.id}
+                    item 
+                    sx={{ 
+                        p: '5px 10px', 
+                        m: '0px 10px',
+                        cursor: 'pointer',
+                        borderRadius: '50px',
+                        background: filter === cat.id ? '#E8E8FF' : 'transparent',
+                        border: filter === cat.id ? '1px solid #D7D6FF' : '1px solid transparent'
+                    }} 
+                    onMouseEnter={(e) => {
+                        setFilter(cat.id);
+                    }}
+            >
+                <Typography fontWeight="normal" color={
+                    filter === cat.id ? '#3F41A4' : 'black'
+                } fontSize={14}>{intl.formatMessage({id: `blocks.${cat.label.toLowerCase()}`})}</Typography>
+            </Grid>
+        )
+    })
 
     return (
         <Grid container>

@@ -29,7 +29,7 @@ const FullScreenFrame = ({
     >
         <AppBar sx={{ position: 'relative', background: "#fff", borderTop: '5px solid #6366F1' }}>
             <Toolbar>
-                <Typography variant="h4" color="black" fontWeight="bolder">
+                <Typography variant="body" color="black" fontWeight="bolder">
                     <FormattedMessage id={title} />
                     <InfoButton tooltip={tooltip} />
                 </Typography>
