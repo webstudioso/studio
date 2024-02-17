@@ -128,10 +128,10 @@ const NameField = ({ principal }) => {
 		>
 			<Grid item xs={12}>
 				<TextField
-					fontSize="3em"
 					placeholder={intl.formatMessage({ id: "new_page.input_placeholder" })}
 					variant="standard"
 					defaultValue={appName}
+					className="text-gray-900"
 					fullWidth
 					onChange={(e) => generateSubdomain(e.target.value)}
 					autoFocus
@@ -142,24 +142,42 @@ const NameField = ({ principal }) => {
 								fontWeight: "lighter",
 								color: "#888"
 							}
-						}
+						},
+						root: {
+							color: 'red',
+							"& .MuiOutlinedInput-root": {
+							  "& fieldset": {
+								borderColor: "rgba(0, 0, 0, 0.23)"  // default
+							  },
+							  "&.Mui-focused fieldset": {
+								border: "2px solid red"             // focus
+							  }
+							}
+						  }
 					}}
 					inputProps={{
 						style: {
-							fontSize: 40,
-							color: theme.palette.primary.dark
-						}
+							fontSize: 34,
+							fontWeight: "lighter",
+							color: "#888"
+						},
+						root: {
+							color: 'red',
+							"& .MuiOutlinedInput-root": {
+							  "& fieldset": {
+								borderColor: "rgba(0, 0, 0, 0.23)"  // default
+							  },
+							  "&.Mui-focused fieldset": {
+								border: "2px solid red"             // focus
+							  }
+							}
+						  }
 					}}
 					InputProps={{
 						endAdornment: (
 						  <InputAdornment position="end">
-							<IconButton edge="end" 
-										color="primary" 
-										size="large" 
-										disabled={!canCreate}
-										onClick={onCreateProject}
-							>
-							  <ArrowCircleRightIcon sx={{ fontSize:'1.75em'}} />
+							<IconButton edge="end" color="primary" disabled={!canCreate} onClick={onCreateProject}>
+							  <ArrowCircleRightIcon className={`text-4xl cursor-pointer`}/>
 							</IconButton>
 						  </InputAdornment>
 						),
@@ -191,14 +209,7 @@ const NameField = ({ principal }) => {
 			</Grid>
 			<Grid item xs={12} sx={{ p: 0, minHeight: 44 }}>
 				{error && (
-					<Alert variant="outlined" severity="error"
-						sx={{
-							fontSize: "1em",
-							height: 28,
-							border: 0,
-							color: "#c62828"
-						}}
-					>
+					<Alert variant="standard" severity="error" className="text-red-500 border-red-100 border">
 						{error}
 					</Alert>
 				)}

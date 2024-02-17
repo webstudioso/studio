@@ -10,7 +10,7 @@ import { getProjectById } from 'api/project'
 import { SET_PROJECT } from 'store/actions'
 import InfoButton from 'views/builder/InfoButton'
 import Card from 'views/projects/Card'
-import Logo from 'common/Logo'
+import Logo from 'ui-component/Logo'
 import { showError } from 'utils/snackbar'
 import Membership from 'views/Membership'
 import { useIntl } from 'react-intl'
@@ -71,14 +71,10 @@ const Projects = () => {
 				>
 					<Grid container spacing={0.3} direction="column">
 						<Grid item xs={12} sx={{ textAlign: "center" }}>
-							<AddCircleIcon sx={{ fontSize: "3em" }} />
+							<AddCircleIcon className="text-purple-500 text-4xl" />
 						</Grid>
 						<Grid item xs={12} sx={{ textAlign: "center" }}>
-							<Typography
-								variant="body"
-								fontWeight="600"
-								sx={{ color: theme.palette.primary.dark }}
-							>
+							<Typography variant="body" className="text-purple-500 mt-1">
 								{intl.formatMessage({ id: 'dashboard.create_new_dapp' })}
 							</Typography>
 						</Grid>

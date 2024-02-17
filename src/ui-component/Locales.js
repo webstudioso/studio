@@ -9,9 +9,9 @@ import { IntlProvider } from 'react-intl';
 const loadLocaleData = (locale) => {
     switch (locale) {
         case 'es':
-            return import('utils/locales/es.json');
+            return import('locales/es.json');
         default:
-            return import('utils/locales/en.json');
+            return import('locales/en.json');
     }
 };
 

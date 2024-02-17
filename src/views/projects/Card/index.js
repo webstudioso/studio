@@ -70,8 +70,8 @@ const Card = ({ project, principal }) => {
 			</Grid>
 			{isSelected && (
                 <Box className="overlay project-overlay">
-					<IconButton className="project-delete" color="primary" onClick={handleDelete} disabled={isLoading}>
-						<DeleteOutlineIcon />
+					<IconButton className="project-delete" onClick={handleDelete} disabled={isLoading}>
+						<DeleteOutlineIcon className="text-gray-400" />
 					</IconButton>
 					<Button elevation={0}
 							disabled={isLoading}

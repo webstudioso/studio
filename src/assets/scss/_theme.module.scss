@@ -1,117 +1,19 @@
 // paper & background
-$paper: white;
-
-// // primary
-// $primaryLight: #C5CAE9;
-// $primaryMain: #485cc7;
-// $primaryDark: #1A237E;
-// $primary200: #9FA8DA;
-// $primary800: #283593;
-
-// // secondary
-// $secondaryLight: #FCE4EC;
-// $secondaryMain: #FF4081;
-// $secondaryDark: #F50057;
-// $secondary200: #F48FB1;
-// $secondary800: #AD1457;
-
-// // primary
-// $primaryLight: #eceff1;
-// $primaryMain: #607d8b;
-// $primaryDark: #546e7a;
-// $primary200: #b0bec5;
-// $primary800: #455a64;
-
-// // secondary
-// $secondaryLight: #e0f2f1;
-// $secondaryMain: #009688;
-// $secondaryDark: #00897b;
-// $secondary200: #80cbc4;
-// $secondary800: #00695c;
-
-// // primary
-// $primaryLight: #e4e7ec;
-// $primaryMain: #203461;
-// $primaryDark: #1c2f59;
-// $primary200: #909ab0;
-// $primary800: #132145;
-
-// // secondary
-// $secondaryLight: #fde8ef;
-// $secondaryMain: #ec407a;
-// $secondaryDark: #ea3a72;
-// $secondary200: #f6a0bd;
-// $secondary800: #e42a5d;
-
-// // primary
-// $primaryLight: #e3ebeb;
-// $primaryMain: #16595a;
-// $primaryDark: #135152;
-// $primary200: #8bacad;
-// $primary800: #0c3e3f;
-
-// // secondary
-// $secondaryLight: #f8f0e5;
-// $secondaryMain: #c77e23;
-// $secondaryDark: #c1761f;
-// $secondary200: #e3bf91;
-// $secondary800: #b36115;
-
-// // primary
-// $primaryLight: #e3e8e8;
-// $primaryMain: #173e43;
-// $primaryDark: #14383d;
-// $primary200: #8b9fa1;
-// $primary800: #0d282c;
-
-// // secondary
-// $secondaryLight: #e8f6f5;
-// $secondaryMain: #3fb0ac;
-// $secondaryDark: #39a9a5;
-// $secondary200: #9fd8d6;
-// $secondary800: #299792;
-
-// // primary
-// $primaryLight: #e2e5e8;
-// $primaryMain: #0a2342;
-// $primaryDark: #091f3c;
-// $primary200: #8591a1;
-// $primary800: #05152b;
-
-// // secondary
-// $secondaryLight: #e6f4f1;
-// $secondaryMain: #2ca58d;
-// $secondaryDark: #279d85;
-// $secondary200: #96d2c6;
-// $secondary800: #1b8a70;
-
-// // primary
-// $primaryLight: #e8eaf6;
-// $primaryMain: #3f51b5;
-// $primaryDark: #3949ab;
-// $primary200: #9fa8da;
-// $primary800: #283593;
-
-// // secondary
-// $secondaryLight: #e8eaf6;
-// $secondaryMain: #3f51b5;
-// $secondaryDark: #3949ab;
-// $secondary200: #9fa8da;
-// $secondary800: #283593;
+$paper: #ffffff;
 
 // primary
-$primaryLight: #1E1E30;
-$primaryMain: #7572F9;
-$primaryDark: #7572F9;
-$primary200: #90caf9;
-$primary800: #1565c0;
+$primaryLight: #7e22ce;
+$primaryMain: #6366f1;
+$primaryDark: #2834b9;
+$primary200: #9FA8DA;
+$primary800: #283593;
 
 // secondary
-$secondaryLight: #7572F9;
-$secondaryMain: #F10074;
-$secondaryDark: white;
-$secondary200: #b39ddb;
-$secondary800: #4527a0;
+$secondaryLight: #FCE4EC;
+$secondaryMain: #FF4081;
+$secondaryDark: #F50057;
+$secondary200: #F48FB1;
+$secondary800: #AD1457;
 
 // success Colors
 $successLight: #edf7ed;
@@ -124,7 +26,7 @@ $errorLight: #e48784;
 $errorMain: #d9534f;
 $errorDark: #d54c48;
 
-$banner: #475CC7;
+$banner: #1A237E;
 $bannerBorder: #1C48D1;
 
 // orange
@@ -138,15 +40,15 @@ $warningMain: #f0ad4e;
 $warningDark: #ec9c3d;
 
 // grey
-$grey50: #fff;
+$grey50: #fafafa;
 $grey100: #f5f5f5;
-$grey200: #42445c;
-$grey300: #aaacb3;
+$grey200: #616161;
+$grey300: #e0e0e0;
 $grey500: #9e9e9e;
 $grey600: #757575;
-$grey700: #42445c;
+$grey700: #616161;
 $grey800: #333C3D;
-$grey900: #aaacb3;
+$grey900: #212121;
 
 // ==============================|| DARK THEME VARIANTS ||============================== //
 
@@ -166,18 +68,11 @@ $darkPrimary200: #b0bec5;
 $darkPrimary800: #44606e;
 
 // secondary dark
-// $darkSecondaryLight: #e0f2f1;
-// $darkSecondaryMain: #009688;
-// $darkSecondaryDark: #00897b;
-// $darkSecondary200: #80cbc4;
-// $darkSecondary800: #00695c;
-
-// secondary dark
-$darkSecondaryLight: #FCE4EC;
-$darkSecondaryMain: #FF4081;
-$darkSecondaryDark: #F50057;
-$darkSecondary200: #F48FB1;
-$darkSecondary800: #AD1457;
+$darkSecondaryLight: #e0f2f1;
+$darkSecondaryMain: #009688;
+$darkSecondaryDark: #00897b;
+$darkSecondary200: #80cbc4;
+$darkSecondary800: #00695c;
 
 // text variants
 $darkTextTitle: #e4e8f7;

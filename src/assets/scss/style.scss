@@ -1,5 +1,8 @@
+// editor
+@import 'editor.module.scss';
+
 // color variants
-@import 'themes-vars.module.scss';
+@import 'theme.module.scss';
 @import 'loader.module.scss';
 
 // third-party
@@ -47,8 +50,7 @@ html, body {
 }
 
 .MuiAlert-icon {
-    width: 48px;
-    margin-left: 8px;
+    margin: 0px 4px;
 }
 
 .changelog {
@@ -266,9 +268,6 @@ html, body {
     }
 }
 
-.container {
-    background-color: transparent;
-}
 
 // ==============================|| LIGHT BOX ||============================== //
 .slick-arrow:before {
@@ -517,13 +516,11 @@ html, body {
         &:hover,
         &.ps--clicking {
             width: 5px;
-            background-color: transparent;
         }
     }
     &.ps--scrolling-y > .ps__rail-y,
     &.ps--scrolling-x > .ps__rail-x {
         opacity: 0.4;
-        background-color: transparent;
     }
 }
 

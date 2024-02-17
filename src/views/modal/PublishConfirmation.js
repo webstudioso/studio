@@ -8,7 +8,7 @@ import { LOADER } from 'store/actions'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { notifyDiscordWebhook } from 'api/discord'
 import constants from 'constant'
-import SocialWebsiteCard from 'ui-component/cards/SocialWebsiteCard'
+import SocialWebsiteCard from 'ui-component/SocialWebsiteCard'
 import { showError, showSuccess } from 'utils/snackbar'
 
 const { IPFS_PROVIDER } = constants

@@ -4,13 +4,13 @@ import { useTheme } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom'
 import { Grid, Box, AppBar, Toolbar, Typography, IconButton, Button } from '@mui/material'
 import { IconSettings, IconPlus, IconFiles, IconTemplate, IconPhoto } from '@tabler/icons'
-import { Editor } from 'editor'
+import Editor from 'editor'
 import { useDispatch, useSelector } from 'react-redux'
 import { UPDATE_APP } from 'store/actions'
 import { forgetMemoProject } from 'utils/project'
 import SidePanel from 'views/builder/SidePanel'
-import Logo from 'common/Logo'
-import PublishButton from './PublishButton'
+import Logo from 'ui-component/Logo'
+import PublishButton from '../../ui-component/PublishButton'
 import DraggableDialog from './DraggableDialog'
 import HtmlTooltip from './HtmlTooltip'
 import constants from 'constant'
@@ -77,7 +77,7 @@ const EditorView = () => {
 				<Grid item>
 					<Box sx={{ flexGrow: 1 }}>
 						<AppBar position="static" sx={{background:'white'}}>
-							<Toolbar variant="dense" disableGutters={true}>
+							<Toolbar variant="dense" disableGutters={true} sx={{ paddingRight: 2 }}>
 								<Typography
 									component="div"
 									sx={{ flexGrow: 1, textAlign: "left" }}

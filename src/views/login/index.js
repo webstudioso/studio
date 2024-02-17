@@ -13,7 +13,7 @@ import { trackEvent } from 'utils/analytics'
 import { getSubscription } from 'api/subscription'
 import { FormattedMessage, useIntl } from 'react-intl'
 import constants from 'constant'
-import { getMyTemplates, getTemplates } from 'api/template';
+import { getMyTemplates, getTemplates } from 'api/template'
 const { 
 	SESSION_DURATION_SEC, 
 	QUERY_PARAMS,  

@@ -23,7 +23,7 @@ const ModalManager = ({ open=false, onLeave }) => {
     >
         <AppBar sx={{ position: 'relative', background: "#fff", borderTop: '5px solid #6366F1' }}>
             <Toolbar>
-                <Typography variant="h4" color="black" fontWeight="bolder">
+                <Typography variant="body" color="black" fontWeight="bolder">
                     <FormattedMessage id="template_page.title" />
                     <InfoButton tooltip="template_page.title_tooltip" />
                 </Typography>
