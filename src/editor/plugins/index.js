@@ -14,7 +14,7 @@ import Web3ContractForm from './web3-contract-form'
 import FaqBlock from './FaqBlock'
 import ScheduleBlock from './ScheduleBlocks'
 
-export default [
+export const plugins = [
     // Block Traits
     FileTrait,
     DatasourceTrait,
@@ -34,3 +34,5 @@ export default [
     FaqBlock,
     ScheduleBlock
 ]
+
+export const getPlugin = (name) => plugins.find((plugin) => plugin.name === name)

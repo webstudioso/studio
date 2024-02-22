@@ -8,3 +8,4 @@ firebase*
 .firebase*
 .eslintcache
 .DS_Store
+__snapshots__

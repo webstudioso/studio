@@ -21,7 +21,7 @@ import Chat from './Chat'
 import PublishConfirmationDialog from 'views/modal/PublishConfirmation'
 import Membership from 'views/Membership'
 import { trackEvent } from 'utils/analytics'
-import Changelog from 'views/changelog'
+import Changelog from 'views/modal/Changelog'
 import { useIntl } from 'react-intl'
 import SaveTemplateModal from 'views/modal/SaveTemplate'
 

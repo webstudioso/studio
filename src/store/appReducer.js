@@ -7,7 +7,7 @@ const appReducer = (state = initialState, action) => {
     switch (action.type) {
         case UPDATE_APP: {
             const newState = { ...state, ...action.configuration }
-            return newState;
+            return newState
         }
         case CLEAR_APP: {
             return { ...initialState }

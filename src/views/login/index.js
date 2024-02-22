@@ -6,11 +6,12 @@ import LoginIcon from '@mui/icons-material/Login';
 import { Magic } from 'magic-sdk'
 import { getQueryParam } from 'utils/url'
 import { showError } from 'utils/snackbar'
-import { LOAD_TEMPLATES, LOGIN, SET_PROJECT, THEME_LOCALE } from 'store/actions'
+import { LOGIN, SET_PROJECT, THEME_LOCALE, SET_SUPPORTED_NETWORKS, SET_TEMPLATES } from 'store/actions'
 import { getAllProjects } from 'api/project'
 import { getMemoedProject } from 'utils/project'
 import { trackEvent } from 'utils/analytics'
 import { getSubscription } from 'api/subscription'
+import { loadSupportedNeworks } from 'api/networks'
 import { FormattedMessage, useIntl } from 'react-intl'
 import constants from 'constant'
 import { getMyTemplates, getTemplates } from 'api/template'
@@ -63,13 +64,17 @@ const Login = () => {
 				getAllProjects({ principal }),
 				getSubscription({ email: user.email }),
 				getTemplates({ principal }),
-				getMyTemplates({ principal, author: user.issuer})
+				getMyTemplates({ principal, author: user.issuer}),
+				loadSupportedNeworks()
 			]
-			const [projects, subscription, availableTemplates, myTemplates] = await Promise.all(promisesData)
+			const [projects, subscription, availableTemplates, myTemplates, supportedNetworks] = await Promise.all(promisesData)
 
 			trackEvent({ name: ANALYTICS.APP_OPEN , params: user })
-			dispatch({ type: LOAD_TEMPLATES, ...{ availableTemplates, myTemplates }})
-			dispatch({ type: LOGIN, payload: { user , principal, projects, subscription }})
+			dispatch({ type: SET_TEMPLATES, ...{ availableTemplates, myTemplates }})
+
+			const account = { user, principal, projects, subscription }
+			dispatch({ type: LOGIN, account })
+			dispatch({ type: SET_SUPPORTED_NETWORKS, supportedNetworks})
 			if (projects && projects.length > 0) {
 				// Has some projects created
 				if (existingProject) {

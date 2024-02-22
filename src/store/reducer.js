@@ -1,35 +1,31 @@
-import { combineReducers } from 'redux';
-import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import { combineReducers } from 'redux'
+import { persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 
 // reducer import
-import customization from './customizationReducer';
-import snackbar from './snackbarReducer';
-import cartReducer from './cartReducer';
-import app from 'store/appReducer';
-import loader from './loaderReducer';
-import account from './accountReducer';
-import editor from './editorReducer';
-import template from './templateReducer';
+import customization from './customizationReducer'
+import snackbar from './snackbarReducer'
+import loader from './loaderReducer'
+import account from './accountReducer'
+import editor from './editorReducer'
+import appReducer from 'store/appReducer'
 
 // ==============================|| COMBINE REDUCER ||============================== //
 
 const reducer = combineReducers({
-    cart: persistReducer(
+    app: persistReducer(
         {
-            key: 'cart',
+            key: 'webstudio',
             storage,
-            keyPrefix: 'berry-'
+            keyPrefix: 'ws-'
         },
-        cartReducer
+        appReducer
     ),
-    app,
     account,
     editor,
     customization,
     snackbar,
-    loader,
-    template
-});
+    loader
+})
 
-export default reducer;
+export default reducer

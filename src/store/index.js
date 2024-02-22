@@ -1,10 +1,10 @@
-import { createStore } from 'redux';
-import { persistStore } from 'redux-persist';
-import reducer from './reducer';
+import { createStore } from 'redux'
+import { persistStore } from 'redux-persist'
+import reducer from './reducer'
 
 // ==============================|| REDUX - MAIN STORE ||============================== //
 
-const store = createStore(reducer);
-const persister = persistStore(store);
+const store = createStore(reducer)
+const persister = persistStore(store)
 
-export { store, persister };
+export { store, persister }

@@ -1,19 +1,19 @@
 // action - state management
-import { LOGIN, LOGOUT } from './actions';
+import { LOGIN, LOGOUT } from './actions'
 
 // ==============================|| ACCOUNT REDUCER ||============================== //
 
 const accountReducer = (state, action) => {
     switch (action.type) {
         case LOGIN: {
-            const { user, principal, projects, subscription } = action.payload;
+            const { user, principal, projects, subscription } = action.account
             return {
                 ...state,
                 user,
                 principal,
                 projects,
                 subscription
-            };
+            }
         }
         case LOGOUT: {
             return {
@@ -22,12 +22,12 @@ const accountReducer = (state, action) => {
                 user: null,
                 projects: null,
                 subscription: null
-            };
+            }
         }
         default: {
-            return { ...state };
+            return { ...state }
         }
     }
-};
+}
 
-export default accountReducer;
+export default accountReducer
