@@ -3,7 +3,6 @@ import {
     Grid,
     Typography
 } from '@mui/material'
-import { gridSpacing } from 'store/constant'
 import { useIntl } from 'react-intl'
 
 const Blocks = ({ onLeave, editor }) => {
@@ -26,7 +25,6 @@ const Blocks = ({ onLeave, editor }) => {
         if (!filter) return
         const blockManager = editor.Blocks
         const blocks = blockManager.getAll()
-        console.log(blocks)
         const filtered = blocks.filter(block => block.get('category').id === filter)
         const blocksContainer = blockManager.render(filtered, {ignoreCategories:true})
         ref.current.appendChild(blocksContainer)
@@ -76,7 +74,7 @@ const Blocks = ({ onLeave, editor }) => {
                 overflow: 'auto',
                 borderTop: '1px solid #dfe5eb',
             }}>
-                <Grid container spacing={gridSpacing} sx={{ p: 0, m: 0, width: '100%' }} ref={ref}>
+                <Grid container spacing={2} sx={{ p: 0, m: 0, width: '100%' }} ref={ref}>
                 </Grid>
             </Grid>
         </Grid>

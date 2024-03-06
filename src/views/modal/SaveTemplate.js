@@ -17,7 +17,7 @@ import {
     Stack
 } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { LOADER, LOAD_TEMPLATES } from 'store/actions'
+import { LOADER, SET_TEMPLATES } from 'store/actions'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { showError, showSuccess } from 'utils/snackbar'
 import { getMyTemplates, getTemplates, publishTemplate } from 'api/template'
@@ -38,7 +38,7 @@ const SaveTemplateModal = ({ open, onClose, project, editor }) => {
         principal
     } = account
 	const loading = useSelector((state) => state.loader.show)
-    const myTemplates = useSelector((state) => state.template.myTemplates)
+    const myTemplates = useSelector((state) => state.editor.myTemplates)
 
     const generateTemplateId = () => `${account.user.issuer}-${project?.subdomain}-${Math.random().toString(36).slice(2, 7)}`
 
@@ -71,7 +71,7 @@ const SaveTemplateModal = ({ open, onClose, project, editor }) => {
 				getMyTemplates({ principal, author: account.user.issuer})
 			]
 			const [allTemplates, privateTemplates] = await Promise.all(promisesData)
-			dispatch({ type: LOAD_TEMPLATES, ...{ 
+			dispatch({ type: SET_TEMPLATES, ...{ 
                 availableTemplates: allTemplates, 
                 myTemplates: privateTemplates
             }})

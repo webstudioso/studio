@@ -1,7 +1,3 @@
-import { loadSupportedNeworks } from 'api/networks'
-
-const networks = await loadSupportedNeworks()
-
 const id = "w3m-button"
 
 const block = {
@@ -59,7 +55,8 @@ export const script = function (props) {
       initializeDatasource()
 }
 
-export const properties = {
+export const getProperties = (networks) => {
+  return {
     model: {
       defaults: {
           script,
@@ -127,13 +124,15 @@ export const properties = {
           "script-props": ["projectId", "name", "description", "url", "icon", "themeMode", "defaultNetworkId", "networks"],
       },
     }
+  }
 }
 
 /*eslint no-undef: "off"*/
-const Plugin = async (editor) => {
-    editor.BlockManager.add(id, block);
-    editor.DomComponents.addType(id, properties)
+const Web3LoginButton = async (editor, options) => {
+    const { supportedNetworks } = options
+    editor.BlockManager.add(id, block)
+    editor.DomComponents.addType(id, getProperties(supportedNetworks))
 }
 
-export default Plugin
+export default Web3LoginButton
   

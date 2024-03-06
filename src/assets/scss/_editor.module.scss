@@ -61,6 +61,7 @@ $quaternaryColor: #605ed8;
     overflow: hidden;
     min-height: 44px;
     padding-top: 2px;
+    max-height: 280px;
 }
 
 .scaled-thumbnail-50 {
@@ -69,7 +70,7 @@ $quaternaryColor: #605ed8;
     width: 200%;
     transform-origin: left top;
     max-width: 700px;
-    max-height: 550px;
+    height: auto;
 }
 
 .scaled-thumbnail-25 {

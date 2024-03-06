@@ -50,14 +50,14 @@ const Templates = ({ onLeave, fullScreen=false }) => {
     const [selected, setSelected] = useState()
     const [picked, setPicked] = useState()
     const isLoading = useSelector((state) => state.loader.show)
-	const editor = useSelector((state) => state.editor.editor)
+	const editorReducer = useSelector((state) => state.editor)
     const account = useSelector((state) => state.account)
-    const templates = useSelector((state) => state?.template)
 
     const {
         availableTemplates,
-        myTemplates
-    } = templates
+        myTemplates,
+        editor
+    } = editorReducer
 
     const confirmTemplate = async () => {
         dispatch({ type: LOADER, show: true })

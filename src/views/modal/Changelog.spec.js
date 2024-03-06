@@ -2,7 +2,7 @@ import React from "react"
 import { render, act } from '@testing-library/react'
 import { unmountComponentAtNode } from "react-dom"
 
-import Changelog from "../index"
+import Changelog from "./Changelog"
 
 let container = null
 const intl = {

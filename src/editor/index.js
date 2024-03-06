@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { LOADER, SET_EDITOR } from 'store/actions'
 import { showError, showSuccess } from 'utils/snackbar'
 import { useIntl } from 'react-intl'
@@ -14,7 +14,8 @@ import { hasPremiumSubscription } from 'utils/user'
 // import { enableContextMenu } from './editor/Utils'
 import { bringToFront, moveToBack } from 'utils/properties'
 
-import plugins from './plugins'
+import { plugins, getPlugin } from './plugins'
+import { escapeName } from 'utils/tailwind'
 
 const { EVENTS } = constants
 
@@ -22,12 +23,12 @@ const Editor = ({ project, principal }) => {
   const intl = useIntl()
   const dispatch = useDispatch()
   const [showUpgradeModal, setShowUpgradeModal] = useState(false)
+
+  const supportedNetworks = useSelector((state) => state.editor.supportedNetworks)
+
   const projectEndpoint = `${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${project.id}/content`
 
   const loadEditor = () => {
-
-    // Handle tailwind's use of slashes in css names
-    const escapeName = (name) => `${name}`.trim().replace(/([^a-z0-9\w-:/]+)/gi, "-")
 
     const editor = grapesjs.init({
       container: "#gjs",
@@ -71,6 +72,7 @@ const Editor = ({ project, principal }) => {
       plugins,
       pluginsOpts: {
         // [Web3GatedSection]: { isPremiumMember: hasPremiumSubscription(account) }
+        [getPlugin('Web3LoginButton')]: { supportedNetworks }
       },
       canvas: {
         scripts: [
@@ -286,20 +288,12 @@ const Editor = ({ project, principal }) => {
 
   }
 
-  const togglePremiumModal = () => {
-      const newState = !showUpgradeModal
-      console.debug(`Toggling premium modal to ${newState}`)
-      setShowUpgradeModal(newState)
-  }
-
-
+  const togglePremiumModal = () => setShowUpgradeModal(!showUpgradeModal)
 
   useEffect(() => {
     loadEditor()
-
     document.addEventListener(EVENTS.TOGGLE_PREMIUM_MODAL, togglePremiumModal)
     return () => document.removeEventListener(EVENTS.TOGGLE_PREMIUM_MODAL, togglePremiumModal)
-
   }, [])
 
   return (
