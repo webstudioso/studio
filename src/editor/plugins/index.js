@@ -13,6 +13,7 @@ import ModalBlock from './ModalBlock'
 import Web3ContractForm from './web3-contract-form'
 import FaqBlock from './FaqBlock'
 import ScheduleBlock from './ScheduleBlocks'
+import TimerBlocks from './TimerBlocks'
 
 export const plugins = [
     // Block Traits
@@ -32,7 +33,8 @@ export const plugins = [
     Web3ContractForm,
     ModalBlock,
     FaqBlock,
-    ScheduleBlock
+    ScheduleBlock,
+    TimerBlocks
 ]
 
 export const getPlugin = (name) => plugins.find((plugin) => plugin.name === name)
