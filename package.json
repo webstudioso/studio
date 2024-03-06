@@ -124,7 +124,7 @@
         "coverage": "jest --coverage --passWithNoTests",
         "eject": "react-scripts eject",
         "prepare": "husky install",
-        "test-ci": "jest --ci --coverage"
+        "test-ci": "jest --ci --updateSnapshot --coverage"
     },
     "eslintConfig": {
         "extends": "react-app"
