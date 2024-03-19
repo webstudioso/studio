@@ -73,7 +73,7 @@ const Blocks = ({ onLeave, editor }) => {
                 height: 'calc(100vh - 120px)', 
                 overflow: 'auto',
                 borderTop: '1px solid #dfe5eb',
-            }}>
+            }} className="overflow-x-hidden">
                 <Grid container spacing={2} sx={{ p: 0, m: 0, width: '100%' }} ref={ref}>
                 </Grid>
             </Grid>

@@ -165,6 +165,7 @@
     "blocks.faq": "Faq",
     "blocks.schedule": "Schedule",
     "blocks.timer": "Timers",
+    "blocks.iframe": "IFrame",
 
     "template.agenda": "Tailwind Event Calendar",
     "template.app_landing_page": "A beautiful landing page for your next mobile app",
