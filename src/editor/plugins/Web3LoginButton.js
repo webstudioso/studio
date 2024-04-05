@@ -17,6 +17,10 @@ const block = {
 export const script = function (props) {
     console.log(`Web3LoginButton ID: ${this.id} script props`)
     console.log(props)
+
+    console.log(`Web3LoginButton plugin script context`)
+    console.log(window.supportedNetworks)
+
     const {
         projectId, // Get projectId at https://cloud.walletconnect.com
         name,
@@ -135,6 +139,8 @@ const Web3LoginButton = async (editor, options) => {
     console.log(`Web3LoginButton plugin options`)
     console.log(options)
     const { supportedNetworks } = options
+    console.log(`Web3LoginButton plugin builder context`)
+    console.log(window.supportedNetworks)
     editor.BlockManager.add(id, block)
     editor.DomComponents.addType(id, getProperties(supportedNetworks))
 }
