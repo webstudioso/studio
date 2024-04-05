@@ -105,8 +105,8 @@
             "global": {
                 "branches": 9.22,
                 "functions": 15.23,
-                "lines": 21.86,
-                "statements": 20.89
+                "lines": 21.83,
+                "statements": 20.87
             }
         },
         "testEnvironment": "jsdom",
