@@ -29,6 +29,8 @@ const editorReducer = (state=initialState, action) => {
         case SET_SUPPORTED_NETWORKS: {
             const supportedNetworks = action.supportedNetworks
             window.supportedNetworks = supportedNetworks // Need to access from editor outside react
+            console.log(`Setting supported networks`)
+            console.log(window.supportedNetworks)
             return {
                 ...state,
                 supportedNetworks
