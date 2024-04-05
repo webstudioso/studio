@@ -24,7 +24,7 @@ const Editor = ({ project, principal }) => {
   const dispatch = useDispatch()
   const [showUpgradeModal, setShowUpgradeModal] = useState(false)
 
-  const supportedNetworks = useSelector((state) => state.editor.supportedNetworks)
+  const supportedNetworks = useSelector((state) => state.editor.supportedNetworks) || window.supportedNetworks
 
   const projectEndpoint = `${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${project.id}/content`
 
