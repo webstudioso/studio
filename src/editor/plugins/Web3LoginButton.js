@@ -28,6 +28,8 @@ export const script = function (props) {
     } = props
 
     const defaultNetwork = networks.find((network) => network.chainId.toString() === defaultNetworkId.toString())
+    console.log(`DefaultNetwork from selected Id ${defaultNetworkId}`)
+    console.log(defaultNetwork)
 
     const { createWeb3Modal, defaultConfig } = window.webstudio.web3Modal
     const metadata = { name, description, url, icons: [icon] }

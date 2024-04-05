@@ -14,7 +14,7 @@ import { hasPremiumSubscription } from 'utils/user'
 // import { enableContextMenu } from './editor/Utils'
 import { bringToFront, moveToBack } from 'utils/properties'
 
-import { plugins, getPlugin } from './plugins'
+import { plugins, Web3LoginButton } from './plugins'
 import { escapeName } from 'utils/tailwind'
 
 const { EVENTS } = constants
@@ -72,7 +72,7 @@ const Editor = ({ project, principal }) => {
       plugins,
       pluginsOpts: {
         // [Web3GatedSection]: { isPremiumMember: hasPremiumSubscription(account) }
-        [getPlugin('Web3LoginButton')]: { supportedNetworks }
+        [Web3LoginButton]: { supportedNetworks }
       },
       canvas: {
         scripts: [
