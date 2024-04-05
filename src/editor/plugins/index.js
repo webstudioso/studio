@@ -39,4 +39,6 @@ export const plugins = [
     IframeBlocks
 ]
 
-export const getPlugin = (name) => plugins.find((plugin) => plugin.name === name)
+export {
+    Web3LoginButton
+}

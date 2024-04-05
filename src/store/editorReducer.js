@@ -28,9 +28,6 @@ const editorReducer = (state=initialState, action) => {
         }
         case SET_SUPPORTED_NETWORKS: {
             const supportedNetworks = action.supportedNetworks
-            console.log(`Setting supported networks`)
-            window.supportedNetworks = supportedNetworks
-            console.log(supportedNetworks)
             return {
                 ...state,
                 supportedNetworks

@@ -103,10 +103,10 @@
         ],
         "coverageThreshold": {
             "global": {
-                "branches": 9,
-                "functions": 15,
-                "lines": 21,
-                "statements": 20
+                "branches": 9.22,
+                "functions": 15.23,
+                "lines": 21.86,
+                "statements": 20.89
             }
         },
         "testEnvironment": "jsdom",

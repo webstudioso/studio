@@ -14,7 +14,7 @@ import { hasPremiumSubscription } from 'utils/user'
 // import { enableContextMenu } from './editor/Utils'
 import { bringToFront, moveToBack } from 'utils/properties'
 
-import { plugins, getPlugin } from './plugins'
+import { plugins, Web3LoginButton } from './plugins'
 import { escapeName } from 'utils/tailwind'
 
 const { EVENTS } = constants
@@ -25,14 +25,9 @@ const Editor = ({ project, principal }) => {
   const [showUpgradeModal, setShowUpgradeModal] = useState(false)
 
   const supportedNetworks = useSelector((state) => state.editor.supportedNetworks)
-  console.log(`Retrieving supported networks state`)
-  console.log(supportedNetworks)
-  console.log(`Retrieving supported networks from window`)
-  console.log(window.supportedNetworks)
 
   const projectEndpoint = `${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${project.id}/content`
 
-  console.log(getPlugin('Web3LoginButton'))
   const loadEditor = () => {
 
     const editor = grapesjs.init({
@@ -77,7 +72,7 @@ const Editor = ({ project, principal }) => {
       plugins,
       pluginsOpts: {
         // [Web3GatedSection]: { isPremiumMember: hasPremiumSubscription(account) }
-        [getPlugin('Web3LoginButton')]: { supportedNetworks }
+        [Web3LoginButton]: { supportedNetworks }
       },
       canvas: {
         scripts: [
