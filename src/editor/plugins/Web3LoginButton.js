@@ -15,7 +15,8 @@ const block = {
 }
   
 export const script = function (props) {
-
+    console.log(`Web3LoginButton ID: ${this.id} script props`)
+    console.log(props)
     const {
         projectId, // Get projectId at https://cloud.walletconnect.com
         name,
@@ -27,13 +28,12 @@ export const script = function (props) {
         networks
     } = props
 
-    console.log(`Web3WalletConnectButton supported networks`)
-    console.log(networks)
     const defaultNetwork = networks.find((network) => network.chainId.toString() === defaultNetworkId.toString())
 
     const { createWeb3Modal, defaultConfig } = window.webstudio.web3Modal
     const metadata = { name, description, url, icons: [icon] }
     
+    window.networks = networks
     window.modal = createWeb3Modal({
         ethersConfig: defaultConfig({ metadata }),
         chains: [defaultNetwork],
@@ -56,7 +56,10 @@ export const script = function (props) {
       initializeDatasource()
 }
 
-export const properties = {
+export const getProperties = (networks) => {
+  console.log(`Loading wallet connect button with networks`)
+  console.log(networks)
+  return {
     model: {
       defaults: {
           script,
@@ -67,7 +70,7 @@ export const properties = {
           icon: 'https://tse3.mm.bing.net/th?id=OIP.XFeasV5g0fiLQpPU0TaQawAAAA&pid=Api&P=0&h=180',
           themeMode: 'dark',
           defaultNetworkId: '1',
-          networks: window?.supportedNetworks,
+          networks,
           traits: [
               {
                 changeProp: 1,
@@ -117,21 +120,23 @@ export const properties = {
                   label: 'Default Network',
                   name: 'defaultNetworkId',
                   type: 'select',
-                  options: window?.supportedNetworks?.map((network) => { return { value: network.chainId, name: network.name } }),
+                  options: networks.map((network) => { return { value: network.chainId, name: network.name } }),
                   changeProp: 1
               }
           ],
           "script-props": ["projectId", "name", "description", "url", "icon", "themeMode", "defaultNetworkId", "networks"],
       },
     }
+  }
 }
 
 /*eslint no-undef: "off"*/
-const Web3LoginButton = async (editor) => {
-    console.log(`Available networks for plugin`)
-    console.log(window.supportedNetworks)
+const Web3LoginButton = async (editor, options) => {
+    console.log(`Web3LoginButton plugin options`)
+    console.log(options)
+    const { supportedNetworks } = options
     editor.BlockManager.add(id, block)
-    editor.DomComponents.addType(id, properties)
+    editor.DomComponents.addType(id, getProperties(supportedNetworks))
 }
 
 export default Web3LoginButton

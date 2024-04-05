@@ -24,6 +24,8 @@ const Editor = ({ project, principal }) => {
   const dispatch = useDispatch()
   const [showUpgradeModal, setShowUpgradeModal] = useState(false)
 
+  const supportedNetworks = useSelector((state) => state.editor.supportedNetworks)
+
   const projectEndpoint = `${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${project.id}/content`
 
   const loadEditor = () => {
@@ -70,7 +72,7 @@ const Editor = ({ project, principal }) => {
       plugins,
       pluginsOpts: {
         // [Web3GatedSection]: { isPremiumMember: hasPremiumSubscription(account) }
-        // [getPlugin('Web3LoginButton')]: { supportedNetworks }
+        [getPlugin('Web3LoginButton')]: { supportedNetworks }
       },
       canvas: {
         scripts: [
