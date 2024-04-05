@@ -32,6 +32,7 @@ const Editor = ({ project, principal }) => {
 
   const projectEndpoint = `${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${project.id}/content`
 
+  console.log(getPlugin('Web3LoginButton'))
   const loadEditor = () => {
 
     const editor = grapesjs.init({
