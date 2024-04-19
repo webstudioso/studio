@@ -175,6 +175,26 @@ describe("Form script", () => {
         });
     });
 
+    describe("formatToUint256Array", () => {
+        it("Transforms strings to uint256[]", () => {
+            const fn = new script();
+            expect(fn.formatToUint256Array("2")).toEqual([2]); 
+            expect(fn.formatToUint256Array("1,2,343")).toEqual([1,2,343]);  
+        });
+    })
+
+    describe("formatToBoolean", () => {
+        it("Transforms strings to Boolean", () => {
+            const fn = new script();
+            expect(fn.formatToBoolean("True")).toBeTruthy();
+            expect(fn.formatToBoolean("TRUE")).toBeTruthy(); 
+            expect(fn.formatToBoolean("true")).toBeTruthy(); 
+            expect(fn.formatToBoolean("False")).toBeFalsy();
+            expect(fn.formatToBoolean("FALSE")).toBeFalsy(); 
+            expect(fn.formatToBoolean("false")).toBeFalsy(); 
+        });
+    })
+
     describe("handleSubmit", () => {
 
         let addrInput, urlInput, onToast, dispatchEventSpy;
