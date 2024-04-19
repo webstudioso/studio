@@ -42,7 +42,9 @@ const formatterTrait =           {
   options: [
     { value: 'none' },
     { value: 'toWei' },
-    { value: 'toBytes32' }
+    { value: 'toBytes32' },
+    { value: 'toUint256[]' },
+    { value: 'toBoolean' }
   ]
 };
 

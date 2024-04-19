@@ -69,6 +69,14 @@ const script = function (props={}) {
         return parsedValue;
     }
 
+    this.formatToUint256Array = (value) => {
+        return value.split(',').map((val) => parseInt(val));
+    }
+
+    this.formatToBoolean = (value) => {
+        return /^true$/i.test(value) || (value?.toLowerCase?.() === 'true') || (String(value).toLowerCase() === 'true');
+    }
+
     this.getAccount = () => {
         const provider = window?.modal?.getWalletProvider();
         if (!provider) return;
@@ -107,11 +115,18 @@ const script = function (props={}) {
             case 'toBytes32':
                 value = this.formatToBytes32(value);
             break;
+            case 'toUint256[]':
+                value = this.formatToUint256Array(value);
+            break;
+            case 'toBoolean':
+                value = this.formatToBoolean(value);
+            break;
             default:
                 // Do nothing
                 
         }
-        console.log(`getValue for input ${required} is ${value}`)
+        console.log(`getValue for input ${required}`)
+        console.log(value)
         return value
     }
 
