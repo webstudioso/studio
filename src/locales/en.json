@@ -249,5 +249,6 @@
     "props.padding": "Padding",
     "props.radius": "Border Radius",
     "props.class_setting": "Advanced Style Manager",
-    "props.class_setting_tooltip": "Manually add or remove style classes from TailwindCSS and AnimateCSS libraries on this component"
+    "props.class_setting_tooltip": "Manually add or remove style classes from TailwindCSS and AnimateCSS libraries on this component",
+    "props.layer": "Navigator"
 }

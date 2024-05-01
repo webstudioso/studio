@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import { Tabs, Tab, Button, Typography, Box, Tooltip } from '@mui/material';
 import Text from 'views/builder/ComponentPropertiesModal/Text';
-import PaletteOutlinedIcon from '@mui/icons-material/PaletteOutlined';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import { Tooltip } from '@mui/material';
+import {
+  PaletteOutlined,
+  SettingsOutlined,
+  LayersOutlined
+} from '@mui/icons-material';
 import InfoButton from 'views/builder/InfoButton';
 import StyleManager from 'views/builder/ComponentPropertiesModal/StyleManager';
 
@@ -52,9 +51,10 @@ export default function BasicTabs({ editor, intl }) {
     const traitTab = document.getElementById('propertyTab');
     traitTab?.prepend(traitBlock);
 
-    if (selected && selected.attributes.hasOwnProperty('payload'))
-      setValue(2)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const layerManager = editor.LayerManager
+    const layerBlock = layerManager.render()
+    const layerTab = document.getElementById('layerTab')
+    layerTab?.prepend(layerBlock)
   }
 
   useEffect(() => {
@@ -68,8 +68,9 @@ export default function BasicTabs({ editor, intl }) {
     <Box sx={{ width: '100%' }}>
      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            <Tab label={<Tooltip title={intl.formatMessage({id:'props.style'})}><PaletteOutlinedIcon /></Tooltip>} {...a11yProps(0)}/>
-            <Tab label={<Tooltip title={intl.formatMessage({id:'props.metadata'})}><SettingsOutlinedIcon /></Tooltip>} {...a11yProps(1)}/>
+            <Tab label={<Tooltip title={intl.formatMessage({id:'props.style'})}><PaletteOutlined /></Tooltip>} {...a11yProps(0)}/>
+            <Tab label={<Tooltip title={intl.formatMessage({id:'props.metadata'})}><SettingsOutlined /></Tooltip>} {...a11yProps(1)}/>
+            <Tab label={<Tooltip title={intl.formatMessage({id:'props.layer'})}><LayersOutlined /></Tooltip>} {...a11yProps(2)}/>
         </Tabs>
       </Box>
       <TabPanel value={value} index={0} id="designTab">
@@ -79,6 +80,8 @@ export default function BasicTabs({ editor, intl }) {
               <StyleManager selected={selected} />
       </TabPanel>
       <TabPanel value={value} index={1} id="propertyTab">
+      </TabPanel>
+      <TabPanel value={value} index={2} id="layerTab">
       </TabPanel>
     </Box>
   );

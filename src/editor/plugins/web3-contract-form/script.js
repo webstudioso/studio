@@ -77,6 +77,16 @@ const script = function (props={}) {
         return /^true$/i.test(value) || (value?.toLowerCase?.() === 'true') || (String(value).toLowerCase() === 'true');
     }
 
+    this.formatToJson = (value) => {
+        let jsonValue
+        try {
+            jsonValue = JSON.parse(value)
+        } catch (e) {
+            console.log(e)
+        }
+        return jsonValue
+    }
+
     this.getAccount = () => {
         const provider = window?.modal?.getWalletProvider();
         if (!provider) return;
@@ -121,9 +131,11 @@ const script = function (props={}) {
             case 'toBoolean':
                 value = this.formatToBoolean(value);
             break;
+            case 'toJson':
+                value = this.formatToJson(value);
+            break;
             default:
-                // Do nothing
-                
+                // Do nothing       
         }
         console.log(`getValue for input ${required}`)
         console.log(value)
@@ -160,7 +172,7 @@ const script = function (props={}) {
         const abiTgt = this.getAbi();
         const methodTgt = this.getMethod();
         const contractTgt = new Contract(contract, abiTgt, signer);
-        const targetFunction = contractTgt[methodTgt.name];
+        const targetFunction = contractTgt.getFunction(methodTgt.name);
         console.log(`getFunction ${JSON.stringify(targetFunction)}`);
         return targetFunction;
     }
@@ -209,35 +221,21 @@ const script = function (props={}) {
         try {
             const targetFunction = await this.getFunction();
             const targetAttributes = this.getAttributes();
-            const scope = this;
-            console.log(`Invoking target function with attributes ${targetAttributes}, is function? ${targetFunction instanceof Function}`);
-            targetFunction.apply(null, targetAttributes)
-                .then((response) => {
-                    console.log(`Response received ${JSON.stringify(response)}`);
-                    scope.sendNotification(
-                        'success',
-                        'Successful!', 
-                        'Your transaction was successful, view it on the explorer',
-                        'View transaction in explorer',
-                        `${window?.currentChain?.explorerUrl}/tx/${response.hash}`
-                    )
-                }, (error) => {
-                    const errorMessage =    error?.reason ? error?.reason : 
-                                            error?.data?.message ? error?.data?.message :
-                                            error
-                    console.log(`Error received ${error}`);
-                    scope.sendNotification(
-                        'error',
-                        'Something Went Wrong!', 
-                        errorMessage
-                    )
-                });
+            const response = await targetFunction(...targetAttributes)
+            this.sendNotification(
+                'success',
+                'Successful!', 
+                'Your transaction was successful, view it on the explorer',
+                'View transaction in explorer',
+                `${window?.currentChain?.explorerUrl}/tx/${response.hash}`
+            )
         } catch (error) {
-            console.log(`Method call failed received ${error}`);
+            const msg = error?.reason || error?.message
+            console.log(`Method call failed received: ${error}`);
             this.sendNotification(
                 'error',
                 'Something Went Wrong!', 
-                error?.message
+                msg
             )
         }
     }

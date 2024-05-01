@@ -16,6 +16,7 @@ import { bringToFront, moveToBack } from 'utils/properties'
 
 import { plugins, Web3LoginButton } from './plugins'
 import { escapeName } from 'utils/tailwind'
+import { onEditorPreview, onEditorPreviewStop } from './utils/events'
 
 const { EVENTS } = constants
 
@@ -233,18 +234,8 @@ const Editor = ({ project, principal }) => {
       }
     })
 
-    editor.on("run:preview",() => {
-      console.log('Preview')
-      const ed = document.getElementById('gjs')
-      ed.classList.remove('gjs-no-preview')
-      ed.classList.add('gjs-preview')
-    })
-
-    editor.on("stop:preview", () => {
-      const ed = document.getElementById('gjs')
-      ed.classList.remove('gjs-preview')
-      ed.classList.add('gjs-no-preview')
-    })
+    editor.on("run:preview", onEditorPreview)
+    editor.on("stop:preview", onEditorPreviewStop)
 
     // For enabling premium blocks
     // editor.on("block:drag:start", (element) => {
@@ -258,12 +249,6 @@ const Editor = ({ project, principal }) => {
     // })
 
     editor.on("canvas:drop", (event, element) => {
-      // // Open payload wizard
-      // const hasWizard = element?.getTrait('payload')
-      // if (hasWizard) {
-      //   editor.select(element)
-      //   editor.runCommand('tlb-settings', { element })
-      // }
       // Open image selector
       const isImage = element?.attributes?.type === 'image'
       if (isImage) {

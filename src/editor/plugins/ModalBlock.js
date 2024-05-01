@@ -51,7 +51,11 @@ export const block = {
                   </div>
               </div>
           </div>
-    `
+    `,
+    selectable: true,
+    removable: true,
+    editable: true,
+    resizable: true
 }
  
 /**
