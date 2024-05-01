@@ -1,4 +1,3 @@
-import { loadTraits } from './traits';
 import { loadBlocks } from './blocks';
 import { loadComponents } from './components';
 
@@ -12,7 +11,6 @@ const Plugin = (editor, opts = {}) => {
   };
 
   loadComponents(editor);
-  loadTraits(editor);
   loadBlocks(editor, config);
 };
 

@@ -44,7 +44,8 @@ const formatterTrait =           {
     { value: 'toWei' },
     { value: 'toBytes32' },
     { value: 'toUint256[]' },
-    { value: 'toBoolean' }
+    { value: 'toBoolean' },
+    { value: 'toJson' }
   ]
 };
 

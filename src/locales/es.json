@@ -247,5 +247,6 @@
     "props.padding": "Espaciado",
     "props.radius": "Curvas",
     "props.class_setting": "Editor Avanzado de Estilos",
-    "props.class_setting_tooltip": "Manualmente agrega o elimina estilos de las librerias de TailwindCSS y AnimateCSS sobre el componente"
+    "props.class_setting_tooltip": "Manualmente agrega o elimina estilos de las librerias de TailwindCSS y AnimateCSS sobre el componente",
+    "props.layer": "Navegador"
 }
