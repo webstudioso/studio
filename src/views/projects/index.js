@@ -34,7 +34,7 @@ const Projects = () => {
 	}
 
 	const addExistingProject = async () => {
-		const guestProject = await getProjectById({ principal: account.principal, id: invitedProject })
+		const guestProject = await getProjectById({ principal: account.principal, projectId: invitedProject })
 		if (guestProject?.id) {
 			dispatch({ type: SET_PROJECT, project: guestProject })
 			memoProject(guestProject)

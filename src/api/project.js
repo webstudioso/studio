@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-export const getProjectById = async ({ id, principal }) => {
-    const project = await axios.get(`${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${id}`,
+export const getProjectById = async ({ projectId, principal }) => {
+    const project = await axios.get(`${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${projectId}`,
         {
             headers: {
                 "AuthorizeToken": `Bearer ${principal}`,
@@ -40,8 +40,8 @@ export const createProject = async({ appData, principal }) => {
     return project?.data
 }
 
-export const deleteProject = async({ id, principal }) => {
-    const responseProject = await axios.delete(`${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${id}`,
+export const deleteProject = async({ projectId, principal }) => {
+    const responseProject = await axios.delete(`${process.env.REACT_APP_WEBSTUDIO_API_URL}/project/${projectId}`,
         {
             headers: {
                 "AuthorizeToken": `Bearer ${principal}`,

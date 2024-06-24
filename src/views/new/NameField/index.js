@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useTheme } from '@mui/material/styles'
 import {
 	InputAdornment,
 	TextField,
@@ -26,11 +25,11 @@ import HtmlTooltip from 'views/builder/HtmlTooltip'
 import constants from 'constant'
 import { notifyDiscordWebhook } from 'api/discord'
 import { showError, showSuccess } from 'utils/snackbar'
+import CustomDomain from 'views/builder/SidePanel/Settings/CustomDomain'
 const { ANALYTICS } = constants
 
 const NameField = ({ principal }) => {
 	const intl = useIntl()
-	const theme = useTheme()
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const appState = useSelector((state) => state.app)
@@ -40,6 +39,7 @@ const NameField = ({ principal }) => {
 	const [appSubdomain, setAppSubdomain] = useState(appState.subdomain)
 	const [error, setError] = useState()
 	const [showEditor, setShowEditor] = useState(false)
+	const [showCustomDomain, setShowCustomDomain] = useState(false)
 
 	const generateSubdomain = async (name) => {
 		setError();
@@ -89,7 +89,7 @@ const NameField = ({ principal }) => {
 		appData.metadata = getDefaultMetadataForProject({ project: appData })
 		try {
 			await createProject({ appData, principal })
-			const project = await getProjectById({ id: appData.subdomain, principal })
+			const project = await getProjectById({ projectId: appData.subdomain, principal })
 			dispatch({ type: SET_PROJECT, project })
 			dispatch({ type: UPDATE_APP, configuration: { new: true } })
 			trackEvent({ name: ANALYTICS.CREATE_PROJECT, params: account.user })
@@ -186,7 +186,7 @@ const NameField = ({ principal }) => {
 				/>
 			</Grid>
 			<Grid item xs={12}>
-			<HtmlTooltip title={urlTooltip} placement="right-start">
+				<HtmlTooltip title={urlTooltip} placement="right-start">
 					<Chip
 						icon={
 							<EditIcon
@@ -206,6 +206,14 @@ const NameField = ({ principal }) => {
 						onClick={() => setShowEditor(true)}
 					/>
 				</HtmlTooltip>
+				<Button sx={{ marginLeft: 1, borderRadius: 50 }} 
+						size="small" 
+						variant="outlined"
+						disabled={!canCreate}
+						onClick={() => setShowCustomDomain(true)}
+				>
+					{intl.formatMessage({ id: 'settings.custom_domain_connect' })}
+				</Button>
 			</Grid>
 			<Grid item xs={12} sx={{ p: 0, minHeight: 44 }}>
 				{error && (
@@ -215,7 +223,7 @@ const NameField = ({ principal }) => {
 				)}
 			</Grid>
 
-			<Dialog open={showEditor} onClose={() => showEditor(false)}>
+			<Dialog open={showEditor} onClose={() => setShowEditor(false)}>
 				<DialogContent>
 					<TextField autoFocus margin="dense" id="name" label="Edit Project Subdomain" type="text"
 						fullWidth
@@ -232,6 +240,16 @@ const NameField = ({ principal }) => {
 					<Button variant="outlined" color="primary" onClick={() => setShowEditor(false)}>{intl.formatMessage({ id:'close' })}</Button>
 				</DialogActions>
 			</Dialog>
+
+			<Dialog open={showCustomDomain} onClose={() => setShowCustomDomain(false)}>
+				<DialogContent sx={{ pt: 4 }}>
+					<CustomDomain project={{
+						name: appName,
+						subdomain: appSubdomain
+					}} onSubmit={() => setShowCustomDomain(false)}/>
+				</DialogContent>
+			</Dialog>
+
 		</Grid>
 	)
 }

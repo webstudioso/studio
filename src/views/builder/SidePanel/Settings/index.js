@@ -3,13 +3,13 @@ import { Grid, Button,TextField, Typography, Box, Stack } from '@mui/material'
 import { getProjectById, publishMetadata } from 'api/project'
 import { LOADER, SET_PROJECT } from "store/actions";
 import { useDispatch, useSelector } from 'react-redux'
-import { getDefaultMetadataForProject, getProjectUrl, memoProject } from 'utils/project'
+import { getDefaultMetadataForProject, memoProject } from 'utils/project'
 import { showError, showSuccess } from 'utils/snackbar'
 import tabFrame from 'assets/images/tab.png'
 import constants from 'constant'
-import { notifyDiscordWebhook } from 'api/discord';
-import { useIntl } from 'react-intl';
-import { uploadFilesToIpfs } from 'api/ipfs';
+import { useIntl } from 'react-intl'
+import { uploadFilesToIpfs } from 'api/ipfs'
+import CustomDomain from './CustomDomain';
 const { EVENTS } = constants
 
 
@@ -17,17 +17,15 @@ const Settings = ({ principal, project }) => {
     const intl = useIntl()
     const defaultMetadata = getDefaultMetadataForProject({ project })
     const isLoading = useSelector((state) => state.loader.show)
-    const account = useSelector((state) => state.account)
     const dispatch = useDispatch()
     const [metadata, setMetadata] = useState(project.metadata || defaultMetadata)
-    const [customDomain, setCustomDomain] = useState()
     
 
     const save = async (data) =>{
         try {
             await publishMetadata({ id: project.id, principal, metadata: data  })
             showSuccess({ dispatch, message: intl.formatMessage({ id : 'action.metadata_saved' }) })
-            const updatedProject = await getProjectById({ id: project.id, principal })
+            const updatedProject = await getProjectById({ projectId: project.id, principal })
             memoProject(updatedProject)
             dispatch({ type: SET_PROJECT, project:updatedProject })
         } catch(e) {
@@ -133,70 +131,6 @@ const Settings = ({ principal, project }) => {
         </Grid>
     )
 
-    const handleSubmitCustomDomain = async () => {
-        try {
-            const message = intl.formatMessage({ id: 'discord_event.custom_domain_request' })
-            dispatch({ type: LOADER, show: true })
-            await notifyDiscordWebhook({
-                username: account.user.email,
-                avatar_url: project?.metadata['icon'],
-                content: 'Request setup for custom domain',
-                name: account?.user?.issuer,
-                title: customDomain,
-                url: getProjectUrl({ project }),
-                color: 15258703,
-                issuer: account?.user?.issuer,
-                subdomain: project?.subdomain,
-                image: project?.metadata['og:image']
-            })
-            showSuccess({ dispatch, message })
-        } catch (e) {
-            showError({ dispatch, error: e.message })
-        } finally {
-            dispatch({ type: LOADER, show: false });
-        }
-    }
-
-    const hasPlan = account?.subscription?.subscriptionId
-
-    const customDomainBlock = (
-        <Grid container spacing={1} sx={{ mb:3, pb: 1, background: '#fdfdfd', border:'1px solid #f3f3f3' }}>
-            <Grid item xs={12}>
-                <Typography fontWeight="bold" color="#222" fontSize={14}>{intl.formatMessage({ id: 'settings.custom_domain' })}</Typography>
-            </Grid>
-            <Grid item xs={12}>
-                <Typography color="#555" fontSize={12}>
-                    {intl.formatMessage({ id: 'settings.custom_domain_description' })}
-                </Typography>
-            </Grid>
-            { !hasPlan && (
-                <Grid item xs={12} sx={{ mt: 1, pr: 2, pl: 1, pb: 2 }}>
-                        <Button fullWidth                 
-                                onClick={() => {
-                                    window.location.href = 'https://www.webstudio.so/plans-pricing'
-                                }}>
-                                    {intl.formatMessage({ id: 'membership.free' })}
-                        </Button>
-                </Grid>
-            )}
-            { hasPlan && (
-                <Grid item xs={12} sx={{ mt: 1, pr: 2, pl: 1, pb: 2 }}>
-                        <TextField  fullWidth
-                                    variant="standard"
-                                    placeholder={intl.formatMessage({ id: 'settings.custom_domain_placeholder' })}
-                                    disabled={isLoading}
-                                    onChange={(e) => setCustomDomain(e.target.value)}
-                        ></TextField>
-                        <Button fullWidth 
-                                onClick={handleSubmitCustomDomain} 
-                                disabled={isLoading}>
-                                    {intl.formatMessage({ id: 'settings.custom_domain_submit_request' })}
-                        </Button>
-                </Grid>
-            )}
-        </Grid>
-    );
-
     const favIcon = (
         <Grid container spacing={1} sx={{ mb:3, pb: 1, background: '#fdfdfd', border:'1px solid #f3f3f3' }}>
             <Grid item xs={12}>
@@ -298,7 +232,7 @@ const Settings = ({ principal, project }) => {
                 {title}
                 {favIcon}
                 {social}
-                {customDomainBlock}
+                <CustomDomain project={project} />
             </Grid>
         </Grid>
     )

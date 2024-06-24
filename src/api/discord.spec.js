@@ -83,5 +83,53 @@ describe('Discord api', () => {
                     }
                 })
         })
+
+        it('Referral information is included if added', async () => {
+            process.env.REACT_APP_HOST_ENV = 'prod'
+            const referral = 'demonoid'
+            notifyDiscordWebhook({
+                username,
+                avatar_url,
+                content,
+                name,
+                title,
+                url,
+                color,
+                issuer,
+                subdomain,
+                image,
+                referral
+            })
+            expect(axios.post).toHaveBeenCalledWith(hookUrl, {
+                avatar_url: 'https://avatar.com', 
+                content: 'What is it about', 
+                embeds: [{
+                    author: {
+                        name: 'name'
+                    }, 
+                    color: 123456, 
+                    fields: [{
+                        name: 'User', 
+                        value: 'id:123'
+                    }, {
+                        name: 'Subdomain', 
+                        value: 'myproject'
+                    }, {
+                        name: 'Referral', 
+                        value: 'demonoid'
+                    }], 
+                    image: {
+                        url: 'https://myimage.com'
+                    }, 
+                    title: 'topic', 
+                    url: 'https://mywebsite.com'
+                }], 
+                username: 'username'
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+        })
     })
 })
