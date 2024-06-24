@@ -1,4 +1,4 @@
-import { loadBlocks } from "../blocks"
+import { loadBlocks } from "./blocks"
 import {
     typeForm,
     typeInput,
@@ -8,7 +8,7 @@ import {
     // typeRadio,
     typeButton,
     typeLabel,
-  } from '../components';
+  } from './components';
 
 
 describe("Form blocks", () => {

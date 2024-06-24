@@ -1,4 +1,4 @@
-import script from "../script";
+import script from "./script";
 
 const file = {
     name: 'test.json',

@@ -1,9 +1,17 @@
 // action - state management
-import { LOGIN, LOGOUT } from './actions'
+import { LOGIN, LOGOUT, SET_REFERRAL } from './actions'
 
 // ==============================|| ACCOUNT REDUCER ||============================== //
 
-const accountReducer = (state, action) => {
+export const initialState = {
+    user: null,
+    principal: null,
+    projects: [],
+    subscription: null,
+    referral: null
+};
+
+const accountReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOGIN: {
             const { user, principal, projects, subscription } = action.account
@@ -21,7 +29,15 @@ const accountReducer = (state, action) => {
                 principal: null,
                 user: null,
                 projects: null,
-                subscription: null
+                subscription: null,
+                referral: null
+            }
+        }
+        case SET_REFERRAL: {
+            const { referral } = action
+            return {
+                ...state,
+                referral
             }
         }
         default: {

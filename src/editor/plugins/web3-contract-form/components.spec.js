@@ -12,7 +12,7 @@ import {
     label,
     typeLabel,
     loadComponents
-  } from '../components';
+  } from './components';
 
 
 describe("Form components", () => {

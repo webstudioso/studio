@@ -87,6 +87,7 @@
     "settings.placeholder": "ej. La mejor manera de construir sitios web | Webstudio",
     "settings.save_title": "Guardar Titulo",
     "settings.custom_domain": "Dominio Personalizado",
+    "settings.custom_domain_connect": "Conecta un dominio personalizado",
     "settings.custom_domain_description": "Puedes tener tu aplicacion con Webstudip bajo tu propio dominio is ya lo tienes. De ser asi, escribe el nombre del dominio aqui y nosotros te contactaremos por email en 48h con las intrucciones para configurarlo.",
     "settings.custom_domain_placeholder": "ej. midominio.com",
     "settings.custom_domain_submit_request": "Enviar Solicitud",

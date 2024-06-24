@@ -1,6 +1,8 @@
 export const LOGIN = '@account/LOGIN'
 export const LOGOUT = '@Account/LOGOUT'
 export const THEME_LOCALE = '@customization/THEME_LOCALE'
+export const SET_LOGO = '@customization/SET_LOGO'
+export const SET_REFERRAL = '@account/SET_REFERRAL'
 export const SNACKBAR_OPEN = '@snackbar/SNACKBAR_OPEN'
 export const UPDATE_APP = '@app/UPDATE_APP'
 export const CLEAR_APP = '@app/CLEAR_APP'

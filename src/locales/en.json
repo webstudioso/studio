@@ -87,6 +87,7 @@
     "settings.placeholder": "e.g The best way to build websites | Webstudio",
     "settings.save_title": "Save Title",
     "settings.custom_domain": "Custom Domain",
+    "settings.custom_domain_connect": "Connect a custom domain",
     "settings.custom_domain_description": "You can have your webstudio app under a custom domain if you own one already. If so, let us know below and we will contact you within 48h via email to help you set it up or change it.",
     "settings.custom_domain_placeholder": "e.g mydomain.com",
     "settings.custom_domain_submit_request": "Submit Request",

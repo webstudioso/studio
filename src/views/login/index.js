@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Box, Typography, LinearProgress, Chip, TextField, InputAdornment, IconButton } from '@mui/material'
 import LoginIcon from '@mui/icons-material/Login';
 import { Magic } from 'magic-sdk'
 import { getQueryParam } from 'utils/url'
 import { showError } from 'utils/snackbar'
-import { LOGIN, SET_PROJECT, THEME_LOCALE, SET_SUPPORTED_NETWORKS, SET_TEMPLATES } from 'store/actions'
+import { LOGIN, SET_PROJECT, THEME_LOCALE, SET_SUPPORTED_NETWORKS, SET_TEMPLATES, SET_LOGO, SET_REFERRAL } from 'store/actions'
 import { getAllProjects } from 'api/project'
 import { getMemoedProject } from 'utils/project'
 import { trackEvent } from 'utils/analytics'
@@ -15,6 +15,7 @@ import { loadSupportedNeworks } from 'api/networks'
 import { FormattedMessage, useIntl } from 'react-intl'
 import constants from 'constant'
 import { getMyTemplates, getTemplates } from 'api/template'
+
 const { 
 	SESSION_DURATION_SEC, 
 	QUERY_PARAMS,  
@@ -33,6 +34,8 @@ const Login = () => {
 	const [isLoading, setLoading] = useState(true)
 	const [userEmail, setUserEmail] = useState()
 
+	const logo = useSelector((state) => state.customization.logo)
+
 	const setLanguage = () => {
 		const queryLocale = getQueryParam(QUERY_PARAMS.LOCALE)
 		if (queryLocale)
@@ -41,9 +44,33 @@ const Login = () => {
 		dispatch({ type: THEME_LOCALE, locale });
 	}
 
+	const setLogo = () => {
+		const queryLogo = getQueryParam(QUERY_PARAMS.LOGO)
+		if (queryLogo) {
+			localStorage.setItem(QUERY_PARAMS.LOGO, queryLogo)
+			const storedLogo = localStorage.getItem(QUERY_PARAMS.LOGO)
+			dispatch({ type: SET_LOGO, logo: storedLogo })
+		}
+	}
+
+	const setReferral = async () => {
+		const queryReferral = getQueryParam(QUERY_PARAMS.REFERRAL)
+		if (queryReferral) {
+			// Is valid referralId?
+			const referralSubscription = await getSubscription({ email: queryReferral })
+			if (referralSubscription?.email) {
+				localStorage.setItem(QUERY_PARAMS.REFERRAL, JSON.stringify(referralSubscription))
+			}
+		}
+		const referral = localStorage.getItem(QUERY_PARAMS.REFERRAL)
+		dispatch({ type: SET_REFERRAL, referral: referral ? JSON.parse(referral) : null })
+	}
+
 	useEffect(() => {
-		authenticate()
+		setLogo()
+		setReferral()
 		setLanguage()
+		authenticate()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
@@ -129,6 +156,9 @@ const Login = () => {
 	return (
 		<Box className="signin">
 			<Box textAlign="center" className="container fade-in bg-container">
+				<Box justifyItems="center" marginY={4} height={144}>
+					<img src={logo} style={{ margin: '0 auto', maxHeight: 144 }} alt="Logo" class="animate__animated animate__fadeIn animate__delay-1s" />
+				</Box>
 				<Typography variant="body" className="super-title-text">
 					<FormattedMessage id='login_page.app_name' />
 				<Chip 	size="small" 

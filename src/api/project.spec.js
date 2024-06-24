@@ -13,7 +13,7 @@ describe('Project api', () => {
 
     const webstudioUrl = 'https://api.webstudio.com'
     const principal = '123abc'
-    const id = 'subdomain'
+    const projectId = 'subdomain'
     const moralisKey = 'abc'
     const appData = {
         subdomain: 'abc'
@@ -58,8 +58,8 @@ describe('Project api', () => {
     describe('getProjectById', () => {
 
         it('Invokes a get call with principal to obtain list of templates', async () => {
-            const proj = await getProjectById({ id, principal })
-            expect(axios.get).toHaveBeenCalledWith(`${webstudioUrl}/project/${id}`,
+            const proj = await getProjectById({ projectId, principal })
+            expect(axios.get).toHaveBeenCalledWith(`${webstudioUrl}/project/${projectId}`,
             {
                 headers: {
                   Accept: 'application/json',
@@ -93,8 +93,8 @@ describe('Project api', () => {
     describe('deleteProject', () => {
 
         it('Invokes a delete call with project id', async () => {
-            const proj = await deleteProject({ principal, id })
-            expect(axios.delete).toHaveBeenCalledWith(`${webstudioUrl}/project/${id}`,
+            const proj = await deleteProject({ principal, projectId })
+            expect(axios.delete).toHaveBeenCalledWith(`${webstudioUrl}/project/${projectId}`,
             {
                 headers: {
                   Accept: 'application/json',
@@ -110,6 +110,7 @@ describe('Project api', () => {
     describe('publishMetadata', () => {
 
         it('Invokes a post call with project metadata', async () => {
+            const id = 'demo'
             const meta = await publishMetadata({ id, principal, metadata })
             expect(axios.post).toHaveBeenCalledWith(`${webstudioUrl}/project/${id}/metadata`,
             metadata,

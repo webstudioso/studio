@@ -10,7 +10,8 @@ export const notifyDiscordWebhook = async ({
     color,
     issuer,
     subdomain,
-    image
+    image,
+    referral
 }) => {
     if (process.env.REACT_APP_HOST_ENV === 'dev') return
     return await axios.post(
@@ -38,6 +39,10 @@ export const notifyDiscordWebhook = async ({
                         name: "Subdomain",
                         value: subdomain
                     },
+                    referral && ({
+                        name: "Referral",
+                        value: referral
+                    })
                 ]
             }]
         },

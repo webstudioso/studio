@@ -1,4 +1,5 @@
 const constants = {
+	WEBSTUDIO_LOGO: 'https://img.einpresswire.com/medium/482779/webstudio-logo.png',
 	IPFS_PROVIDER: 'https://gateway.ipfs.io/ipfs',
 	DEFAULT_LOCALE: 'en',
 	TEMPLATES: {
@@ -17,7 +18,9 @@ const constants = {
 	DOCS: 'https://webstudioso.notion.site/Guides-53b4c8f9caf948d7902e191a29293e08',
 	QUERY_PARAMS: {
 		LOCALE: 'locale',
-		EMAIL: 'email'
+		EMAIL: 'email',
+		LOGO: 'logo',
+		REFERRAL: 'referral'
 	},
 	SUBSCRIPTION_PLAN: 'SUBSCRIPTION_PLAN',
 	SESSION_DURATION_SEC: '21600', // 6 hours

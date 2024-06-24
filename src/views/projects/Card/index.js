@@ -34,7 +34,7 @@ const Card = ({ project, principal }) => {
 
 		try {
 			const deletions = [
-				deleteProject({ id: project.id, principal }),
+				deleteProject({ projectId: project.id, principal }),
 				deleteRoute({ id: getUrlWithoutProtocol(project.subdomain), principal }),
 				...(project?.domain && deleteRoute({ id: project.domain, principal }))
 			]
