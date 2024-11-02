@@ -1,4 +1,4 @@
-import Plugin from "../index"
+import Plugin from "./index"
 import {
     typeForm,
     typeInput,
@@ -9,7 +9,7 @@ import {
     typeButton,
     typeLabel,
     loadComponents
-  } from '../components';
+  } from './components';
 
 
 describe("Form plugin", () => {

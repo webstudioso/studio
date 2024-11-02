@@ -29,10 +29,7 @@ jobs:
       - name: Build
         env: 
           SKIP_PREFLIGHT_CHECK: true
-          REACT_APP_MORALIS_APP_ID: ${{ secrets.MORALIS_APP_ID }}
-          REACT_APP_MORALIS_SERVER_URL: ${{ secrets.MORALIS_SERVER_URL }}
-          REACT_APP_MORALIS_API_KEY: ${{ secrets.MORALIS_API_KEY }}
-          REACT_APP_INFURA_KEY: ${{ secrets.INFURA_API_KEY }}
+          REACT_APP_PINATA_JWT: ${{ secrets.PINATA_JWT }}
           REACT_APP_MAGIC_API_KEY: ${{ secrets.MAGIC }}
           REACT_APP_HOST_ENV: production
           REACT_APP_WEBSTUDIO_API_URL: "https://api.webstudio.so"

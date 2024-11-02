@@ -7,10 +7,10 @@ import { showError, showSuccess } from 'utils/snackbar'
 import { useIntl } from 'react-intl'
 import { AddCircle, Clear } from '@mui/icons-material'
 import { IconEye } from '@tabler/icons'
-import { uploadFilesToIpfs } from 'api/ipfs'
+import { pinFilesToIpfs } from 'api/ipfs'
 const { EVENTS } = constants
 
-const Media = ({ onLeave, editor }) => {
+const Media = ({ onLeave, editor, project }) => {
     const intl = useIntl()
     const dispatch = useDispatch()
     const [selected, setSelected] = useState()
@@ -20,31 +20,15 @@ const Media = ({ onLeave, editor }) => {
         document.dispatchEvent(new CustomEvent(EVENTS.CLOSE_DELAY));
         dispatch({ type: LOADER, show: true });
         const file = e.target.files[0];
-
-        // Encode the file using the FileReader API
-        const reader = new FileReader();
-        reader.onloadend = async () => {
-            // Use a regex to remove data url part
-            const base64String = reader.result
-                .replace('data:', '')
-                .replace(/^.+,/, '')
-                const pages = [{
-                    path: file.name,
-                    content: base64String
-                }]
-            try {
-                const upload = await uploadFilesToIpfs(pages)
-                const uploadedFilePath = upload[0].path;
-                editor.AssetManager.add([uploadedFilePath])
-                showSuccess({ dispatch, message:  intl.formatMessage({id: 'image_manager.media_uploaded'})  })
-            } catch(e) {
-                showError({ dispatch, message: e.message })
-            } finally {
-                dispatch({ type: LOADER, show: false });
-            }
-
+        try {
+            const upload = await pinFilesToIpfs([file], project.subdomain)
+            editor.AssetManager.add([upload.url])
+            showSuccess({ dispatch, message:  intl.formatMessage({id: 'image_manager.media_uploaded'})  })
+        } catch(e) {
+            showError({ dispatch, message: e.message })
+        } finally {
+            dispatch({ type: LOADER, show: false })
         }
-        reader.readAsDataURL(file)
     }
 
     const uploadButton = (

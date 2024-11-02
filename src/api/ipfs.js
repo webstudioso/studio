@@ -1,15 +1,40 @@
 import axios from 'axios'
+import FormData from 'form-data'
+import constants from 'constant'
+const { IPFS_PROVIDER } = constants
 
-export const uploadFilesToIpfs = async (files) => {
-    const upload = await axios.post('https://deep-index.moralis.io/api/v2/ipfs/uploadFolder',
-    files,
+/**
+ * Upload a folder of files to Pinata API
+ * @param {*} files Array of File objects
+ */
+export const pinFilesToIpfs = async (files, projectName='webstudio') => {
+
+    // Prepare form
+    const data = new FormData()
+
+    try {
+        Array.from(files).forEach((file) => data?.append("file", file, `${projectName}/${file.name}`))
+        
+        // Set display name for pinata file manager
+        const pinataMetadata = JSON.stringify({ name: projectName })
+        data.append("pinataMetadata", pinataMetadata)
+    } catch (e) {
+
+    }
+
+    // Upload to pinata
+    const upload = await axios.post('https://api.pinata.cloud/pinning/pinFileToIPFS',
+    data,
         {
             headers: {
-                "X-API-KEY": process.env.REACT_APP_MORALIS_API_KEY,
-                "Content-Type": "application/json",
-                "accept": "application/json"
+                Authorization: `Bearer ${process.env.REACT_APP_PINATA_JWT}`,
+                "Content-Type": 'multipart/form-data',
             }
         }
     )
-    return upload?.data
+    const cid = upload?.data?.IpfsHash
+    return {
+        cid,
+        url: `${IPFS_PROVIDER}/${cid}/${files[0].name}`
+    }
 }
