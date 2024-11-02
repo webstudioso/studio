@@ -11,7 +11,7 @@ import { trackEvent } from 'utils/analytics'
 import { IconInfoCircle } from '@tabler/icons'
 import constants from 'constant'
 import { useIntl } from 'react-intl'
-import { uploadFilesToIpfs } from 'api/ipfs'
+import { pinFilesToIpfs } from 'api/ipfs'
 import HtmlTooltip from 'views/builder/HtmlTooltip'
 const { ANALYTICS, EVENTS, IPFS_PROVIDER } = constants
 
@@ -30,8 +30,8 @@ const PublishButton = ({ principal, project, editor }) => {
             const tags = getUserConfiguredMetadataTags({ project })
             const fonts = getCustomFontsMetadatTags()
             const pages = await getPages({ tags, fonts, editor, project })
-            const upload = await uploadFilesToIpfs(pages)
-            const cid = getCidFromDeployment({ upload })
+            const upload = await pinFilesToIpfs(pages, project.subdomain)
+            const cid = upload.cid
             setRelease(cid)
 
             // Register in AWS deploy defult subdomain

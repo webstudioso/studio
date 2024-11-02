@@ -8,7 +8,7 @@ import { showError, showSuccess } from 'utils/snackbar'
 import tabFrame from 'assets/images/tab.png'
 import constants from 'constant'
 import { useIntl } from 'react-intl'
-import { uploadFilesToIpfs } from 'api/ipfs'
+import { pinFilesToIpfs, uploadFilesToIpfs } from 'api/ipfs'
 import CustomDomain from './CustomDomain';
 const { EVENTS } = constants
 
@@ -44,61 +44,23 @@ const Settings = ({ principal, project }) => {
     const handleFaviconChange = async (e) => {
         dispatch({ type: LOADER, show: true });
         const file = e.target.files[0];
-
-        // Encode the file using the FileReader API
-        const reader = new FileReader();
-        reader.onloadend = async () => {
-            // Use a regex to remove data url part
-            const base64String = reader.result
-                .replace('data:', '')
-                .replace(/^.+,/, '')
-                const pages = [{
-                    path: 'favicon.jpeg',
-                    content: base64String
-                }]
-                const upload = await uploadFilesToIpfs(pages)
-                const uploadedFilePath = upload[0].path
-
-                const currMeta = {...metadata}
-                currMeta['icon'] = uploadedFilePath
-                await save(currMeta)
-                setMetadata(currMeta)
-
-        };
-        reader.readAsDataURL(file);
-
-
+        const upload = await pinFilesToIpfs([file], project.subdomain)
+        const currMeta = {...metadata}
+        currMeta['icon'] = upload.url
+        await save(currMeta)
+        setMetadata(currMeta)
     }
 
 
     const handleSocialImageChange = async (e) => {
-        dispatch({ type: LOADER, show: true });
-        const file = e.target.files[0];
-
-        // Encode the file using the FileReader API
-        const reader = new FileReader();
-        reader.onloadend = async () => {
-            // Use a regex to remove data url part
-            const base64String = reader.result
-                .replace('data:', '')
-                .replace(/^.+,/, '')
-                const pages = [{
-                    path: 'favicon.jpeg',
-                    content: base64String
-                }]
-                const upload = await uploadFilesToIpfs(pages);
-                const uploadedFilePath = upload[0].path;
-
-                const currMeta = {...metadata};
-                currMeta['og:image'] = uploadedFilePath;
-                currMeta['twitter:image'] = uploadedFilePath;
-                await save(currMeta);
-                setMetadata(currMeta);
-
-        };
-        reader.readAsDataURL(file);
-
-
+        dispatch({ type: LOADER, show: true })
+        const file = e.target.files[0]
+        const upload = await pinFilesToIpfs([file], project.subdomain)
+        const currMeta = {...metadata}
+        currMeta['og:image'] = upload.url
+        currMeta['twitter:image'] = upload.url
+        await save(currMeta)
+        setMetadata(currMeta)
     }
 
     const title = (

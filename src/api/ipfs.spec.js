@@ -1,5 +1,5 @@
 import { 
-    uploadFilesToIpfs,
+    pinFilesToIpfs,
 } from 'api/ipfs'
 
 import axios from 'axios'
@@ -8,8 +8,8 @@ jest.mock('axios')
 
 describe('IPFS api', () => {
 
-    const moralisKey = 'abc'
-    process.env.REACT_APP_MORALIS_API_KEY = moralisKey
+    const pinataJwt = 'abc'
+    process.env.REACT_APP_PINATA_JWT = pinataJwt
 
     beforeAll(() => {
         axios.post.mockImplementation(() => Promise.resolve({ data: [] }))
@@ -19,26 +19,17 @@ describe('IPFS api', () => {
         axios.post.mockClear()
     })
 
-    describe('uploadFilesToIpfs', () => {
+    describe('pinFilesToIpfs', () => {
 
         it('Invokes a post call to upload ipfs', async () => {
-            const list = [
-                {
-                    id: 1,
-                    url: 'test'
-                }
-            ]
-            const uris = await uploadFilesToIpfs(list)
-            expect(axios.post).toHaveBeenCalledWith(`https://deep-index.moralis.io/api/v2/ipfs/uploadFolder`,
-            list,
-            {
-                headers: {
-                    'X-API-KEY': moralisKey,
-                    accept: 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            })
-            expect(uris).toEqual([])
+            const blob = new Blob(['test'], {type: 'text/plain'})
+            const file = new File([blob], 'test.name')
+            await pinFilesToIpfs([file], 'name')
+            expect(axios.post).toHaveBeenCalledWith(
+                `https://api.pinata.cloud/pinning/pinFileToIPFS`,
+                expect.anything(),
+                { headers: {"Authorization": "Bearer abc", "Content-Type": "multipart/form-data"}}
+            )
         })
 
     })

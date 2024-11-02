@@ -1,6 +1,6 @@
 const constants = {
 	WEBSTUDIO_LOGO: 'https://img.einpresswire.com/medium/482779/webstudio-logo.png',
-	IPFS_PROVIDER: 'https://gateway.ipfs.io/ipfs',
+	IPFS_PROVIDER: 'https://ipfs.webstudio.so/ipfs',
 	DEFAULT_LOCALE: 'en',
 	TEMPLATES: {
 		DEFAULT_IMAGE: 'https://i.ibb.co/619tC6J/imageonline-co-placeholder-image.jpg',

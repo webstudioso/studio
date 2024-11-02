@@ -90,15 +90,11 @@ const Editor = ({ project, principal }) => {
       deviceManager: {
         devices: [
             {
-                name: 'Desktop',
-            },
-            {
-                name: 'Tablet',
-                width: '768px',
+                name: 'Desktop'
             },
             {
                 name: 'Mobile portrait',
-                width: '375px',
+                width: '360px',
             }
         ]
       }

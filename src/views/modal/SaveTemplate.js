@@ -23,7 +23,7 @@ import { showError, showSuccess } from 'utils/snackbar'
 import { getMyTemplates, getTemplates, publishTemplate } from 'api/template'
 import constants from 'constant'
 import FullScreenFrame from './FullScreenFrame'
-import { uploadFilesToIpfs } from 'api/ipfs'
+import { pinFilesToIpfs } from 'api/ipfs'
 
 const { TEMPLATES } = constants
 
@@ -89,31 +89,17 @@ const SaveTemplateModal = ({ open, onClose, project, editor }) => {
     const handleMediaUpload = async (e) => {
         dispatch({ type: LOADER, show: true })
         const file = e.target.files[0]
-
-        // Encode the file using the FileReader API
-        const reader = new FileReader()
-        reader.onloadend = async () => {
-            // Use a regex to remove data url part
-            const base64String = reader.result
-                .replace('data:', '')
-                .replace(/^.+,/, '')
-                const pages = [{
-                    path: file.name,
-                    content: base64String
-                }]
-            try {
-                const upload = await uploadFilesToIpfs(pages)
-                const uploadedFilePath = upload[0].path
-                setImageUrl(uploadedFilePath)
-                showSuccess({ dispatch, message:  intl.formatMessage({id: 'image_manager.media_uploaded'})  })
-            } catch(e) {
-                showError({ dispatch, message: e.message })
-            } finally {
-                dispatch({ type: LOADER, show: false });
-            }
-
+        try {
+            const upload = await pinFilesToIpfs([file], project.subdomain)
+            console.log(upload)
+            const uploadedFilePath = upload.url
+            setImageUrl(uploadedFilePath)
+            showSuccess({ dispatch, message:  intl.formatMessage({id: 'image_manager.media_uploaded'})  })
+        } catch(e) {
+            showError({ dispatch, message: e.message })
+        } finally {
+            dispatch({ type: LOADER, show: false });
         }
-        reader.readAsDataURL(file)
     }
 
     const handleChangeTemplate = (e) => {

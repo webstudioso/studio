@@ -157,7 +157,7 @@ const Login = () => {
 		<Box className="signin">
 			<Box textAlign="center" className="container fade-in bg-container">
 				<Box justifyItems="center" marginY={4} height={144}>
-					<img src={logo} style={{ margin: '0 auto', maxHeight: 144 }} alt="Logo" class="animate__animated animate__fadeIn animate__delay-1s" />
+					<img src={logo} style={{ margin: '0 auto', maxHeight: 144 }} alt="Logo" className="animate__animated animate__fadeIn animate__delay-1s" />
 				</Box>
 				<Typography variant="body" className="super-title-text">
 					<FormattedMessage id='login_page.app_name' />

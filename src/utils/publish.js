@@ -51,13 +51,12 @@ export const getPages = async ({ tags=[], fonts=[], editor, project }) => {
             </style>
           </head>
           ${html}
-        </html>`;
+        </html>`
 
-        pages.push({
-          path: `${pageName}.html`,
-          content:btoa(unescape(encodeURIComponent(content)))
-        });
-    });
+        const blob = new Blob([content], {type: 'text/html'})
+        const file = new File([blob], `${pageName}.html`)
+        pages.push(file)
+    })
 
     // Return to original selected page
     return pages
